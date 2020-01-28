@@ -44,3 +44,8 @@ testem.log
 # System Files
 .DS_Store
 Thumbs.db
+
+# Data
+/src/app/data2020.ts
+/src/app/data2019.ts
+/src/app/data2018.ts
