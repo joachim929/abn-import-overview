@@ -1,0 +1,5 @@
+<div *ngFor="let entry of formattedData; let index = index">
+  <a [routerLink]="['/edit', index]" class="card m-2">
+    <app-entry [entry]="entry"></app-entry>
+  </a>
+</div>

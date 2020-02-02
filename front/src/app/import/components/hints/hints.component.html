@@ -1,0 +1,26 @@
+<div class="card">
+  <div class="card-body">
+
+  </div>
+</div>
+
+<div class="card">
+  <form [formGroup]="hintForm" class="card-body">
+    <h4>New hint</h4>
+    <label for="amount">Amount</label>
+    <input id="amount" formControlName="amount" type="number">
+
+    <h4>Logic</h4>
+    <label for="greaterThan">Greater than</label>
+    <input type="radio" value="greaterThan" name="logic" id="greaterThan" formControlName="amountLogic">
+    <label for="lessThan">Less than</label>
+    <input type="radio" value="lessThan" name="logic" id="lessThan" formControlName="amountLogic">
+    <label for="equalTo">Equal to</label>
+    <input type="radio" value="equalTo" name="logic" id="equalTo" formControlName="amountLogic">
+
+    <h4>Description</h4>
+    <label for="contains">Contains</label>
+    <input type="text" id="contains">
+
+  </form>
+</div>

@@ -1,0 +1,31 @@
+<div *ngFor="let entry of formattedData; let index = index">
+  <div class="card m-2" *ngIf="!entry.category">
+    <app-entry [entry]="entry"></app-entry>
+  </div>
+  <div class="card m-2" *ngIf="index === assignIndex">
+    <form [formGroup]="categoryForm" class="card-body" *ngIf="showCategoryMenu">
+      <label for="category" class="mr-1">Category</label>
+      <input id="category" class="mx-1" formControlName="category" type="text">
+
+      <label for="subCategory" class="mx-1">Sub-category</label>
+      <input id="subCategory" class="mx-1" formControlName="subCategory" type="text">
+
+      <button class="btn btn-secondary mx-1"
+              [disabled]="categoryForm.invalid"
+              (click)="addCategory()">Add
+      </button>
+      <button class="btn btn-secondary mx-1"
+              [disabled]="categoryForm.invalid"
+              (click)="addAndAssign(index)">Add and assign
+      </button>
+    </form>
+    <div class="card-body">
+      <button class="btn btn-primary mx-1"
+              *ngFor="let category of categories"
+              (click)="assignCategory(index, category)">Cat: {{category.category}}, Sub-cat: {{category.subCategory}}
+      </button>
+      <hr>
+      <button class="btn btn-secondary mx-1" (click)="toggleCategoryMenu()">Create category</button>
+    </div>
+  </div>
+</div>

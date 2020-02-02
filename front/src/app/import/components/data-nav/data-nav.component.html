@@ -1,0 +1,26 @@
+<nav class="navbar navbar-expand-lg navbar-light bg-light">
+  <button class="navbar-toggler" type="button" aria-controls="navbarSupportedContent" aria-label="Toggle navigation" (click)="toggleHeader()">
+    <span class="navbar-toggler-icon"></span>
+  </button>
+
+  <div class="navbar-collapse" [class.collapse]="showHeader">
+    <ul class="navbar-nav mr-auto">
+      <li class="nav-item">
+        <a class="nav-link" [routerLinkActiveOptions]="{exact: true}"
+           routerLinkActive="active" routerLink="/all">Show all</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" [routerLinkActiveOptions]="{exact: true}"
+           routerLinkActive="active" routerLink="/assign">Assign Categories</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" [routerLinkActiveOptions]="{exact: true}"
+           routerLinkActive="active" routerLink="/edit-categories">Edit Categories</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" [routerLinkActiveOptions]="{exact: true}"
+           routerLinkActive="active" routerLink="/hints">Edit hits</a>
+      </li>
+    </ul>
+  </div>
+</nav>

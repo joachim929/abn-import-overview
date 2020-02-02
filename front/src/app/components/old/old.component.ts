@@ -1,7 +1,7 @@
 import {Component} from '@angular/core';
-import {DATA2020} from '../../data2020';
-import {DATA2019} from '../../data2019';
-import {DATA2018} from '../../data2018';
+// import {DATA2020} from '../../data2020';
+// import {DATA2019} from '../../data2019';
+// import {DATA2018} from '../../data2018';
 
 @Component({
   selector: 'app-old',
@@ -10,7 +10,7 @@ import {DATA2018} from '../../data2018';
 })
 export class OldComponent {
 
-  test = [DATA2020, DATA2019, DATA2018];
+  // test = [DATA2020, DATA2019, DATA2018];
   selectedYear: any;
   selectedMonth: any;
   monthSum: number;
@@ -48,42 +48,42 @@ export class OldComponent {
   }
 
   calcCategories() {
-    for (const year of this.test) {
-      const sumYear = {
-        year: year.year,
-        sum: 0,
-        months: []
-      };
-      const months = Object.keys(year.months);
-      for (const month of months) {
-        const sumMonth = {
-          month,
-          sum: 0,
-          categories: []
-        };
-
-        for (const item of year.months[month]) {
-          if (!item.category) {
-            continue;
-          }
-
-          if (item.category.name === 'Groceries') {
-            console.log(sumMonth);
-          }
-
-          sumMonth.sum += Number(item.amount);
-          sumMonth.sum = Number(sumMonth.sum.toFixed(2));
-          if (sumMonth.categories[item.category.name]) {
-            sumMonth.categories[item.category.name] = Number(sumMonth.categories[item.category.name]) + Number(item.amount);
-            sumMonth.categories[item.category.name] = Number(sumMonth.categories[item.category.name]).toFixed(2);
-          } else {
-            sumMonth.categories[item.category.name] = Number(item.amount).toFixed(2);
-          }
-        }
-        sumYear.months.push(sumMonth);
-      }
-      this.categorySums.push(sumYear);
-    }
+    // for (const year of this.test) {
+    //   const sumYear = {
+    //     year: year.year,
+    //     sum: 0,
+    //     months: []
+    //   };
+    //   const months = Object.keys(year.months);
+    //   for (const month of months) {
+    //     const sumMonth = {
+    //       month,
+    //       sum: 0,
+    //       categories: []
+    //     };
+    //
+    //     for (const item of year.months[month]) {
+    //       if (!item.category) {
+    //         continue;
+    //       }
+    //
+    //       if (item.category.name === 'Groceries') {
+    //         console.log(sumMonth);
+    //       }
+    //
+    //       sumMonth.sum += Number(item.amount);
+    //       sumMonth.sum = Number(sumMonth.sum.toFixed(2));
+    //       if (sumMonth.categories[item.category.name]) {
+    //         sumMonth.categories[item.category.name] = Number(sumMonth.categories[item.category.name]) + Number(item.amount);
+    //         sumMonth.categories[item.category.name] = Number(sumMonth.categories[item.category.name]).toFixed(2);
+    //       } else {
+    //         sumMonth.categories[item.category.name] = Number(item.amount).toFixed(2);
+    //       }
+    //     }
+    //     sumYear.months.push(sumMonth);
+    //   }
+    //   this.categorySums.push(sumYear);
+    // }
 
     for (const year of this.categorySums) {
       for (const month of year.months) {
