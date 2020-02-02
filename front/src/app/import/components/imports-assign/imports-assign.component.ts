@@ -9,6 +9,7 @@ import {FormControl, FormGroup, Validators} from '@angular/forms';
   styleUrls: ['./imports-assign.component.scss']
 })
 export class ImportsAssignComponent implements OnInit {
+  showHintMenu = false;
   showCategoryMenu = false;
   categoryForm: FormGroup;
   assignIndex = 0;
@@ -44,6 +45,10 @@ export class ImportsAssignComponent implements OnInit {
 
   toggleCategoryMenu() {
     this.showCategoryMenu = !this.showCategoryMenu;
+  }
+
+  toggleHintMenu() {
+    this.showHintMenu = !this.showHintMenu;
   }
 
   assignCategory(index: number, category: Category) {

@@ -1,26 +1,44 @@
-<div class="card">
+<div class="card m-2">
   <div class="card-body">
 
   </div>
 </div>
 
-<div class="card">
-  <form [formGroup]="hintForm" class="card-body">
-    <h4>New hint</h4>
-    <label for="amount">Amount</label>
-    <input id="amount" formControlName="amount" type="number">
+<div class="card m-2">
+  <form [formGroup]="hintForm" *ngIf="hintForm" class="card-body">
 
-    <h4>Logic</h4>
-    <label for="greaterThan">Greater than</label>
-    <input type="radio" value="greaterThan" name="logic" id="greaterThan" formControlName="amountLogic">
-    <label for="lessThan">Less than</label>
-    <input type="radio" value="lessThan" name="logic" id="lessThan" formControlName="amountLogic">
-    <label for="equalTo">Equal to</label>
-    <input type="radio" value="equalTo" name="logic" id="equalTo" formControlName="amountLogic">
+    <h5>Logic</h5>
+    <div class="amount-container">
+      <div class="radio-item" formArrayName="amountLogic">
+        <select [formControl]="logic" *ngFor="let logic of amountLogic">
+          <option *ngFor="let option of amountOptions">{{option}}</option>
+        </select>
+      </div>
+      <div class="radio-item" formArrayName="amount">
+        <input type="number" [formControl]="amount" *ngFor="let amount of amountControls">
+      </div>
+    </div>
+    <button class="btn btn-primary" (click)="addAmountRule()">Add rule</button>
 
-    <h4>Description</h4>
-    <label for="contains">Contains</label>
-    <input type="text" id="contains">
+    <h5>Description</h5>
+    <div class="description-container">
+      <div class="description-item" formArrayName="descriptionLogic">
+        <select [formControl]="description" *ngFor="let description of descriptionLogic">
+          <option *ngFor="let option of descriptionOptions">{{option}}</option>
+        </select>
+      </div>
+      <div formArrayName="description">
+        <input type="text" [formControl]="description" *ngFor="let description of description">
+      </div>
+    </div>
+    <button class="btn btn-primary" (click)="addDescriptionRule()">Add rule</button>
 
+    <div class="category-container">
+      <label for="category">Assign to:</label>
+      <select id="category" formControlName="category">
+        <option *ngFor="let category of categories">Cat: {{category.category}},
+          Sub-cat: {{category.subCategory}}</option>
+      </select>
+    </div>
   </form>
 </div>
