@@ -15,6 +15,7 @@ chrome-profiler-events.json
 speed-measure-plugin.json
 
 # IDEs and editors
+../.idea
 /.idea
 .project
 .classpath
@@ -46,6 +47,4 @@ testem.log
 Thumbs.db
 
 # Data
-/src/app/data2020.ts
-/src/app/data2019.ts
-/src/app/data2018.ts
+/src/assets/*.xls
