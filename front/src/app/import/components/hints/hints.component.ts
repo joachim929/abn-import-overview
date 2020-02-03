@@ -1,5 +1,5 @@
 import {Component, OnInit} from '@angular/core';
-import {AbstractControl, Form, FormArray, FormControl, FormGroup, Validators} from '@angular/forms';
+import {AbstractControl, Form, FormArray, FormBuilder, FormControl, FormGroup, Validators} from '@angular/forms';
 import {Category, CategoryService} from '../../services/category.service';
 
 @Component({
@@ -15,11 +15,12 @@ export class HintsComponent implements OnInit {
   ];
 
   amountOptions = [
-    'greaterThan', 'lessThan', 'equalTo'
+    'Greater than', 'Less than', 'Equal to'
   ];
 
   constructor(
-    private categoryService: CategoryService
+    private categoryService: CategoryService,
+    private fb: FormBuilder
   ) {
   }
 
@@ -27,16 +28,16 @@ export class HintsComponent implements OnInit {
   ngOnInit() {
     this.hintForm = new FormGroup({
       amount: new FormArray([
-        new FormControl()
-      ]),
-      amountLogic: new FormArray([
-        new FormControl()
+        new FormGroup({
+          rule: new FormControl(),
+          value: new FormControl()
+        })
       ]),
       description: new FormArray([
-        new FormControl()
-      ]),
-      descriptionLogic: new FormArray([
-        new FormControl()
+        new FormGroup({
+          rule: new FormControl(),
+          value: new FormControl()
+        })
       ]),
       category: new FormControl(null, [
         Validators.required
@@ -44,16 +45,16 @@ export class HintsComponent implements OnInit {
     });
   }
 
+  getControls(form: FormGroup, name): FormGroup[] {
+    return <FormGroup[]>(<FormArray>form.get(name)).controls;
+  }
+
+  getControl(form: FormGroup, name) {
+    return <FormControl>form.get(name);
+  }
+
   get amountControls(): AbstractControl[] {
     return (<FormArray>this.hintForm.get('amount')).controls;
-  }
-
-  get amountLogic(): AbstractControl[] {
-    return (<FormArray>this.hintForm.get('amountLogic')).controls;
-  }
-
-  get descriptionLogic(): AbstractControl[] {
-    return (<FormArray>this.hintForm.get('descriptionLogic')).controls;
   }
 
   get description(): AbstractControl[] {
@@ -65,12 +66,20 @@ export class HintsComponent implements OnInit {
   }
 
   addAmountRule() {
-    (<FormArray>this.hintForm.get('amountLogic')).push(new FormControl);
-    (<FormArray>this.hintForm.get('amount')).push(new FormControl);
+    const controls = (<FormArray>this.hintForm.get('amount')).controls;
+    (<FormGroup>controls[controls.length - 1]).addControl('andOr', new FormControl());
+    (<FormArray>this.hintForm.get('amount')).push(new FormGroup({
+      rule: new FormControl(),
+      value: new FormControl()
+    }));
   }
 
   addDescriptionRule() {
-    (<FormArray>this.hintForm.get('descriptionLogic')).push(new FormControl);
-    (<FormArray>this.hintForm.get('description')).push(new FormControl);
+    const controls = (<FormArray>this.hintForm.get('description')).controls;
+    (<FormGroup>controls[controls.length - 1]).addControl('andOr', new FormControl());
+    (<FormArray>this.hintForm.get('description')).push(new FormGroup({
+      rule: new FormControl(),
+      value: new FormControl()
+    }));
   }
 }

@@ -1,23 +1,7 @@
-.amount-container, .radio-container, .description-container {
-  display: flex;
-  flex-direction: row;
-  align-items: center;
-  margin: 0.5rem;
-}
-
-.amount-container input[type="number"] {
+input[type="number"] {
   -moz-appearance: textfield;
 }
 
-.description-item, .amount-item, .radio-item {
-  flex-direction: column;
-  display: flex;
-
-  label {
-    margin: 0 0.25rem;
-  }
-
-  input {
-    margin: 0 0.25rem;
-  }
+input, label, select {
+  margin: 0 0.25rem;
 }

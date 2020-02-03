@@ -8,32 +8,55 @@
   <form [formGroup]="hintForm" *ngIf="hintForm" class="card-body">
 
     <h5>Logic</h5>
-    <div class="amount-container">
-      <div class="radio-item" formArrayName="amountLogic">
-        <select [formControl]="logic" *ngFor="let logic of amountLogic">
-          <option *ngFor="let option of amountOptions">{{option}}</option>
-        </select>
-      </div>
-      <div class="radio-item" formArrayName="amount">
-        <input type="number" [formControl]="amount" *ngFor="let amount of amountControls">
-      </div>
+    <div formArrayName="amount">
+
+      <form [formGroup]="amountGroup" *ngFor="let amountGroup of getControls(hintForm, 'amount')">
+        <div class="d-flex">
+          <select [formControl]="getControl(amountGroup, 'rule')">
+            <option *ngFor="let option of amountOptions">{{option}}</option>
+          </select>
+          <input type="number" [formControl]="getControl(amountGroup, 'value')">
+        </div>
+        <div class="d-flex flex-column" *ngIf="!!amountGroup.get('andOr')">
+          <div class="flex-row">
+            <input type="radio" id="andAmount" formControlName="andOr" value="and">
+            <label for="andAmount">And</label>
+          </div>
+          <div class="flex-row">
+            <input type="radio" id="orAmount" formControlName="andOr" value="or">
+            <label for="orAmount">Or</label>
+          </div>
+        </div>
+      </form>
+
     </div>
-    <button class="btn btn-primary" (click)="addAmountRule()">Add rule</button>
+    <button class="btn btn-primary my-1" (click)="addAmountRule()">Add rule</button>
 
     <h5>Description</h5>
-    <div class="description-container">
-      <div class="description-item" formArrayName="descriptionLogic">
-        <select [formControl]="description" *ngFor="let description of descriptionLogic">
-          <option *ngFor="let option of descriptionOptions">{{option}}</option>
-        </select>
-      </div>
-      <div formArrayName="description">
-        <input type="text" [formControl]="description" *ngFor="let description of description">
-      </div>
+    <div formArrayName="description">
+      <form [formGroup]="descriptionGroup"
+            *ngFor="let descriptionGroup of getControls(hintForm, 'description')">
+        <div class="d-flex">
+          <select [formControl]="getControl(descriptionGroup, 'rule')">
+            <option *ngFor="let option of descriptionOptions">{{option}}</option>
+          </select>
+          <input type="text" [formControl]="getControl(descriptionGroup, 'value')">
+        </div>
+        <div class="d-flex flex-column" *ngIf="!!descriptionGroup.get('andOr')">
+          <div class="flex-row">
+            <input type="radio" id="andDescription" formControlName="andOr" value="and">
+            <label for="andDescription">And</label>
+          </div>
+          <div class="flex-row">
+            <input type="radio" id="orDescription" formControlName="andOr" value="or">
+            <label for="orDescription">Or</label>
+          </div>
+        </div>
+      </form>
     </div>
-    <button class="btn btn-primary" (click)="addDescriptionRule()">Add rule</button>
+    <button class="btn btn-primary my-1" (click)="addDescriptionRule()">Add rule</button>
 
-    <div class="category-container">
+    <div>
       <label for="category">Assign to:</label>
       <select id="category" formControlName="category">
         <option *ngFor="let category of categories">Cat: {{category.category}},
