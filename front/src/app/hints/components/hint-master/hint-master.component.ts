@@ -1,5 +1,13 @@
-import { Component, OnInit } from '@angular/core';
-import {AbstractControl, FormArray, FormControl, FormGroup, Validators} from '@angular/forms';
+import {Component, OnInit} from '@angular/core';
+import {
+  AbstractControl,
+  FormArray,
+  FormControl,
+  FormGroup,
+  ValidationErrors,
+  ValidatorFn,
+  Validators
+} from '@angular/forms';
 import {Category, CategoryService} from '../../../import/services/category.service';
 
 @Component({
@@ -9,18 +17,6 @@ import {Category, CategoryService} from '../../../import/services/category.servi
 })
 export class HintMasterComponent implements OnInit {
   hintForm: FormGroup;
-  cards = {
-    imports: {
-      collapse: true,
-      collapsing: false,
-      show: true
-    },
-    create: {
-      collapse: true,
-      collapsing: false,
-      show: false
-    },
-  };
 
   descriptionOptions = [
     'Contains', 'Doesn\'t contain'
@@ -42,19 +38,19 @@ export class HintMasterComponent implements OnInit {
         new FormGroup({
           rule: new FormControl(),
           value: new FormControl()
-        })
+        }, {validators: bothEmptyOrFilledValidator})
       ]),
       description: new FormArray([
         new FormGroup({
           rule: new FormControl(),
           value: new FormControl()
-        })
+        }, {validators: bothEmptyOrFilledValidator})
       ]),
       categoryId: new FormControl(null, [
         Validators.required
       ]),
       autoAssign: new FormControl()
-    });
+    }, {validators: oneNotEmpty});
   }
 
   getControls(form: FormGroup, name): FormGroup[] {
@@ -87,21 +83,22 @@ export class HintMasterComponent implements OnInit {
     }));
   }
 
-  toggleCard(name: string): void {
-    this.cards[name].collapse = false;
-    // this.cards[name].collapsing = true;
-    if (this.cards[name].show) {
-      this.cards[name].show = false;
-      setTimeout(() => {
-        this.cards[name].collapse = true;
-        // this.cards[name].collapsing = false;
-      }, 350);
-    } else {
-      setTimeout(() => {
-        this.cards[name].collapse = true;
-        // this.cards[name].collapsing = false;
-        this.cards[name].show = true;
-      }, 350);
-    }
+  test() {
+    console.log(this.hintForm);
   }
 }
+
+export const bothEmptyOrFilledValidator: ValidatorFn = (control: FormGroup): ValidationErrors | null => {
+  const rule = control.get('rule');
+  const value = control.get('value');
+
+  return rule && value &&
+  ((!!rule.value && !!value.value) || (!rule.value && !value.value)) ? null : {'bothEmptyOrFilled': true} ;
+};
+
+export const oneNotEmpty: ValidatorFn = (control: FormGroup): ValidationErrors | null => {
+  const amount = <FormArray>control.get('amount');
+  const description = <FormArray>control.get('description');
+  return (amount && amount.controls.length > 0) || (description && description.controls.length > 0) ?
+    null : {'oneNotEmpty': true};
+};

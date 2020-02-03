@@ -1,6 +1,7 @@
 <form [formGroup]="form" *ngIf="form">
   <div class="d-flex form-row">
     <select [formControl]="getControl(form, 'rule')">
+      <option selected></option>
       <option *ngFor="let option of options">{{option}}</option>
     </select>
     <input type="text" [placeholder]="inputPlaceholder" [formControl]="getControl(form, 'value')">

@@ -1,8 +1,3 @@
-<!--
-todo:
-    Form Validation
-    Both need to be empty or both need to have a value
--->
 <app-data-nav></app-data-nav>
 
 <div class="accordion">
@@ -41,6 +36,7 @@ todo:
         <div class="category-container">
           <label for="categoryId">Assign to:</label>
           <select id="categoryId" formControlName="categoryId">
+            <option selected></option>
             <option [value]="category.id" *ngFor="let category of categories">Cat: {{category.category}},
               Sub-cat: {{category.subCategory}}</option>
           </select>
@@ -51,9 +47,11 @@ todo:
         </div>
       </form>
       <div class="col-6">
+        <pre>Valid: {{hintForm.status | json}}</pre>
         <pre>{{hintForm.value | json}}</pre>
       </div>
     </div>
   </div>
 </div>
 
+<button (click)="test()">Log form</button>
