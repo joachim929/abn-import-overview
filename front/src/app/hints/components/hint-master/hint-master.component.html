@@ -15,9 +15,10 @@
         <div formArrayName="amount">
           <app-hint-form
             inputPlaceholder="Enter amount..."
+            (remove)="removeRule(index, 'amount')"
             [form]="amountGroup"
             [options]="amountOptions"
-            *ngFor="let amountGroup of getControls(hintForm, 'amount')">
+            *ngFor="let amountGroup of getControls(hintForm, 'amount'); let index = index;">
           </app-hint-form>
         </div>
         <button class="btn btn-primary" (click)="addAmountRule()">Add</button>
@@ -26,9 +27,10 @@
         <div formArrayName="description">
           <app-hint-form
             inputPlaceholder="Enter value..."
+            (remove)="removeRule(index, 'description')"
             [form]="descriptionGroup"
             [options]="descriptionOptions"
-            *ngFor="let descriptionGroup of getControls(hintForm, 'description')">
+            *ngFor="let descriptionGroup of getControls(hintForm, 'description'); let index = index;">
           </app-hint-form>
         </div>
         <button class="btn btn-primary" (click)="addDescriptionRule()">Add</button>
@@ -53,5 +55,3 @@
     </div>
   </div>
 </div>
-
-<button (click)="test()">Log form</button>

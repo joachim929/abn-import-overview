@@ -5,6 +5,7 @@
       <option *ngFor="let option of options">{{option}}</option>
     </select>
     <input type="text" [placeholder]="inputPlaceholder" [formControl]="getControl(form, 'value')">
+    <button class="btn btn-danger" (click)="remove.emit()">Remove</button>
   </div>
   <div class="d-flex flex-column" *ngIf="!!form.get('andOr')">
     <div class="flex-row">

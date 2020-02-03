@@ -1,4 +1,4 @@
-import {Component, Input, OnInit} from '@angular/core';
+import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
 import {FormGroup} from '@angular/forms';
 import {FormBaseComponent} from '../../../shared/components/form-base/form-base.component';
 
@@ -11,6 +11,7 @@ export class HintFormComponent extends FormBaseComponent implements OnInit {
   @Input() inputPlaceholder: string;
   @Input() form: FormGroup;
   @Input() options: any[] | string[];
+  @Output() remove = new EventEmitter();
 
   constructor() {
     super();
@@ -18,5 +19,4 @@ export class HintFormComponent extends FormBaseComponent implements OnInit {
 
   ngOnInit() {
   }
-
 }

@@ -57,6 +57,10 @@ export class HintMasterComponent implements OnInit {
     return <FormGroup[]>(<FormArray>form.get(name)).controls;
   }
 
+  getArray(form: FormGroup, name): FormArray {
+    return <FormArray>form.get(name);
+  }
+
   get description(): AbstractControl[] {
     return (<FormArray>this.hintForm.get('description')).controls;
   }
@@ -67,7 +71,9 @@ export class HintMasterComponent implements OnInit {
 
   addAmountRule() {
     const controls = (<FormArray>this.hintForm.get('amount')).controls;
-    (<FormGroup>controls[controls.length - 1]).addControl('andOr', new FormControl());
+    if (controls.length !== 0) {
+      (<FormGroup>controls[controls.length - 1]).addControl('andOr', new FormControl());
+    }
     (<FormArray>this.hintForm.get('amount')).push(new FormGroup({
       rule: new FormControl(),
       value: new FormControl()
@@ -76,15 +82,21 @@ export class HintMasterComponent implements OnInit {
 
   addDescriptionRule() {
     const controls = (<FormArray>this.hintForm.get('description')).controls;
-    (<FormGroup>controls[controls.length - 1]).addControl('andOr', new FormControl());
+    if (controls.length !== 0) {
+      (<FormGroup>controls[controls.length - 1]).addControl('andOr', new FormControl());
+    }
     (<FormArray>this.hintForm.get('description')).push(new FormGroup({
       rule: new FormControl(),
       value: new FormControl()
     }));
   }
 
-  test() {
-    console.log(this.hintForm);
+  removeRule(index: number, name: string) {
+    const array = this.getArray(this.hintForm, name);
+    if (index >= array.controls.length - 1 && <FormGroup>array.controls[index - 1]) {
+      (<FormGroup>array.controls[index - 1]).removeControl('andOr')
+    }
+    array.removeAt(index);
   }
 }
 
