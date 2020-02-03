@@ -1,19 +1,15 @@
-.btn {
-  margin: 0.5rem 0;
-}
-
-.category-container {
+:host {
   display: flex;
-  flex-direction: row;
-
-  select {
-    margin: 0 0.5rem;
-  }
+  height: 100%;
+  flex-direction: column;
 }
 
-.card-toggle-button {
-  font-size: 1.5rem;
-  border: 0;
-  text-align: start;
-  font-family: inherit;
+.hint-main-container {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+}
+
+.hint-main-card {
+  height: 100%;
 }

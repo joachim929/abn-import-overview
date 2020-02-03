@@ -1,6 +1,6 @@
 import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
 import {FormGroup} from '@angular/forms';
-import {FormBaseComponent} from '../../../shared/components/form-base/form-base.component';
+import {FormBaseComponent} from '../../../../shared/components/form-base/form-base.component';
 
 @Component({
   selector: 'app-hint-form',

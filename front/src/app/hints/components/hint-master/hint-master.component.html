@@ -1,57 +1,11 @@
 <app-data-nav></app-data-nav>
+<div class="card m-2">
+  <app-import-export></app-import-export>
+</div>
 
-<div class="accordion">
-  <div class="card m-2">
-    <h3 class="card-header">Import or export hints</h3>
-    <app-import-export></app-import-export>
-  </div>
-
-  <div class="card m-2">
-    <h3 class="card-header">Create new hints</h3>
-    <div class="d-flex flex-row">
-      <form [formGroup]="hintForm" *ngIf="hintForm" class="card-body col-6">
-
-        <h5>Logic</h5>
-        <div formArrayName="amount">
-          <app-hint-form
-            inputPlaceholder="Enter amount..."
-            (remove)="removeRule(index, 'amount')"
-            [form]="amountGroup"
-            [options]="amountOptions"
-            *ngFor="let amountGroup of getControls(hintForm, 'amount'); let index = index;">
-          </app-hint-form>
-        </div>
-        <button class="btn btn-primary" (click)="addAmountRule()">Add</button>
-
-        <h5>Description</h5>
-        <div formArrayName="description">
-          <app-hint-form
-            inputPlaceholder="Enter value..."
-            (remove)="removeRule(index, 'description')"
-            [form]="descriptionGroup"
-            [options]="descriptionOptions"
-            *ngFor="let descriptionGroup of getControls(hintForm, 'description'); let index = index;">
-          </app-hint-form>
-        </div>
-        <button class="btn btn-primary" (click)="addDescriptionRule()">Add</button>
-
-        <div class="category-container">
-          <label for="categoryId">Assign to:</label>
-          <select id="categoryId" formControlName="categoryId">
-            <option selected></option>
-            <option [value]="category.id" *ngFor="let category of categories">Cat: {{category.category}},
-              Sub-cat: {{category.subCategory}}</option>
-          </select>
-        </div>
-        <div class="category-container">
-          <label for="autoAssign">Auto assign</label>
-          <input class="mx-2" id="autoAssign" type="checkbox" formControlName="autoAssign">
-        </div>
-      </form>
-      <div class="col-6">
-        <pre>Valid: {{hintForm.status | json}}</pre>
-        <pre>{{hintForm.value | json}}</pre>
-      </div>
-    </div>
+<div class="hint-main-container">
+  <div class="card m-2 hint-main-card">
+    <app-hints-nav></app-hints-nav>
+    <router-outlet></router-outlet>
   </div>
 </div>
