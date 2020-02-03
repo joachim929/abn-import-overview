@@ -3,7 +3,7 @@
     <select [formControl]="getControl(form, 'rule')">
       <option *ngFor="let option of options">{{option}}</option>
     </select>
-    <input type="text" [formControl]="getControl(form, 'value')">
+    <input type="text" [placeholder]="inputPlaceholder" [formControl]="getControl(form, 'value')">
   </div>
   <div class="d-flex flex-column" *ngIf="!!form.get('andOr')">
     <div class="flex-row">

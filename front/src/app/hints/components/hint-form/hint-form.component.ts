@@ -8,6 +8,7 @@ import {FormBaseComponent} from '../../../shared/components/form-base/form-base.
   styleUrls: ['./hint-form.component.scss']
 })
 export class HintFormComponent extends FormBaseComponent implements OnInit {
+  @Input() inputPlaceholder: string;
   @Input() form: FormGroup;
   @Input() options: any[] | string[];
 

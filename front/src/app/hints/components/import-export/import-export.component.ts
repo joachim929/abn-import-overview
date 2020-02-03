@@ -9,7 +9,6 @@ import {FormControl} from '@angular/forms';
   styleUrls: ['./import-export.component.scss']
 })
 export class ImportExportComponent implements OnInit {
-  importControl: FormControl;
   private setting = {
     element: {
       dynamicDownload: null as HTMLElement
@@ -44,7 +43,7 @@ export class ImportExportComponent implements OnInit {
   downloadJson() {
     this.getRulesToDownload().subscribe((res) => {
       this.dyanmicDownloadByHtmlTag({
-        fileName: 'My Report.json',
+        fileName: 'Rules.json',
         text: JSON.stringify(res)
       });
     });

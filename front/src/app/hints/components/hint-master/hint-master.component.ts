@@ -9,6 +9,18 @@ import {Category, CategoryService} from '../../../import/services/category.servi
 })
 export class HintMasterComponent implements OnInit {
   hintForm: FormGroup;
+  cards = {
+    imports: {
+      collapse: true,
+      collapsing: false,
+      show: true
+    },
+    create: {
+      collapse: true,
+      collapsing: false,
+      show: false
+    },
+  };
 
   descriptionOptions = [
     'Contains', 'Doesn\'t contain'
@@ -73,5 +85,23 @@ export class HintMasterComponent implements OnInit {
       rule: new FormControl(),
       value: new FormControl()
     }));
+  }
+
+  toggleCard(name: string): void {
+    this.cards[name].collapse = false;
+    // this.cards[name].collapsing = true;
+    if (this.cards[name].show) {
+      this.cards[name].show = false;
+      setTimeout(() => {
+        this.cards[name].collapse = true;
+        // this.cards[name].collapsing = false;
+      }, 350);
+    } else {
+      setTimeout(() => {
+        this.cards[name].collapse = true;
+        // this.cards[name].collapsing = false;
+        this.cards[name].show = true;
+      }, 350);
+    }
   }
 }
