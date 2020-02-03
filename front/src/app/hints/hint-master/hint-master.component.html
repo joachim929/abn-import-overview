@@ -1,0 +1,39 @@
+<app-data-nav></app-data-nav>
+<div class="card m-2">
+  <div class="card-body">
+
+  </div>
+</div>
+
+<div class="card m-2">
+  <form [formGroup]="hintForm" *ngIf="hintForm" class="card-body">
+
+    <h5>Logic</h5>
+    <div formArrayName="amount">
+      <app-hint-form
+        [form]="amountGroup"
+        [options]="amountOptions"
+        *ngFor="let amountGroup of getControls(hintForm, 'amount')">
+      </app-hint-form>
+    </div>
+    <button class="btn btn-primary" (click)="addAmountRule()">Add rule</button>
+
+    <h5>Description</h5>
+    <div formArrayName="description">
+      <app-hint-form
+        [form]="descriptionGroup"
+        [options]="descriptionOptions"
+        *ngFor="let descriptionGroup of getControls(hintForm, 'description')">
+      </app-hint-form>
+    </div>
+    <button class="btn btn-primary" (click)="addDescriptionRule()">Add rule</button>
+
+    <div class="category-container">
+      <label for="category">Assign to:</label>
+      <select id="category" formControlName="category">
+        <option *ngFor="let category of categories">Cat: {{category.category}},
+          Sub-cat: {{category.subCategory}}</option>
+      </select>
+    </div>
+  </form>
+</div>

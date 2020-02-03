@@ -1,0 +1,18 @@
+<form [formGroup]="form" *ngIf="form">
+  <div class="d-flex form-row">
+    <select [formControl]="getControl(form, 'rule')">
+      <option *ngFor="let option of options">{{option}}</option>
+    </select>
+    <input type="text" [formControl]="getControl(form, 'value')">
+  </div>
+  <div class="d-flex flex-column" *ngIf="!!form.get('andOr')">
+    <div class="flex-row">
+      <input type="radio" id="andDescription" formControlName="andOr" value="and">
+      <label for="andDescription">And</label>
+    </div>
+    <div class="flex-row">
+      <input type="radio" id="orDescription" formControlName="andOr" value="or">
+      <label for="orDescription">Or</label>
+    </div>
+  </div>
+</form>

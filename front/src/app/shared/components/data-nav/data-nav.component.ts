@@ -1,5 +1,5 @@
 import {Component, OnInit} from '@angular/core';
-import {HeaderComponent} from '../../../shared/components/header/header.component';
+import {HeaderComponent} from '../header/header.component';
 
 @Component({
   selector: 'app-data-nav',

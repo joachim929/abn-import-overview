@@ -7,11 +7,13 @@ import {SharedModule} from './shared/shared.module';
 import {FormsModule} from '@angular/forms';
 import {OldComponent} from './components/old/old.component';
 import {HttpClientModule} from '@angular/common/http';
+import { FormBaseComponent } from './components/form-base/form-base.component';
 
 @NgModule({
   declarations: [
     AppComponent,
-    OldComponent
+    OldComponent,
+    FormBaseComponent
   ],
   imports: [
     BrowserModule,
