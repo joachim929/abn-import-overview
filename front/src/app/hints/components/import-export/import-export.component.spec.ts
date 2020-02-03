@@ -1,20 +1,20 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { OldComponent } from './old.component';
+import { ImportExportComponent } from './import-export.component';
 
-describe('OldComponent', () => {
-  let component: OldComponent;
-  let fixture: ComponentFixture<OldComponent>;
+describe('ImportExportComponent', () => {
+  let component: ImportExportComponent;
+  let fixture: ComponentFixture<ImportExportComponent>;
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ OldComponent ]
+      declarations: [ ImportExportComponent ]
     })
     .compileComponents();
   }));
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(OldComponent);
+    fixture = TestBed.createComponent(ImportExportComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

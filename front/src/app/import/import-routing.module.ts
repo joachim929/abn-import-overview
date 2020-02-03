@@ -6,7 +6,6 @@ import {ImportsAllComponent} from './components/imports-all/imports-all.componen
 import {ImportsAssignComponent} from './components/imports-assign/imports-assign.component';
 import {EditCategoriesComponent} from './components/edit-categories/edit-categories.component';
 import {EntryEditComponent} from './components/entry-edit/entry-edit.component';
-import {HintsComponent} from './components/hints/hints.component';
 
 const routes: Routes = [
   {
@@ -15,8 +14,7 @@ const routes: Routes = [
       {path: 'all', component: ImportsAllComponent},
       {path: 'assign', component: ImportsAssignComponent},
       {path: 'edit-categories', component: EditCategoriesComponent},
-      {path: 'edit/:index', component: EntryEditComponent},
-      {path: 'hints', component: HintsComponent}
+      {path: 'edit/:index', component: EntryEditComponent}
     ]
   },
   {path: 'import', component: ImportComponent}

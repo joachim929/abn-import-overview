@@ -11,7 +11,7 @@ import {ImportsAllComponent} from './components/imports-all/imports-all.componen
 import {EditCategoriesComponent} from './components/edit-categories/edit-categories.component';
 import {EntryEditComponent} from './components/entry-edit/entry-edit.component';
 import {EntryComponent} from './components/entry/entry.component';
-import {HintsComponent} from './components/hints/hints.component';
+import {SharedModule} from '../shared/shared.module';
 
 
 @NgModule({
@@ -23,13 +23,13 @@ import {HintsComponent} from './components/hints/hints.component';
     ImportsAllComponent,
     EditCategoriesComponent,
     EntryEditComponent,
-    EntryComponent,
-    HintsComponent
+    EntryComponent
   ],
   imports: [
     CommonModule,
     ImportRoutingModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    SharedModule
   ]
 })
 export class ImportModule {

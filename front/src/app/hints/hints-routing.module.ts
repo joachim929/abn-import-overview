@@ -1,6 +1,6 @@
 import {NgModule} from '@angular/core';
 import {Routes, RouterModule} from '@angular/router';
-import {HintMasterComponent} from './hint-master/hint-master.component';
+import {HintMasterComponent} from './components/hint-master/hint-master.component';
 
 const routes: Routes = [
   {

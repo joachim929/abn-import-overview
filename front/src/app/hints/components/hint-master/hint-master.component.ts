@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import {AbstractControl, FormArray, FormBuilder, FormControl, FormGroup, Validators} from '@angular/forms';
-import {Category, CategoryService} from '../../import/services/category.service';
+import {AbstractControl, FormArray, FormControl, FormGroup, Validators} from '@angular/forms';
+import {Category, CategoryService} from '../../../import/services/category.service';
 
 @Component({
   selector: 'app-hint-master',
@@ -19,8 +19,7 @@ export class HintMasterComponent implements OnInit {
   ];
 
   constructor(
-    private categoryService: CategoryService,
-    private fb: FormBuilder
+    private categoryService: CategoryService
   ) {
   }
 
@@ -39,22 +38,15 @@ export class HintMasterComponent implements OnInit {
           value: new FormControl()
         })
       ]),
-      category: new FormControl(null, [
+      categoryId: new FormControl(null, [
         Validators.required
-      ])
+      ]),
+      autoAssign: new FormControl()
     });
   }
 
   getControls(form: FormGroup, name): FormGroup[] {
     return <FormGroup[]>(<FormArray>form.get(name)).controls;
-  }
-
-  getControl(form: FormGroup, name) {
-    return <FormControl>form.get(name);
-  }
-
-  get amountControls(): AbstractControl[] {
-    return (<FormArray>this.hintForm.get('amount')).controls;
   }
 
   get description(): AbstractControl[] {
