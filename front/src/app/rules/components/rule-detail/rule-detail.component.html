@@ -2,16 +2,18 @@
   <div *ngIf="!showEdit">
     <label *ngIf="rule.name">Name: {{rule.name}}</label>
     <label>Amount:</label>
-    <pre>{{rule.amount | json}}</pre>
+    <pre *ngFor="let amount of rule.amount">{{amount | amountRule}}</pre>
     <label>Description:</label>
-    <pre>{{rule.description | json}}</pre>
-    <label>Auto assign: {{rule.autoAssign}}</label>
-    <label>To: </label>
-    <pre>{{getCategoryById(rule.categoryId) | json}}</pre>
+    <pre *ngFor="let description of rule.description">{{description | descriptionRule}}</pre>
+    <label>Auto assign:</label>
+    <pre>{{rule.autoAssign}}</pre>
+    <label>Assign to: </label>
+    <pre>Category: {{getCategoryById(rule.id).category}}</pre>
+    <pre>Sub-category: {{getCategoryById(rule.id).subCategory}}</pre>
   </div>
   <app-rule-edit *ngIf="showEdit" [rule]="rule"></app-rule-edit>
   <!-- todo: Edit/Delete icon & functionality -->
-  <div>
+  <div class="action-bar">
     <button (click)="toggleEdit()">Edit</button>
     <button (click)="deleteRule()">Delete</button>
   </div>

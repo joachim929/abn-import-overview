@@ -7,6 +7,8 @@ import {RulesListComponent} from './components/rules-list/rules-list.component';
 import {ImportExportRulesComponent} from './components/import-export-rules/import-export-rules.component';
 import {RuleDetailComponent} from './components/rule-detail/rule-detail.component';
 import {RuleEditComponent} from './components/rule-edit/rule-edit.component';
+import { AmountRulePipe } from './pipes/amount-rule.pipe';
+import { DescriptionRulePipe } from './pipes/description-rule.pipe';
 
 
 @NgModule({
@@ -15,7 +17,9 @@ import {RuleEditComponent} from './components/rule-edit/rule-edit.component';
     RulesListComponent,
     ImportExportRulesComponent,
     RuleDetailComponent,
-    RuleEditComponent
+    RuleEditComponent,
+    AmountRulePipe,
+    DescriptionRulePipe
   ],
   imports: [
     CommonModule,

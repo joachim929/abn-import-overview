@@ -1,3 +1,5 @@
+<!-- todo: Implement accordian -->
 <div class="card m-2" *ngFor="let rule of rules">
+  <div class="card-header">Rule{{rule.name ? + ': ' + rule.name : ' detail'}}</div>
   <app-rule-detail [rule]="rule"></app-rule-detail>
 </div>

@@ -1,5 +1,14 @@
-export type DescriptionRuleType = 'Contains' | 'Doesn\'t contain';
-
-export type AmountRuleType = 'Less than' | 'Greater than' | 'Equal to';
-
+export type DescriptionRuleType = DescriptionRuleEnum.contains | DescriptionRuleEnum.not;
+export type AmountRuleType = AmountRuleEnum.greaterThan | AmountRuleEnum.lessThan | AmountRuleEnum.equalTo;
 export type AndOrType = 'and' | 'or';
+
+export enum AmountRuleEnum {
+  lessThan = 'less than',
+  greaterThan = 'greater than',
+  equalTo = 'equal to'
+}
+
+export enum DescriptionRuleEnum {
+  contains = 'contains',
+  not = 'doesn\'t contain'
+}

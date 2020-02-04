@@ -1,7 +1,7 @@
 import {Injectable} from '@angular/core';
 import {Rule} from '../interfaces-types/hint.interface';
 import {CategoryService} from '../../import/services/category.service';
-import {AmountRuleType, DescriptionRuleType} from '../interfaces-types/hint.types';
+import {AmountRuleEnum, AmountRuleType, DescriptionRuleEnum, DescriptionRuleType} from '../interfaces-types/hint.types';
 
 @Injectable({
   providedIn: 'root'
@@ -11,14 +11,25 @@ export class RuleService {
     {
       id: 1,
       amount: [
-        {rule: 'Less than', value: 0, andOr: 'and'},
-        {rule: 'Greater than', value: -6.50}
+        {rule: AmountRuleEnum.lessThan, value: 0, andOr: 'and'},
+        {rule: AmountRuleEnum.greaterThan, value: -6.50}
       ],
       description: [
-        {rule: 'Contains', value: 'Kiosk'}
+        {rule: DescriptionRuleEnum.contains, value: 'Kiosk'}
       ],
       categoryId: 1,
       autoAssign: true
+    },
+    {
+      id: 2,
+      amount: [],
+      description: [
+        {rule: DescriptionRuleEnum.contains, value: 'Albert', andOr: 'and'},
+        {rule: DescriptionRuleEnum.contains, value: 'Heijn', andOr: 'and'},
+        {rule: DescriptionRuleEnum.not, value: 'Kiosk'}
+      ],
+      categoryId: 2,
+      autoAssign: false
     }
   ];
 
@@ -62,7 +73,6 @@ export class RuleService {
         }
 
         if (!categoryIds.includes(rule.categoryId)) {
-          console.log(rule);
           break;
         }
 
@@ -78,7 +88,7 @@ export class RuleService {
   }
 
   private validateAmount(rules: any): boolean {
-    const amountTypes: AmountRuleType[] = ['Less than', 'Greater than', 'Equal to'];
+    const amountTypes: AmountRuleType[] = [AmountRuleEnum.equalTo, AmountRuleEnum.lessThan, AmountRuleEnum.greaterThan];
     let validAmounts = false;
     if (rules.amount && Array.isArray(rules.amount) && rules.amount.length > 0) {
       validAmounts = this.validateInstance(rules, 'amount', amountTypes, 'number');
@@ -113,12 +123,12 @@ export class RuleService {
   }
 
   private validateDescription(rules: any): boolean {
-    const descriptionTypes: DescriptionRuleType[] = ['Contains', 'Doesn\'t contain'];
+    const descriptionTypes: DescriptionRuleType[] = [DescriptionRuleEnum.not, DescriptionRuleEnum.contains];
     let validDescriptions = false;
     if (rules.description && Array.isArray(rules.description) && rules.description.length > 0) {
       validDescriptions = this.validateInstance(rules, 'description', descriptionTypes, 'string');
     }
 
-    return validDescriptions
+    return validDescriptions;
   }
 }

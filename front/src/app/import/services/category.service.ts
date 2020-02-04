@@ -1,7 +1,7 @@
 import {Injectable} from '@angular/core';
 
 export interface Category {
-  id?: number
+  id?: number;
   category: string;
   subCategory: string;
 }
