@@ -1,20 +1,20 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { DataNavComponent } from './data-nav.component';
+import { RuleEditComponent } from './rule-edit.component';
 
-describe('DataNavComponent', () => {
-  let component: DataNavComponent;
-  let fixture: ComponentFixture<DataNavComponent>;
+describe('RuleEditComponent', () => {
+  let component: RuleEditComponent;
+  let fixture: ComponentFixture<RuleEditComponent>;
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ DataNavComponent ]
+      declarations: [ RuleEditComponent ]
     })
     .compileComponents();
   }));
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(DataNavComponent);
+    fixture = TestBed.createComponent(RuleEditComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

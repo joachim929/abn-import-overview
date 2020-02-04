@@ -34,7 +34,7 @@ export class RuleService {
   removeRule(ruleId: number): void {
     for (let i = 0; i < this.rules.length; i++) {
       if (this.rules[i].id === ruleId) {
-        this.rules.slice(i, 1);
+        this.rules.splice(i, 1);
         break;
       }
     }
@@ -54,7 +54,7 @@ export class RuleService {
 
     if (Array.isArray(importedRules) && importedRules.length > 0) {
       let validArray = true;
-      let categoryIds = this.categoryService.categories.map(category => category.id);
+      const categoryIds = this.categoryService.categories.map(category => category.id);
       for (const rule of importedRules) {
         if (!this.validateAmount(rule) && !this.validateDescription(rule)) {
           validArray = false;

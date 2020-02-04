@@ -1,4 +1,4 @@
-import { Injectable } from '@angular/core';
+import {Injectable} from '@angular/core';
 
 export interface Category {
   id?: number
@@ -15,15 +15,28 @@ export class CategoryService {
     {id: 2, category: 'Groceries', subCategory: 'Food'}
   ];
 
-  constructor() { }
+  constructor() {
+  }
+
+  getCategoryById(id: number): Category | null {
+    let requestedCategory = null;
+    for (const category of this.categories) {
+      if (category.id === id) {
+        requestedCategory = category;
+        break;
+      }
+    }
+
+    return requestedCategory;
+  }
 
   addCategory(category: Category): void {
     if (category.id) {
       this.categories.push(category);
     } else {
       const usedNumbers = [];
-      for (const category of this.categories) {
-        usedNumbers.push(category.id);
+      for (const _category of this.categories) {
+        usedNumbers.push(_category.id);
       }
 
       category.id = this.getNewId(usedNumbers, 1);

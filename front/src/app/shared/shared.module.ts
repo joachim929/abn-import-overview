@@ -3,7 +3,6 @@ import {CommonModule} from '@angular/common';
 import {HeaderComponent} from './components/header/header.component';
 import {RouterModule} from '@angular/router';
 import {NotFoundComponent} from './components/not-found/not-found.component';
-import {DataNavComponent} from './components/data-nav/data-nav.component';
 import {FormBaseComponent} from './components/form-base/form-base.component';
 
 
@@ -11,7 +10,6 @@ import {FormBaseComponent} from './components/form-base/form-base.component';
   declarations: [
     HeaderComponent,
     NotFoundComponent,
-    DataNavComponent,
     FormBaseComponent
   ],
   imports: [
@@ -21,7 +19,6 @@ import {FormBaseComponent} from './components/form-base/form-base.component';
   exports: [
     HeaderComponent,
     NotFoundComponent,
-    DataNavComponent,
     FormBaseComponent
   ]
 })

@@ -2,6 +2,7 @@ import {AmountRuleType, AndOrType, DescriptionRuleType} from './hint.types';
 
 export interface Rule {
   id: number;
+  name?: string;
   amount?: AmountRule[];
   description?: DescriptionRule[];
   categoryId: number;
@@ -9,7 +10,7 @@ export interface Rule {
 }
 
 export interface AmountRule {
-  rule: AmountRuleType
+  rule: AmountRuleType;
   value: number;
   andOr?: AndOrType;
 }

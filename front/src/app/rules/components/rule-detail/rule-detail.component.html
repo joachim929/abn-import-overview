@@ -1,0 +1,18 @@
+<div class="card-body rules-list">
+  <div *ngIf="!showEdit">
+    <label *ngIf="rule.name">Name: {{rule.name}}</label>
+    <label>Amount:</label>
+    <pre>{{rule.amount | json}}</pre>
+    <label>Description:</label>
+    <pre>{{rule.description | json}}</pre>
+    <label>Auto assign: {{rule.autoAssign}}</label>
+    <label>To: </label>
+    <pre>{{getCategoryById(rule.categoryId) | json}}</pre>
+  </div>
+  <app-rule-edit *ngIf="showEdit" [rule]="rule"></app-rule-edit>
+  <!-- todo: Edit/Delete icon & functionality -->
+  <div>
+    <button (click)="toggleEdit()">Edit</button>
+    <button (click)="deleteRule()">Delete</button>
+  </div>
+</div>
