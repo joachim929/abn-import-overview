@@ -9,6 +9,8 @@ import {RuleDetailComponent} from './components/rule-detail/rule-detail.componen
 import {RuleEditComponent} from './components/rule-edit/rule-edit.component';
 import { AmountRulePipe } from './pipes/amount-rule.pipe';
 import { DescriptionRulePipe } from './pipes/description-rule.pipe';
+import {ReactiveFormsModule} from '@angular/forms';
+import {SharedModule} from '../shared/shared.module';
 
 
 @NgModule({
@@ -23,7 +25,9 @@ import { DescriptionRulePipe } from './pipes/description-rule.pipe';
   ],
   imports: [
     CommonModule,
-    RulesRoutingModule
+    RulesRoutingModule,
+    ReactiveFormsModule,
+    SharedModule
   ]
 })
 export class RulesModule {

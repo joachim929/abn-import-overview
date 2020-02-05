@@ -1,0 +1,7 @@
+<div class="d-flex flex-column">
+  <label *ngIf="label">{{label}}</label>
+  <div *ngFor="let option of options">
+    <input type="radio" [formControl]="control" [value]="option.value">
+    <label *ngIf="option.name">{{option.name}}</label>
+  </div>
+</div>

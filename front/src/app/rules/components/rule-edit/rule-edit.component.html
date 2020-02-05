@@ -1,1 +1,62 @@
-<p>rule-edit works!</p>
+<form [formGroup]="form" *ngIf="form" class="pr-2">
+
+  <app-rule-name-control label="Name:" type="text" formControlName="name"></app-rule-name-control>
+
+  <div formArrayName="amount" class="px-2">
+    <h4>Amount</h4>
+    <div *ngFor="let ruleGroup of getArray('amount').controls; let index = index">
+      <h5>Rule {{index + 1}})</h5>
+      <div [formGroupName]="index">
+        <app-rule-amount-description-control label="Rule" formControlName="rule" [options]="amountOptions">
+        </app-rule-amount-description-control>
+
+        <app-rule-name-control label="Value" type="number" formControlName="value"></app-rule-name-control>
+
+        <app-rule-radio-control
+          *ngIf="index < getArray('amount').controls.length - 1"
+          [options]="andOrOptions" formControlName="andOr"></app-rule-radio-control>
+      </div>
+      <button>Remove rule</button>
+      <hr>
+    </div>
+    <div class="d-flex flex-row">
+      <button>Add rule</button>
+    </div>
+  </div>
+
+  <hr>
+  <div formArrayName="description" class="px-2">
+    <h4>Description</h4>
+    <div *ngFor="let ruleGroup of getArray('description').controls; let index = index">
+      <h5>Rule {{index + 1}}</h5>
+      <div [formGroupName]="index">
+        <app-rule-amount-description-control label="Rule" formControlName="rule" [options]="descriptionOptions">
+        </app-rule-amount-description-control>
+
+        <app-rule-name-control label="Value" type="string" formControlName="value">
+        </app-rule-name-control>
+
+        <app-rule-radio-control
+          *ngIf="index < getArray('description').controls.length - 1"
+          [options]="andOrOptions" formControlName="andOr"></app-rule-radio-control>
+      </div>
+      <button>Remove rule</button>
+      <hr>
+    </div>
+    <div class="d-flex flex-row">
+      <button>Add rule</button>
+    </div>
+  </div>
+  <div class="d-flex flex-column">
+    <label>Category</label>
+    <select formControlName="categoryId">
+      <option *ngFor="let category of categories" [value]="category.id">{{category | categoryPipe}}</option>
+    </select>
+    <label>Auto-assign {{rule.autoAssign | json}}</label>
+    <input type="checkbox" formControlName="autoAssign">
+  </div>
+
+</form>
+<div *ngIf="!form" class="alert alert-warning">
+  <p>Looks like something went wrong</p>
+</div>

@@ -1,5 +1,8 @@
 import {Component, Input, OnInit} from '@angular/core';
 import {Rule} from '../../../core/interfaces-types/hint.interface';
+import {FormArray, FormControl, FormGroup} from '@angular/forms';
+import {AmountRuleEnum, AmountRuleType, DescriptionRuleEnum, DescriptionRuleType} from '../../../core/interfaces-types/hint.types';
+import {Category, CategoryService} from '../../../import/services/category.service';
 
 @Component({
   selector: 'app-rule-edit',
@@ -7,11 +10,64 @@ import {Rule} from '../../../core/interfaces-types/hint.interface';
   styleUrls: ['./rule-edit.component.scss']
 })
 export class RuleEditComponent implements OnInit {
-  @Input() rule: Rule
+  _rule: Rule;
+  @Input() set rule(input: Rule) {
+    if (input) {
+      this._rule = input;
+      this.initGroup();
+    } else {
+      this._rule = null;
+      this.form = null;
+    }
+  }
 
-  constructor() { }
+  get rule(): Rule {
+    return this._rule;
+  }
+
+  form: FormGroup;
+  descriptionOptions: DescriptionRuleType[] = [DescriptionRuleEnum.not, DescriptionRuleEnum.contains];
+  amountOptions: AmountRuleType[] = [AmountRuleEnum.lessThan, AmountRuleEnum.greaterThan, AmountRuleEnum.equalTo];
+  andOrOptions = [
+    {name: 'And', value: 'and'},
+    {name: 'Or', value: 'or'}
+  ];
+
+  constructor(
+    private categoryService: CategoryService
+  ) {
+  }
 
   ngOnInit() {
+  }
+
+  get categories(): Category[] {
+    return this.categoryService.categories;
+  }
+
+  getArray(name: string): FormArray {
+    return (this.form.get(name) as FormArray);
+  }
+
+  private initGroup() {
+    const name = this.rule.amount.map(amountRule => new FormGroup({
+      rule: new FormControl(amountRule.rule),
+      value: new FormControl(amountRule.value),
+      andOr: new FormControl(amountRule.andOr)
+    }));
+
+    const description = this.rule.description.map(descriptionRule => new FormGroup({
+      rule: new FormControl(descriptionRule.rule),
+      value: new FormControl(descriptionRule.value),
+      andOr: new FormControl(descriptionRule.andOr)
+    }));
+    this.form = new FormGroup({
+      name: new FormControl(this.rule.name),
+      amount: new FormArray(name),
+      description: new FormArray(description),
+      categoryId: new FormControl(this.rule.categoryId),
+      autoAssign: new FormControl(this.rule.autoAssign)
+    });
   }
 
 }
