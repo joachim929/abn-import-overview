@@ -55,7 +55,7 @@
     <label>Auto-assign {{rule.autoAssign | json}}</label>
     <input type="checkbox" formControlName="autoAssign">
   </div>
-
+  <button (click)="saveChanges()" [disabled]="!form.dirty">Save changes</button>
 </form>
 <div *ngIf="!form" class="alert alert-warning">
   <p>Looks like something went wrong</p>

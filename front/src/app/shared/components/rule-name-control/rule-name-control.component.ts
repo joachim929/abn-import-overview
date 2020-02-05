@@ -18,22 +18,22 @@ export class RuleNameControlComponent implements ControlValueAccessor {
 
   constructor() {
     this.control.valueChanges.subscribe((next) => {
-      this.registerOnChange(next);
+      this.propagateChange(next);
     });
   }
 
-  propagateChange = (_: any) => {
+  propagateChange = (_: any) => {};
+
+  writeValue(obj: any): void {
+    this.control.setValue(obj);
   }
 
-  registerOnChange(fn) {
+  registerOnChange(fn: any): void {
     this.propagateChange = fn;
   }
 
   registerOnTouched(fn: any): void {
-  }
-
-  writeValue(obj: any): void {
-    this.control.setValue(obj);
+    // do nothing
   }
 
 }

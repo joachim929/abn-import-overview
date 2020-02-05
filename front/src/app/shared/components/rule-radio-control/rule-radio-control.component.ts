@@ -18,21 +18,21 @@ export class RuleRadioControlComponent implements ControlValueAccessor {
 
   constructor() {
     this.control.valueChanges.subscribe((next) => {
-      this.registerOnChange(next);
+      this.propagateChange(next);
     });
   }
 
   propagateChange = (_: any) => {};
 
-  registerOnChange(fn) {
-    this.propagateChange = fn;
-  }
-
-  registerOnTouched(fn: any): void {
-  }
-
   writeValue(obj: any): void {
     this.control.setValue(obj);
   }
 
+  registerOnChange(fn: any): void {
+    this.propagateChange = fn;
+  }
+
+  registerOnTouched(fn: any): void {
+    // do nothing
+  }
 }

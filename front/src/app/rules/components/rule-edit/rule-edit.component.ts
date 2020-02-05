@@ -49,18 +49,33 @@ export class RuleEditComponent implements OnInit {
     return (this.form.get(name) as FormArray);
   }
 
-  private initGroup() {
-    const name = this.rule.amount.map(amountRule => new FormGroup({
-      rule: new FormControl(amountRule.rule),
-      value: new FormControl(amountRule.value),
-      andOr: new FormControl(amountRule.andOr)
-    }));
+  saveChanges() {
+    this.rule = this.form.value;
+    this.form.markAsPristine();
+  }
 
-    const description = this.rule.description.map(descriptionRule => new FormGroup({
-      rule: new FormControl(descriptionRule.rule),
-      value: new FormControl(descriptionRule.value),
-      andOr: new FormControl(descriptionRule.andOr)
-    }));
+  private initGroup() {
+    const name = this.rule.amount.map((amountRule, index) => {
+      const group = new FormGroup({
+        rule: new FormControl(amountRule.rule),
+        value: new FormControl(amountRule.value)
+      });
+      if (index !== this.rule.amount.length - 1) {
+        group.addControl('andOr', new FormControl(amountRule.andOr));
+      }
+      return group;
+    });
+
+    const description = this.rule.description.map((descriptionRule, index) => {
+      const group = new FormGroup({
+        rule: new FormControl(descriptionRule.rule),
+        value: new FormControl(descriptionRule.value)
+      });
+      if (index !== this.rule.description.length - 1) {
+        group.addControl('andOr', new FormControl(descriptionRule.andOr));
+      }
+      return group;
+    });
     this.form = new FormGroup({
       name: new FormControl(this.rule.name),
       amount: new FormArray(name),
