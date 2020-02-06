@@ -3,6 +3,8 @@ import {Rule} from '../../../core/interfaces-types/hint.interface';
 import {FormArray, FormControl, FormGroup} from '@angular/forms';
 import {AmountRuleEnum, AmountRuleType, DescriptionRuleEnum, DescriptionRuleType} from '../../../core/interfaces-types/hint.types';
 import {Category, CategoryService} from '../../../import/services/category.service';
+import {RuleService} from '../../../core/services/rule.service';
+import {map} from 'rxjs/operators';
 
 @Component({
   selector: 'app-rule-edit',
@@ -34,7 +36,8 @@ export class RuleEditComponent implements OnInit {
   ];
 
   constructor(
-    private categoryService: CategoryService
+    private categoryService: CategoryService,
+    private ruleService: RuleService
   ) {
   }
 
@@ -50,7 +53,9 @@ export class RuleEditComponent implements OnInit {
   }
 
   saveChanges() {
-    this.rule = this.form.value;
+    if (!this.ruleService.editRule(this.form.value)) {
+      console.warn('Rule edit failed');
+    }
     this.form.markAsPristine();
   }
 
@@ -60,6 +65,7 @@ export class RuleEditComponent implements OnInit {
         rule: new FormControl(amountRule.rule),
         value: new FormControl(amountRule.value)
       });
+      group.get('value').valueChanges.pipe(map(x => Number(x)));
       if (index !== this.rule.amount.length - 1) {
         group.addControl('andOr', new FormControl(amountRule.andOr));
       }
@@ -81,7 +87,8 @@ export class RuleEditComponent implements OnInit {
       amount: new FormArray(name),
       description: new FormArray(description),
       categoryId: new FormControl(this.rule.categoryId),
-      autoAssign: new FormControl(this.rule.autoAssign)
+      autoAssign: new FormControl(this.rule.autoAssign),
+      id: new FormControl(this.rule.id)
     });
   }
 

@@ -51,13 +51,14 @@ export class RuleService {
     }
   }
 
-  editRule(rule: Rule): void {
+  editRule(rule: Rule): boolean {
     for (let i = 0; i < this.rules.length; i++) {
       if (this.rules[i].id === rule.id) {
         this.rules[i] = rule;
-        break;
+        return true;
       }
     }
+    return false;
   }
 
   validateImport(importedRules: unknown): boolean {

@@ -1,20 +1,20 @@
 <form [formGroup]="form" *ngIf="form" class="pr-2">
 
-  <app-rule-name-control label="Name:" type="text" formControlName="name"></app-rule-name-control>
+  <app-rule-name-control label="Name:" type="text" [control]="form.get('name')"></app-rule-name-control>
 
   <div formArrayName="amount" class="px-2">
     <h4>Amount</h4>
     <div *ngFor="let ruleGroup of getArray('amount').controls; let index = index">
       <h5>Rule {{index + 1}})</h5>
-      <div [formGroupName]="index">
-        <app-rule-amount-description-control label="Rule" formControlName="rule" [options]="amountOptions">
+      <div [formGroup]="ruleGroup">
+        <app-rule-amount-description-control label="Rule" [control]="ruleGroup.get('rule')" [options]="amountOptions">
         </app-rule-amount-description-control>
 
-        <app-rule-name-control label="Value" type="number" formControlName="value"></app-rule-name-control>
+        <app-rule-name-control label="Value" type="number" [control]="ruleGroup.get('value')"></app-rule-name-control>
 
         <app-rule-radio-control
           *ngIf="index < getArray('amount').controls.length - 1"
-          [options]="andOrOptions" formControlName="andOr"></app-rule-radio-control>
+          [options]="andOrOptions" [control]="ruleGroup.get('andOr')"></app-rule-radio-control>
       </div>
       <button>Remove rule</button>
       <hr>
@@ -29,16 +29,16 @@
     <h4>Description</h4>
     <div *ngFor="let ruleGroup of getArray('description').controls; let index = index">
       <h5>Rule {{index + 1}}</h5>
-      <div [formGroupName]="index">
-        <app-rule-amount-description-control label="Rule" formControlName="rule" [options]="descriptionOptions">
+      <div [formGroup]="ruleGroup">
+        <app-rule-amount-description-control label="Rule" [control]="ruleGroup.get('rule')" [options]="descriptionOptions">
         </app-rule-amount-description-control>
 
-        <app-rule-name-control label="Value" type="string" formControlName="value">
+        <app-rule-name-control label="Value" type="string" [control]="ruleGroup.get('value')">
         </app-rule-name-control>
 
         <app-rule-radio-control
           *ngIf="index < getArray('description').controls.length - 1"
-          [options]="andOrOptions" formControlName="andOr"></app-rule-radio-control>
+          [options]="andOrOptions" [control]="ruleGroup.get('andOr')"></app-rule-radio-control>
       </div>
       <button>Remove rule</button>
       <hr>

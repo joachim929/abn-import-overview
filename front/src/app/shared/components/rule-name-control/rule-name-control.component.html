@@ -1,4 +1,4 @@
-<div class="d-flex flex-column">
+<div class="d-flex flex-column" *ngIf="control">
   <label *ngIf="label">{{label}}</label>
   <input [type]="type" [formControl]="control">
 </div>
