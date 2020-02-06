@@ -6,16 +6,16 @@ import {Component, OnInit} from '@angular/core';
   styleUrls: ['./header.component.scss']
 })
 export class HeaderComponent implements OnInit {
-  showHeader = true;
+  links = [
+    {path: '/imports/all', label: 'Show all'},
+    {path: '/imports/assign', label: 'Assign Categories'},
+    {path: '/imports/edit-categories', label: 'Edit Categories'},
+    {path: '/rules', label: 'Rules'}
+  ];
 
   constructor() {
   }
 
   ngOnInit() {
   }
-
-  toggleHeader() {
-    this.showHeader = !this.showHeader;
-  }
-
 }

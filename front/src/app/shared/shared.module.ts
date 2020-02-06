@@ -9,6 +9,7 @@ import {ReactiveFormsModule} from '@angular/forms';
 import { RuleAmountDescriptionControlComponent } from './components/rule-amount-description-control/rule-amount-description-control.component';
 import { RuleRadioControlComponent } from './components/rule-radio-control/rule-radio-control.component';
 import { CategoryPipe } from './pipes/category.pipe';
+import {MatButtonModule, MatTabsModule, MatToolbarModule} from '@angular/material';
 
 
 @NgModule({
@@ -24,7 +25,10 @@ import { CategoryPipe } from './pipes/category.pipe';
   imports: [
     CommonModule,
     RouterModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    MatToolbarModule,
+    MatButtonModule,
+    MatTabsModule
   ],
   exports: [
     HeaderComponent,
