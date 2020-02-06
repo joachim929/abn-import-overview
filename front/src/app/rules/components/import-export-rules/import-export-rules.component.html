@@ -1,5 +1,9 @@
-<div class="card-header d-flex flex-row">
-  <label for="import" class="mb-0 mx-1 btn btn-secondary">Import...</label>
-  <input (change)="importRules($event)" type="file" hidden id="import">
-  <button (click)="downloadJson()" class="mx-1 btn btn-secondary">Export...</button>
-</div>
+<mat-card>
+  <mat-chip-list>
+    <mat-chip class="import-export-button" color="primary" selected>
+      <label for="import" class="no-margin">Import...</label>
+      <input (change)="importRules($event)" type="file" hidden id="import">
+    </mat-chip>
+    <mat-chip class="import-export-button" color="primary" selected (click)="downloadJson()">Export...</mat-chip>
+  </mat-chip-list>
+</mat-card>

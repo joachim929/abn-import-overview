@@ -7,7 +7,7 @@ import {SharedModule} from './shared/shared.module';
 import {FormsModule} from '@angular/forms';
 import {HttpClientModule} from '@angular/common/http';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import {MatToolbarModule} from '@angular/material';
+import {MatButtonModule, MatCardModule, MatChipsModule, MatToolbarModule} from '@angular/material';
 
 @NgModule({
   declarations: [
@@ -20,7 +20,10 @@ import {MatToolbarModule} from '@angular/material';
     FormsModule,
     HttpClientModule,
     BrowserAnimationsModule,
-    MatToolbarModule
+    MatToolbarModule,
+    MatCardModule,
+    MatButtonModule,
+    MatChipsModule
   ],
   providers: [],
   bootstrap: [AppComponent]
