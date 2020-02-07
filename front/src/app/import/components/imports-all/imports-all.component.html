@@ -1,5 +1,5 @@
-<div *ngFor="let entry of formattedData; let index = index">
-  <a [routerLink]="['/edit', index]" class="card m-2">
+<mat-card *ngFor="let entry of formattedData; let index = index" style="margin: 0.5rem 0;">
+  <a [routerLink]="['/edit', index]" style="text-decoration: none;">
     <app-entry [entry]="entry"></app-entry>
   </a>
-</div>
+</mat-card>
