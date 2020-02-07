@@ -1,4 +1,4 @@
-<div class="card-body" *ngIf="entry">
+<ng-container *ngIf="entry">
   <p class="mb-0">Date: {{entry.transactionDate | date}}</p>
   <p class="mb-0">Amount: {{entry.amount | currency: 'EUR'}}</p>
   <p class="mb-0">Start Saldo: {{entry.startSaldo}}</p>
@@ -6,4 +6,4 @@
   <p class="mb-0">Description: {{entry.description}}</p>
   <p class="mb-0" *ngIf="entry.category">Category: {{entry.category.category}}</p>
   <p class="mb-0" *ngIf="entry.category">Sub-category: {{entry.category.subCategory}}</p>
-</div>
+</ng-container>
