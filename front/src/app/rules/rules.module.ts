@@ -11,7 +11,7 @@ import { AmountRulePipe } from './pipes/amount-rule.pipe';
 import { DescriptionRulePipe } from './pipes/description-rule.pipe';
 import {ReactiveFormsModule} from '@angular/forms';
 import {SharedModule} from '../shared/shared.module';
-import {MatCardModule, MatChipsModule} from '@angular/material';
+import {MatCardModule, MatChipsModule, MatExpansionModule} from '@angular/material';
 
 
 @NgModule({
@@ -24,14 +24,15 @@ import {MatCardModule, MatChipsModule} from '@angular/material';
     AmountRulePipe,
     DescriptionRulePipe
   ],
-  imports: [
-    CommonModule,
-    RulesRoutingModule,
-    ReactiveFormsModule,
-    SharedModule,
-    MatCardModule,
-    MatChipsModule
-  ]
+    imports: [
+        CommonModule,
+        RulesRoutingModule,
+        ReactiveFormsModule,
+        SharedModule,
+        MatCardModule,
+        MatChipsModule,
+        MatExpansionModule
+    ]
 })
 export class RulesModule {
 }
