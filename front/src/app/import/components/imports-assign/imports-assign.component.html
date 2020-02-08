@@ -10,11 +10,11 @@
       <label for="subCategory" class="mx-1">Sub-category</label>
       <input id="subCategory" class="mx-1" formControlName="subCategory" type="text">
 
-      <button class="btn btn-secondary mx-1"
+      <button mat-raised-button color="accent" class="mx-1"
               [disabled]="categoryForm.invalid"
               (click)="addCategory()">Add
       </button>
-      <button class="btn btn-secondary mx-1"
+      <button mat-raised-button color="accent" class="mx-1"
               [disabled]="categoryForm.invalid"
               (click)="addAndAssign(index)">Add and assign
       </button>
