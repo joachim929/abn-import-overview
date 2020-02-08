@@ -1,13 +1,13 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import {RuleService} from '../../../core/services/rule.service';
 import {of} from 'rxjs';
 
 @Component({
-  selector: 'app-import-export-rules',
-  templateUrl: './import-export-rules.component.html',
-  styleUrls: ['./import-export-rules.component.scss']
+  selector: 'app-rules-action',
+  templateUrl: './rules-action.component.html',
+  styleUrls: ['./rules-action.component.scss']
 })
-export class ImportExportRulesComponent implements OnInit {
+export class RulesActionComponent implements OnInit {
   private setting = {
     element: {
       dynamicDownload: null as HTMLElement
@@ -46,6 +46,10 @@ export class ImportExportRulesComponent implements OnInit {
         text: JSON.stringify(res)
       });
     });
+  }
+
+  createNewRule() {
+
   }
 
 

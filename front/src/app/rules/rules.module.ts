@@ -4,7 +4,7 @@ import {CommonModule} from '@angular/common';
 import {RulesRoutingModule} from './rules-routing.module';
 import {RulesMasterComponent} from './components/rules-master/rules-master.component';
 import {RulesListComponent} from './components/rules-list/rules-list.component';
-import {ImportExportRulesComponent} from './components/import-export-rules/import-export-rules.component';
+import {RulesActionComponent} from './components/rules-actions/rules-action.component';
 import {RuleDetailComponent} from './components/rule-detail/rule-detail.component';
 import {RuleEditComponent} from './components/rule-edit/rule-edit.component';
 import { AmountRulePipe } from './pipes/amount-rule.pipe';
@@ -15,18 +15,20 @@ import { MatCardModule } from '@angular/material/card';
 import { MatChipsModule } from '@angular/material/chips';
 import { MatExpansionModule } from '@angular/material/expansion';
 import { ItemTitlePipe } from './pipes/item-title.pipe';
+import { RuleCreateComponent } from './components/rule-create/rule-create.component';
 
 
 @NgModule({
   declarations: [
     RulesMasterComponent,
     RulesListComponent,
-    ImportExportRulesComponent,
+    RulesActionComponent,
     RuleDetailComponent,
     RuleEditComponent,
     AmountRulePipe,
     DescriptionRulePipe,
-    ItemTitlePipe
+    ItemTitlePipe,
+    RuleCreateComponent
   ],
     imports: [
         CommonModule,

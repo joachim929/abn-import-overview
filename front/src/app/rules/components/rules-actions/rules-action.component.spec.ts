@@ -1,20 +1,20 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { ImportExportRulesComponent } from './import-export-rules.component';
+import { RulesActionComponent } from './rules-action.component';
 
 describe('ImportExportRulesComponent', () => {
-  let component: ImportExportRulesComponent;
-  let fixture: ComponentFixture<ImportExportRulesComponent>;
+  let component: RulesActionComponent;
+  let fixture: ComponentFixture<RulesActionComponent>;
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ ImportExportRulesComponent ]
+      declarations: [ RulesActionComponent ]
     })
     .compileComponents();
   }));
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(ImportExportRulesComponent);
+    fixture = TestBed.createComponent(RulesActionComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

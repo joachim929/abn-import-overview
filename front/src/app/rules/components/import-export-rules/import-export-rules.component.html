@@ -1,9 +1,0 @@
-<mat-card>
-  <mat-chip-list>
-    <mat-chip class="import-export-button" color="primary" selected>
-      <label for="import" class="no-margin">Import...</label>
-      <input (change)="importRules($event)" type="file" hidden id="import">
-    </mat-chip>
-    <mat-chip class="import-export-button" color="primary" selected (click)="downloadJson()">Export...</mat-chip>
-  </mat-chip-list>
-</mat-card>
