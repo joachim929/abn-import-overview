@@ -9,7 +9,9 @@ import {ReactiveFormsModule} from '@angular/forms';
 import { RuleAmountDescriptionControlComponent } from './components/rule-amount-description-control/rule-amount-description-control.component';
 import { RuleRadioControlComponent } from './components/rule-radio-control/rule-radio-control.component';
 import { CategoryPipe } from './pipes/category.pipe';
-import {MatButtonModule, MatTabsModule, MatToolbarModule} from '@angular/material';
+import { MatButtonModule } from '@angular/material/button';
+import { MatTabsModule } from '@angular/material/tabs';
+import { MatToolbarModule } from '@angular/material/toolbar';
 
 
 @NgModule({

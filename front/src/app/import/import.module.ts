@@ -12,7 +12,8 @@ import {EditCategoriesComponent} from './components/edit-categories/edit-categor
 import {EntryEditComponent} from './components/entry-edit/entry-edit.component';
 import {EntryComponent} from './components/entry/entry.component';
 import {SharedModule} from '../shared/shared.module';
-import {MatButtonModule, MatCardModule} from '@angular/material';
+import { MatButtonModule } from '@angular/material/button';
+import { MatCardModule } from '@angular/material/card';
 
 
 @NgModule({

@@ -11,7 +11,9 @@ import { AmountRulePipe } from './pipes/amount-rule.pipe';
 import { DescriptionRulePipe } from './pipes/description-rule.pipe';
 import {ReactiveFormsModule} from '@angular/forms';
 import {SharedModule} from '../shared/shared.module';
-import {MatCardModule, MatChipsModule, MatExpansionModule} from '@angular/material';
+import { MatCardModule } from '@angular/material/card';
+import { MatChipsModule } from '@angular/material/chips';
+import { MatExpansionModule } from '@angular/material/expansion';
 
 
 @NgModule({
