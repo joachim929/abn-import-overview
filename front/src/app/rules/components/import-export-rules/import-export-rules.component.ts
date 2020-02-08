@@ -28,7 +28,7 @@ export class ImportExportRulesComponent implements OnInit {
 
       let file: string;
       reader.onload = ((e) => {
-        file = e.target['result'];
+        file = (e.target.result as string);
         if (this.ruleService.validateImport(JSON.parse(file))) {
           this.ruleService.rules = JSON.parse(file);
         } else {

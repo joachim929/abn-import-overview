@@ -1,12 +1,10 @@
-<!--<div style="margin: 0.5rem;">-->
-  <mat-accordion multi>
-    <mat-expansion-panel *ngFor="let rule of rules" style="margin: 0.125em 0; border: 1px solid rgba(0,0,0,.125)">
-      <mat-expansion-panel-header>
-        <mat-panel-title>
-          Rule{{rule.name ? +': ' + rule.name : ' detail'}}
-        </mat-panel-title>
-      </mat-expansion-panel-header>
-      <app-rule-detail [rule]="rule"></app-rule-detail>
-    </mat-expansion-panel>
-  </mat-accordion>
-<!--</div>-->
+<mat-accordion multi>
+  <mat-expansion-panel *ngFor="let rule of rules" style="margin: 0.125em 0; border: 1px solid rgba(0,0,0,.125)">
+    <mat-expansion-panel-header>
+      <mat-panel-title>
+        {{rule | itemTitle}}
+      </mat-panel-title>
+    </mat-expansion-panel-header>
+    <app-rule-detail [rule]="rule"></app-rule-detail>
+  </mat-expansion-panel>
+</mat-accordion>

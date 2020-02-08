@@ -14,6 +14,7 @@ import {SharedModule} from '../shared/shared.module';
 import { MatCardModule } from '@angular/material/card';
 import { MatChipsModule } from '@angular/material/chips';
 import { MatExpansionModule } from '@angular/material/expansion';
+import { ItemTitlePipe } from './pipes/item-title.pipe';
 
 
 @NgModule({
@@ -24,7 +25,8 @@ import { MatExpansionModule } from '@angular/material/expansion';
     RuleDetailComponent,
     RuleEditComponent,
     AmountRulePipe,
-    DescriptionRulePipe
+    DescriptionRulePipe,
+    ItemTitlePipe
   ],
     imports: [
         CommonModule,
