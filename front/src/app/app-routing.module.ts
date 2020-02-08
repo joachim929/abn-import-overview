@@ -3,10 +3,11 @@ import { Routes, RouterModule } from '@angular/router';
 import {NotFoundComponent} from './shared/components/not-found/not-found.component';
 import {ImportModule} from './import/import.module';
 import {RulesModule} from './rules/rules.module';
+import {LandingComponent} from './core/components/landing/landing.component';
 
 
 const routes: Routes = [
-  {path: '', redirectTo: '/imports', pathMatch: 'full'},
+  {path: '', component: LandingComponent},
   {path: 'imports', loadChildren: () => import('./import/import.module').then(m => ImportModule)},
   {path: 'rules', loadChildren: () => import('./rules/rules.module').then(m => RulesModule)},
   {path: '404', component: NotFoundComponent},
