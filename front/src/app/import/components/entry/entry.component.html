@@ -1,9 +1,9 @@
 <ng-container *ngIf="entry">
-  <p class="mb-0">Date: {{entry.transactionDate | date}}</p>
-  <p class="mb-0">Amount: {{entry.amount | currency: 'EUR'}}</p>
-  <p class="mb-0">Start Saldo: {{entry.startSaldo}}</p>
-  <p class="mb-0">End Saldo: {{entry.endSaldo}}</p>
-  <p class="mb-0">Description: {{entry.description}}</p>
-  <p class="mb-0" *ngIf="entry.category">Category: {{entry.category.category}}</p>
-  <p class="mb-0" *ngIf="entry.category">Sub-category: {{entry.category.subCategory}}</p>
+  <p>Date: {{entry.transactionDate | date}}</p>
+  <p>Amount: {{entry.amount | currency: 'EUR'}}</p>
+  <p>Start Saldo: {{entry.startSaldo}}</p>
+  <p>End Saldo: {{entry.endSaldo}}</p>
+  <p>Description: {{entry.description}}</p>
+  <p *ngIf="entry.category">Category: {{entry.category.category}}</p>
+  <p *ngIf="entry.category">Sub-category: {{entry.category.subCategory}}</p>
 </ng-container>

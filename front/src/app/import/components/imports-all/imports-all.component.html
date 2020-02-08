@@ -1,5 +1,8 @@
-<mat-card *ngFor="let entry of formattedData; let index = index" style="margin: 0.5rem 0;">
-  <a [routerLink]="['/edit', index]" style="text-decoration: none;">
-    <app-entry [entry]="entry"></app-entry>
-  </a>
-</mat-card>
+<ng-container *ngFor="let entry of formattedData; let index = index">
+  <mat-card *ngIf="index < showAmount"  style="margin: 0.5rem 0;">
+    <a [routerLink]="['/edit', index]" style="text-decoration: none;">
+      <app-entry [entry]="entry"></app-entry>
+    </a>
+  </mat-card>
+</ng-container>
+<button mat-raised-button color="primary" (click)="loadMoreEntries()">Load more</button>

@@ -4,17 +4,17 @@
   </ng-container>
   <ng-container *ngIf="index === assignIndex">
     <form [formGroup]="categoryForm" class="card-body" *ngIf="showCategoryMenu">
-      <label for="category" class="mr-1">Category</label>
-      <input id="category" class="mx-1" formControlName="category" type="text">
+      <label for="category" class="">Category</label>
+      <input id="category" class="" formControlName="category" type="text">
 
-      <label for="subCategory" class="mx-1">Sub-category</label>
-      <input id="subCategory" class="mx-1" formControlName="subCategory" type="text">
+      <label for="subCategory" class="">Sub-category</label>
+      <input id="subCategory" class="" formControlName="subCategory" type="text">
 
-      <button mat-raised-button color="accent" class="mx-1"
+      <button mat-raised-button color="accent" class=""
               [disabled]="categoryForm.invalid"
               (click)="addCategory()">Add
       </button>
-      <button mat-raised-button color="accent" class="mx-1"
+      <button mat-raised-button color="accent" class=""
               [disabled]="categoryForm.invalid"
               (click)="addAndAssign(index)">Add and assign
       </button>
