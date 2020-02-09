@@ -45,6 +45,8 @@ export class RuleCreateComponent implements OnInit {
     {id: 'notContain', name: 'Description doesn\'t contain'}
   ];
 
+  createAnother = new FormControl();
+
   ruleForm = new FormGroup({
     name: new FormControl(null, [Validators.required]),
     amount: new FormArray([
@@ -60,7 +62,7 @@ export class RuleCreateComponent implements OnInit {
       })
     ]),
     categoryId: new FormControl(null, [Validators.required]),
-    autoAssign: new FormControl(null, [Validators.required])
+    autoAssign: new FormControl(null)
   });
 
   constructor() {
@@ -75,6 +77,27 @@ export class RuleCreateComponent implements OnInit {
 
   getArray(name: string): FormArray {
     return (this.ruleForm.get(name) as FormArray);
+  }
+
+  resetForm() {
+    this.ruleForm.reset();
+  }
+
+  addRule() {
+    if (this.createAnother.value) {
+
+    } else {
+
+    }
+  }
+
+  removeRule(index: number, arrayName: string) {
+    this.getArray(arrayName).removeAt(index);
+    if (this.getArray(arrayName).at(index - 1)) {
+      console.log('got more than 1');
+    } else {
+      console.log('not got more than 1');
+    }
   }
 
 }

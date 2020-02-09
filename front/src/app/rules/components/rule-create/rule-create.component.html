@@ -10,29 +10,38 @@
                      label="Name"></app-mat-input>
       <hr>
       <div formArrayName="amount">
-        <mat-label>Amount logic</mat-label>
-        <div style="display: grid; grid-template-columns: 4fr 1fr">
-          <div [formGroup]="ruleGroup" *ngFor="let ruleGroup of getArray('amount').controls; let index = index">
-            <app-mat-select
-              [options]="amountOptions"
-              label="Rule"
-              [control]="ruleGroup.get('rule')"></app-mat-select>
-            <app-mat-input [control]="ruleGroup.get('value')" type="number" label="value"></app-mat-input>
-            <button [disabled]="ruleGroup.invalid"
-                    *ngIf="index === (getArray('amount').controls.length)" mat-raised-button></button>
-          </div>
+        <mat-label style="display: flex;">Amount logic</mat-label>
+        <div style="display:flex; align-items: center;" [formGroup]="ruleGroup" *ngFor="let ruleGroup of getArray('amount').controls; let index = index">
+          <app-mat-select
+            [options]="amountOptions"
+            label="Rule"
+            [control]="ruleGroup.get('rule')"></app-mat-select>
+          <app-mat-input style="margin-left: 1rem;" [control]="ruleGroup.get('value')" type="number"
+                         label="Value"></app-mat-input>
+          <button (click)="removeRule(index, 'description')"
+                  class="remove-rule-button">
+            <mat-icon color="warn">remove_circle</mat-icon>
+          </button>
         </div>
+        <button class="add-rule-button">
+          <mat-icon>add_circle_outline</mat-icon>
+        </button>
       </div>
       <hr>
       <div formArrayName="description">
-        <mat-label>Description logic</mat-label>
+        <mat-label style="display: flex;">Description logic</mat-label>
         <div [formGroup]="ruleGroup" *ngFor="let ruleGroup of getArray('description').controls; let index = index">
           <app-mat-select
             [control]="ruleGroup.get('rule')"
             label="Rule"
             [options]="descriptionOptions"></app-mat-select>
-          <app-mat-input [control]="ruleGroup.get('value')" type="text" label="value"></app-mat-input>
+          <app-mat-input style="margin-left: 1rem;" [control]="ruleGroup.get('value')" type="text"
+                         label="Value"></app-mat-input>
+          <button (click)="removeRule(index, 'description')" class="remove-rule-button"><mat-icon color="warn">remove_circle</mat-icon></button>
         </div>
+        <button class="add-rule-button">
+          <mat-icon>add_circle_outline</mat-icon>
+        </button>
       </div>
       <hr>
       <app-mat-select-groups
@@ -40,12 +49,22 @@
         groupKey="category"
         [control]="ruleForm.get('categoryId')"
         label="Category"></app-mat-select-groups>
-      <mat-checkbox color="primary" formControlName="autoAssign">Auto assign</mat-checkbox>
+      <mat-checkbox style="margin: 0 1rem;" color="primary" formControlName="autoAssign">Auto assign</mat-checkbox>
       <hr>
-      <button mat-raised-button>Add</button>
-      <!-- todo: go back-->
-      <button mat-raised-button>Cancel</button>
-      <button mat-raised-button>Reset</button>
+      <div style="display: flex; flex-direction: row; justify-content: space-between">
+        <div>
+          <button color="primary" style="margin: 0 0.5rem 0 0;"
+                  [disabled]="ruleForm.invalid"
+                  mat-raised-button
+                  (click)="addRule()">Add
+          </button>
+          <mat-checkbox style="margin: 0 0.5rem;" color="primary" [formControl]="createAnother">Create another
+          </mat-checkbox>
+        </div>
+        <button style="margin: 0 0.5rem;" mat-raised-button (click)="resetForm()">Reset</button>
+        <!-- todo: go back-->
+        <button color="accent" mat-raised-button>Cancel</button>
+      </div>
     </form>
   </mat-card-content>
 </mat-card>

@@ -1,3 +1,13 @@
 .rule-container {
   margin: 0.125em 0;
 }
+
+.add-rule-button {
+  color: green;
+  padding: 0;
+}
+
+.remove-rule-button, .add-rule-button {
+  border: 0;
+  background-color: inherit;
+}
