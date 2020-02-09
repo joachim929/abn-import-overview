@@ -1,4 +1,5 @@
 import {Injectable} from '@angular/core';
+import {CategoryGroup} from '../../core/interfaces-types/category.interface';
 
 /**
  * @deprecated
@@ -16,6 +17,33 @@ export class CategoryService {
   categories: Category[] = [
     {id: 1, category: 'Smokes', subCategory: 'Smokes'},
     {id: 2, category: 'Groceries', subCategory: 'Food'}
+  ];
+
+  categoryGroups: CategoryGroup[] = [
+    {
+      name: 'Food',
+      id: 1,
+      categories: [
+        {id: 1, name: 'Snacks'},
+        {id: 2, name: 'Groceries'}
+      ]
+    },
+    {
+      name: 'Social',
+      id: 2,
+      categories: [
+        {id: 3, name: 'Drinks'},
+        {id: 4, name: 'Activity'}
+      ]
+    },
+    {
+      name: 'Bills',
+      id: 3,
+      categories: [
+        {id: 5, name: 'Travel'},
+        {id: 6, name: 'Rent'}
+      ]
+    }
   ];
 
   constructor() {

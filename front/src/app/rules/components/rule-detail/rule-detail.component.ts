@@ -33,7 +33,6 @@ export class RuleDetailComponent implements OnInit {
 
   deleteRule(): void {
     this.ruleService.removeRule(this.rule.id);
-    console.log(this.ruleService.rules);
   }
 
 }

@@ -3,12 +3,12 @@ export type AmountRuleType = AmountRuleEnum.greaterThan | AmountRuleEnum.lessTha
 export type AndOrType = 'and' | 'or';
 
 export enum AmountRuleEnum {
-  lessThan = 'less than',
-  greaterThan = 'greater than',
-  equalTo = 'equal to'
+  lessThan = 'lessThan',
+  greaterThan = 'greaterThan',
+  equalTo = 'equalTo'
 }
 
 export enum DescriptionRuleEnum {
   contains = 'contains',
-  not = 'doesn\'t contain'
+  not = 'notContain'
 }

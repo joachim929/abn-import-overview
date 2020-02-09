@@ -18,7 +18,6 @@ export class RuleLogicComponent implements OnInit {
   ngOnInit(): void {
   }
 
-
   removeLogicEntry(index: number) {
     this.array.removeAt(index);
     const arrayLength = this.array.controls.length;
@@ -30,13 +29,15 @@ export class RuleLogicComponent implements OnInit {
   addLogic() {
     if (this.validArray()) {
       const oldLength = this.array.controls.length;
-      if (oldLength > 0) {
-        (this.array.at(oldLength - 1) as FormGroup).addControl('andOr', new FormControl());
-      }
-      this.array.controls.push(new FormGroup({
-        rule: new FormControl(null, [Validators.required]),
-        value: new FormControl(null, [Validators.required])
-      }));
+      setTimeout(() => {
+        if (oldLength > 0) {
+          (this.array.at(oldLength - 1) as FormGroup).addControl('andOr', new FormControl(null, [Validators.required]));
+        }
+        this.array.controls.push(new FormGroup({
+          rule: new FormControl(null, [Validators.required]),
+          value: new FormControl(null, [Validators.required])
+        }));
+      });
     }
   }
 

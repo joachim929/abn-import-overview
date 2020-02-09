@@ -1,61 +1,23 @@
 <form [formGroup]="form" *ngIf="form" class="pr-2">
 
-  <app-rule-name-control label="Name:" type="text" [control]="form.get('name')"></app-rule-name-control>
+  <app-mat-input label="Name" type="text" [control]="form.get('name')"></app-mat-input>
+  <app-rule-logic [ruleOptions]="testAmountOptions" [array]="getArray('amount')" valueType="number" label="Amount">
+  </app-rule-logic>
+  <app-rule-logic [ruleOptions]="testDescriptionOptions" [array]="getArray('description')" valueType="text" label="Description">
+  </app-rule-logic>
 
-  <div formArrayName="amount" class="px-2">
-    <h4>Amount</h4>
-    <div *ngFor="let ruleGroup of getArray('amount').controls; let index = index">
-      <h5>Rule {{index + 1}})</h5>
-      <div [formGroup]="ruleGroup">
-        <app-rule-amount-description-control label="Rule" [control]="ruleGroup.get('rule')" [options]="amountOptions">
-        </app-rule-amount-description-control>
-
-        <app-rule-name-control label="Value" type="number" [control]="ruleGroup.get('value')"></app-rule-name-control>
-
-        <app-rule-radio-control
-          *ngIf="index < getArray('amount').controls.length - 1"
-          [options]="andOrOptions" [control]="ruleGroup.get('andOr')"></app-rule-radio-control>
-      </div>
-      <button>Remove rule</button>
-      <hr>
-    </div>
-    <div class="row-container">
-      <button>Add rule</button>
-    </div>
-  </div>
-
-  <hr>
-  <div formArrayName="description" class="px-2">
-    <h4>Description</h4>
-    <div *ngFor="let ruleGroup of getArray('description').controls; let index = index">
-      <h5>Rule {{index + 1}}</h5>
-      <div [formGroup]="ruleGroup">
-        <app-rule-amount-description-control label="Rule" [control]="ruleGroup.get('rule')" [options]="descriptionOptions">
-        </app-rule-amount-description-control>
-
-        <app-rule-name-control label="Value" type="string" [control]="ruleGroup.get('value')">
-        </app-rule-name-control>
-
-        <app-rule-radio-control
-          *ngIf="index < getArray('description').controls.length - 1"
-          [options]="andOrOptions" [control]="ruleGroup.get('andOr')"></app-rule-radio-control>
-      </div>
-      <button>Remove rule</button>
-      <hr>
-    </div>
-    <div class="row-container">
-      <button>Add rule</button>
-    </div>
-  </div>
   <div class="column-container">
-    <label>Category</label>
-    <select formControlName="categoryId">
-      <option *ngFor="let category of categories" [value]="category.id">{{category | categoryPipe}}</option>
-    </select>
-    <label>Auto-assign {{rule.autoAssign | json}}</label>
-    <input type="checkbox" formControlName="autoAssign">
+    <app-mat-select-groups
+      [groups]="categoryGroups"
+      groupKey="categories"
+      [control]="form.get('categoryId')"
+      label="Category"></app-mat-select-groups>
+
+    <mat-checkbox class="add-another-rule-check"
+                  formControlName="autoAssign">Auto assign
+    </mat-checkbox>
   </div>
-  <button (click)="saveChanges()" [disabled]="!form.dirty">Save changes</button>
+  <button mat-raised-button (click)="saveChanges()" [disabled]="form.invalid">Save changes</button>
 </form>
 <div *ngIf="!form" class="alert alert-warning">
   <p>Looks like something went wrong</p>

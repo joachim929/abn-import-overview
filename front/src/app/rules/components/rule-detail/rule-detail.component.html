@@ -1,5 +1,5 @@
 <div class="rules-list">
-  <div *ngIf="!showEdit">
+  <div [hidden]="showEdit">
     <label *ngIf="rule.name">Name: {{rule.name}}</label>
     <label>Amount:</label>
     <pre *ngFor="let amount of rule.amount">{{amount | amountRule}}</pre>
@@ -14,9 +14,12 @@
   <app-rule-edit *ngIf="showEdit" [rule]="rule"></app-rule-edit>
   <!-- todo: Edit/Delete icon & functionality -->
   <div class="action-bar">
-    <button (click)="toggleEdit()">Edit</button>
-    <button (click)="deleteRule()">Delete</button>
+    <button class="rule-action-button" mat-raised-button (click)="toggleEdit()">
+      <span *ngIf="showEdit">Cancel</span>
+      <span *ngIf="!showEdit">Edit</span>
+    </button>
+    <button class="rule-action-button" mat-raised-button (click)="deleteRule()">Delete</button>
     <!-- todo: Implement -->
-    <button>Duplicate</button>
+    <button class="rule-action-button" mat-raised-button>Duplicate</button>
   </div>
 </div>

@@ -3,6 +3,7 @@ import {FormArray, FormControl, FormGroup, Validators} from '@angular/forms';
 import {RuleService} from '../../../core/services/rule.service';
 import {Location} from '@angular/common';
 import {CategoryGroup} from '../../../core/interfaces-types/category.interface';
+import {amountOptions, descriptionOptions} from '../../constants/amount-options.constant';
 
 @Component({
   selector: 'app-rule-create',
@@ -37,16 +38,8 @@ export class RuleCreateComponent implements OnInit {
     }
   ];
 
-  amountOptions = [
-    {id: 'lessThan', name: 'Less than'},
-    {id: 'greaterThan', name: 'Greater than'},
-    {id: 'equalTo', name: 'Equal to'}
-  ];
-
-  descriptionOptions = [
-    {id: 'contains', name: 'Description contains'},
-    {id: 'notContain', name: 'Description doesn\'t contain'}
-  ];
+  amountOptions = amountOptions;
+  descriptionOptions = descriptionOptions;
 
   createAnother = new FormControl();
 

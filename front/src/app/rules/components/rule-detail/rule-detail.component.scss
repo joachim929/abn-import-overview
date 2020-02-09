@@ -1,6 +1,6 @@
 .rules-list {
   display: grid;
-  grid-template-columns: auto 50px;
+  grid-template-columns: auto 100px;
 }
 
 .action-bar {
@@ -8,4 +8,8 @@
   justify-content: center;
   display: flex;
   flex-direction: column;
+}
+
+.rule-action-button {
+  margin: 0.5rem 0;
 }
