@@ -1,5 +1,7 @@
 import {Component, OnInit} from '@angular/core';
 import {FormArray, FormControl, FormGroup, Validators} from '@angular/forms';
+import {RuleService} from '../../../core/services/rule.service';
+import {Location} from '@angular/common';
 
 @Component({
   selector: 'app-rule-create',
@@ -65,7 +67,10 @@ export class RuleCreateComponent implements OnInit {
     autoAssign: new FormControl(null)
   });
 
-  constructor() {
+  constructor(
+    private ruleService: RuleService,
+    private location: Location
+  ) {
   }
 
   ngOnInit(): void {
@@ -81,13 +86,34 @@ export class RuleCreateComponent implements OnInit {
 
   resetForm() {
     this.ruleForm.reset();
+    this.resetFormArray('description');
+    this.resetFormArray('amount');
   }
 
   addRule() {
-    if (this.createAnother.value) {
-
-    } else {
-
+    if (this.ruleForm.valid) {
+      const newRule = this.ruleForm.value;
+      newRule.autoAssign = !!newRule.autoAssign;
+      this.ruleService.rules.push(newRule);
     }
+    if (this.createAnother.value) {
+      this.ruleForm.reset();
+    } else {
+      this.location.back();
+    }
+  }
+
+  goBack() {
+    this.location.back();
+  }
+
+  private resetFormArray(name: string): void {
+    (this.ruleForm.get(name) as FormArray).clear();
+    (this.ruleForm.get(name) as FormArray).controls.push(
+      new FormGroup({
+        rule: new FormControl(null, [Validators.required]),
+        value: new FormControl(null, [Validators.required])
+      })
+    );
   }
 }
