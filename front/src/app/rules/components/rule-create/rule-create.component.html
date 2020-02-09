@@ -8,42 +8,24 @@
                      error="Field must be filled"
                      errorType="required"
                      label="Name"></app-mat-input>
+
       <hr>
-      <div formArrayName="amount">
-        <mat-label style="display: flex;">Amount logic</mat-label>
-        <div style="display:flex; align-items: center;" [formGroup]="ruleGroup" *ngFor="let ruleGroup of getArray('amount').controls; let index = index">
-          <app-mat-select
-            [options]="amountOptions"
-            label="Rule"
-            [control]="ruleGroup.get('rule')"></app-mat-select>
-          <app-mat-input style="margin-left: 1rem;" [control]="ruleGroup.get('value')" type="number"
-                         label="Value"></app-mat-input>
-          <button (click)="removeRule(index, 'description')"
-                  class="remove-rule-button">
-            <mat-icon color="warn">remove_circle</mat-icon>
-          </button>
-        </div>
-        <button class="add-rule-button">
-          <mat-icon>add_circle_outline</mat-icon>
-        </button>
-      </div>
+
+      <app-rule-logic
+        [array]="getArray('amount')"
+        [ruleOptions]="amountOptions"
+        valueType="number"
+        label="Amount logic"></app-rule-logic>
+
       <hr>
-      <div formArrayName="description">
-        <mat-label style="display: flex;">Description logic</mat-label>
-        <div [formGroup]="ruleGroup" *ngFor="let ruleGroup of getArray('description').controls; let index = index">
-          <app-mat-select
-            [control]="ruleGroup.get('rule')"
-            label="Rule"
-            [options]="descriptionOptions"></app-mat-select>
-          <app-mat-input style="margin-left: 1rem;" [control]="ruleGroup.get('value')" type="text"
-                         label="Value"></app-mat-input>
-          <button (click)="removeRule(index, 'description')" class="remove-rule-button"><mat-icon color="warn">remove_circle</mat-icon></button>
-        </div>
-        <button class="add-rule-button">
-          <mat-icon>add_circle_outline</mat-icon>
-        </button>
-      </div>
+
+      <app-rule-logic
+        [array]="getArray('description')"
+        [ruleOptions]="descriptionOptions"
+        valueType="text"
+        label="Description logic"></app-rule-logic>
       <hr>
+
       <app-mat-select-groups
         [groups]="categoryGroups"
         groupKey="category"
@@ -51,17 +33,19 @@
         label="Category"></app-mat-select-groups>
       <mat-checkbox style="margin: 0 1rem;" color="primary" formControlName="autoAssign">Auto assign</mat-checkbox>
       <hr>
-      <div style="display: flex; flex-direction: row; justify-content: space-between">
+      <div class="action-buttons">
         <div>
-          <button color="primary" style="margin: 0 0.5rem 0 0;"
+          <button color="primary"
+                  class="add-rule-button"
                   [disabled]="ruleForm.invalid"
                   mat-raised-button
                   (click)="addRule()">Add
           </button>
-          <mat-checkbox style="margin: 0 0.5rem;" color="primary" [formControl]="createAnother">Create another
+          <mat-checkbox class="add-another-rule-check"
+                        [formControl]="createAnother">Create another
           </mat-checkbox>
         </div>
-        <button style="margin: 0 0.5rem;" mat-raised-button (click)="resetForm()">Reset</button>
+        <button class="reset-form-button" mat-raised-button (click)="resetForm()">Reset</button>
         <!-- todo: go back-->
         <button color="accent" mat-raised-button>Cancel</button>
       </div>

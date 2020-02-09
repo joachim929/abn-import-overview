@@ -90,14 +90,4 @@ export class RuleCreateComponent implements OnInit {
 
     }
   }
-
-  removeRule(index: number, arrayName: string) {
-    this.getArray(arrayName).removeAt(index);
-    if (this.getArray(arrayName).at(index - 1)) {
-      console.log('got more than 1');
-    } else {
-      console.log('not got more than 1');
-    }
-  }
-
 }

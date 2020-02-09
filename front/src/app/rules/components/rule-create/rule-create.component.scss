@@ -2,12 +2,16 @@
   margin: 0.125em 0;
 }
 
-.add-rule-button {
-  color: green;
-  padding: 0;
+.action-buttons {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between
 }
 
-.remove-rule-button, .add-rule-button {
-  border: 0;
-  background-color: inherit;
+.add-rule-button {
+  margin-right: 0.5rem;
+}
+
+.add-another-rule-check, .reset-form-button {
+  margin: 0 0.5rem;
 }
