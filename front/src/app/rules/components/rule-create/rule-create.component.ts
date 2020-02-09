@@ -2,6 +2,7 @@ import {Component, OnInit} from '@angular/core';
 import {FormArray, FormControl, FormGroup, Validators} from '@angular/forms';
 import {RuleService} from '../../../core/services/rule.service';
 import {Location} from '@angular/common';
+import {CategoryGroup} from '../../../core/interfaces-types/category.interface';
 
 @Component({
   selector: 'app-rule-create',
@@ -9,11 +10,11 @@ import {Location} from '@angular/common';
   styleUrls: ['./rule-create.component.scss']
 })
 export class RuleCreateComponent implements OnInit {
-  categoryGroups = [
+  categoryGroups: CategoryGroup[] = [
     {
       name: 'Food',
       id: 1,
-      category: [
+      categories: [
         {id: 1, name: 'Snacks'},
         {id: 2, name: 'Groceries'}
       ]
@@ -21,7 +22,7 @@ export class RuleCreateComponent implements OnInit {
     {
       name: 'Social',
       id: 2,
-      category: [
+      categories: [
         {id: 3, name: 'Drinks'},
         {id: 4, name: 'Activity'}
       ]
@@ -29,7 +30,7 @@ export class RuleCreateComponent implements OnInit {
     {
       name: 'Bills',
       id: 3,
-      category: [
+      categories: [
         {id: 5, name: 'Travel'},
         {id: 6, name: 'Rent'}
       ]

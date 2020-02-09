@@ -1,5 +1,8 @@
 import {Injectable} from '@angular/core';
 
+/**
+ * @deprecated
+ */
 export interface Category {
   id?: number;
   category: string;

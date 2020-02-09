@@ -22,7 +22,9 @@ export class RuleDetailComponent implements OnInit {
   }
 
   getCategoryById(id: number): Category | null {
-    return this.categoryService.getCategoryById(id);
+    if (id) {
+      return this.categoryService.getCategoryById(id);
+    }
   }
 
   toggleEdit(): void {
