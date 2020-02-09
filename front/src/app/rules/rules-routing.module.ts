@@ -5,6 +5,7 @@ import {RulesListComponent} from './components/rules-list/rules-list.component';
 import {RuleCreateComponent} from './components/rule-create/rule-create.component';
 
 const routes: Routes = [
+  {path: '', redirectTo: 'all', pathMatch: 'full'},
   {
     path: '', component: RulesMasterComponent, children: [
       {path: '', component: RulesListComponent},

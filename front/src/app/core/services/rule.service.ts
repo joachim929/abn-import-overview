@@ -1,5 +1,5 @@
 import {Injectable} from '@angular/core';
-import {Rule} from '../interfaces-types/hint.interface';
+import {Rule} from '../interfaces-types/rule.interface';
 import {CategoryService} from '../../import/services/category.service';
 import {AmountRuleEnum, AmountRuleType, DescriptionRuleEnum, DescriptionRuleType} from '../interfaces-types/hint.types';
 

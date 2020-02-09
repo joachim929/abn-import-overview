@@ -19,7 +19,7 @@
       <button>Remove rule</button>
       <hr>
     </div>
-    <div class="d-flex flex-row">
+    <div class="row-container">
       <button>Add rule</button>
     </div>
   </div>
@@ -43,11 +43,11 @@
       <button>Remove rule</button>
       <hr>
     </div>
-    <div class="d-flex flex-row">
+    <div class="row-container">
       <button>Add rule</button>
     </div>
   </div>
-  <div class="d-flex flex-column">
+  <div class="column-container">
     <label>Category</label>
     <select formControlName="categoryId">
       <option *ngFor="let category of categories" [value]="category.id">{{category | categoryPipe}}</option>

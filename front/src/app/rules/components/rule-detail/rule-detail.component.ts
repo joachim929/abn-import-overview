@@ -1,5 +1,5 @@
 import {Component, Input, OnInit} from '@angular/core';
-import {Rule} from '../../../core/interfaces-types/hint.interface';
+import {Rule} from '../../../core/interfaces-types/rule.interface';
 import {Category, CategoryService} from '../../../import/services/category.service';
 import {RuleService} from '../../../core/services/rule.service';
 

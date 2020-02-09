@@ -3,26 +3,33 @@ import {CommonModule} from '@angular/common';
 import {HeaderComponent} from './components/header/header.component';
 import {RouterModule} from '@angular/router';
 import {NotFoundComponent} from './components/not-found/not-found.component';
-import {FormBaseComponent} from './components/form-base/form-base.component';
-import { RuleNameControlComponent } from './components/rule-name-control/rule-name-control.component';
+import {RuleNameControlComponent} from './components/rule-name-control/rule-name-control.component';
 import {ReactiveFormsModule} from '@angular/forms';
-import { RuleAmountDescriptionControlComponent } from './components/rule-amount-description-control/rule-amount-description-control.component';
-import { RuleRadioControlComponent } from './components/rule-radio-control/rule-radio-control.component';
-import { CategoryPipe } from './pipes/category.pipe';
-import { MatButtonModule } from '@angular/material/button';
-import { MatTabsModule } from '@angular/material/tabs';
-import { MatToolbarModule } from '@angular/material/toolbar';
+import {RuleAmountDescriptionControlComponent} from './components/rule-amount-description-control/rule-amount-description-control.component';
+import {RuleRadioControlComponent} from './components/rule-radio-control/rule-radio-control.component';
+import {CategoryPipe} from './pipes/category.pipe';
+import {MatButtonModule} from '@angular/material/button';
+import {MatTabsModule} from '@angular/material/tabs';
+import {MatToolbarModule} from '@angular/material/toolbar';
+import {MatInputComponent} from './components/mat-input/mat-input.component';
+import {MatFormFieldModule} from '@angular/material/form-field';
+import {MatInputModule} from '@angular/material/input';
+import { MatSelectGroupsComponent } from './components/mat-select-groups/mat-select-groups.component';
+import {MatSelectModule} from '@angular/material/select';
+import { MatSelectComponent } from './components/mat-select/mat-select.component';
 
 
 @NgModule({
   declarations: [
     HeaderComponent,
     NotFoundComponent,
-    FormBaseComponent,
     RuleNameControlComponent,
     RuleAmountDescriptionControlComponent,
     RuleRadioControlComponent,
-    CategoryPipe
+    CategoryPipe,
+    MatInputComponent,
+    MatSelectGroupsComponent,
+    MatSelectComponent
   ],
   imports: [
     CommonModule,
@@ -30,16 +37,21 @@ import { MatToolbarModule } from '@angular/material/toolbar';
     ReactiveFormsModule,
     MatToolbarModule,
     MatButtonModule,
-    MatTabsModule
+    MatTabsModule,
+    MatFormFieldModule,
+    MatInputModule,
+    MatSelectModule
   ],
   exports: [
     HeaderComponent,
     NotFoundComponent,
-    FormBaseComponent,
     RuleNameControlComponent,
     RuleAmountDescriptionControlComponent,
     RuleRadioControlComponent,
-    CategoryPipe
+    CategoryPipe,
+    MatInputComponent,
+    MatSelectGroupsComponent,
+    MatSelectComponent
   ]
 })
 export class SharedModule {

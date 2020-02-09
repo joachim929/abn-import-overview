@@ -16,6 +16,10 @@ import { MatChipsModule } from '@angular/material/chips';
 import { MatExpansionModule } from '@angular/material/expansion';
 import { ItemTitlePipe } from './pipes/item-title.pipe';
 import { RuleCreateComponent } from './components/rule-create/rule-create.component';
+import {MatCheckboxModule} from '@angular/material/checkbox';
+import {MatFormFieldModule} from '@angular/material/form-field';
+import {MatSelectModule} from '@angular/material/select';
+import {MatButtonModule} from '@angular/material/button';
 
 
 @NgModule({
@@ -30,15 +34,19 @@ import { RuleCreateComponent } from './components/rule-create/rule-create.compon
     ItemTitlePipe,
     RuleCreateComponent
   ],
-    imports: [
-        CommonModule,
-        RulesRoutingModule,
-        ReactiveFormsModule,
-        SharedModule,
-        MatCardModule,
-        MatChipsModule,
-        MatExpansionModule
-    ]
+  imports: [
+    CommonModule,
+    RulesRoutingModule,
+    ReactiveFormsModule,
+    SharedModule,
+    MatCardModule,
+    MatChipsModule,
+    MatExpansionModule,
+    MatCheckboxModule,
+    MatFormFieldModule,
+    MatSelectModule,
+    MatButtonModule
+  ]
 })
 export class RulesModule {
 }

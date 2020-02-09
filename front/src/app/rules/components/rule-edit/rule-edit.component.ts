@@ -1,5 +1,5 @@
 import {Component, Input, OnInit} from '@angular/core';
-import {Rule} from '../../../core/interfaces-types/hint.interface';
+import {Rule} from '../../../core/interfaces-types/rule.interface';
 import {FormArray, FormControl, FormGroup} from '@angular/forms';
 import {AmountRuleEnum, AmountRuleType, DescriptionRuleEnum, DescriptionRuleType} from '../../../core/interfaces-types/hint.types';
 import {Category, CategoryService} from '../../../import/services/category.service';

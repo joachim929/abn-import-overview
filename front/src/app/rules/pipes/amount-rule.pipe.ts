@@ -1,5 +1,5 @@
 import {Pipe, PipeTransform} from '@angular/core';
-import {AmountRule} from '../../core/interfaces-types/hint.interface';
+import {AmountRule} from '../../core/interfaces-types/rule.interface';
 
 @Pipe({
   name: 'amountRule'

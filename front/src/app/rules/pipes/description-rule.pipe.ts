@@ -1,5 +1,5 @@
 import { Pipe, PipeTransform } from '@angular/core';
-import {DescriptionRule} from '../../core/interfaces-types/hint.interface';
+import {DescriptionRule} from '../../core/interfaces-types/rule.interface';
 
 @Pipe({
   name: 'descriptionRule'

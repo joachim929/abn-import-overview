@@ -1,0 +1,10 @@
+<mat-form-field>
+  <mat-label *ngIf="label">{{label}}</mat-label>
+  <mat-select [formControl]="control">
+      <mat-optgroup *ngFor="let group of groups" [label]="group.name">
+        <mat-option *ngFor="let option of group[groupKey]" [value]="option.id">
+          {{option.name}}
+        </mat-option>
+      </mat-optgroup>
+  </mat-select>
+</mat-form-field>

@@ -1,0 +1,6 @@
+<mat-form-field>
+  <mat-label *ngIf="label">{{label}}</mat-label>
+  <input [type]="type" matInput [formControl]="control" [placeholder]="placeholder ? placeholder : null">
+  <mat-hint *ngIf="hint">{{hint}}</mat-hint>
+  <mat-error *ngIf="error && control.hasError(errorType)">{{error}}</mat-error>
+</mat-form-field>

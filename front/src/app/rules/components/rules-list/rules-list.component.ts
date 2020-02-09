@@ -1,6 +1,6 @@
 import {Component, OnInit} from '@angular/core';
 import {RuleService} from '../../../core/services/rule.service';
-import {Rule} from '../../../core/interfaces-types/hint.interface';
+import {Rule} from '../../../core/interfaces-types/rule.interface';
 
 @Component({
   selector: 'app-rules-list',

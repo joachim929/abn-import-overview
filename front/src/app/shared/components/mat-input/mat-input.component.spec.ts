@@ -1,20 +1,20 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { FormBaseComponent } from './form-base.component';
+import { MatInputComponent } from './mat-input.component';
 
-describe('FormBaseComponent', () => {
-  let component: FormBaseComponent;
-  let fixture: ComponentFixture<FormBaseComponent>;
+describe('MatInputComponent', () => {
+  let component: MatInputComponent;
+  let fixture: ComponentFixture<MatInputComponent>;
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ FormBaseComponent ]
+      declarations: [ MatInputComponent ]
     })
     .compileComponents();
   }));
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(FormBaseComponent);
+    fixture = TestBed.createComponent(MatInputComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });
