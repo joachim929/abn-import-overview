@@ -1,4 +1,4 @@
-<mat-card style="margin: 0.5rem 0;" *ngFor="let entry of formattedData; let index = index">
+<mat-card class="item" *ngFor="let entry of formattedData; let index = index">
   <ng-container *ngIf="!entry.category">
     <app-entry [entry]="entry"></app-entry>
   </ng-container>
@@ -20,15 +20,16 @@
       </button>
     </form>
 
-    <!--    todo: adjust styling so first doesn't have margin left -->
-    <button mat-raised-button color="primary" style="margin: 0.25rem;"
+    <button mat-raised-button color="primary" class="import-action-buttons ml-0"
             *ngFor="let category of categories"
             (click)="assignCategory(index, category)">Cat: {{category.category}}, Sub-cat: {{category.subCategory}}
     </button>
     <hr>
-    <button mat-raised-button color="accent" style="margin: 0.25rem;" (click)="toggleCategoryMenu()">Create category
+    <button mat-raised-button color="accent" class="import-action-buttons ml-0" (click)="toggleCategoryMenu()">
+      Create category
     </button>
-    <button mat-raised-button color="accent" style="margin: 0.25rem;" (click)="toggleHintMenu()">Create hint rule
+    <button mat-raised-button color="accent" class="import-action-buttons" (click)="toggleHintMenu()">
+      Create hint rule
     </button>
 
   </ng-container>
