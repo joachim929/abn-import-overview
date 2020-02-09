@@ -20,7 +20,7 @@ export class EntryEditComponent implements OnInit {
   }
 
   ngOnInit() {
-    let index = this.route.snapshot.paramMap.get('index');
+    const index = this.route.snapshot.paramMap.get('index');
     this.entry$ = this.dataParseService.formattedData[index];
   }
 
