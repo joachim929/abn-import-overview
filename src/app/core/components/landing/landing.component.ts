@@ -16,6 +16,7 @@ export class LandingComponent implements OnInit {
   }
 
   ngOnInit(): void {
+    this.importService.test();
   }
 
 

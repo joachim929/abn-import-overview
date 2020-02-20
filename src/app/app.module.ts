@@ -16,7 +16,7 @@ import {MatInputModule} from '@angular/material/input';
 import {MatCheckboxModule} from '@angular/material/checkbox';
 import {MatSelectModule} from '@angular/material/select';
 import {MatRadioModule} from '@angular/material/radio';
-import {ApiModule} from './shared/swagger/api.module';
+import {ApiModule} from './swagger/api.module';
 
 @NgModule({
   declarations: [

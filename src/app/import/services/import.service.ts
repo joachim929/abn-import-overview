@@ -1,6 +1,6 @@
 import {Injectable} from '@angular/core';
 import * as XLSX from 'xlsx';
-import {InvoiceService} from '../../shared/swagger/services/invoice.service';
+import {InvoiceService} from '../../swagger/services/invoice.service';
 
 @Injectable({
   providedIn: 'root'
@@ -32,12 +32,12 @@ export class ImportService {
   }
 
   test() {
-    this.invoiceService.invoiceControllerGet({userId: 1}).subscribe((next) => console.log(next));
+    this.invoiceService.getInvoicesForUser({userId: 1}).subscribe((next) => console.log(next));
   }
 
   postJson(json) {
     console.log(json);
-    this.invoiceService.invoiceControllerImportExcel$Response({body: json}).subscribe((next) => {
+    this.invoiceService.postInvoiceMultiExcel({body: json}).subscribe((next) => {
       console.log(next);
     });
   }

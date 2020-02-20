@@ -6,5 +6,5 @@ export { CategoryGroup } from './models/category-group';
 export { RuleDto } from './models/rule-dto';
 export { Rule } from './models/rule';
 export { UserDto } from './models/user-dto';
-export { InvoiceDto } from './models/invoice-dto';
 export { CreateInvoiceDto } from './models/create-invoice-dto';
+export { InvoiceDto } from './models/invoice-dto';

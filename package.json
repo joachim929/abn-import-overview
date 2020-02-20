@@ -8,7 +8,7 @@
     "test": "ng test",
     "lint": "ng lint",
     "e2e": "ng e2e",
-    "generate-api": "ng-openapi-gen --input http://localhost:3000/api-json --output src/app/shared/swagger"
+    "generate-api": "ng-openapi-gen --input http://localhost:3000/api-json --output src/app/swagger"
   },
   "private": true,
   "dependencies": {
