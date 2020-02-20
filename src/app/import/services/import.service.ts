@@ -1,12 +1,15 @@
 import {Injectable} from '@angular/core';
 import * as XLSX from 'xlsx';
+import {InvoiceService} from '../../shared/swagger/services/invoice.service';
 
 @Injectable({
   providedIn: 'root'
 })
 export class ImportService {
 
-  constructor() {
+  constructor(
+    private invoiceService: InvoiceService
+  ) {
   }
 
   xlsToJson(file) {
@@ -22,9 +25,21 @@ export class ImportService {
       const workbook = XLSX.read(bstr, {type: 'binary'});
       const firstSheetName = workbook.SheetNames[0];
       const worksheet = workbook.Sheets[firstSheetName];
-      console.log(XLSX.utils.sheet_to_json(worksheet, {raw: true}));
+      const json = XLSX.utils.sheet_to_json(worksheet, {raw: true});
+      this.postJson(json);
     };
     fileReader.readAsArrayBuffer(file);
+  }
+
+  test() {
+    this.invoiceService.invoiceControllerGet({userId: 1}).subscribe((next) => console.log(next));
+  }
+
+  postJson(json) {
+    console.log(json);
+    this.invoiceService.invoiceControllerImportExcel$Response({body: json}).subscribe((next) => {
+      console.log(next);
+    });
   }
 
 }

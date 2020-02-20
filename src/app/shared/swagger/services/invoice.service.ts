@@ -256,51 +256,96 @@ export class InvoiceService extends BaseService {
   }
 
   /**
-   * Path part for operation invoiceControllerImport
+   * Path part for operation invoiceControllerImportText
    */
-  static readonly InvoiceControllerImportPath = '/invoice/upload/{type}';
+  static readonly InvoiceControllerImportTextPath = '/invoice/upload/text';
 
   /**
    * This method provides access to the full `HttpResponse`, allowing access to response headers.
-   * To access only the response body, use `invoiceControllerImport()` instead.
+   * To access only the response body, use `invoiceControllerImportText()` instead.
    *
-   * This method doesn't expect any request body.
+   * This method sends `application/json` and handles request body of type `application/json`.
    */
-  invoiceControllerImport$Response(params: {
-    type: string;
+  invoiceControllerImportText$Response(params: {
+      body: Array<CreateInvoiceDto>
+  }): Observable<StrictHttpResponse<void>> {
 
-  }): Observable<StrictHttpResponse<string>> {
-
-    const rb = new RequestBuilder(this.rootUrl, InvoiceService.InvoiceControllerImportPath, 'post');
+    const rb = new RequestBuilder(this.rootUrl, InvoiceService.InvoiceControllerImportTextPath, 'post');
     if (params) {
 
-      rb.path('type', params.type);
 
+      rb.body(params.body, 'application/json');
     }
     return this.http.request(rb.build({
-      responseType: 'json',
-      accept: 'application/json'
+      responseType: 'text',
+      accept: '*/*'
     })).pipe(
       filter((r: any) => r instanceof HttpResponse),
       map((r: HttpResponse<any>) => {
-        return r as StrictHttpResponse<string>;
+        return (r as HttpResponse<any>).clone({ body: undefined }) as StrictHttpResponse<void>;
       })
     );
   }
 
   /**
    * This method provides access to only to the response body.
-   * To access the full response (for headers, for example), `invoiceControllerImport$Response()` instead.
+   * To access the full response (for headers, for example), `invoiceControllerImportText$Response()` instead.
    *
-   * This method doesn't expect any request body.
+   * This method sends `application/json` and handles request body of type `application/json`.
    */
-  invoiceControllerImport(params: {
-    type: string;
+  invoiceControllerImportText(params: {
+      body: Array<CreateInvoiceDto>
+  }): Observable<void> {
 
-  }): Observable<string> {
+    return this.invoiceControllerImportText$Response(params).pipe(
+      map((r: StrictHttpResponse<void>) => r.body as void)
+    );
+  }
 
-    return this.invoiceControllerImport$Response(params).pipe(
-      map((r: StrictHttpResponse<string>) => r.body as string)
+  /**
+   * Path part for operation invoiceControllerImportExcel
+   */
+  static readonly InvoiceControllerImportExcelPath = '/invoice/upload/excel';
+
+  /**
+   * This method provides access to the full `HttpResponse`, allowing access to response headers.
+   * To access only the response body, use `invoiceControllerImportExcel()` instead.
+   *
+   * This method sends `application/json` and handles request body of type `application/json`.
+   */
+  invoiceControllerImportExcel$Response(params: {
+      body: Array<CreateInvoiceDto>
+  }): Observable<StrictHttpResponse<void>> {
+
+    const rb = new RequestBuilder(this.rootUrl, InvoiceService.InvoiceControllerImportExcelPath, 'post');
+    if (params) {
+
+
+      rb.body(params.body, 'application/json');
+    }
+    return this.http.request(rb.build({
+      responseType: 'text',
+      accept: '*/*'
+    })).pipe(
+      filter((r: any) => r instanceof HttpResponse),
+      map((r: HttpResponse<any>) => {
+        return (r as HttpResponse<any>).clone({ body: undefined }) as StrictHttpResponse<void>;
+      })
+    );
+  }
+
+  /**
+   * This method provides access to only to the response body.
+   * To access the full response (for headers, for example), `invoiceControllerImportExcel$Response()` instead.
+   *
+   * This method sends `application/json` and handles request body of type `application/json`.
+   */
+  invoiceControllerImportExcel(params: {
+      body: Array<CreateInvoiceDto>
+  }): Observable<void> {
+
+    return this.invoiceControllerImportExcel$Response(params).pipe(
+      map((r: StrictHttpResponse<void>) => r.body as void)
     );
   }
 

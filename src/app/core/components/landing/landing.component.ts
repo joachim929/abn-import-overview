@@ -1,4 +1,5 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, OnInit} from '@angular/core';
+import {ImportService} from '../../../import/services/import.service';
 
 @Component({
   selector: 'app-landing',
@@ -7,9 +8,27 @@ import { Component, OnInit } from '@angular/core';
 })
 export class LandingComponent implements OnInit {
 
-  constructor() { }
+  file: File;
+
+  constructor(
+    private importService: ImportService
+  ) {
+  }
 
   ngOnInit(): void {
+  }
+
+
+  incomingFile(event) {
+    this.file = event.target.files[0];
+  }
+
+  test() {
+    this.importService.test();
+  }
+
+  upload() {
+    this.importService.xlsToJson(this.file);
   }
 
 }
