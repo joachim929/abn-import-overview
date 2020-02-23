@@ -56,20 +56,3 @@
   max-width: 1200px;
 }
 
-.invoice-items-container {
-  overflow: hidden;
-  display: flex;
-}
-
-.invoice-items-overflow {
-  overflow-y: auto;
-}
-
-.invoice-item {
-  display: flex; flex-direction: row; margin: 0.5em;
-}
-
-.test {
-  overflow: hidden;
-  height: calc(100vh - 90px)
-}

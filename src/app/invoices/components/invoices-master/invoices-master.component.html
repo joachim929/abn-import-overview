@@ -3,13 +3,13 @@
     <button mat-button>Import</button>
     <button mat-button>Assign mode</button>
   </section>
-  <section class="content test" style="display: grid; grid-template-columns: 1fr 3fr;">
-    <mat-card style="display: flex; margin: 0.5em;">
+  <section class="content invoice-and-filters">
+    <mat-card class="filter-container">
       <h3>Filter</h3>
     </mat-card>
       <div class="invoice-items-overflow">
         <mat-card *ngFor="let invoice of test$ | async" class="invoice-item">
-          <div style="flex: 1 1 100%; display: flex; flex-direction: column;">
+          <div class="invoice-detail-container">
             <p>Account number: {{invoice.accountNumber}}</p>
             <p>Amount: {{invoice.amount | currency: 'EUR'}}</p>
             <p>Description: {{invoice.description}}</p>
@@ -17,7 +17,7 @@
             <p>End balance: {{invoice.endBalance | currency: 'EUR'}}</p>
             <p>Transaction date: {{invoice.transactionDate | date}}</p>
           </div>
-          <div style="display: flex; flex-direction: column;">
+          <div class="column-container">
             <mat-icon>edit</mat-icon>
             <mat-icon>delete</mat-icon>
           </div>
