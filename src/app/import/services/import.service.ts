@@ -31,14 +31,10 @@ export class ImportService {
     fileReader.readAsArrayBuffer(file);
   }
 
-  test() {
-    this.invoiceService.getInvoicesForUser({userId: 1}).subscribe((next) => console.log(next));
-  }
-
+  // todo: wip
   postJson(json) {
-    console.log(json);
     this.invoiceService.postInvoiceMultiExcel({body: json}).subscribe((next) => {
-      console.log(next);
+      // console.log(next);
     });
   }
 
