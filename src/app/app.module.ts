@@ -11,7 +11,6 @@ import {MatButtonModule} from '@angular/material/button';
 import {MatCardModule} from '@angular/material/card';
 import {MatChipsModule} from '@angular/material/chips';
 import {MatToolbarModule} from '@angular/material/toolbar';
-import {LandingComponent} from './core/components/landing/landing.component';
 import {MatInputModule} from '@angular/material/input';
 import {MatCheckboxModule} from '@angular/material/checkbox';
 import {MatSelectModule} from '@angular/material/select';
@@ -20,8 +19,7 @@ import {ApiModule} from './swagger/api.module';
 
 @NgModule({
   declarations: [
-    AppComponent,
-    LandingComponent
+    AppComponent
   ],
   imports: [
     BrowserModule,
@@ -38,7 +36,7 @@ import {ApiModule} from './swagger/api.module';
     MatCheckboxModule,
     MatSelectModule,
     MatRadioModule,
-    ApiModule.forRoot({ rootUrl: 'http://localhost:3000' }),
+    ApiModule.forRoot({rootUrl: 'http://localhost:3000'})
   ],
   providers: [],
   bootstrap: [AppComponent]
