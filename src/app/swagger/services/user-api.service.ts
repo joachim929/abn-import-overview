@@ -14,7 +14,7 @@ import { UserDto } from '../models/user-dto';
 @Injectable({
   providedIn: 'root',
 })
-export class UserService extends BaseService {
+export class UserApiService extends BaseService {
   constructor(
     config: ApiConfiguration,
     http: HttpClient
@@ -37,7 +37,7 @@ export class UserService extends BaseService {
 
   }): Observable<StrictHttpResponse<Array<UserDto>>> {
 
-    const rb = new RequestBuilder(this.rootUrl, UserService.GetAllUsersPath, 'get');
+    const rb = new RequestBuilder(this.rootUrl, UserApiService.GetAllUsersPath, 'get');
     if (params) {
 
 
@@ -83,7 +83,7 @@ export class UserService extends BaseService {
       body: User
   }): Observable<StrictHttpResponse<UserDto>> {
 
-    const rb = new RequestBuilder(this.rootUrl, UserService.CreateUserPath, 'post');
+    const rb = new RequestBuilder(this.rootUrl, UserApiService.CreateUserPath, 'post');
     if (params) {
 
 
@@ -130,7 +130,7 @@ export class UserService extends BaseService {
 
   }): Observable<StrictHttpResponse<UserDto>> {
 
-    const rb = new RequestBuilder(this.rootUrl, UserService.GetUserByIdPath, 'get');
+    const rb = new RequestBuilder(this.rootUrl, UserApiService.GetUserByIdPath, 'get');
     if (params) {
 
 
@@ -176,7 +176,7 @@ export class UserService extends BaseService {
 
   }): Observable<StrictHttpResponse<void>> {
 
-    const rb = new RequestBuilder(this.rootUrl, UserService.DeleteUserPath, 'delete');
+    const rb = new RequestBuilder(this.rootUrl, UserApiService.DeleteUserPath, 'delete');
     if (params) {
 
 
@@ -222,7 +222,7 @@ export class UserService extends BaseService {
       body: User
   }): Observable<StrictHttpResponse<void>> {
 
-    const rb = new RequestBuilder(this.rootUrl, UserService.PatchUserPath, 'patch');
+    const rb = new RequestBuilder(this.rootUrl, UserApiService.PatchUserPath, 'patch');
     if (params) {
 
 

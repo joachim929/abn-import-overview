@@ -14,7 +14,7 @@ import { RuleDto } from '../models/rule-dto';
 @Injectable({
   providedIn: 'root',
 })
-export class RulesService extends BaseService {
+export class RulesApiService extends BaseService {
   constructor(
     config: ApiConfiguration,
     http: HttpClient
@@ -37,7 +37,7 @@ export class RulesService extends BaseService {
 
   }): Observable<StrictHttpResponse<RuleDto>> {
 
-    const rb = new RequestBuilder(this.rootUrl, RulesService.GetRuleByIdPath, 'get');
+    const rb = new RequestBuilder(this.rootUrl, RulesApiService.GetRuleByIdPath, 'get');
     if (params) {
 
 
@@ -83,7 +83,7 @@ export class RulesService extends BaseService {
 
   }): Observable<StrictHttpResponse<void>> {
 
-    const rb = new RequestBuilder(this.rootUrl, RulesService.DeleteRulePath, 'delete');
+    const rb = new RequestBuilder(this.rootUrl, RulesApiService.DeleteRulePath, 'delete');
     if (params) {
 
 
@@ -129,7 +129,7 @@ export class RulesService extends BaseService {
       body: Rule
   }): Observable<StrictHttpResponse<{  }>> {
 
-    const rb = new RequestBuilder(this.rootUrl, RulesService.PatchRulePath, 'patch');
+    const rb = new RequestBuilder(this.rootUrl, RulesApiService.PatchRulePath, 'patch');
     if (params) {
 
 
@@ -176,7 +176,7 @@ export class RulesService extends BaseService {
 
   }): Observable<StrictHttpResponse<Array<RuleDto>>> {
 
-    const rb = new RequestBuilder(this.rootUrl, RulesService.GetAllRulesPath, 'get');
+    const rb = new RequestBuilder(this.rootUrl, RulesApiService.GetAllRulesPath, 'get');
     if (params) {
 
 
@@ -222,7 +222,7 @@ export class RulesService extends BaseService {
       body: Array<string>
   }): Observable<StrictHttpResponse<RuleDto>> {
 
-    const rb = new RequestBuilder(this.rootUrl, RulesService.CreateRulePath, 'post');
+    const rb = new RequestBuilder(this.rootUrl, RulesApiService.CreateRulePath, 'post');
     if (params) {
 
 

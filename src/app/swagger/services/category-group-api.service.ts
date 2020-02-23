@@ -13,7 +13,7 @@ import { CategoryGroup } from '../models/category-group';
 @Injectable({
   providedIn: 'root',
 })
-export class CategoryGroupService extends BaseService {
+export class CategoryGroupApiService extends BaseService {
   constructor(
     config: ApiConfiguration,
     http: HttpClient
@@ -36,7 +36,7 @@ export class CategoryGroupService extends BaseService {
 
   }): Observable<StrictHttpResponse<{  }>> {
 
-    const rb = new RequestBuilder(this.rootUrl, CategoryGroupService.GetAllCategoryGroupsPath, 'get');
+    const rb = new RequestBuilder(this.rootUrl, CategoryGroupApiService.GetAllCategoryGroupsPath, 'get');
     if (params) {
 
 
@@ -82,7 +82,7 @@ export class CategoryGroupService extends BaseService {
 
   }): Observable<StrictHttpResponse<{  }>> {
 
-    const rb = new RequestBuilder(this.rootUrl, CategoryGroupService.GetCategoryGroupByIdPath, 'get');
+    const rb = new RequestBuilder(this.rootUrl, CategoryGroupApiService.GetCategoryGroupByIdPath, 'get');
     if (params) {
 
 
@@ -128,7 +128,7 @@ export class CategoryGroupService extends BaseService {
 
   }): Observable<StrictHttpResponse<{  }>> {
 
-    const rb = new RequestBuilder(this.rootUrl, CategoryGroupService.DeleteCategoryGroupPath, 'delete');
+    const rb = new RequestBuilder(this.rootUrl, CategoryGroupApiService.DeleteCategoryGroupPath, 'delete');
     if (params) {
 
 
@@ -174,7 +174,7 @@ export class CategoryGroupService extends BaseService {
       body: CategoryGroup
   }): Observable<StrictHttpResponse<{  }>> {
 
-    const rb = new RequestBuilder(this.rootUrl, CategoryGroupService.PatchCategoryGroupPath, 'patch');
+    const rb = new RequestBuilder(this.rootUrl, CategoryGroupApiService.PatchCategoryGroupPath, 'patch');
     if (params) {
 
 
@@ -221,7 +221,7 @@ export class CategoryGroupService extends BaseService {
 
   }): Observable<StrictHttpResponse<{  }>> {
 
-    const rb = new RequestBuilder(this.rootUrl, CategoryGroupService.GetAllCategoryGroupsWithCategoriesPath, 'get');
+    const rb = new RequestBuilder(this.rootUrl, CategoryGroupApiService.GetAllCategoryGroupsWithCategoriesPath, 'get');
     if (params) {
 
 
@@ -267,7 +267,7 @@ export class CategoryGroupService extends BaseService {
       body: CategoryGroup
   }): Observable<StrictHttpResponse<{  }>> {
 
-    const rb = new RequestBuilder(this.rootUrl, CategoryGroupService.CreateCategoryGroupPath, 'post');
+    const rb = new RequestBuilder(this.rootUrl, CategoryGroupApiService.CreateCategoryGroupPath, 'post');
     if (params) {
 
 

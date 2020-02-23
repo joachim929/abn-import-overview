@@ -14,7 +14,7 @@ import { CategoryDto } from '../models/category-dto';
 @Injectable({
   providedIn: 'root',
 })
-export class CategoryService extends BaseService {
+export class CategoryApiService extends BaseService {
   constructor(
     config: ApiConfiguration,
     http: HttpClient
@@ -37,7 +37,7 @@ export class CategoryService extends BaseService {
 
   }): Observable<StrictHttpResponse<Array<CategoryDto>>> {
 
-    const rb = new RequestBuilder(this.rootUrl, CategoryService.GetAllCategoriesPath, 'get');
+    const rb = new RequestBuilder(this.rootUrl, CategoryApiService.GetAllCategoriesPath, 'get');
     if (params) {
 
 
@@ -83,7 +83,7 @@ export class CategoryService extends BaseService {
       body: Category
   }): Observable<StrictHttpResponse<CategoryDto>> {
 
-    const rb = new RequestBuilder(this.rootUrl, CategoryService.CreateCategoryPath, 'post');
+    const rb = new RequestBuilder(this.rootUrl, CategoryApiService.CreateCategoryPath, 'post');
     if (params) {
 
 
@@ -130,7 +130,7 @@ export class CategoryService extends BaseService {
 
   }): Observable<StrictHttpResponse<CategoryDto>> {
 
-    const rb = new RequestBuilder(this.rootUrl, CategoryService.GetCategoryByIdPath, 'get');
+    const rb = new RequestBuilder(this.rootUrl, CategoryApiService.GetCategoryByIdPath, 'get');
     if (params) {
 
 
@@ -176,7 +176,7 @@ export class CategoryService extends BaseService {
 
   }): Observable<StrictHttpResponse<{  }>> {
 
-    const rb = new RequestBuilder(this.rootUrl, CategoryService.DeleteCategoryPath, 'delete');
+    const rb = new RequestBuilder(this.rootUrl, CategoryApiService.DeleteCategoryPath, 'delete');
     if (params) {
 
 
@@ -222,7 +222,7 @@ export class CategoryService extends BaseService {
       body: Category
   }): Observable<StrictHttpResponse<{  }>> {
 
-    const rb = new RequestBuilder(this.rootUrl, CategoryService.PatchCategoryPath, 'patch');
+    const rb = new RequestBuilder(this.rootUrl, CategoryApiService.PatchCategoryPath, 'patch');
     if (params) {
 
 

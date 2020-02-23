@@ -14,7 +14,7 @@ import { InvoiceDto } from '../models/invoice-dto';
 @Injectable({
   providedIn: 'root',
 })
-export class InvoiceService extends BaseService {
+export class InvoiceApiService extends BaseService {
   constructor(
     config: ApiConfiguration,
     http: HttpClient
@@ -36,21 +36,21 @@ export class InvoiceService extends BaseService {
   getInvoicesForUser$Response(params: {
     userId: number;
 
-  }): Observable<StrictHttpResponse<void>> {
+  }): Observable<StrictHttpResponse<Array<InvoiceDto>>> {
 
-    const rb = new RequestBuilder(this.rootUrl, InvoiceService.GetInvoicesForUserPath, 'get');
+    const rb = new RequestBuilder(this.rootUrl, InvoiceApiService.GetInvoicesForUserPath, 'get');
     if (params) {
 
       rb.path('userId', params.userId);
 
     }
     return this.http.request(rb.build({
-      responseType: 'text',
-      accept: '*/*'
+      responseType: 'json',
+      accept: 'application/json'
     })).pipe(
       filter((r: any) => r instanceof HttpResponse),
       map((r: HttpResponse<any>) => {
-        return (r as HttpResponse<any>).clone({ body: undefined }) as StrictHttpResponse<void>;
+        return r as StrictHttpResponse<Array<InvoiceDto>>;
       })
     );
   }
@@ -64,10 +64,10 @@ export class InvoiceService extends BaseService {
   getInvoicesForUser(params: {
     userId: number;
 
-  }): Observable<void> {
+  }): Observable<Array<InvoiceDto>> {
 
     return this.getInvoicesForUser$Response(params).pipe(
-      map((r: StrictHttpResponse<void>) => r.body as void)
+      map((r: StrictHttpResponse<Array<InvoiceDto>>) => r.body as Array<InvoiceDto>)
     );
   }
 
@@ -86,7 +86,7 @@ export class InvoiceService extends BaseService {
       body: CreateInvoiceDto
   }): Observable<StrictHttpResponse<InvoiceDto>> {
 
-    const rb = new RequestBuilder(this.rootUrl, InvoiceService.PostInvoicePath, 'post');
+    const rb = new RequestBuilder(this.rootUrl, InvoiceApiService.PostInvoicePath, 'post');
     if (params) {
 
 
@@ -133,7 +133,7 @@ export class InvoiceService extends BaseService {
       body: CreateInvoiceDto
   }): Observable<StrictHttpResponse<{  }>> {
 
-    const rb = new RequestBuilder(this.rootUrl, InvoiceService.PatchInvoicePath, 'patch');
+    const rb = new RequestBuilder(this.rootUrl, InvoiceApiService.PatchInvoicePath, 'patch');
     if (params) {
 
 
@@ -181,7 +181,7 @@ export class InvoiceService extends BaseService {
 
   }): Observable<StrictHttpResponse<{  }>> {
 
-    const rb = new RequestBuilder(this.rootUrl, InvoiceService.DeleteInvoicePath, 'delete');
+    const rb = new RequestBuilder(this.rootUrl, InvoiceApiService.DeleteInvoicePath, 'delete');
     if (params) {
 
       rb.path('id', params.id);
@@ -229,7 +229,7 @@ export class InvoiceService extends BaseService {
       body: Array<CreateInvoiceDto>
   }): Observable<StrictHttpResponse<Array<InvoiceDto>>> {
 
-    const rb = new RequestBuilder(this.rootUrl, InvoiceService.PostInvoiceMultiPath, 'post');
+    const rb = new RequestBuilder(this.rootUrl, InvoiceApiService.PostInvoiceMultiPath, 'post');
     if (params) {
 
 
@@ -276,7 +276,7 @@ export class InvoiceService extends BaseService {
 
   }): Observable<StrictHttpResponse<Array<InvoiceDto>>> {
 
-    const rb = new RequestBuilder(this.rootUrl, InvoiceService.PostInvoiceMultiTextPath, 'post');
+    const rb = new RequestBuilder(this.rootUrl, InvoiceApiService.PostInvoiceMultiTextPath, 'post');
     if (params) {
 
 
@@ -322,7 +322,7 @@ export class InvoiceService extends BaseService {
 
   }): Observable<StrictHttpResponse<Array<InvoiceDto>>> {
 
-    const rb = new RequestBuilder(this.rootUrl, InvoiceService.PostInvoiceMultiExcelPath, 'post');
+    const rb = new RequestBuilder(this.rootUrl, InvoiceApiService.PostInvoiceMultiExcelPath, 'post');
     if (params) {
 
 

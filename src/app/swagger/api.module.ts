@@ -3,11 +3,11 @@ import { NgModule, ModuleWithProviders, SkipSelf, Optional } from '@angular/core
 import { HttpClient } from '@angular/common/http';
 import { ApiConfiguration, ApiConfigurationParams } from './api-configuration';
 
-import { CategoryService } from './services/category.service';
-import { RulesService } from './services/rules.service';
-import { CategoryGroupService } from './services/category-group.service';
-import { UserService } from './services/user.service';
-import { InvoiceService } from './services/invoice.service';
+import { CategoryApiService } from './services/category-api.service';
+import { RulesApiService } from './services/rules-api.service';
+import { CategoryGroupApiService } from './services/category-group-api.service';
+import { UserApiService } from './services/user-api.service';
+import { InvoiceApiService } from './services/invoice-api.service';
 
 /**
  * Module that provides all services and configuration.
@@ -17,11 +17,11 @@ import { InvoiceService } from './services/invoice.service';
   exports: [],
   declarations: [],
   providers: [
-    CategoryService,
-    RulesService,
-    CategoryGroupService,
-    UserService,
-    InvoiceService,
+    CategoryApiService,
+    RulesApiService,
+    CategoryGroupApiService,
+    UserApiService,
+    InvoiceApiService,
     ApiConfiguration
   ],
 })
