@@ -23,21 +23,21 @@ export class UserService extends BaseService {
   }
 
   /**
-   * Path part for operation userControllerGetAll
+   * Path part for operation getAllUsers
    */
-  static readonly UserControllerGetAllPath = '/user';
+  static readonly GetAllUsersPath = '/user';
 
   /**
    * This method provides access to the full `HttpResponse`, allowing access to response headers.
-   * To access only the response body, use `userControllerGetAll()` instead.
+   * To access only the response body, use `getAllUsers()` instead.
    *
    * This method doesn't expect any request body.
    */
-  userControllerGetAll$Response(params?: {
+  getAllUsers$Response(params?: {
 
   }): Observable<StrictHttpResponse<Array<UserDto>>> {
 
-    const rb = new RequestBuilder(this.rootUrl, UserService.UserControllerGetAllPath, 'get');
+    const rb = new RequestBuilder(this.rootUrl, UserService.GetAllUsersPath, 'get');
     if (params) {
 
 
@@ -55,35 +55,35 @@ export class UserService extends BaseService {
 
   /**
    * This method provides access to only to the response body.
-   * To access the full response (for headers, for example), `userControllerGetAll$Response()` instead.
+   * To access the full response (for headers, for example), `getAllUsers$Response()` instead.
    *
    * This method doesn't expect any request body.
    */
-  userControllerGetAll(params?: {
+  getAllUsers(params?: {
 
   }): Observable<Array<UserDto>> {
 
-    return this.userControllerGetAll$Response(params).pipe(
+    return this.getAllUsers$Response(params).pipe(
       map((r: StrictHttpResponse<Array<UserDto>>) => r.body as Array<UserDto>)
     );
   }
 
   /**
-   * Path part for operation userControllerCreate
+   * Path part for operation createUser
    */
-  static readonly UserControllerCreatePath = '/user';
+  static readonly CreateUserPath = '/user';
 
   /**
    * This method provides access to the full `HttpResponse`, allowing access to response headers.
-   * To access only the response body, use `userControllerCreate()` instead.
+   * To access only the response body, use `createUser()` instead.
    *
    * This method sends `application/json` and handles request body of type `application/json`.
    */
-  userControllerCreate$Response(params: {
+  createUser$Response(params: {
       body: User
   }): Observable<StrictHttpResponse<UserDto>> {
 
-    const rb = new RequestBuilder(this.rootUrl, UserService.UserControllerCreatePath, 'post');
+    const rb = new RequestBuilder(this.rootUrl, UserService.CreateUserPath, 'post');
     if (params) {
 
 
@@ -102,35 +102,35 @@ export class UserService extends BaseService {
 
   /**
    * This method provides access to only to the response body.
-   * To access the full response (for headers, for example), `userControllerCreate$Response()` instead.
+   * To access the full response (for headers, for example), `createUser$Response()` instead.
    *
    * This method sends `application/json` and handles request body of type `application/json`.
    */
-  userControllerCreate(params: {
+  createUser(params: {
       body: User
   }): Observable<UserDto> {
 
-    return this.userControllerCreate$Response(params).pipe(
+    return this.createUser$Response(params).pipe(
       map((r: StrictHttpResponse<UserDto>) => r.body as UserDto)
     );
   }
 
   /**
-   * Path part for operation userControllerGet
+   * Path part for operation getUserById
    */
-  static readonly UserControllerGetPath = '/user/{id}';
+  static readonly GetUserByIdPath = '/user/{id}';
 
   /**
    * This method provides access to the full `HttpResponse`, allowing access to response headers.
-   * To access only the response body, use `userControllerGet()` instead.
+   * To access only the response body, use `getUserById()` instead.
    *
    * This method doesn't expect any request body.
    */
-  userControllerGet$Response(params?: {
+  getUserById$Response(params?: {
 
   }): Observable<StrictHttpResponse<UserDto>> {
 
-    const rb = new RequestBuilder(this.rootUrl, UserService.UserControllerGetPath, 'get');
+    const rb = new RequestBuilder(this.rootUrl, UserService.GetUserByIdPath, 'get');
     if (params) {
 
 
@@ -148,35 +148,35 @@ export class UserService extends BaseService {
 
   /**
    * This method provides access to only to the response body.
-   * To access the full response (for headers, for example), `userControllerGet$Response()` instead.
+   * To access the full response (for headers, for example), `getUserById$Response()` instead.
    *
    * This method doesn't expect any request body.
    */
-  userControllerGet(params?: {
+  getUserById(params?: {
 
   }): Observable<UserDto> {
 
-    return this.userControllerGet$Response(params).pipe(
+    return this.getUserById$Response(params).pipe(
       map((r: StrictHttpResponse<UserDto>) => r.body as UserDto)
     );
   }
 
   /**
-   * Path part for operation userControllerDelete
+   * Path part for operation deleteUser
    */
-  static readonly UserControllerDeletePath = '/user/{id}';
+  static readonly DeleteUserPath = '/user/{id}';
 
   /**
    * This method provides access to the full `HttpResponse`, allowing access to response headers.
-   * To access only the response body, use `userControllerDelete()` instead.
+   * To access only the response body, use `deleteUser()` instead.
    *
    * This method doesn't expect any request body.
    */
-  userControllerDelete$Response(params?: {
+  deleteUser$Response(params?: {
 
   }): Observable<StrictHttpResponse<void>> {
 
-    const rb = new RequestBuilder(this.rootUrl, UserService.UserControllerDeletePath, 'delete');
+    const rb = new RequestBuilder(this.rootUrl, UserService.DeleteUserPath, 'delete');
     if (params) {
 
 
@@ -194,35 +194,35 @@ export class UserService extends BaseService {
 
   /**
    * This method provides access to only to the response body.
-   * To access the full response (for headers, for example), `userControllerDelete$Response()` instead.
+   * To access the full response (for headers, for example), `deleteUser$Response()` instead.
    *
    * This method doesn't expect any request body.
    */
-  userControllerDelete(params?: {
+  deleteUser(params?: {
 
   }): Observable<void> {
 
-    return this.userControllerDelete$Response(params).pipe(
+    return this.deleteUser$Response(params).pipe(
       map((r: StrictHttpResponse<void>) => r.body as void)
     );
   }
 
   /**
-   * Path part for operation userControllerPatch
+   * Path part for operation patchUser
    */
-  static readonly UserControllerPatchPath = '/user/{id}';
+  static readonly PatchUserPath = '/user/{id}';
 
   /**
    * This method provides access to the full `HttpResponse`, allowing access to response headers.
-   * To access only the response body, use `userControllerPatch()` instead.
+   * To access only the response body, use `patchUser()` instead.
    *
    * This method sends `application/json` and handles request body of type `application/json`.
    */
-  userControllerPatch$Response(params: {
+  patchUser$Response(params: {
       body: User
   }): Observable<StrictHttpResponse<void>> {
 
-    const rb = new RequestBuilder(this.rootUrl, UserService.UserControllerPatchPath, 'patch');
+    const rb = new RequestBuilder(this.rootUrl, UserService.PatchUserPath, 'patch');
     if (params) {
 
 
@@ -241,15 +241,15 @@ export class UserService extends BaseService {
 
   /**
    * This method provides access to only to the response body.
-   * To access the full response (for headers, for example), `userControllerPatch$Response()` instead.
+   * To access the full response (for headers, for example), `patchUser$Response()` instead.
    *
    * This method sends `application/json` and handles request body of type `application/json`.
    */
-  userControllerPatch(params: {
+  patchUser(params: {
       body: User
   }): Observable<void> {
 
-    return this.userControllerPatch$Response(params).pipe(
+    return this.patchUser$Response(params).pipe(
       map((r: StrictHttpResponse<void>) => r.body as void)
     );
   }

@@ -22,21 +22,21 @@ export class CategoryGroupService extends BaseService {
   }
 
   /**
-   * Path part for operation categoryGroupControllerGetAll
+   * Path part for operation getAllCategoryGroups
    */
-  static readonly CategoryGroupControllerGetAllPath = '/category-group/all';
+  static readonly GetAllCategoryGroupsPath = '/category-group/all';
 
   /**
    * This method provides access to the full `HttpResponse`, allowing access to response headers.
-   * To access only the response body, use `categoryGroupControllerGetAll()` instead.
+   * To access only the response body, use `getAllCategoryGroups()` instead.
    *
    * This method doesn't expect any request body.
    */
-  categoryGroupControllerGetAll$Response(params?: {
+  getAllCategoryGroups$Response(params?: {
 
   }): Observable<StrictHttpResponse<{  }>> {
 
-    const rb = new RequestBuilder(this.rootUrl, CategoryGroupService.CategoryGroupControllerGetAllPath, 'get');
+    const rb = new RequestBuilder(this.rootUrl, CategoryGroupService.GetAllCategoryGroupsPath, 'get');
     if (params) {
 
 
@@ -54,35 +54,35 @@ export class CategoryGroupService extends BaseService {
 
   /**
    * This method provides access to only to the response body.
-   * To access the full response (for headers, for example), `categoryGroupControllerGetAll$Response()` instead.
+   * To access the full response (for headers, for example), `getAllCategoryGroups$Response()` instead.
    *
    * This method doesn't expect any request body.
    */
-  categoryGroupControllerGetAll(params?: {
+  getAllCategoryGroups(params?: {
 
   }): Observable<{  }> {
 
-    return this.categoryGroupControllerGetAll$Response(params).pipe(
+    return this.getAllCategoryGroups$Response(params).pipe(
       map((r: StrictHttpResponse<{  }>) => r.body as {  })
     );
   }
 
   /**
-   * Path part for operation categoryGroupControllerGet
+   * Path part for operation getCategoryGroupById
    */
-  static readonly CategoryGroupControllerGetPath = '/category-group/{id}';
+  static readonly GetCategoryGroupByIdPath = '/category-group/{id}';
 
   /**
    * This method provides access to the full `HttpResponse`, allowing access to response headers.
-   * To access only the response body, use `categoryGroupControllerGet()` instead.
+   * To access only the response body, use `getCategoryGroupById()` instead.
    *
    * This method doesn't expect any request body.
    */
-  categoryGroupControllerGet$Response(params?: {
+  getCategoryGroupById$Response(params?: {
 
   }): Observable<StrictHttpResponse<{  }>> {
 
-    const rb = new RequestBuilder(this.rootUrl, CategoryGroupService.CategoryGroupControllerGetPath, 'get');
+    const rb = new RequestBuilder(this.rootUrl, CategoryGroupService.GetCategoryGroupByIdPath, 'get');
     if (params) {
 
 
@@ -100,35 +100,35 @@ export class CategoryGroupService extends BaseService {
 
   /**
    * This method provides access to only to the response body.
-   * To access the full response (for headers, for example), `categoryGroupControllerGet$Response()` instead.
+   * To access the full response (for headers, for example), `getCategoryGroupById$Response()` instead.
    *
    * This method doesn't expect any request body.
    */
-  categoryGroupControllerGet(params?: {
+  getCategoryGroupById(params?: {
 
   }): Observable<{  }> {
 
-    return this.categoryGroupControllerGet$Response(params).pipe(
+    return this.getCategoryGroupById$Response(params).pipe(
       map((r: StrictHttpResponse<{  }>) => r.body as {  })
     );
   }
 
   /**
-   * Path part for operation categoryGroupControllerDelete
+   * Path part for operation deleteCategoryGroup
    */
-  static readonly CategoryGroupControllerDeletePath = '/category-group/{id}';
+  static readonly DeleteCategoryGroupPath = '/category-group/{id}';
 
   /**
    * This method provides access to the full `HttpResponse`, allowing access to response headers.
-   * To access only the response body, use `categoryGroupControllerDelete()` instead.
+   * To access only the response body, use `deleteCategoryGroup()` instead.
    *
    * This method doesn't expect any request body.
    */
-  categoryGroupControllerDelete$Response(params?: {
+  deleteCategoryGroup$Response(params?: {
 
   }): Observable<StrictHttpResponse<{  }>> {
 
-    const rb = new RequestBuilder(this.rootUrl, CategoryGroupService.CategoryGroupControllerDeletePath, 'delete');
+    const rb = new RequestBuilder(this.rootUrl, CategoryGroupService.DeleteCategoryGroupPath, 'delete');
     if (params) {
 
 
@@ -146,35 +146,35 @@ export class CategoryGroupService extends BaseService {
 
   /**
    * This method provides access to only to the response body.
-   * To access the full response (for headers, for example), `categoryGroupControllerDelete$Response()` instead.
+   * To access the full response (for headers, for example), `deleteCategoryGroup$Response()` instead.
    *
    * This method doesn't expect any request body.
    */
-  categoryGroupControllerDelete(params?: {
+  deleteCategoryGroup(params?: {
 
   }): Observable<{  }> {
 
-    return this.categoryGroupControllerDelete$Response(params).pipe(
+    return this.deleteCategoryGroup$Response(params).pipe(
       map((r: StrictHttpResponse<{  }>) => r.body as {  })
     );
   }
 
   /**
-   * Path part for operation categoryGroupControllerPatch
+   * Path part for operation patchCategoryGroup
    */
-  static readonly CategoryGroupControllerPatchPath = '/category-group/{id}';
+  static readonly PatchCategoryGroupPath = '/category-group/{id}';
 
   /**
    * This method provides access to the full `HttpResponse`, allowing access to response headers.
-   * To access only the response body, use `categoryGroupControllerPatch()` instead.
+   * To access only the response body, use `patchCategoryGroup()` instead.
    *
    * This method sends `application/json` and handles request body of type `application/json`.
    */
-  categoryGroupControllerPatch$Response(params: {
+  patchCategoryGroup$Response(params: {
       body: CategoryGroup
   }): Observable<StrictHttpResponse<{  }>> {
 
-    const rb = new RequestBuilder(this.rootUrl, CategoryGroupService.CategoryGroupControllerPatchPath, 'patch');
+    const rb = new RequestBuilder(this.rootUrl, CategoryGroupService.PatchCategoryGroupPath, 'patch');
     if (params) {
 
 
@@ -193,35 +193,35 @@ export class CategoryGroupService extends BaseService {
 
   /**
    * This method provides access to only to the response body.
-   * To access the full response (for headers, for example), `categoryGroupControllerPatch$Response()` instead.
+   * To access the full response (for headers, for example), `patchCategoryGroup$Response()` instead.
    *
    * This method sends `application/json` and handles request body of type `application/json`.
    */
-  categoryGroupControllerPatch(params: {
+  patchCategoryGroup(params: {
       body: CategoryGroup
   }): Observable<{  }> {
 
-    return this.categoryGroupControllerPatch$Response(params).pipe(
+    return this.patchCategoryGroup$Response(params).pipe(
       map((r: StrictHttpResponse<{  }>) => r.body as {  })
     );
   }
 
   /**
-   * Path part for operation categoryGroupControllerGetAllWithCategories
+   * Path part for operation getAllCategoryGroupsWithCategories
    */
-  static readonly CategoryGroupControllerGetAllWithCategoriesPath = '/category-group';
+  static readonly GetAllCategoryGroupsWithCategoriesPath = '/category-group';
 
   /**
    * This method provides access to the full `HttpResponse`, allowing access to response headers.
-   * To access only the response body, use `categoryGroupControllerGetAllWithCategories()` instead.
+   * To access only the response body, use `getAllCategoryGroupsWithCategories()` instead.
    *
    * This method doesn't expect any request body.
    */
-  categoryGroupControllerGetAllWithCategories$Response(params?: {
+  getAllCategoryGroupsWithCategories$Response(params?: {
 
   }): Observable<StrictHttpResponse<{  }>> {
 
-    const rb = new RequestBuilder(this.rootUrl, CategoryGroupService.CategoryGroupControllerGetAllWithCategoriesPath, 'get');
+    const rb = new RequestBuilder(this.rootUrl, CategoryGroupService.GetAllCategoryGroupsWithCategoriesPath, 'get');
     if (params) {
 
 
@@ -239,35 +239,35 @@ export class CategoryGroupService extends BaseService {
 
   /**
    * This method provides access to only to the response body.
-   * To access the full response (for headers, for example), `categoryGroupControllerGetAllWithCategories$Response()` instead.
+   * To access the full response (for headers, for example), `getAllCategoryGroupsWithCategories$Response()` instead.
    *
    * This method doesn't expect any request body.
    */
-  categoryGroupControllerGetAllWithCategories(params?: {
+  getAllCategoryGroupsWithCategories(params?: {
 
   }): Observable<{  }> {
 
-    return this.categoryGroupControllerGetAllWithCategories$Response(params).pipe(
+    return this.getAllCategoryGroupsWithCategories$Response(params).pipe(
       map((r: StrictHttpResponse<{  }>) => r.body as {  })
     );
   }
 
   /**
-   * Path part for operation categoryGroupControllerCreate
+   * Path part for operation createCategoryGroup
    */
-  static readonly CategoryGroupControllerCreatePath = '/category-group';
+  static readonly CreateCategoryGroupPath = '/category-group';
 
   /**
    * This method provides access to the full `HttpResponse`, allowing access to response headers.
-   * To access only the response body, use `categoryGroupControllerCreate()` instead.
+   * To access only the response body, use `createCategoryGroup()` instead.
    *
    * This method sends `application/json` and handles request body of type `application/json`.
    */
-  categoryGroupControllerCreate$Response(params: {
+  createCategoryGroup$Response(params: {
       body: CategoryGroup
   }): Observable<StrictHttpResponse<{  }>> {
 
-    const rb = new RequestBuilder(this.rootUrl, CategoryGroupService.CategoryGroupControllerCreatePath, 'post');
+    const rb = new RequestBuilder(this.rootUrl, CategoryGroupService.CreateCategoryGroupPath, 'post');
     if (params) {
 
 
@@ -286,15 +286,15 @@ export class CategoryGroupService extends BaseService {
 
   /**
    * This method provides access to only to the response body.
-   * To access the full response (for headers, for example), `categoryGroupControllerCreate$Response()` instead.
+   * To access the full response (for headers, for example), `createCategoryGroup$Response()` instead.
    *
    * This method sends `application/json` and handles request body of type `application/json`.
    */
-  categoryGroupControllerCreate(params: {
+  createCategoryGroup(params: {
       body: CategoryGroup
   }): Observable<{  }> {
 
-    return this.categoryGroupControllerCreate$Response(params).pipe(
+    return this.createCategoryGroup$Response(params).pipe(
       map((r: StrictHttpResponse<{  }>) => r.body as {  })
     );
   }

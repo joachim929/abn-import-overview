@@ -131,7 +131,7 @@ export class InvoiceService extends BaseService {
    */
   patchInvoice$Response(params: {
       body: CreateInvoiceDto
-  }): Observable<StrictHttpResponse<void>> {
+  }): Observable<StrictHttpResponse<{  }>> {
 
     const rb = new RequestBuilder(this.rootUrl, InvoiceService.PatchInvoicePath, 'patch');
     if (params) {
@@ -140,12 +140,12 @@ export class InvoiceService extends BaseService {
       rb.body(params.body, 'application/json');
     }
     return this.http.request(rb.build({
-      responseType: 'text',
-      accept: '*/*'
+      responseType: 'json',
+      accept: 'application/json'
     })).pipe(
       filter((r: any) => r instanceof HttpResponse),
       map((r: HttpResponse<any>) => {
-        return (r as HttpResponse<any>).clone({ body: undefined }) as StrictHttpResponse<void>;
+        return r as StrictHttpResponse<{  }>;
       })
     );
   }
@@ -158,10 +158,10 @@ export class InvoiceService extends BaseService {
    */
   patchInvoice(params: {
       body: CreateInvoiceDto
-  }): Observable<void> {
+  }): Observable<{  }> {
 
     return this.patchInvoice$Response(params).pipe(
-      map((r: StrictHttpResponse<void>) => r.body as void)
+      map((r: StrictHttpResponse<{  }>) => r.body as {  })
     );
   }
 
@@ -176,22 +176,24 @@ export class InvoiceService extends BaseService {
    *
    * This method doesn't expect any request body.
    */
-  deleteInvoice$Response(params?: {
+  deleteInvoice$Response(params: {
+    id: number;
 
-  }): Observable<StrictHttpResponse<void>> {
+  }): Observable<StrictHttpResponse<{  }>> {
 
     const rb = new RequestBuilder(this.rootUrl, InvoiceService.DeleteInvoicePath, 'delete');
     if (params) {
 
+      rb.path('id', params.id);
 
     }
     return this.http.request(rb.build({
-      responseType: 'text',
-      accept: '*/*'
+      responseType: 'json',
+      accept: 'application/json'
     })).pipe(
       filter((r: any) => r instanceof HttpResponse),
       map((r: HttpResponse<any>) => {
-        return (r as HttpResponse<any>).clone({ body: undefined }) as StrictHttpResponse<void>;
+        return r as StrictHttpResponse<{  }>;
       })
     );
   }
@@ -202,12 +204,13 @@ export class InvoiceService extends BaseService {
    *
    * This method doesn't expect any request body.
    */
-  deleteInvoice(params?: {
+  deleteInvoice(params: {
+    id: number;
 
-  }): Observable<void> {
+  }): Observable<{  }> {
 
     return this.deleteInvoice$Response(params).pipe(
-      map((r: StrictHttpResponse<void>) => r.body as void)
+      map((r: StrictHttpResponse<{  }>) => r.body as {  })
     );
   }
 
@@ -267,25 +270,24 @@ export class InvoiceService extends BaseService {
    * This method provides access to the full `HttpResponse`, allowing access to response headers.
    * To access only the response body, use `postInvoiceMultiText()` instead.
    *
-   * This method sends `application/json` and handles request body of type `application/json`.
+   * This method doesn't expect any request body.
    */
-  postInvoiceMultiText$Response(params: {
-      body: Array<CreateInvoiceDto>
-  }): Observable<StrictHttpResponse<void>> {
+  postInvoiceMultiText$Response(params?: {
+
+  }): Observable<StrictHttpResponse<Array<InvoiceDto>>> {
 
     const rb = new RequestBuilder(this.rootUrl, InvoiceService.PostInvoiceMultiTextPath, 'post');
     if (params) {
 
 
-      rb.body(params.body, 'application/json');
     }
     return this.http.request(rb.build({
-      responseType: 'text',
-      accept: '*/*'
+      responseType: 'json',
+      accept: 'application/json'
     })).pipe(
       filter((r: any) => r instanceof HttpResponse),
       map((r: HttpResponse<any>) => {
-        return (r as HttpResponse<any>).clone({ body: undefined }) as StrictHttpResponse<void>;
+        return r as StrictHttpResponse<Array<InvoiceDto>>;
       })
     );
   }
@@ -294,14 +296,14 @@ export class InvoiceService extends BaseService {
    * This method provides access to only to the response body.
    * To access the full response (for headers, for example), `postInvoiceMultiText$Response()` instead.
    *
-   * This method sends `application/json` and handles request body of type `application/json`.
+   * This method doesn't expect any request body.
    */
-  postInvoiceMultiText(params: {
-      body: Array<CreateInvoiceDto>
-  }): Observable<void> {
+  postInvoiceMultiText(params?: {
+
+  }): Observable<Array<InvoiceDto>> {
 
     return this.postInvoiceMultiText$Response(params).pipe(
-      map((r: StrictHttpResponse<void>) => r.body as void)
+      map((r: StrictHttpResponse<Array<InvoiceDto>>) => r.body as Array<InvoiceDto>)
     );
   }
 
@@ -314,25 +316,24 @@ export class InvoiceService extends BaseService {
    * This method provides access to the full `HttpResponse`, allowing access to response headers.
    * To access only the response body, use `postInvoiceMultiExcel()` instead.
    *
-   * This method sends `application/json` and handles request body of type `application/json`.
+   * This method doesn't expect any request body.
    */
-  postInvoiceMultiExcel$Response(params: {
-      body: Array<string>
-  }): Observable<StrictHttpResponse<void>> {
+  postInvoiceMultiExcel$Response(params?: {
+
+  }): Observable<StrictHttpResponse<Array<InvoiceDto>>> {
 
     const rb = new RequestBuilder(this.rootUrl, InvoiceService.PostInvoiceMultiExcelPath, 'post');
     if (params) {
 
 
-      rb.body(params.body, 'application/json');
     }
     return this.http.request(rb.build({
-      responseType: 'text',
-      accept: '*/*'
+      responseType: 'json',
+      accept: 'application/json'
     })).pipe(
       filter((r: any) => r instanceof HttpResponse),
       map((r: HttpResponse<any>) => {
-        return (r as HttpResponse<any>).clone({ body: undefined }) as StrictHttpResponse<void>;
+        return r as StrictHttpResponse<Array<InvoiceDto>>;
       })
     );
   }
@@ -341,14 +342,14 @@ export class InvoiceService extends BaseService {
    * This method provides access to only to the response body.
    * To access the full response (for headers, for example), `postInvoiceMultiExcel$Response()` instead.
    *
-   * This method sends `application/json` and handles request body of type `application/json`.
+   * This method doesn't expect any request body.
    */
-  postInvoiceMultiExcel(params: {
-      body: Array<string>
-  }): Observable<void> {
+  postInvoiceMultiExcel(params?: {
+
+  }): Observable<Array<InvoiceDto>> {
 
     return this.postInvoiceMultiExcel$Response(params).pipe(
-      map((r: StrictHttpResponse<void>) => r.body as void)
+      map((r: StrictHttpResponse<Array<InvoiceDto>>) => r.body as Array<InvoiceDto>)
     );
   }
 

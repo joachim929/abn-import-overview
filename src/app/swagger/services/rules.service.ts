@@ -23,21 +23,21 @@ export class RulesService extends BaseService {
   }
 
   /**
-   * Path part for operation rulesControllerGet
+   * Path part for operation getRuleById
    */
-  static readonly RulesControllerGetPath = '/rules/{id}';
+  static readonly GetRuleByIdPath = '/rules/{id}';
 
   /**
    * This method provides access to the full `HttpResponse`, allowing access to response headers.
-   * To access only the response body, use `rulesControllerGet()` instead.
+   * To access only the response body, use `getRuleById()` instead.
    *
    * This method doesn't expect any request body.
    */
-  rulesControllerGet$Response(params?: {
+  getRuleById$Response(params?: {
 
   }): Observable<StrictHttpResponse<RuleDto>> {
 
-    const rb = new RequestBuilder(this.rootUrl, RulesService.RulesControllerGetPath, 'get');
+    const rb = new RequestBuilder(this.rootUrl, RulesService.GetRuleByIdPath, 'get');
     if (params) {
 
 
@@ -55,35 +55,35 @@ export class RulesService extends BaseService {
 
   /**
    * This method provides access to only to the response body.
-   * To access the full response (for headers, for example), `rulesControllerGet$Response()` instead.
+   * To access the full response (for headers, for example), `getRuleById$Response()` instead.
    *
    * This method doesn't expect any request body.
    */
-  rulesControllerGet(params?: {
+  getRuleById(params?: {
 
   }): Observable<RuleDto> {
 
-    return this.rulesControllerGet$Response(params).pipe(
+    return this.getRuleById$Response(params).pipe(
       map((r: StrictHttpResponse<RuleDto>) => r.body as RuleDto)
     );
   }
 
   /**
-   * Path part for operation rulesControllerDelete
+   * Path part for operation deleteRule
    */
-  static readonly RulesControllerDeletePath = '/rules/{id}';
+  static readonly DeleteRulePath = '/rules/{id}';
 
   /**
    * This method provides access to the full `HttpResponse`, allowing access to response headers.
-   * To access only the response body, use `rulesControllerDelete()` instead.
+   * To access only the response body, use `deleteRule()` instead.
    *
    * This method doesn't expect any request body.
    */
-  rulesControllerDelete$Response(params?: {
+  deleteRule$Response(params?: {
 
   }): Observable<StrictHttpResponse<void>> {
 
-    const rb = new RequestBuilder(this.rootUrl, RulesService.RulesControllerDeletePath, 'delete');
+    const rb = new RequestBuilder(this.rootUrl, RulesService.DeleteRulePath, 'delete');
     if (params) {
 
 
@@ -101,35 +101,35 @@ export class RulesService extends BaseService {
 
   /**
    * This method provides access to only to the response body.
-   * To access the full response (for headers, for example), `rulesControllerDelete$Response()` instead.
+   * To access the full response (for headers, for example), `deleteRule$Response()` instead.
    *
    * This method doesn't expect any request body.
    */
-  rulesControllerDelete(params?: {
+  deleteRule(params?: {
 
   }): Observable<void> {
 
-    return this.rulesControllerDelete$Response(params).pipe(
+    return this.deleteRule$Response(params).pipe(
       map((r: StrictHttpResponse<void>) => r.body as void)
     );
   }
 
   /**
-   * Path part for operation rulesControllerPatch
+   * Path part for operation patchRule
    */
-  static readonly RulesControllerPatchPath = '/rules/{id}';
+  static readonly PatchRulePath = '/rules/{id}';
 
   /**
    * This method provides access to the full `HttpResponse`, allowing access to response headers.
-   * To access only the response body, use `rulesControllerPatch()` instead.
+   * To access only the response body, use `patchRule()` instead.
    *
    * This method sends `application/json` and handles request body of type `application/json`.
    */
-  rulesControllerPatch$Response(params: {
+  patchRule$Response(params: {
       body: Rule
   }): Observable<StrictHttpResponse<{  }>> {
 
-    const rb = new RequestBuilder(this.rootUrl, RulesService.RulesControllerPatchPath, 'patch');
+    const rb = new RequestBuilder(this.rootUrl, RulesService.PatchRulePath, 'patch');
     if (params) {
 
 
@@ -148,35 +148,35 @@ export class RulesService extends BaseService {
 
   /**
    * This method provides access to only to the response body.
-   * To access the full response (for headers, for example), `rulesControllerPatch$Response()` instead.
+   * To access the full response (for headers, for example), `patchRule$Response()` instead.
    *
    * This method sends `application/json` and handles request body of type `application/json`.
    */
-  rulesControllerPatch(params: {
+  patchRule(params: {
       body: Rule
   }): Observable<{  }> {
 
-    return this.rulesControllerPatch$Response(params).pipe(
+    return this.patchRule$Response(params).pipe(
       map((r: StrictHttpResponse<{  }>) => r.body as {  })
     );
   }
 
   /**
-   * Path part for operation rulesControllerGetAll
+   * Path part for operation getAllRules
    */
-  static readonly RulesControllerGetAllPath = '/rules';
+  static readonly GetAllRulesPath = '/rules';
 
   /**
    * This method provides access to the full `HttpResponse`, allowing access to response headers.
-   * To access only the response body, use `rulesControllerGetAll()` instead.
+   * To access only the response body, use `getAllRules()` instead.
    *
    * This method doesn't expect any request body.
    */
-  rulesControllerGetAll$Response(params?: {
+  getAllRules$Response(params?: {
 
   }): Observable<StrictHttpResponse<Array<RuleDto>>> {
 
-    const rb = new RequestBuilder(this.rootUrl, RulesService.RulesControllerGetAllPath, 'get');
+    const rb = new RequestBuilder(this.rootUrl, RulesService.GetAllRulesPath, 'get');
     if (params) {
 
 
@@ -194,35 +194,35 @@ export class RulesService extends BaseService {
 
   /**
    * This method provides access to only to the response body.
-   * To access the full response (for headers, for example), `rulesControllerGetAll$Response()` instead.
+   * To access the full response (for headers, for example), `getAllRules$Response()` instead.
    *
    * This method doesn't expect any request body.
    */
-  rulesControllerGetAll(params?: {
+  getAllRules(params?: {
 
   }): Observable<Array<RuleDto>> {
 
-    return this.rulesControllerGetAll$Response(params).pipe(
+    return this.getAllRules$Response(params).pipe(
       map((r: StrictHttpResponse<Array<RuleDto>>) => r.body as Array<RuleDto>)
     );
   }
 
   /**
-   * Path part for operation rulesControllerCreate
+   * Path part for operation createRule
    */
-  static readonly RulesControllerCreatePath = '/rules';
+  static readonly CreateRulePath = '/rules';
 
   /**
    * This method provides access to the full `HttpResponse`, allowing access to response headers.
-   * To access only the response body, use `rulesControllerCreate()` instead.
+   * To access only the response body, use `createRule()` instead.
    *
    * This method sends `application/json` and handles request body of type `application/json`.
    */
-  rulesControllerCreate$Response(params: {
+  createRule$Response(params: {
       body: Array<string>
   }): Observable<StrictHttpResponse<RuleDto>> {
 
-    const rb = new RequestBuilder(this.rootUrl, RulesService.RulesControllerCreatePath, 'post');
+    const rb = new RequestBuilder(this.rootUrl, RulesService.CreateRulePath, 'post');
     if (params) {
 
 
@@ -241,15 +241,15 @@ export class RulesService extends BaseService {
 
   /**
    * This method provides access to only to the response body.
-   * To access the full response (for headers, for example), `rulesControllerCreate$Response()` instead.
+   * To access the full response (for headers, for example), `createRule$Response()` instead.
    *
    * This method sends `application/json` and handles request body of type `application/json`.
    */
-  rulesControllerCreate(params: {
+  createRule(params: {
       body: Array<string>
   }): Observable<RuleDto> {
 
-    return this.rulesControllerCreate$Response(params).pipe(
+    return this.createRule$Response(params).pipe(
       map((r: StrictHttpResponse<RuleDto>) => r.body as RuleDto)
     );
   }
