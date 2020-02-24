@@ -7,8 +7,9 @@
     <mat-card class="filter-container">
       <h3>Filter</h3>
     </mat-card>
-      <div class="invoice-items-overflow">
-        <mat-card *ngFor="let invoice of test$ | async" class="invoice-item">
+    <div class="invoice-items-overflow">
+      <ng-container *ngFor="let invoice of invoices$ | async">
+        <mat-card class="invoice-item">
           <div class="invoice-detail-container">
             <p>Account number: {{invoice.accountNumber}}</p>
             <p>Amount: {{invoice.amount | currency: 'EUR'}}</p>
@@ -18,11 +19,38 @@
             <p>Transaction date: {{invoice.transactionDate | date}}</p>
           </div>
           <div class="column-container">
-            <mat-icon>edit</mat-icon>
-            <mat-icon>delete</mat-icon>
+            <button (click)="patch(invoice)"
+                    aria-label="Edit button"
+                    mat-icon-button>
+              <mat-icon>edit</mat-icon>
+            </button>
+            <button (click)="split(invoice)"
+                    aria-label="Split button"
+                    mat-icon-button>
+              <mat-icon *ngIf="splitItem?.id !== invoice.id">file_copy</mat-icon>
+              <mat-icon *ngIf="splitItem?.id === invoice.id">close</mat-icon>
+            </button>
+            <button (click)="remove(invoice.id)"
+                    aria-label="Delete button"
+                    mat-icon-button
+                    color="warn">
+              <mat-icon>delete</mat-icon>
+            </button>
           </div>
         </mat-card>
-      </div>
+
+        <mat-card *ngIf="splitItem?.id === invoice.id" class="invoice-item">
+          <div class="invoice-detail-container">
+            <p>Account number: {{splitItem.accountNumber}}</p>
+            <p>Amount: {{splitItem.amount | currency: 'EUR'}}</p>
+            <p>Description: {{splitItem.description}}</p>
+            <p>Start balance: {{splitItem.startBalance | currency: 'EUR'}}</p>
+            <p>End balance: {{splitItem.endBalance | currency: 'EUR'}}</p>
+            <p>Transaction date: {{splitItem.transactionDate | date}}</p>
+          </div>
+        </mat-card>
+      </ng-container>
+    </div>
   </section>
 
 </main>
