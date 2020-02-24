@@ -1,10 +1,8 @@
 <main class="container column-container">
-  <section class="content">
-    <button mat-button>Import</button>
-    <button mat-button>Assign mode</button>
-  </section>
   <section class="content invoice-and-filters">
     <mat-card class="filter-container">
+      <button mat-raised-button class="my-1">Import</button>
+      <button mat-raised-button class="my-1">Assign mode</button>
       <h3>Filter</h3>
     </mat-card>
     <div class="invoice-items-overflow">
@@ -39,16 +37,8 @@
           </div>
         </mat-card>
 
-        <mat-card *ngIf="splitItem?.id === invoice.id" class="invoice-item">
-          <div class="invoice-detail-container">
-            <p>Account number: {{splitItem.accountNumber}}</p>
-            <p>Amount: {{splitItem.amount | currency: 'EUR'}}</p>
-            <p>Description: {{splitItem.description}}</p>
-            <p>Start balance: {{splitItem.startBalance | currency: 'EUR'}}</p>
-            <p>End balance: {{splitItem.endBalance | currency: 'EUR'}}</p>
-            <p>Transaction date: {{splitItem.transactionDate | date}}</p>
-          </div>
-        </mat-card>
+        <app-invoice-split [hidden]="splitItem?.id !== invoice.id"
+                           [ocInvoice]="invoice"></app-invoice-split>
       </ng-container>
     </div>
   </section>

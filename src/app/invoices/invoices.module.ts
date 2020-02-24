@@ -1,5 +1,5 @@
 import { NgModule } from '@angular/core';
-import { CommonModule } from '@angular/common';
+import {CommonModule, CurrencyPipe} from '@angular/common';
 
 import { InvoicesRoutingModule } from './invoices-routing.module';
 import {SharedModule} from '../shared/shared.module';
@@ -8,20 +8,28 @@ import {MatButtonModule} from '@angular/material/button';
 import {InvoicesService} from './services/invoices.service';
 import {MatCardModule} from '@angular/material/card';
 import {MatIconModule} from '@angular/material/icon';
+import {MatFormFieldModule} from '@angular/material/form-field';
+import { InvoiceSplitComponent } from './components/invoice-split/invoice-split.component';
+import {ReactiveFormsModule} from '@angular/forms';
+import {MatInputModule} from '@angular/material/input';
 
 
 @NgModule({
-  declarations: [InvoicesMasterComponent],
+  declarations: [InvoicesMasterComponent, InvoiceSplitComponent],
   imports: [
     CommonModule,
     InvoicesRoutingModule,
     SharedModule,
     MatButtonModule,
     MatCardModule,
-    MatIconModule
+    MatIconModule,
+    MatFormFieldModule,
+    ReactiveFormsModule,
+    MatInputModule
   ],
   providers: [
-    InvoicesService
+    InvoicesService,
+    CurrencyPipe
   ]
 })
 export class InvoicesModule { }

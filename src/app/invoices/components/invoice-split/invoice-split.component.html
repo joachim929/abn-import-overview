@@ -1,0 +1,33 @@
+<mat-card *ngIf="splitInvoice" style="display: flex; flex-direction: row; margin: 0.5em;">
+  <form [formGroup]="form" style="display: flex; flex-direction: column; flex: 1 1 100%">
+    <mat-form-field>
+      <mat-label>Account number</mat-label>
+      <input matInput readonly formControlName="accountNumber">
+    </mat-form-field>
+    <mat-form-field>
+      <mat-label>Amount</mat-label>
+      <span matPrefix>	&euro;</span>
+      <input matInput formControlName="amount" type="number">
+    </mat-form-field>
+    <mat-form-field>
+      <mat-label>Description</mat-label>
+      <textarea matInput
+                cdkTextareaAutosize
+                formControlName="description"></textarea>
+    </mat-form-field>
+    <mat-form-field>
+      <mat-label>Start balance</mat-label>
+      <input matInput readonly type="text" formControlName="startBalance">
+    </mat-form-field>
+    <mat-form-field>
+      <mat-label>End balance</mat-label>
+      <input matInput readonly type="text" formControlName="endBalance">
+    </mat-form-field>
+    <mat-form-field>
+      <input matInput type="text" readonly [placeholder]="form.get('transactionDate').value | date">
+    </mat-form-field>
+  </form>
+  <div style="justify-content: space-between" class="column-container">
+    <button mat-icon-button><mat-icon>cancel</mat-icon></button>
+  </div>
+</mat-card>
