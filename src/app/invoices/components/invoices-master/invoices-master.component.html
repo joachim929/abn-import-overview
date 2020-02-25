@@ -7,15 +7,7 @@
     </mat-card>
     <div class="invoice-items-overflow">
       <ng-container *ngFor="let invoice of invoices$ | async">
-        <mat-card class="invoice-item">
-          <div class="invoice-detail-container">
-            <p>Account number: {{invoice.accountNumber}}</p>
-            <p>Amount: {{invoice.amount | currency: 'EUR'}}</p>
-            <p>Description: {{invoice.description}}</p>
-            <p>Start balance: {{invoice.startBalance | currency: 'EUR'}}</p>
-            <p>End balance: {{invoice.endBalance | currency: 'EUR'}}</p>
-            <p>Transaction date: {{invoice.transactionDate | date}}</p>
-          </div>
+        <app-invoice-detail [invoice]="invoice">
           <div class="column-container">
             <button (click)="patch(invoice)"
                     aria-label="Edit button"
@@ -35,8 +27,7 @@
               <mat-icon>delete</mat-icon>
             </button>
           </div>
-        </mat-card>
-
+        </app-invoice-detail>
         <app-invoice-split [hidden]="splitItem?.id !== invoice.id"
                            [ocInvoice]="invoice"></app-invoice-split>
       </ng-container>

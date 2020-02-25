@@ -1,0 +1,10 @@
+.invoice-item {
+  display: flex;
+  flex-direction: row;
+  margin: 0.5em;
+}
+
+.invoice-detail-container {
+  flex: 1 1 100%;
+}
+
