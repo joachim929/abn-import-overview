@@ -13,10 +13,11 @@ import { InvoiceSplitComponent } from './components/invoice-split/invoice-split.
 import {ReactiveFormsModule} from '@angular/forms';
 import {MatInputModule} from '@angular/material/input';
 import { InvoiceDetailComponent } from './components/invoice-detail/invoice-detail.component';
+import { InvoiceFilterComponent } from './components/invoice-filter/invoice-filter.component';
 
 
 @NgModule({
-  declarations: [InvoicesMasterComponent, InvoiceSplitComponent, InvoiceDetailComponent],
+  declarations: [InvoicesMasterComponent, InvoiceSplitComponent, InvoiceDetailComponent, InvoiceFilterComponent],
   imports: [
     CommonModule,
     InvoicesRoutingModule,

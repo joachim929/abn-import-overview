@@ -1,13 +1,13 @@
 <main class="container column-container">
   <section class="content invoice-and-filters">
-    <mat-card class="filter-container">
+    <app-invoice-filter>
       <button mat-raised-button class="my-1">Import</button>
       <button mat-raised-button class="my-1">Assign mode</button>
-      <h3>Filter</h3>
-    </mat-card>
+    </app-invoice-filter>
     <div class="invoice-items-overflow">
       <ng-container *ngFor="let invoice of invoices$ | async">
-        <app-invoice-detail [invoice]="invoice">
+        <app-invoice-detail [invoice]="invoice"
+                            [style.opacity]="(splitItem && splitItem.id !== invoice.id) ? '0.3' : '1'">
           <div class="column-container">
             <button (click)="patch(invoice)"
                     aria-label="Edit button"
