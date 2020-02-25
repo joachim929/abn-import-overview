@@ -1,8 +1,12 @@
 <main class="container column-container">
   <section class="content invoice-and-filters">
     <app-invoice-filter>
-      <button mat-raised-button class="my-1">Import</button>
-      <button mat-raised-button class="my-1">Assign mode</button>
+      <label class="invoices-import-container my-1">
+        <button *ngIf="!file" mat-button color="primary" (click)="importInvoices.click()">Import</button>
+        <button *ngIf="file" mat-raised-button color="primary" (click)="upload()">Upload</button>
+        <input hidden type="file" accept="application/vnd.ms-excel" #importInvoices (change)="incomingFile($event)">
+      </label>
+      <a mat-button class="my-1">Assign mode</a>
     </app-invoice-filter>
     <div class="invoice-items-overflow">
       <ng-container *ngFor="let invoice of invoices$ | async">
