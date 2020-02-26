@@ -1,21 +1,17 @@
 <main class="container column-container">
   <section class="content invoice-and-filters">
-    <mat-card class="filter-container">
-      <button mat-raised-button class="my-1">Import</button>
-      <button mat-raised-button class="my-1">Assign mode</button>
-      <h3>Filter</h3>
-    </mat-card>
+    <app-invoice-filter>
+      <label class="invoices-import-container my-1">
+        <button *ngIf="!file" mat-button color="primary" (click)="importInvoices.click()">Import</button>
+        <button *ngIf="file" mat-raised-button color="primary" (click)="upload()">Upload</button>
+        <input hidden type="file" accept="application/vnd.ms-excel" #importInvoices (change)="incomingFile($event)">
+      </label>
+      <a mat-button class="my-1">Assign mode</a>
+    </app-invoice-filter>
     <div class="invoice-items-overflow">
       <ng-container *ngFor="let invoice of invoices$ | async">
-        <mat-card class="invoice-item">
-          <div class="invoice-detail-container">
-            <p>Account number: {{invoice.accountNumber}}</p>
-            <p>Amount: {{invoice.amount | currency: 'EUR'}}</p>
-            <p>Description: {{invoice.description}}</p>
-            <p>Start balance: {{invoice.startBalance | currency: 'EUR'}}</p>
-            <p>End balance: {{invoice.endBalance | currency: 'EUR'}}</p>
-            <p>Transaction date: {{invoice.transactionDate | date}}</p>
-          </div>
+        <app-invoice-detail [invoice]="invoice"
+                            [style.opacity]="(splitItem && splitItem.id !== invoice.id) ? '0.3' : '1'">
           <div class="column-container">
             <button (click)="patch(invoice)"
                     aria-label="Edit button"
@@ -35,8 +31,7 @@
               <mat-icon>delete</mat-icon>
             </button>
           </div>
-        </mat-card>
-
+        </app-invoice-detail>
         <app-invoice-split [hidden]="splitItem?.id !== invoice.id"
                            [ocInvoice]="invoice"></app-invoice-split>
       </ng-container>

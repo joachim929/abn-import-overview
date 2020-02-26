@@ -2,6 +2,7 @@ import {Component, OnInit} from '@angular/core';
 import {InvoicesService} from '../../services/invoices.service';
 import {InvoiceDto} from '../../../swagger/models/invoice-dto';
 import {BehaviorSubject} from 'rxjs';
+import {switchMap, tap} from 'rxjs/operators';
 
 @Component({
   selector: 'app-invoices-master',
@@ -9,6 +10,7 @@ import {BehaviorSubject} from 'rxjs';
   styleUrls: ['./invoices-master.component.scss']
 })
 export class InvoicesMasterComponent implements OnInit {
+  file: File;
   _invoices$ = new BehaviorSubject<InvoiceDto[]>([]);
   dataStore: { invoices$: InvoiceDto[] } = {invoices$: []};
   invoices$ = this._invoices$.asObservable();
@@ -43,6 +45,16 @@ export class InvoicesMasterComponent implements OnInit {
     } else {
       this.splitItem = undefined;
     }
+  }
+
+  incomingFile(event) {
+    this.file = event.target.files[0];
+  }
+
+  upload() {
+    this.invoicesService.xlsToJson(this.file).subscribe((next) => {
+      console.log(next); // todo implement adding reponse to obserable
+    });
   }
 
   remove(invoiceId: number) {

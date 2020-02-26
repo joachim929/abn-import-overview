@@ -5,19 +5,8 @@
 
 .invoice-items-overflow {
   overflow-y: auto;
-
-  .invoice-item {
-    display: flex;
-    flex-direction: row;
-    margin: 0.5em;
-  }
 }
 
-.filter-container {
-  display: flex;
-  flex-direction: column;
-  margin: 0.5em;
-}
 
 .invoice-and-filters {
   display: grid;
@@ -26,10 +15,12 @@
   height: calc(100vh - 90px)
 }
 
-.invoice-detail-container {
-  flex: 1 1 100%;
-}
-
 .column-container {
   justify-content: space-between;
+}
+
+.invoices-import-container {
+  button {
+    width: 100%;
+  }
 }

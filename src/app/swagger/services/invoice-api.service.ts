@@ -270,16 +270,17 @@ export class InvoiceApiService extends BaseService {
    * This method provides access to the full `HttpResponse`, allowing access to response headers.
    * To access only the response body, use `postInvoiceMultiText()` instead.
    *
-   * This method doesn't expect any request body.
+   * This method sends `application/json` and handles request body of type `application/json`.
    */
-  postInvoiceMultiText$Response(params?: {
-
+  postInvoiceMultiText$Response(params: {
+      body: Array<string>
   }): Observable<StrictHttpResponse<Array<InvoiceDto>>> {
 
     const rb = new RequestBuilder(this.rootUrl, InvoiceApiService.PostInvoiceMultiTextPath, 'post');
     if (params) {
 
 
+      rb.body(params.body, 'application/json');
     }
     return this.http.request(rb.build({
       responseType: 'json',
@@ -296,10 +297,10 @@ export class InvoiceApiService extends BaseService {
    * This method provides access to only to the response body.
    * To access the full response (for headers, for example), `postInvoiceMultiText$Response()` instead.
    *
-   * This method doesn't expect any request body.
+   * This method sends `application/json` and handles request body of type `application/json`.
    */
-  postInvoiceMultiText(params?: {
-
+  postInvoiceMultiText(params: {
+      body: Array<string>
   }): Observable<Array<InvoiceDto>> {
 
     return this.postInvoiceMultiText$Response(params).pipe(
@@ -316,16 +317,17 @@ export class InvoiceApiService extends BaseService {
    * This method provides access to the full `HttpResponse`, allowing access to response headers.
    * To access only the response body, use `postInvoiceMultiExcel()` instead.
    *
-   * This method doesn't expect any request body.
+   * This method sends `application/json` and handles request body of type `application/json`.
    */
-  postInvoiceMultiExcel$Response(params?: {
-
+  postInvoiceMultiExcel$Response(params: {
+      body: Array<string>
   }): Observable<StrictHttpResponse<Array<InvoiceDto>>> {
 
     const rb = new RequestBuilder(this.rootUrl, InvoiceApiService.PostInvoiceMultiExcelPath, 'post');
     if (params) {
 
 
+      rb.body(params.body, 'application/json');
     }
     return this.http.request(rb.build({
       responseType: 'json',
@@ -342,10 +344,10 @@ export class InvoiceApiService extends BaseService {
    * This method provides access to only to the response body.
    * To access the full response (for headers, for example), `postInvoiceMultiExcel$Response()` instead.
    *
-   * This method doesn't expect any request body.
+   * This method sends `application/json` and handles request body of type `application/json`.
    */
-  postInvoiceMultiExcel(params?: {
-
+  postInvoiceMultiExcel(params: {
+      body: Array<string>
   }): Observable<Array<InvoiceDto>> {
 
     return this.postInvoiceMultiExcel$Response(params).pipe(
