@@ -1,0 +1,76 @@
+// Small devices (landscape phones, 576px and up)
+@media (min-width: 576px) {
+  .sm-d-flex {
+    display: flex !important;
+  }
+  .sm-d-none {
+    display: none !important;
+  }
+
+  .sm-flex-row {
+    flex-direction: row !important;
+  }
+
+  .sm-flex-column {
+    flex-direction: column !important;
+  }
+}
+
+// Medium devices (tablets, 768px and up)
+@media (min-width: 768px) {
+  .md-d-flex {
+    display: flex !important;
+  }
+  .md-d-none {
+    display: none !important;
+  }
+
+
+  .md-flex-row {
+    flex-direction: row !important;
+  }
+
+  .md-flex-column {
+    flex-direction: column !important;
+  }
+}
+
+// Large devices (desktops, 992px and up)
+@media (min-width: 992px) {
+  .lg-d-flex {
+    display: flex !important;
+  }
+
+  .lg-d-none {
+    display: none !important;
+  }
+
+
+  .lg-flex-row {
+    flex-direction: row !important;
+  }
+
+  .lg-flex-column {
+    flex-direction: column !important;
+  }
+}
+
+// Extra large devices (large desktops, 1200px and up)
+@media (min-width: 1200px) {
+  .xl-d-flex {
+    display: flex !important;
+  }
+
+  .xl-d-none {
+    display: none !important;
+  }
+
+
+  .xl-flex-row {
+    flex-direction: row !important;
+  }
+
+  .xl-flex-column {
+    flex-direction: column !important;
+  }
+}
