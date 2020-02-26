@@ -1,6 +1,7 @@
 import {Component, Input, OnInit} from '@angular/core';
 import {InvoiceDto} from '../../../swagger/models/invoice-dto';
 import {InvoiceDataService} from '../../services/invoice-data.service';
+import {FormControl, FormGroup} from '@angular/forms';
 
 @Component({
   selector: 'app-invoice-detail',
@@ -11,6 +12,10 @@ export class InvoiceDetailComponent implements OnInit {
   @Input() invoice: InvoiceDto;
   splitItem: InvoiceDto;
   editInProgress = false;
+  form = new FormGroup({
+    description: new FormControl(),
+    comment: new FormControl()
+  });
 
   constructor(
     private invoiceDataService: InvoiceDataService

@@ -3,6 +3,7 @@ export interface InvoiceDto {
   accountNumber: number;
   amount: number;
   categoryId?: number;
+  comment?: string;
   description?: string;
   endBalance: number;
   id: number;

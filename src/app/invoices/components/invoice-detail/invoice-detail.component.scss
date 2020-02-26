@@ -6,6 +6,8 @@
 
 .invoice-detail-container {
   flex: 1 1 100%;
+  display: flex;
+  flex-direction: column;
 }
 
 .hide-icon {
@@ -15,5 +17,6 @@
 }
 
 .invoice-controls-container {
+  margin-left: 1em;
   justify-content: space-between;
 }

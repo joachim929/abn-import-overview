@@ -1,12 +1,21 @@
 <mat-card class="invoice-item">
-  <div class="invoice-detail-container">
+  <form [formGroup]="form" class="invoice-detail-container">
     <p>Account number: {{invoice.accountNumber}}</p>
     <p>Amount: {{invoice.amount | customCurrency}}</p>
-    <p>Description: {{invoice.description}}</p>
+    <p *ngIf="!editInProgress">Description: {{invoice.description}}</p>
+    <app-mat-input *ngIf="editInProgress"
+                   placeholder="Description..."
+                   label="Description"
+                   [control]="form.get('description')"></app-mat-input>
+    <p *ngIf="invoice.comment && !editInProgress">Comment: {{invoice.comment}}</p>
+    <app-mat-input *ngIf="editInProgress"
+                   placeholder="Comment..."
+                   label="Comment"
+                   [control]="form.get('comment')"></app-mat-input>
     <p>Start balance: {{invoice.startBalance | customCurrency}}</p>
     <p>End balance: {{invoice.endBalance | customCurrency}}</p>
     <p>Transaction date: {{invoice.transactionDate | date}}</p>
-  </div>
+  </form>
   <div class="column-container invoice-controls-container">
     <button (click)="patch(invoice)"
             aria-label="Edit button"

@@ -9,9 +9,11 @@
       <a mat-button class="my-1">Assign mode</a>
     </app-invoice-filter>
     <div class="invoice-items-overflow">
-      <app-invoice-detail [invoice]="invoice" *ngFor="let invoice of invoices$ | async"
-                          [style.opacity]="(splitItem && splitItem.id !== invoice.id) ? '0.3' : '1'">
-      </app-invoice-detail>
+      <ng-container *ngFor="let invoice of invoices$ | async; let index = index;">
+        <app-invoice-detail [invoice]="invoice" *ngIf="index <= 10"
+                            [style.opacity]="(splitItem && splitItem.id !== invoice.id) ? '0.3' : '1'">
+        </app-invoice-detail>
+      </ng-container>
     </div>
   </section>
 
