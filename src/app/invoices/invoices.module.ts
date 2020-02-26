@@ -5,7 +5,6 @@ import { InvoicesRoutingModule } from './invoices-routing.module';
 import {SharedModule} from '../shared/shared.module';
 import { InvoicesMasterComponent } from './components/invoices-master/invoices-master.component';
 import {MatButtonModule} from '@angular/material/button';
-import {InvoicesService} from './services/invoices.service';
 import {MatCardModule} from '@angular/material/card';
 import {MatIconModule} from '@angular/material/icon';
 import {MatFormFieldModule} from '@angular/material/form-field';
@@ -14,6 +13,7 @@ import {ReactiveFormsModule} from '@angular/forms';
 import {MatInputModule} from '@angular/material/input';
 import { InvoiceDetailComponent } from './components/invoice-detail/invoice-detail.component';
 import { InvoiceFilterComponent } from './components/invoice-filter/invoice-filter.component';
+import {InvoiceDataService} from './services/invoice-data.service';
 
 
 @NgModule({
@@ -30,8 +30,8 @@ import { InvoiceFilterComponent } from './components/invoice-filter/invoice-filt
     MatInputModule
   ],
   providers: [
-    InvoicesService,
-    CurrencyPipe
+    CurrencyPipe,
+    InvoiceDataService
   ]
 })
 export class InvoicesModule { }
