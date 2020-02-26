@@ -1,6 +1,6 @@
 <ng-container *ngIf="entry">
   <p>Date: {{entry.transactionDate | date}}</p>
-  <p>Amount: {{entry.amount | currency: 'EUR'}}</p>
+  <p>Amount: {{entry.amount | customCurrency}}</p>
   <p>Start Saldo: {{entry.startSaldo}}</p>
   <p>End Saldo: {{entry.endSaldo}}</p>
   <p>Description: {{entry.description}}</p>

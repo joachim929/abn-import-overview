@@ -1,7 +1,8 @@
 import {Component, OnInit} from '@angular/core';
 import {InvoiceDto} from '../../../swagger/models/invoice-dto';
-import {BehaviorSubject} from 'rxjs';
+import {Observable} from 'rxjs';
 import {InvoiceDataService} from '../../services/invoice-data.service';
+import {tap} from 'rxjs/operators';
 
 @Component({
   selector: 'app-invoices-master',
@@ -10,16 +11,18 @@ import {InvoiceDataService} from '../../services/invoice-data.service';
 })
 export class InvoicesMasterComponent implements OnInit {
   file: File;
-  _invoices$ = new BehaviorSubject<InvoiceDto[]>([]);
-  dataStore: { invoices$: InvoiceDto[] } = {invoices$: []};
-  invoices$ = this._invoices$.asObservable();
+  invoices$: Observable<InvoiceDto[]>;
 
   splitItem: InvoiceDto;
 
   constructor(
     private invoiceDataService: InvoiceDataService
   ) {
-    this.invoices$ = this.invoiceDataService.invoices$;
+    this.invoices$ = this.invoiceDataService.invoices$.pipe(
+      tap(result =>
+        result.sort((a, b) =>
+          (a.transactionDate > b.transactionDate) ? 1 : -1))
+    );
   }
 
   ngOnInit() {
@@ -43,11 +46,7 @@ export class InvoicesMasterComponent implements OnInit {
   }
 
   upload() {
-    console.log('upload');
     this.invoiceDataService.multiUploadExcel(this.file);
-    // this.invoicesService.xlsToJson(this.file).subscribe((next) => {
-    //   console.log(next); // todo implement adding reponse to obserable
-    // });
   }
 
   remove(invoiceId: number) {

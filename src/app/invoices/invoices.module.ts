@@ -14,6 +14,7 @@ import {MatInputModule} from '@angular/material/input';
 import { InvoiceDetailComponent } from './components/invoice-detail/invoice-detail.component';
 import { InvoiceFilterComponent } from './components/invoice-filter/invoice-filter.component';
 import {InvoiceDataService} from './services/invoice-data.service';
+import {CustomCurrencyPipe} from '../shared/pipes/custom-currency.pipe';
 
 
 @NgModule({
@@ -30,7 +31,7 @@ import {InvoiceDataService} from './services/invoice-data.service';
     MatInputModule
   ],
   providers: [
-    CurrencyPipe,
+    CustomCurrencyPipe,
     InvoiceDataService
   ]
 })

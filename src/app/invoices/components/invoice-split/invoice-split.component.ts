@@ -1,7 +1,7 @@
 import {Component, Input, OnInit} from '@angular/core';
 import {InvoiceDto} from '../../../swagger/models/invoice-dto';
 import {FormControl, FormGroup, Validators} from '@angular/forms';
-import {CurrencyPipe} from '@angular/common';
+import {CustomCurrencyPipe} from '../../../shared/pipes/custom-currency.pipe';
 
 @Component({
   selector: 'app-invoice-split',
@@ -26,7 +26,7 @@ export class InvoiceSplitComponent implements OnInit {
     this.setFormValues();
   }
 
-  constructor(private currencyPipe: CurrencyPipe) {
+  constructor(private customCurrencyPipe: CustomCurrencyPipe) {
   }
 
   ngOnInit(): void {
@@ -37,7 +37,7 @@ export class InvoiceSplitComponent implements OnInit {
     this.form.get('amount').setValue(this.splitInvoice.amount);
     this.form.get('description').setValue(this.splitInvoice.description);
     this.form.get('startBalance').setValue(this.splitInvoice.startBalance);
-    this.form.get('endBalance').setValue(this.currencyPipe.transform(this.splitInvoice.endBalance, 'EUR', true));
+    this.form.get('endBalance').setValue(this.customCurrencyPipe.transform(this.splitInvoice.endBalance));
     this.form.get('transactionDate').setValue(this.splitInvoice.transactionDate);
   }
 

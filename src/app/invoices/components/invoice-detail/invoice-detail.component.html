@@ -1,10 +1,10 @@
 <mat-card class="invoice-item">
   <div class="invoice-detail-container">
     <p>Account number: {{invoice.accountNumber}}</p>
-    <p>Amount: {{invoice.amount | currency: 'EUR'}}</p>
+    <p>Amount: {{invoice.amount | customCurrency}}</p>
     <p>Description: {{invoice.description}}</p>
-    <p>Start balance: {{invoice.startBalance | currency: 'EUR'}}</p>
-    <p>End balance: {{invoice.endBalance | currency: 'EUR'}}</p>
+    <p>Start balance: {{invoice.startBalance | customCurrency}}</p>
+    <p>End balance: {{invoice.endBalance | customCurrency}}</p>
     <p>Transaction date: {{invoice.transactionDate | date}}</p>
   </div>
   <ng-content></ng-content>

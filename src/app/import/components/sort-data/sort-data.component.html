@@ -7,7 +7,7 @@
     <div class="card m-2">
       <div class="card-body">
         <p class="mb-0">Date: {{entry.transactionDate | date}}</p>
-        <p class="mb-0">Amount: {{entry.amount | currency: 'EUR'}}</p>
+        <p class="mb-0">Amount: {{entry.amount | customCurrency}}</p>
         <p class="mb-0">Start Saldo: {{entry.startSaldo}}</p>
         <p class="mb-0">End Saldo: {{entry.endSaldo}}</p>
         <p class="mb-0">Description: {{entry.description}}</p>
