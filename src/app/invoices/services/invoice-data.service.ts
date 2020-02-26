@@ -5,6 +5,7 @@ import {InvoiceApiService} from '../../swagger/services/invoice-api.service';
 import * as XLSX from 'xlsx';
 import {map, tap} from 'rxjs/operators';
 
+// https://coryrylan.com/blog/angular-observable-data-services
 @Injectable()
 export class InvoiceDataService {
 
@@ -45,8 +46,7 @@ export class InvoiceDataService {
     this.xlsToJson(file).then((json) => {
       this.invoiceApiService.postInvoiceMultiExcel({body: json})
         .subscribe((next) => {
-          console.log(next);
-          this.dataStore.invoices$.concat(next); // todo: concat doesn't seem to work
+          this.dataStore.invoices$ = this.dataStore.invoices$.concat(next);
           this.invoices.next(Object.assign({}, this.dataStore).invoices$);
         });
     });
