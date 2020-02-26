@@ -7,5 +7,26 @@
     <p>End balance: {{invoice.endBalance | customCurrency}}</p>
     <p>Transaction date: {{invoice.transactionDate | date}}</p>
   </div>
-  <ng-content></ng-content>
+  <div class="column-container invoice-controls-container">
+    <button (click)="patch(invoice)"
+            aria-label="Edit button"
+            mat-icon-button>
+      <mat-icon [class.hide-icon]="editInProgress">edit</mat-icon>
+      <mat-icon [class.hide-icon]="!editInProgress">save</mat-icon>
+    </button>
+    <button (click)="split(invoice)"
+            aria-label="Split button"
+            mat-icon-button>
+      <mat-icon *ngIf="splitItem?.id !== invoice.id">file_copy</mat-icon>
+      <mat-icon *ngIf="splitItem?.id === invoice.id">close</mat-icon>
+    </button>
+    <button (click)="remove(invoice.id)"
+            aria-label="Delete button"
+            mat-icon-button
+            color="warn">
+      <mat-icon>delete</mat-icon>
+    </button>
+  </div>
 </mat-card>
+<app-invoice-split [hidden]="splitItem?.id !== invoice.id"
+                   [ocInvoice]="invoice"></app-invoice-split>

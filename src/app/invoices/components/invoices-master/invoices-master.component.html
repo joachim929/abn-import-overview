@@ -9,32 +9,9 @@
       <a mat-button class="my-1">Assign mode</a>
     </app-invoice-filter>
     <div class="invoice-items-overflow">
-      <ng-container *ngFor="let invoice of invoices$ | async">
-        <app-invoice-detail [invoice]="invoice"
-                            [style.opacity]="(splitItem && splitItem.id !== invoice.id) ? '0.3' : '1'">
-          <div class="column-container">
-            <button (click)="patch(invoice)"
-                    aria-label="Edit button"
-                    mat-icon-button>
-              <mat-icon>edit</mat-icon>
-            </button>
-            <button (click)="split(invoice)"
-                    aria-label="Split button"
-                    mat-icon-button>
-              <mat-icon *ngIf="splitItem?.id !== invoice.id">file_copy</mat-icon>
-              <mat-icon *ngIf="splitItem?.id === invoice.id">close</mat-icon>
-            </button>
-            <button (click)="remove(invoice.id)"
-                    aria-label="Delete button"
-                    mat-icon-button
-                    color="warn">
-              <mat-icon>delete</mat-icon>
-            </button>
-          </div>
-        </app-invoice-detail>
-        <app-invoice-split [hidden]="splitItem?.id !== invoice.id"
-                           [ocInvoice]="invoice"></app-invoice-split>
-      </ng-container>
+      <app-invoice-detail [invoice]="invoice" *ngFor="let invoice of invoices$ | async"
+                          [style.opacity]="(splitItem && splitItem.id !== invoice.id) ? '0.3' : '1'">
+      </app-invoice-detail>
     </div>
   </section>
 

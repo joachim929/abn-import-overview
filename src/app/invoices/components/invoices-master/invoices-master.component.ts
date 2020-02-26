@@ -29,18 +29,6 @@ export class InvoicesMasterComponent implements OnInit {
     this.invoiceDataService.loadAll();
   }
 
-  patch(invoice: InvoiceDto) {
-
-  }
-
-  split(invoice: InvoiceDto) {
-    if (!this.splitItem) {
-      this.splitItem = {...invoice};
-    } else {
-      this.splitItem = undefined;
-    }
-  }
-
   incomingFile(event) {
     this.file = event.target.files[0];
   }
@@ -49,7 +37,4 @@ export class InvoicesMasterComponent implements OnInit {
     this.invoiceDataService.multiUploadExcel(this.file);
   }
 
-  remove(invoiceId: number) {
-    this.invoiceDataService.removeInvoice(invoiceId);
-  }
 }

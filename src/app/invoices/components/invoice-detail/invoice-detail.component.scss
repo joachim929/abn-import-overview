@@ -8,3 +8,12 @@
   flex: 1 1 100%;
 }
 
+.hide-icon {
+  height: 0;
+  visibility: hidden;
+  width: 0;
+}
+
+.invoice-controls-container {
+  justify-content: space-between;
+}
