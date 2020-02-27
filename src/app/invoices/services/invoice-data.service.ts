@@ -1,9 +1,8 @@
 import {Injectable} from '@angular/core';
 import {InvoiceDto} from '../../swagger/models/invoice-dto';
-import {BehaviorSubject, Observable, Subscriber} from 'rxjs';
+import {BehaviorSubject, Observable} from 'rxjs';
 import {InvoiceApiService} from '../../swagger/services/invoice-api.service';
 import * as XLSX from 'xlsx';
-import {map, tap} from 'rxjs/operators';
 import {MatDialog} from '@angular/material/dialog';
 import {InvoicesEditDetailModalComponent} from '../components/invoices-edit-detail-modal/invoices-edit-detail-modal.component';
 
@@ -15,8 +14,14 @@ export class InvoiceDataService {
   private selectedInvoice = new BehaviorSubject<InvoiceDto>(null);
   // Initial value
   private dataStore: { invoices$: InvoiceDto[], selectedInvoice$: InvoiceDto } = {invoices$: [], selectedInvoice$: null};
-  invoices$ = this.invoices.asObservable();
-  selectedInvoice$ = this.selectedInvoice.asObservable();
+
+  get invoices$(): Observable<InvoiceDto[]> {
+    return this.invoices.asObservable();
+  }
+
+  get selectedInvoice$(): Observable<InvoiceDto> {
+    return this.selectedInvoice.asObservable();
+  }
 
   constructor(
     private invoiceApiService: InvoiceApiService,
@@ -27,6 +32,18 @@ export class InvoiceDataService {
 
   openEditDialog(invoice: InvoiceDto) {
     this.selectInvoice(invoice.id);
+
+    const dialog = this.dialog.open(InvoicesEditDetailModalComponent, {
+      width: '600px',
+      maxWidth: '95vw',
+      data: {invoice}
+    });
+
+    dialog.afterClosed().subscribe(editedInvoice => {
+      // patch invoices
+      this.dataStore.selectedInvoice$ = null;
+      this.selectedInvoice.next(Object.assign({}, this.dataStore).selectedInvoice$);
+    });
   }
 
   openSplitDialog(invoice: InvoiceDto) {

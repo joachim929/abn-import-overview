@@ -1,1 +1,39 @@
-<p>invoices-edit-detail-modal works!</p>
+<h2>Edit invoice</h2>
+<dl style="display:grid; grid-template-columns: 7fr 6fr;">
+  <dt>Account number</dt>
+  <dd>{{data.invoice.accountNumber}}</dd>
+  <dt>Currency</dt>
+  <dd>{{data.invoice.mutationCode}}</dd>
+  <dt>Transaction date</dt>
+  <dd>{{data.invoice.transactionDate | date}}</dd>
+  <dt>Start balance</dt>
+  <dd>{{data.invoice.startBalance | customCurrency}}</dd>
+  <dt>End balance</dt>
+  <dd>{{data.invoice.endBalance | customCurrency}}</dd>
+  <dt>Amount</dt>
+  <dd>{{data.invoice.amount | customCurrency}}</dd>
+</dl>
+<form [formGroup]="form" style="display: flex; flex-direction: column">
+  <mat-form-field>
+    <mat-label>Description</mat-label>
+    <textarea cdkTextareaAutosize
+              cdkAutosizeMinRows="1"
+              cdkAutosizeMaxRows="5" formControlName="description" matInput></textarea>
+    <mat-error *ngIf="form.get('description').invalid">
+      Email is <strong>required</strong>
+    </mat-error>
+  </mat-form-field>
+  <mat-form-field>
+    <mat-label>Comment</mat-label>
+    <textarea cdkTextareaAutosize
+              cdkAutosizeMinRows="1"
+              cdkAutosizeMaxRows="5" formControlName="comment" matInput></textarea>
+  </mat-form-field>
+  <!-- todo: Set up category-data service and put in options -->
+  <mat-form-field>
+    <mat-label>Category</mat-label>
+    <mat-select formControlName="category">
+      <mat-option></mat-option>
+    </mat-select>
+  </mat-form-field>
+</form>
