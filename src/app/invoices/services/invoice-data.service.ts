@@ -22,20 +22,24 @@ export class InvoiceDataService {
     private invoiceApiService: InvoiceApiService,
     private dialog: MatDialog
   ) {
+    this.selectedInvoice$.subscribe((next) => console.log(next));
   }
 
-  private loadInvoices(): Observable<InvoiceDto[]> {
-    return this.invoiceApiService.getInvoicesForUser({userId: 1});
+  openEditDialog(invoice: InvoiceDto) {
+    this.selectInvoice(invoice.id);
   }
 
-  openDialog() {
+  openSplitDialog(invoice: InvoiceDto) {
+    this.selectInvoice(invoice.id);
+
     const dialog = this.dialog.open(InvoicesEditDetailModalComponent, {
       width: '400px',
       data: {name: 'test'}
     });
 
     dialog.afterClosed().subscribe(result => {
-      console.log('closed');
+      this.dataStore.selectedInvoice$ = null;
+      this.selectedInvoice.next(Object.assign({}, this.dataStore).selectedInvoice$);
     });
   }
 
@@ -78,6 +82,10 @@ export class InvoiceDataService {
           this.invoices.next(Object.assign({}, this.dataStore).invoices$);
         });
     });
+  }
+
+  private loadInvoices(): Observable<InvoiceDto[]> {
+    return this.invoiceApiService.getInvoicesForUser({userId: 1});
   }
 
   private xlsToJson(file): Promise<any> {

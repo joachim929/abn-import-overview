@@ -26,13 +26,14 @@ export class InvoiceDetailComponent implements OnInit {
   }
 
   patch(invoice: InvoiceDto) {
-    this.invoiceDataService.selectInvoice(this.editInProgress ? null : invoice.id);
+    this.invoiceDataService.openEditDialog(invoice);
+    // this.invoiceDataService.selectInvoice(this.editInProgress ? null : invoice.id);
     this.editInProgress = !this.editInProgress;
   }
 
   split(invoice: InvoiceDto) {
     this.splitItem = !this.splitItem ? {...invoice} : undefined;
-    this.invoiceDataService.openDialog();
+    this.invoiceDataService.openSplitDialog(invoice);
   }
 
   remove(invoiceId: number) {
