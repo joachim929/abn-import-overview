@@ -12,6 +12,7 @@ import {tap} from 'rxjs/operators';
 export class InvoicesMasterComponent implements OnInit {
   file: File;
   invoices$: Observable<InvoiceDto[]>;
+  selectedInvoice$: Observable<InvoiceDto>;
 
   splitItem: InvoiceDto;
 
@@ -23,6 +24,7 @@ export class InvoicesMasterComponent implements OnInit {
         result.sort((a, b) =>
           (a.transactionDate > b.transactionDate) ? 1 : -1))
     );
+    this.selectedInvoice$ = this.invoiceDataService.selectedInvoice$;
   }
 
   ngOnInit() {

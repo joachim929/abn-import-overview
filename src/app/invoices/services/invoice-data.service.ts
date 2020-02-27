@@ -12,8 +12,11 @@ import {InvoicesEditDetailModalComponent} from '../components/invoices-edit-deta
 export class InvoiceDataService {
 
   private invoices = new BehaviorSubject<InvoiceDto[]>([]);
-  private dataStore: { invoices$: InvoiceDto[] } = {invoices$: []};
+  private selectedInvoice = new BehaviorSubject<InvoiceDto>(null);
+  // Initial value
+  private dataStore: { invoices$: InvoiceDto[], selectedInvoice$: InvoiceDto } = {invoices$: [], selectedInvoice$: null};
   invoices$ = this.invoices.asObservable();
+  selectedInvoice$ = this.selectedInvoice.asObservable();
 
   constructor(
     private invoiceApiService: InvoiceApiService,
@@ -34,6 +37,17 @@ export class InvoiceDataService {
     dialog.afterClosed().subscribe(result => {
       console.log('closed');
     });
+  }
+
+  selectInvoice(id?: number) {
+    let foundInvoice = null;
+    this.dataStore.invoices$.map(invoice => {
+      if (invoice.id === id) {
+        foundInvoice = invoice;
+      }
+    });
+    this.dataStore.selectedInvoice$ = foundInvoice;
+    this.selectedInvoice.next(Object.assign({}, this.dataStore).selectedInvoice$);
   }
 
   loadAll() {

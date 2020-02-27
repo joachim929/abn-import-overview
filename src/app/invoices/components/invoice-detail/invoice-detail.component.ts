@@ -26,6 +26,7 @@ export class InvoiceDetailComponent implements OnInit {
   }
 
   patch(invoice: InvoiceDto) {
+    this.invoiceDataService.selectInvoice(this.editInProgress ? null : invoice.id);
     this.editInProgress = !this.editInProgress;
   }
 
