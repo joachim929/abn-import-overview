@@ -31,6 +31,7 @@ export class InvoiceDetailComponent implements OnInit {
 
   split(invoice: InvoiceDto) {
     this.splitItem = !this.splitItem ? {...invoice} : undefined;
+    this.invoiceDataService.openDialog();
   }
 
   remove(invoiceId: number) {

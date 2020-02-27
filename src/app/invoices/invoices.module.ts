@@ -15,10 +15,11 @@ import { InvoiceDetailComponent } from './components/invoice-detail/invoice-deta
 import { InvoiceFilterComponent } from './components/invoice-filter/invoice-filter.component';
 import {InvoiceDataService} from './services/invoice-data.service';
 import {CustomCurrencyPipe} from '../shared/pipes/custom-currency.pipe';
+import { InvoicesEditDetailModalComponent } from './components/invoices-edit-detail-modal/invoices-edit-detail-modal.component';
 
 
 @NgModule({
-  declarations: [InvoicesMasterComponent, InvoiceSplitComponent, InvoiceDetailComponent, InvoiceFilterComponent],
+  declarations: [InvoicesMasterComponent, InvoiceSplitComponent, InvoiceDetailComponent, InvoiceFilterComponent, InvoicesEditDetailModalComponent],
   imports: [
     CommonModule,
     InvoicesRoutingModule,

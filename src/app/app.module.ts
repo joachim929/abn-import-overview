@@ -16,6 +16,7 @@ import {MatCheckboxModule} from '@angular/material/checkbox';
 import {MatSelectModule} from '@angular/material/select';
 import {MatRadioModule} from '@angular/material/radio';
 import {ApiModule} from './swagger/api.module';
+import {MatDialogModule} from '@angular/material/dialog';
 
 @NgModule({
   declarations: [
@@ -36,7 +37,8 @@ import {ApiModule} from './swagger/api.module';
     MatCheckboxModule,
     MatSelectModule,
     MatRadioModule,
-    ApiModule.forRoot({rootUrl: 'http://localhost:3000'})
+    ApiModule.forRoot({rootUrl: 'http://localhost:3000'}),
+    MatDialogModule
   ],
   providers: [],
   bootstrap: [AppComponent]

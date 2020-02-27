@@ -4,6 +4,8 @@ import {BehaviorSubject, Observable, Subscriber} from 'rxjs';
 import {InvoiceApiService} from '../../swagger/services/invoice-api.service';
 import * as XLSX from 'xlsx';
 import {map, tap} from 'rxjs/operators';
+import {MatDialog} from '@angular/material/dialog';
+import {InvoicesEditDetailModalComponent} from '../components/invoices-edit-detail-modal/invoices-edit-detail-modal.component';
 
 // https://coryrylan.com/blog/angular-observable-data-services
 @Injectable()
@@ -14,12 +16,24 @@ export class InvoiceDataService {
   invoices$ = this.invoices.asObservable();
 
   constructor(
-    private invoiceApiService: InvoiceApiService
+    private invoiceApiService: InvoiceApiService,
+    private dialog: MatDialog
   ) {
   }
 
   private loadInvoices(): Observable<InvoiceDto[]> {
     return this.invoiceApiService.getInvoicesForUser({userId: 1});
+  }
+
+  openDialog() {
+    const dialog = this.dialog.open(InvoicesEditDetailModalComponent, {
+      width: '400px',
+      data: {name: 'test'}
+    });
+
+    dialog.afterClosed().subscribe(result => {
+      console.log('closed');
+    });
   }
 
   loadAll() {
