@@ -58,8 +58,17 @@ export class InvoiceDataService {
     });
 
     dialog.afterClosed().subscribe(editedInvoices => {
-      this.dataStore.selectedInvoice$ = null;
-      this.selectedInvoice.next(Object.assign({}, this.dataStore).selectedInvoice$);
+      if (editedInvoices) {
+        this.dataStore.selectedInvoice$ = null;
+        this.selectedInvoice.next(Object.assign({}, this.dataStore).selectedInvoice$);
+        this.dataStore.invoices$.map((_invoice, index) => {
+          if (_invoice.id === editedInvoices.ocInvoice.id) {
+            this.dataStore.invoices$[index] = {...editedInvoices.ocInvoice};
+            this.dataStore.invoices$.splice(index + 1, 0, editedInvoices.splitInvoice);
+          }
+        });
+        this.invoices.next(Object.assign({}, this.dataStore).invoices$);
+      }
     });
   }
 

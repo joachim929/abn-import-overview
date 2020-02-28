@@ -18,6 +18,7 @@ import {CustomCurrencyPipe} from '../shared/pipes/custom-currency.pipe';
 import {InvoicesEditDetailModalComponent} from './components/invoices-edit-detail-modal/invoices-edit-detail-modal.component';
 import {InvoicesSplitDetailModalComponent} from './components/invoices-split-detail-modal/invoices-split-detail-modal.component';
 import {MatSelectModule} from '@angular/material/select';
+import {MatSortModule} from '@angular/material/sort';
 
 
 @NgModule({
@@ -39,7 +40,8 @@ import {MatSelectModule} from '@angular/material/select';
     MatFormFieldModule,
     ReactiveFormsModule,
     MatInputModule,
-    MatSelectModule
+    MatSelectModule,
+    MatSortModule
   ],
   providers: [
     CustomCurrencyPipe,

@@ -1,0 +1,28 @@
+.invoice-attribute {
+  flex: 1 1 100%;
+  width: 100%;
+}
+
+.split-header {
+  font-weight: bold;
+}
+
+.split-sub-header {
+  padding-left: 8px;
+}
+
+dl dd {
+  margin-left: 20px;
+}
+
+.test {
+  display: flex;
+  @media (max-width: 575.98px) {
+    flex-direction: column;
+  }
+
+  @media (min-width: 992px) {
+    flex-direction: row;
+  }
+}
+

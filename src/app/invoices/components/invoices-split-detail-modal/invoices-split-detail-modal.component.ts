@@ -11,6 +11,8 @@ import {filter, map} from 'rxjs/operators';
 })
 export class InvoicesSplitDetailModalComponent {
   form: FormGroup;
+  ocInvoice: InvoiceDto;
+  ocAmount: number;
 
   constructor(
     public dialogRef: MatDialogRef<InvoicesSplitDetailModalComponent>,
@@ -31,17 +33,25 @@ export class InvoicesSplitDetailModalComponent {
       userId: new FormControl(this.data.invoice.userId || null)
     });
 
-    // this.form.get('amount').valueChanges
-    //   .pipe(map(x => Number(x)),
-    //     filter(x => !!Number(x)))
-    //   .subscribe((next) => {
-    //     console.log(next);
-    //     console.log(this.data.invoice.amount);
-    //     this.data.invoice.amount = this.data.invoice.amount - next;
-    //   });
+    this.ocInvoice = {...data.invoice};
+    this.ocAmount = data.invoice.amount;
+
+    this.form.get('amount').valueChanges
+      .pipe(map(x => Number(x)),
+        filter(x => !!Number(x)))
+      .subscribe((next) => {
+        this.ocInvoice.amount = this.ocAmount - next;
+      });
   }
 
-  onNoClick(): void {
+  save() {
+    this.dialogRef.close({
+      ocInvoice: this.ocInvoice,
+      splitInvoice: this.form.value
+    });
+  }
+
+  cancel() {
     this.dialogRef.close();
   }
 }
