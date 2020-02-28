@@ -36,7 +36,7 @@ export class InvoiceDataService {
     this.selectInvoice(invoice.id);
 
     const dialog = this.dialog.open(InvoicesEditDetailModalComponent, {
-      width: '600px',
+      width: '800px',
       maxWidth: '95vw',
       data: {invoice}
     });
@@ -52,7 +52,7 @@ export class InvoiceDataService {
     this.selectInvoice(invoice.id);
 
     const dialog = this.dialog.open(InvoicesSplitDetailModalComponent, {
-      width: '600px',
+      width: '800px',
       maxWidth: '95vh',
       data: {invoice}
     });

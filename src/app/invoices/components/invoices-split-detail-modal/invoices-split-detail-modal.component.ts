@@ -2,6 +2,7 @@ import {Component, Inject, OnInit} from '@angular/core';
 import {MAT_DIALOG_DATA, MatDialogRef} from '@angular/material/dialog';
 import {InvoiceDto} from '../../../swagger/models/invoice-dto';
 import {FormControl, FormGroup} from '@angular/forms';
+import {filter, map} from 'rxjs/operators';
 
 @Component({
   selector: 'app-invoices-split-detail-modal',
@@ -29,6 +30,18 @@ export class InvoicesSplitDetailModalComponent {
       categoryId: new FormControl(this.data.invoice.categoryId || null),
       userId: new FormControl(this.data.invoice.userId || null)
     });
+
+    // this.form.get('amount').valueChanges
+    //   .pipe(map(x => Number(x)),
+    //     filter(x => !!Number(x)))
+    //   .subscribe((next) => {
+    //     console.log(next);
+    //     console.log(this.data.invoice.amount);
+    //     this.data.invoice.amount = this.data.invoice.amount - next;
+    //   });
   }
 
+  onNoClick(): void {
+    this.dialogRef.close();
+  }
 }

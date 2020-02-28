@@ -1,3 +1,74 @@
-<div style="display: flex; flex-direction: row">
-  <pre>{{data.invoice | json}}</pre>
+<div class="row-container">
+  <!-- Original -->
+  <div style="flex: 1 1 50%;">
+    <dl>
+      <dt>Account number</dt>
+      <dd>{{data.invoice.accountNumber}}</dd>
+      <dt>Currency</dt>
+      <dd>{{data.invoice.mutationCode}}</dd>
+      <dt>Transaction date</dt>
+      <dd>{{data.invoice.transactionDate | date}}</dd>
+      <dt>Start balance</dt>
+      <dd>{{data.invoice.startBalance | customCurrency}}</dd>
+      <dt>End balance</dt>
+      <dd>{{data.invoice.endBalance | customCurrency}}</dd>
+      <dt>Amount</dt>
+      <dd>{{data.invoice.amount | customCurrency}}</dd>
+      <dt>Description</dt>
+      <dd>{{data.invoice.description}}</dd>
+      <ng-container *ngIf="data.invoice.comment">
+        <dt>Comment</dt>
+        <dd>{{data.invoice.comment}}</dd>
+      </ng-container>
+      <ng-container *ngIf="data.invoice.categoryId">
+        <dt>Category</dt>
+        <!-- todo: Need to find category name-->
+        <dd>{{data.invoice.categoryId}}</dd>
+      </ng-container>
+    </dl>
+  </div>
+  <!-- Split -->
+  <form [formGroup]="form" class="column-container" style="flex: 1 1 50%;">
+    <dl>
+      <dt>Account number</dt>
+      <dd>{{form.get('accountNumber').value}}</dd>
+      <dt>Currency</dt>
+      <dd>{{form.get('mutationCode').value}}</dd>
+      <dt>Transaction date</dt>
+      <dd>{{form.get('transactionDate').value}}</dd>
+      <dt>Start balance</dt>
+      <dd>{{form.get('startBalance').value}}</dd>
+      <dt>End balance</dt>
+      <dd>{{form.get('endBalance').value}}</dd>
+    </dl>
+    <mat-form-field>
+      <mat-label>Amount</mat-label>
+      <input matInput formControlName="amount">
+      <!-- todo: include hint and currency prefix -->
+    </mat-form-field>
+    <mat-form-field>
+      <mat-label>Description</mat-label>
+      <textarea cdkTextareaAutosize
+                cdkAutosizeMinRows="1"
+                cdkAutosizeMaxRows="5"
+                matInput
+                formControlName="description"></textarea>
+      <!-- todo: include hint -->
+    </mat-form-field>
+    <mat-form-field>
+      <mat-label>Comment</mat-label>
+      <textarea cdkTextareaAutosize
+                cdkAutosizeMinRows="1"
+                cdkAutosizeMaxRows="5"
+                matInput
+                formControlName="comment"></textarea>
+      <!-- todo: include hint -->
+    </mat-form-field>
+    <mat-form-field>
+      <mat-label>Category</mat-label>
+      <mat-select formControlName="categoryId">
+        <mat-option></mat-option>
+      </mat-select>
+    </mat-form-field>
+  </form>
 </div>

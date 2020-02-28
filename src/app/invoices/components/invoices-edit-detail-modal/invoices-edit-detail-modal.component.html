@@ -13,7 +13,7 @@
   <dt>Amount</dt>
   <dd>{{data.invoice.amount | customCurrency}}</dd>
 </dl>
-<form [formGroup]="form" style="display: flex; flex-direction: column">
+<form [formGroup]="form" class="column-container">
   <mat-form-field>
     <mat-label>Description</mat-label>
     <textarea cdkTextareaAutosize
