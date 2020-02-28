@@ -5,6 +5,8 @@ import {InvoiceApiService} from '../../swagger/services/invoice-api.service';
 import * as XLSX from 'xlsx';
 import {MatDialog} from '@angular/material/dialog';
 import {InvoicesEditDetailModalComponent} from '../components/invoices-edit-detail-modal/invoices-edit-detail-modal.component';
+import {InvoicesSplitDetailModalComponent} from '../components/invoices-split-detail-modal/invoices-split-detail-modal.component';
+import {split} from 'ts-node';
 
 // https://coryrylan.com/blog/angular-observable-data-services
 @Injectable()
@@ -49,12 +51,13 @@ export class InvoiceDataService {
   openSplitDialog(invoice: InvoiceDto) {
     this.selectInvoice(invoice.id);
 
-    const dialog = this.dialog.open(InvoicesEditDetailModalComponent, {
-      width: '400px',
-      data: {name: 'test'}
+    const dialog = this.dialog.open(InvoicesSplitDetailModalComponent, {
+      width: '600px',
+      maxWidth: '95vh',
+      data: {invoice}
     });
 
-    dialog.afterClosed().subscribe(result => {
+    dialog.afterClosed().subscribe(editedInvoices => {
       this.dataStore.selectedInvoice$ = null;
       this.selectedInvoice.next(Object.assign({}, this.dataStore).selectedInvoice$);
     });
