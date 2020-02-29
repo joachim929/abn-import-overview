@@ -38,6 +38,7 @@ export class InvoiceDataService {
     const dialog = this.dialog.open(InvoicesEditDetailModalComponent, {
       width: '800px',
       maxWidth: '95vw',
+      maxHeight: '95vh',
       data: {invoice}
     });
 
@@ -53,7 +54,8 @@ export class InvoiceDataService {
 
     const dialog = this.dialog.open(InvoicesSplitDetailModalComponent, {
       width: '800px',
-      maxWidth: '95vh',
+      maxWidth: '95vw',
+      maxHeight: '95vh',
       data: {invoice}
     });
 

@@ -7,6 +7,10 @@
   font-weight: bold;
 }
 
+.attribute {
+  flex: 1 0 50%;
+}
+
 .split-sub-header {
   padding-left: 8px;
 }
@@ -17,6 +21,9 @@ dl dd {
 
 .test {
   display: flex;
+  //border: 1px solid black;
+  //border-right-width: 0;
+  //border-left-width: 0;
   @media (max-width: 575.98px) {
     flex-direction: column;
   }

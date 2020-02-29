@@ -19,6 +19,7 @@ import {InvoicesEditDetailModalComponent} from './components/invoices-edit-detai
 import {InvoicesSplitDetailModalComponent} from './components/invoices-split-detail-modal/invoices-split-detail-modal.component';
 import {MatSelectModule} from '@angular/material/select';
 import {MatSortModule} from '@angular/material/sort';
+import {MatDividerModule} from '@angular/material/divider';
 
 
 @NgModule({
@@ -30,19 +31,20 @@ import {MatSortModule} from '@angular/material/sort';
     InvoicesEditDetailModalComponent,
     InvoicesSplitDetailModalComponent
   ],
-  imports: [
-    CommonModule,
-    InvoicesRoutingModule,
-    SharedModule,
-    MatButtonModule,
-    MatCardModule,
-    MatIconModule,
-    MatFormFieldModule,
-    ReactiveFormsModule,
-    MatInputModule,
-    MatSelectModule,
-    MatSortModule
-  ],
+    imports: [
+        CommonModule,
+        InvoicesRoutingModule,
+        SharedModule,
+        MatButtonModule,
+        MatCardModule,
+        MatIconModule,
+        MatFormFieldModule,
+        ReactiveFormsModule,
+        MatInputModule,
+        MatSelectModule,
+        MatSortModule,
+        MatDividerModule
+    ],
   providers: [
     CustomCurrencyPipe,
     InvoiceDataService

@@ -1,27 +1,116 @@
 <h2 style="margin: 0;">Split invoice</h2>
-<form [formGroup]="form" class="row-container">
-  <!-- Take 2 -->
-  <dl>
-    <dt class="split-header">Amount</dt>
-    <div class="test">
-      <div>
-        <dt class="split-sub-header">Old</dt>
-        <dd>{{ocInvoice.amount}}</dd>
-      </div>
+<form [formGroup]="form" class="column-container" style="overflow-y: auto; margin: 0;">
+  <!-- Take 3 -->
+  <mat-form-field>
+    <mat-label>Account number</mat-label>
+    <input matInput readonly [value]="data.invoice.accountNumber">
+  </mat-form-field>
 
-      <div>
-        <dt class="split-sub-header">New</dt>
-        <dd>
-          <mat-form-field>
-            <mat-label>New</mat-label>
-            <input matInput formControlName="amount">
-          </mat-form-field>
-        </dd>
-      </div>
-    </div>
-  </dl>
+  <mat-form-field>
+    <mat-label>Transaction date</mat-label>
+    <input matInput readonly [value]="data.invoice.transactionDate | date">
+  </mat-form-field>
+
+  <mat-form-field>
+    <mat-label>Start balance</mat-label>
+    <input matInput readonly [value]="data.invoice.startBalance | customCurrency">
+  </mat-form-field>
+
+  <mat-form-field>
+    <mat-label>End balance</mat-label>
+    <input matInput readonly [value]="data.invoice.endBalance | customCurrency">
+  </mat-form-field>
+
+  <mat-divider></mat-divider>
+  <div class="test">
+    <mat-form-field style="width: 100%;">
+      <mat-label>Amount</mat-label>
+      <input matInput readonly [value]="ocInvoice.amount">
+    </mat-form-field>
+
+    <mat-form-field style="width: 100%">
+      <mat-label>New</mat-label>
+      <input matInput formControlName="amount">
+    </mat-form-field>
+  </div>
+
+  <mat-divider></mat-divider>
+  <div class="test">
+    <mat-form-field style="width: 100%">
+      <mat-label>Description</mat-label>
+      <textarea cdkTextareaAutosize
+                cdkAutosizeMinRows="3"
+                cdkAutosizeMaxRows="5"
+                matInput readonly [value]="ocInvoice.description"></textarea>
+    </mat-form-field>
+
+    <mat-form-field style="width: 100%">
+      <mat-label>New</mat-label>
+      <textarea cdkTextareaAutosize
+                cdkAutosizeMinRows="3"
+                cdkAutosizeMaxRows="5"
+                matInput formControlName="description"></textarea>
+    </mat-form-field>
+  </div>
+
+  <mat-divider></mat-divider>
+  <div class="test">
+    <mat-form-field style="width: 100%">
+      <mat-label>Comment</mat-label>
+      <textarea cdkTextareaAutosize
+                cdkAutosizeMinRows="3"
+                cdkAutosizeMaxRows="5" readonly
+                matInput [value]="ocInvoice.comment || ''"></textarea>
+    </mat-form-field>
+
+    <mat-form-field style="width: 100%;">
+      <mat-label>New</mat-label>
+      <textarea cdkTextareaAutosize
+                cdkAutosizeMinRows="3"
+                cdkAutosizeMaxRows="5"
+                matInput formControlName="comment"></textarea>
+    </mat-form-field>
+  </div>
+
+  <mat-divider></mat-divider>
+  <div class="test">
+    <mat-form-field style="width: 100%;">
+      <mat-label>Category</mat-label>
+      <input readonly matInput [value]="ocInvoice.categoryId || ''">
+    </mat-form-field>
+    <mat-form-field style="width: 100%;">
+      <mat-label>New</mat-label>
+      <mat-select formControlName="categoryId">
+        <mat-option></mat-option>
+      </mat-select>
+    </mat-form-field>
+  </div>
 </form>
-<div style="display: flex; justify-content: space-between">
+<div style="display: flex; justify-content: space-between; margin-top: 8px; margin-bottom: 20px;">
   <button mat-button (click)="save()">Save</button>
   <button mat-button (click)="cancel()">Cancel</button>
 </div>
+
+<!--
+ <dt>Account number</dt>
+      <dd>{{data.invoice.accountNumber}}</dd>
+      <dt>Currency</dt>
+      <dd>{{data.invoice.mutationCode}}</dd>
+      <dt>Transaction date</dt>
+      <dd>{{data.invoice.transactionDate | date}}</dd>
+      <dt>Start balance</dt>
+      <dd>{{data.invoice.startBalance | customCurrency}}</dd>
+      <dt>End balance</dt>
+      <dd>{{data.invoice.endBalance | customCurrency}}</dd>
+      <dt>Amount</dt>
+      <dd>{{data.invoice.amount | customCurrency}}</dd>
+      <dt>Description</dt>
+      <dd>{{data.invoice.description}}</dd>
+      <ng-container *ngIf="data.invoice.comment">
+        <dt>Comment</dt>
+        <dd>{{data.invoice.comment}}</dd>
+      </ng-container>
+      <ng-container *ngIf="data.invoice.categoryId">
+        <dt>Category</dt>
+
+-->
