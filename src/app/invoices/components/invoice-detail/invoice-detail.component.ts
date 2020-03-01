@@ -1,34 +1,22 @@
-import {Component, Input, OnInit} from '@angular/core';
+import {Component, Input} from '@angular/core';
 import {InvoiceDto} from '../../../swagger/models/invoice-dto';
 import {InvoiceDataService} from '../../services/invoice-data.service';
-import {FormControl, FormGroup} from '@angular/forms';
 
 @Component({
   selector: 'app-invoice-detail',
   templateUrl: './invoice-detail.component.html',
   styleUrls: ['./invoice-detail.component.scss']
 })
-export class InvoiceDetailComponent implements OnInit {
+export class InvoiceDetailComponent {
   @Input() invoice: InvoiceDto;
-  splitItem: InvoiceDto;
-  editInProgress = false;
-  form = new FormGroup({
-    description: new FormControl(),
-    comment: new FormControl()
-  });
 
   constructor(
     private invoiceDataService: InvoiceDataService
   ) {
   }
 
-  ngOnInit(): void {
-  }
-
   patch(invoice: InvoiceDto) {
     this.invoiceDataService.openEditDialog(invoice);
-    // this.invoiceDataService.selectInvoice(this.editInProgress ? null : invoice.id);
-    this.editInProgress = !this.editInProgress;
   }
 
   split(invoice: InvoiceDto) {

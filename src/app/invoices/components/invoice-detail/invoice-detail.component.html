@@ -1,5 +1,4 @@
 <mat-card class="invoice-item">
-  <!-- todo: Need to move form logic to dialog -->
   <div class="invoice-detail-container">
     <p>Account number: {{invoice.accountNumber}}</p>
     <p>Amount: {{invoice.amount | customCurrency}}</p>
@@ -10,16 +9,18 @@
     <p>Transaction date: {{invoice.transactionDate | date}}</p>
   </div>
   <div class="column-container invoice-controls-container">
-    <button (click)="patch(invoice)"
-            aria-label="Edit button"
-            mat-icon-button>
-      <mat-icon>edit</mat-icon>
-    </button>
-    <button (click)="split(invoice)"
-            aria-label="Split button"
-            mat-icon-button>
-      <mat-icon>file_copy</mat-icon>
-    </button>
+    <div class="column-container">
+      <button (click)="patch(invoice)"
+              aria-label="Edit button"
+              mat-icon-button>
+        <mat-icon>edit</mat-icon>
+      </button>
+      <button (click)="split(invoice)"
+              aria-label="Split button"
+              mat-icon-button>
+        <mat-icon>file_copy</mat-icon>
+      </button>
+    </div>
     <button (click)="remove(invoice.id)"
             aria-label="Delete button"
             mat-icon-button
@@ -28,5 +29,3 @@
     </button>
   </div>
 </mat-card>
-<app-invoice-split [hidden]="splitItem?.id !== invoice.id"
-                   [ocInvoice]="invoice"></app-invoice-split>
