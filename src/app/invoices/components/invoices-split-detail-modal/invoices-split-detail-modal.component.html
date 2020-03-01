@@ -2,28 +2,28 @@
 <form [formGroup]="form" class="column-container invoice-form">
   <mat-form-field>
     <mat-label>Account number</mat-label>
-    <input matInput readonly value="{{data.invoice.accountNumber}}">
+    <input class="invoice-cursor-default" matInput readonly value="{{data.invoice.accountNumber}}">
   </mat-form-field>
 
   <mat-form-field>
     <mat-label>Transaction date</mat-label>
-    <input matInput readonly [value]="data.invoice.transactionDate | date">
+    <input class="invoice-cursor-default" matInput readonly [value]="data.invoice.transactionDate | date">
   </mat-form-field>
 
   <mat-form-field>
     <mat-label>Start balance</mat-label>
-    <input matInput readonly [value]="data.invoice.startBalance | customCurrency">
+    <input class="invoice-cursor-default" matInput readonly [value]="data.invoice.startBalance | customCurrency">
   </mat-form-field>
 
   <mat-form-field>
     <mat-label>End balance</mat-label>
-    <input matInput readonly [value]="data.invoice.endBalance | customCurrency">
+    <input class="invoice-cursor-default" matInput readonly [value]="data.invoice.endBalance | customCurrency">
   </mat-form-field>
 
   <div class="invoice-form-pair">
     <mat-form-field class="invoice-form-field">
       <mat-label>Amount</mat-label>
-      <input matInput readonly value="{{ocInvoice.amount}}">
+      <input class="invoice-cursor-default" matInput readonly value="{{ocInvoice.amount}}">
     </mat-form-field>
 
     <mat-form-field class="invoice-form-field">
@@ -38,7 +38,8 @@
   <div class="invoice-form-pair">
     <mat-form-field class="invoice-form-field">
       <mat-label>Description</mat-label>
-      <textarea cdkTextareaAutosize
+      <textarea class="invoice-cursor-default"
+                cdkTextareaAutosize
                 cdkAutosizeMinRows="5"
                 cdkAutosizeMaxRows="5"
                 matInput readonly [value]="ocInvoice.description"></textarea>
@@ -56,11 +57,11 @@
     </mat-form-field>
   </div>
 
-  <mat-divider></mat-divider>
   <div class="invoice-form-pair">
     <mat-form-field class="invoice-form-field">
       <mat-label>Comment</mat-label>
-      <textarea cdkTextareaAutosize
+      <textarea class="invoice-cursor-default"
+                cdkTextareaAutosize
                 cdkAutosizeMinRows="5"
                 cdkAutosizeMaxRows="5" readonly
                 matInput [value]="ocInvoice.comment || ''"></textarea>
@@ -78,11 +79,10 @@
     </mat-form-field>
   </div>
 
-  <mat-divider></mat-divider>
   <div class="invoice-form-pair">
     <mat-form-field class="invoice-form-field">
       <mat-label>Category</mat-label>
-      <input readonly matInput value="{{ocInvoice.categoryId || ''}}">
+      <input class="invoice-cursor-default" readonly matInput value="{{ocInvoice.categoryId || ''}}">
     </mat-form-field>
     <mat-form-field class="invoice-form-field">
       <mat-label>New</mat-label>

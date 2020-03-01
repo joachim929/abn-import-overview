@@ -14,6 +14,7 @@ export class CategoryDataService {
   constructor(
     private categoryApiService: CategoryGroupApiService
   ) {
+    console.log('Constructor');
     this.loadCategories();
   }
 
@@ -23,7 +24,6 @@ export class CategoryDataService {
 
   loadCategories() {
     this.categoryApiService.getAllCategoryGroupsWithCategories().subscribe((next) => {
-      console.log(next);
       this.dataStore.categories$ = next;
       this.categories.next(Object.assign({}, this.dataStore).categories$);
     });
