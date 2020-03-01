@@ -4,32 +4,45 @@
 }
 
 .split-header {
-  font-weight: bold;
+  margin: 0;
 }
 
 .attribute {
   flex: 1 0 50%;
 }
 
-.split-sub-header {
-  padding-left: 8px;
+.invoice-form {
+  margin: 0;
 }
 
-dl dd {
-  margin-left: 20px;
-}
-
-.test {
+.invoice-form-pair {
   display: flex;
-  //border: 1px solid black;
-  //border-right-width: 0;
-  //border-left-width: 0;
   @media (max-width: 575.98px) {
     flex-direction: column;
   }
 
   @media (min-width: 992px) {
     flex-direction: row;
+    .invoice-form-field:first-child {
+      margin-right: 4px;
+    }
+    .invoice-form-field:last-child {
+      margin-left: 4px;
+    }
   }
 }
 
+.invoice-form-field {
+  width: 100%;
+}
+
+.split-sub-header {
+  padding-left: 8px;
+}
+
+.invoice-controls-container {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 8px;
+  margin-bottom: 20px;
+}

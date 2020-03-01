@@ -5,8 +5,13 @@ import {InvoiceApiService} from '../../swagger/services/invoice-api.service';
 import * as XLSX from 'xlsx';
 import {MatDialog} from '@angular/material/dialog';
 import {InvoicesEditDetailModalComponent} from '../components/invoices-edit-detail-modal/invoices-edit-detail-modal.component';
-import {InvoicesSplitDetailModalComponent} from '../components/invoices-split-detail-modal/invoices-split-detail-modal.component';
+import {
+  InvoicesSplitDetail,
+  InvoicesSplitDetailModalComponent
+} from '../components/invoices-split-detail-modal/invoices-split-detail-modal.component';
 import {split} from 'ts-node';
+import {filter, map, switchMap} from 'rxjs/operators';
+import {SplitInvoiceDto} from '../../swagger/models/split-invoice-dto';
 
 // https://coryrylan.com/blog/angular-observable-data-services
 @Injectable()
@@ -29,7 +34,6 @@ export class InvoiceDataService {
     private invoiceApiService: InvoiceApiService,
     private dialog: MatDialog
   ) {
-    this.selectedInvoice$.subscribe((next) => console.log(next));
   }
 
   openEditDialog(invoice: InvoiceDto) {
@@ -59,14 +63,20 @@ export class InvoiceDataService {
       data: {invoice}
     });
 
-    dialog.afterClosed().subscribe(editedInvoices => {
+    dialog.afterClosed().pipe(
+      filter(x => !!x),
+      switchMap(x => {
+        console.log(x);
+        return this.invoiceApiService.splitInvoice({body: x});
+      })
+    ).subscribe((editedInvoices: SplitInvoiceDto) => {
       if (editedInvoices) {
         this.dataStore.selectedInvoice$ = null;
         this.selectedInvoice.next(Object.assign({}, this.dataStore).selectedInvoice$);
         this.dataStore.invoices$.map((_invoice, index) => {
-          if (_invoice.id === editedInvoices.ocInvoice.id) {
-            this.dataStore.invoices$[index] = {...editedInvoices.ocInvoice};
-            this.dataStore.invoices$.splice(index + 1, 0, editedInvoices.splitInvoice);
+          if (_invoice.id === editedInvoices.patch.id) {
+            this.dataStore.invoices$[index] = {...editedInvoices.patch};
+            this.dataStore.invoices$.splice(index + 1, 0, editedInvoices.split);
           }
         });
         this.invoices.next(Object.assign({}, this.dataStore).invoices$);

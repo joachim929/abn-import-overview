@@ -10,6 +10,7 @@ import { map, filter } from 'rxjs/operators';
 
 import { CreateInvoiceDto } from '../models/create-invoice-dto';
 import { InvoiceDto } from '../models/invoice-dto';
+import { SplitInvoiceDto } from '../models/split-invoice-dto';
 
 @Injectable({
   providedIn: 'root',
@@ -211,6 +212,54 @@ export class InvoiceApiService extends BaseService {
 
     return this.deleteInvoice$Response(params).pipe(
       map((r: StrictHttpResponse<{  }>) => r.body as {  })
+    );
+  }
+
+  /**
+   * Path part for operation splitInvoice
+   */
+  static readonly SplitInvoicePath = '/invoice/split';
+
+  /**
+   * This method provides access to the full `HttpResponse`, allowing access to response headers.
+   * To access only the response body, use `splitInvoice()` instead.
+   *
+   * This method sends `application/json` and handles request body of type `application/json`.
+   */
+  splitInvoice$Response(params: {
+      body: SplitInvoiceDto
+  }): Observable<StrictHttpResponse<SplitInvoiceDto>> {
+
+    const rb = new RequestBuilder(this.rootUrl, InvoiceApiService.SplitInvoicePath, 'post');
+    if (params) {
+
+
+      rb.body(params.body, 'application/json');
+    }
+    return this.http.request(rb.build({
+      responseType: 'json',
+      accept: 'application/json'
+    })).pipe(
+      filter((r: any) => r instanceof HttpResponse),
+      map((r: HttpResponse<any>) => {
+        return r as StrictHttpResponse<SplitInvoiceDto>;
+      })
+    );
+  }
+
+  /**
+   * This method provides access to only to the response body.
+   * To access the full response (for headers, for example), `splitInvoice$Response()` instead.
+   *
+   * This method sends `application/json` and handles request body of type `application/json`.
+   */
+  splitInvoice(params: {
+      body: SplitInvoiceDto
+  }): Observable<SplitInvoiceDto> {
+    console.log(params);
+
+    return this.splitInvoice$Response(params).pipe(
+      map((r: StrictHttpResponse<SplitInvoiceDto>) => r.body as SplitInvoiceDto)
     );
   }
 

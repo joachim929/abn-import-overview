@@ -9,6 +9,7 @@ import { Observable } from 'rxjs';
 import { map, filter } from 'rxjs/operators';
 
 import { CategoryGroup } from '../models/category-group';
+import { CategoryGroupDto } from '../models/category-group-dto';
 
 @Injectable({
   providedIn: 'root',
@@ -34,7 +35,7 @@ export class CategoryGroupApiService extends BaseService {
    */
   getAllCategoryGroups$Response(params?: {
 
-  }): Observable<StrictHttpResponse<{  }>> {
+  }): Observable<StrictHttpResponse<Array<CategoryGroupDto>>> {
 
     const rb = new RequestBuilder(this.rootUrl, CategoryGroupApiService.GetAllCategoryGroupsPath, 'get');
     if (params) {
@@ -47,7 +48,7 @@ export class CategoryGroupApiService extends BaseService {
     })).pipe(
       filter((r: any) => r instanceof HttpResponse),
       map((r: HttpResponse<any>) => {
-        return r as StrictHttpResponse<{  }>;
+        return r as StrictHttpResponse<Array<CategoryGroupDto>>;
       })
     );
   }
@@ -60,10 +61,10 @@ export class CategoryGroupApiService extends BaseService {
    */
   getAllCategoryGroups(params?: {
 
-  }): Observable<{  }> {
+  }): Observable<Array<CategoryGroupDto>> {
 
     return this.getAllCategoryGroups$Response(params).pipe(
-      map((r: StrictHttpResponse<{  }>) => r.body as {  })
+      map((r: StrictHttpResponse<Array<CategoryGroupDto>>) => r.body as Array<CategoryGroupDto>)
     );
   }
 
@@ -80,7 +81,7 @@ export class CategoryGroupApiService extends BaseService {
    */
   getCategoryGroupById$Response(params?: {
 
-  }): Observable<StrictHttpResponse<{  }>> {
+  }): Observable<StrictHttpResponse<CategoryGroupDto>> {
 
     const rb = new RequestBuilder(this.rootUrl, CategoryGroupApiService.GetCategoryGroupByIdPath, 'get');
     if (params) {
@@ -93,7 +94,7 @@ export class CategoryGroupApiService extends BaseService {
     })).pipe(
       filter((r: any) => r instanceof HttpResponse),
       map((r: HttpResponse<any>) => {
-        return r as StrictHttpResponse<{  }>;
+        return r as StrictHttpResponse<CategoryGroupDto>;
       })
     );
   }
@@ -106,10 +107,10 @@ export class CategoryGroupApiService extends BaseService {
    */
   getCategoryGroupById(params?: {
 
-  }): Observable<{  }> {
+  }): Observable<CategoryGroupDto> {
 
     return this.getCategoryGroupById$Response(params).pipe(
-      map((r: StrictHttpResponse<{  }>) => r.body as {  })
+      map((r: StrictHttpResponse<CategoryGroupDto>) => r.body as CategoryGroupDto)
     );
   }
 
@@ -219,7 +220,7 @@ export class CategoryGroupApiService extends BaseService {
    */
   getAllCategoryGroupsWithCategories$Response(params?: {
 
-  }): Observable<StrictHttpResponse<{  }>> {
+  }): Observable<StrictHttpResponse<Array<CategoryGroupDto>>> {
 
     const rb = new RequestBuilder(this.rootUrl, CategoryGroupApiService.GetAllCategoryGroupsWithCategoriesPath, 'get');
     if (params) {
@@ -232,7 +233,7 @@ export class CategoryGroupApiService extends BaseService {
     })).pipe(
       filter((r: any) => r instanceof HttpResponse),
       map((r: HttpResponse<any>) => {
-        return r as StrictHttpResponse<{  }>;
+        return r as StrictHttpResponse<Array<CategoryGroupDto>>;
       })
     );
   }
@@ -245,10 +246,10 @@ export class CategoryGroupApiService extends BaseService {
    */
   getAllCategoryGroupsWithCategories(params?: {
 
-  }): Observable<{  }> {
+  }): Observable<Array<CategoryGroupDto>> {
 
     return this.getAllCategoryGroupsWithCategories$Response(params).pipe(
-      map((r: StrictHttpResponse<{  }>) => r.body as {  })
+      map((r: StrictHttpResponse<Array<CategoryGroupDto>>) => r.body as Array<CategoryGroupDto>)
     );
   }
 

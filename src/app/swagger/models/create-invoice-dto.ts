@@ -7,6 +7,7 @@ export interface CreateInvoiceDto {
   description: string;
   endBalance: number;
   mutationCode: string;
+  originalId?: number;
   startBalance: number;
   transactionDate?: string;
   userId: number;
