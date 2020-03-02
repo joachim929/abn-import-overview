@@ -58,6 +58,26 @@
   margin: auto !important;
 }
 
+.w-100 {
+  width: 100% !important;
+}
+
+.w-75 {
+  width: 75% !important;
+}
+
+.w-50 {
+  width: 50% !important;
+}
+
+.w-25 {
+  width: 25% !important;
+}
+
+.cursor-default {
+  cursor: default;
+}
+
 .container, .column-container, .row-container {
   display: flex;
   margin: 0 auto;

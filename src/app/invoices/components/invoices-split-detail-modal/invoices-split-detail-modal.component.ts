@@ -15,7 +15,10 @@ export interface InvoicesSplitDetail {
 @Component({
   selector: 'app-invoices-split-detail-modal',
   templateUrl: './invoices-split-detail-modal.component.html',
-  styleUrls: ['./invoices-split-detail-modal.component.scss']
+  styleUrls: [
+    './invoices-split-detail-modal.component.scss',
+    '../../shared/invoices-dialog.styles.scss'
+  ]
 })
 export class InvoicesSplitDetailModalComponent implements OnInit {
   form: FormGroup;

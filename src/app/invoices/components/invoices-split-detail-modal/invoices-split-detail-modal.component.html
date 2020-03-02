@@ -1,32 +1,34 @@
-<h2 class="split-header">Split invoice</h2>
-<form [formGroup]="form" class="column-container invoice-form">
+<h2 class="m-0">Split invoice</h2>
+<form [formGroup]="form" class="column-container m-0">
   <mat-form-field>
     <mat-label>Account number</mat-label>
-    <input class="invoice-cursor-default" matInput readonly value="{{data.invoice.accountNumber}}">
+    <input class="cursor-default" matInput readonly value="{{data.invoice.accountNumber}}">
   </mat-form-field>
 
   <mat-form-field>
     <mat-label>Transaction date</mat-label>
-    <input class="invoice-cursor-default" matInput readonly [value]="data.invoice.transactionDate | date">
+    <input class="cursor-default" matInput readonly [value]="data.invoice.transactionDate | date">
   </mat-form-field>
 
   <mat-form-field>
     <mat-label>Start balance</mat-label>
-    <input class="invoice-cursor-default" matInput readonly [value]="data.invoice.startBalance | customCurrency">
+    <input class="cursor-default" matInput readonly [value]="data.invoice.startBalance | customCurrency">
   </mat-form-field>
 
   <mat-form-field>
     <mat-label>End balance</mat-label>
-    <input class="invoice-cursor-default" matInput readonly [value]="data.invoice.endBalance | customCurrency">
+    <input class="cursor-default" matInput readonly [value]="data.invoice.endBalance | customCurrency">
   </mat-form-field>
 
   <div class="invoice-form-pair">
-    <mat-form-field class="invoice-form-field">
+    <!-- todo: See if w-100 can be replaced by flex: 1 -->
+    <mat-form-field class="w-100">
       <mat-label>Amount</mat-label>
-      <input class="invoice-cursor-default" matInput readonly value="{{ocInvoice.amount}}">
+      <input class="cursor-default" matInput readonly value="{{ocInvoice.amount}}">
     </mat-form-field>
 
-    <mat-form-field class="invoice-form-field">
+    <!-- todo: See if w-100 can be replaced by flex: 1 -->
+    <mat-form-field class="w-100">
       <mat-label>New</mat-label>
       <input matInput formControlName="amount">
       <mat-error *ngIf="form.get('amount').touched && form.get('amount').invalid">
@@ -36,16 +38,19 @@
   </div>
 
   <div class="invoice-form-pair">
-    <mat-form-field class="invoice-form-field">
+
+    <!-- todo: See if w-100 can be replaced by flex: 1 -->
+    <mat-form-field class="w-100">
       <mat-label>Description</mat-label>
-      <textarea class="invoice-cursor-default"
+      <textarea class="cursor-default"
                 cdkTextareaAutosize
                 cdkAutosizeMinRows="5"
                 cdkAutosizeMaxRows="5"
                 matInput readonly [value]="ocInvoice.description"></textarea>
     </mat-form-field>
 
-    <mat-form-field class="invoice-form-field">
+    <!-- todo: See if w-100 can be replaced by flex: 1 -->
+    <mat-form-field class="w-100">
       <mat-label>New</mat-label>
       <textarea cdkTextareaAutosize
                 cdkAutosizeMinRows="5"
@@ -58,16 +63,18 @@
   </div>
 
   <div class="invoice-form-pair">
-    <mat-form-field class="invoice-form-field">
+    <!-- todo: See if w-100 can be replaced by flex: 1 -->
+    <mat-form-field class="w-100">
       <mat-label>Comment</mat-label>
-      <textarea class="invoice-cursor-default"
+      <textarea class="cursor-default"
                 cdkTextareaAutosize
                 cdkAutosizeMinRows="5"
                 cdkAutosizeMaxRows="5" readonly
                 matInput [value]="ocInvoice.comment || ''"></textarea>
     </mat-form-field>
 
-    <mat-form-field class="invoice-form-field">
+    <!-- todo: See if w-100 can be replaced by flex: 1 -->
+    <mat-form-field class="w-100">
       <mat-label>New</mat-label>
       <textarea cdkTextareaAutosize
                 cdkAutosizeMinRows="5"
@@ -80,11 +87,13 @@
   </div>
 
   <div class="invoice-form-pair">
-    <mat-form-field class="invoice-form-field">
+    <!-- todo: See if w-100 can be replaced by flex: 1 -->
+    <mat-form-field class="w-100">
       <mat-label>Category</mat-label>
-      <input class="invoice-cursor-default" readonly matInput value="{{ocInvoice.categoryId || ''}}">
+      <input class="cursor-default" readonly matInput value="{{ocInvoice.categoryId || ''}}">
     </mat-form-field>
-    <mat-form-field class="invoice-form-field">
+    <!-- todo: See if w-100 can be replaced by flex: 1 -->
+    <mat-form-field class="w-100">
       <mat-label>New</mat-label>
       <mat-select formControlName="categoryId">
         <!-- todo: Implement option groups -->

@@ -1,5 +1,7 @@
-<h2>Edit invoice</h2>
+<h2 class="m-0">Edit invoice</h2>
+<!-- todo: Move styling inline -->
 <dl style="display:grid; grid-template-columns: 7fr 6fr;">
+  <!-- todo: Replace with material design readonly -->
   <dt>Account number</dt>
   <dd>{{data.invoice.accountNumber}}</dd>
   <dt>Currency</dt>
@@ -17,23 +19,30 @@
   <mat-form-field>
     <mat-label>Description</mat-label>
     <textarea cdkTextareaAutosize
-              cdkAutosizeMinRows="1"
+              cdkAutosizeMinRows="3"
               cdkAutosizeMaxRows="5" formControlName="description" matInput></textarea>
-    <mat-error *ngIf="form.get('description').invalid">
-      Email is <strong>required</strong>
+    <mat-error *ngIf="form.get('description').invalid && form.get('description').touched">
+      Description is <strong>required</strong>
     </mat-error>
   </mat-form-field>
+
   <mat-form-field>
     <mat-label>Comment</mat-label>
     <textarea cdkTextareaAutosize
-              cdkAutosizeMinRows="1"
+              cdkAutosizeMinRows="3"
               cdkAutosizeMaxRows="5" formControlName="comment" matInput></textarea>
   </mat-form-field>
-  <!-- todo: Set up category-data service and put in options -->
+
   <mat-form-field>
     <mat-label>Category</mat-label>
     <mat-select formControlName="category">
       <mat-option></mat-option>
+      <!-- todo: Set up categoryGroups -->
+      <mat-option [value]="categoryGroup.id" *ngFor="let categoryGroup of categories$ | async">{{categoryGroup.name}}</mat-option>
     </mat-select>
   </mat-form-field>
 </form>
+<div class="invoice-controls-container">
+  <button mat-raised-button (click)="cancel()">Cancel</button>
+  <button [disabled]="form.invalid" mat-raised-button (click)="save()">Save</button>
+</div>

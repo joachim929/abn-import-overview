@@ -3,16 +3,8 @@
   width: 100%;
 }
 
-.split-header {
-  margin: 0;
-}
-
 .attribute {
   flex: 1 0 50%;
-}
-
-.invoice-form {
-  margin: 0;
 }
 
 .invoice-form-pair {
@@ -32,10 +24,6 @@
   }
 }
 
-.invoice-cursor-default {
-  cursor: default;
-}
-
 .invoice-form-field {
   width: 100%;
 }
@@ -44,9 +32,3 @@
   padding-left: 8px;
 }
 
-.invoice-controls-container {
-  display: flex;
-  justify-content: space-between;
-  margin-top: 8px;
-  margin-bottom: 20px;
-}
