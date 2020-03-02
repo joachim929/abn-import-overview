@@ -9,6 +9,10 @@
 
 .invoice-form-pair {
   display: flex;
+
+  mat-form-field {
+    flex: 1;
+  }
   @media (max-width: 575.98px) {
     flex-direction: column;
   }

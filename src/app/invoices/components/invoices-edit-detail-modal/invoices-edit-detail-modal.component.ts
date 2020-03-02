@@ -46,7 +46,6 @@ export class InvoicesEditDetailModalComponent implements OnInit {
   }
 
   save() {
-    // todo: Find fix
     const patchObject: any = {};
     Object.keys(this.ocInvoice).map(key => !!this.ocInvoice[key] ? patchObject[key] = this.ocInvoice[key] : null);
     this.dialogRef.close((this.form.valid && this.form.dirty && typeof patchObject.id !== 'undefined') ? {
