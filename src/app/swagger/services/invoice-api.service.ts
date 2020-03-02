@@ -132,7 +132,7 @@ export class InvoiceApiService extends BaseService {
    */
   patchInvoice$Response(params: {
       body: CreateInvoiceDto
-  }): Observable<StrictHttpResponse<{  }>> {
+  }): Observable<StrictHttpResponse<InvoiceDto>> {
 
     const rb = new RequestBuilder(this.rootUrl, InvoiceApiService.PatchInvoicePath, 'patch');
     if (params) {
@@ -146,7 +146,7 @@ export class InvoiceApiService extends BaseService {
     })).pipe(
       filter((r: any) => r instanceof HttpResponse),
       map((r: HttpResponse<any>) => {
-        return r as StrictHttpResponse<{  }>;
+        return r as StrictHttpResponse<InvoiceDto>;
       })
     );
   }
@@ -159,10 +159,10 @@ export class InvoiceApiService extends BaseService {
    */
   patchInvoice(params: {
       body: CreateInvoiceDto
-  }): Observable<{  }> {
+  }): Observable<InvoiceDto> {
 
     return this.patchInvoice$Response(params).pipe(
-      map((r: StrictHttpResponse<{  }>) => r.body as {  })
+      map((r: StrictHttpResponse<InvoiceDto>) => r.body as InvoiceDto)
     );
   }
 
@@ -256,7 +256,6 @@ export class InvoiceApiService extends BaseService {
   splitInvoice(params: {
       body: SplitInvoiceDto
   }): Observable<SplitInvoiceDto> {
-    console.log(params);
 
     return this.splitInvoice$Response(params).pipe(
       map((r: StrictHttpResponse<SplitInvoiceDto>) => r.body as SplitInvoiceDto)

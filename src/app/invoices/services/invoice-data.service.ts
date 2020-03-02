@@ -10,7 +10,7 @@ import {
   InvoicesSplitDetailModalComponent
 } from '../components/invoices-split-detail-modal/invoices-split-detail-modal.component';
 import {split} from 'ts-node';
-import {filter, map, switchMap} from 'rxjs/operators';
+import {filter, map, switchMap, tap} from 'rxjs/operators';
 import {SplitInvoiceDto} from '../../swagger/models/split-invoice-dto';
 
 // https://coryrylan.com/blog/angular-observable-data-services
@@ -37,8 +37,6 @@ export class InvoiceDataService {
   }
 
   openEditDialog(invoice: InvoiceDto) {
-    this.selectInvoice(invoice.id);
-
     const dialog = this.dialog.open(InvoicesEditDetailModalComponent, {
       width: '800px',
       maxWidth: '95vw',
@@ -46,15 +44,21 @@ export class InvoiceDataService {
       data: {invoice}
     });
 
-    dialog.afterClosed().subscribe(editedInvoice => {
-      // patch invoices
-      this.dataStore.selectedInvoice$ = null;
-      this.selectedInvoice.next(Object.assign({}, this.dataStore).selectedInvoice$);
+    dialog.afterClosed().pipe(
+      filter(x => !!x),
+      switchMap(x => {
+        return this.invoiceApiService.patchInvoice({body: x});
+      })
+    ).subscribe(editedInvoice => {
+      this.dataStore.invoices$.map((_invoice, index) => {
+        if (_invoice.id === editedInvoice.id) {
+          this.dataStore.invoices$[index] = {...editedInvoice};
+        }
+      });
     });
   }
 
   openSplitDialog(invoice: InvoiceDto) {
-    this.selectInvoice(invoice.id);
 
     const dialog = this.dialog.open(InvoicesSplitDetailModalComponent, {
       width: '800px',
@@ -66,13 +70,10 @@ export class InvoiceDataService {
     dialog.afterClosed().pipe(
       filter(x => !!x),
       switchMap(x => {
-        console.log(x);
         return this.invoiceApiService.splitInvoice({body: x});
       })
     ).subscribe((editedInvoices: SplitInvoiceDto) => {
       if (editedInvoices) {
-        this.dataStore.selectedInvoice$ = null;
-        this.selectedInvoice.next(Object.assign({}, this.dataStore).selectedInvoice$);
         this.dataStore.invoices$.map((_invoice, index) => {
           if (_invoice.id === editedInvoices.patch.id) {
             this.dataStore.invoices$[index] = {...editedInvoices.patch};

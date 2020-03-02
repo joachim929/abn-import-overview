@@ -44,5 +44,5 @@
 </form>
 <div class="invoice-controls-container">
   <button mat-raised-button (click)="cancel()">Cancel</button>
-  <button [disabled]="form.invalid" mat-raised-button (click)="save()">Save</button>
+  <button [disabled]="form.invalid || form.pristine" mat-raised-button (click)="save()">Save</button>
 </div>
