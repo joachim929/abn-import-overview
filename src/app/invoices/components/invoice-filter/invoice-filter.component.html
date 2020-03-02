@@ -1,4 +1,39 @@
 <mat-card class="filter-container">
   <ng-content></ng-content>
-  <h3>Filter</h3>
+  <div style="display: flex; flex-direction: row; align-items: center; justify-content: space-between;">
+    <h3>Filter</h3>
+    <button (click)="resetForm()" mat-icon-button><mat-icon>clear</mat-icon></button>
+  </div>
+
+  <form [formGroup]="filterForm" style="display: flex; flex-direction: column;">
+    <div formGroupName="date">
+      <mat-form-field>
+        <mat-label>From...</mat-label>
+        <input matInput [matDatepicker]="picker1" formControlName="from">
+        <mat-datepicker-toggle matSuffix [for]="picker1"></mat-datepicker-toggle>
+        <mat-datepicker startView="year" #picker1></mat-datepicker>
+      </mat-form-field>
+
+      <mat-form-field>
+        <mat-label>To...</mat-label>
+        <input matInput [min]="filterForm.get('date.from').value || null" [matDatepicker]="picker" formControlName="to">
+        <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+        <mat-datepicker startView="year" #picker></mat-datepicker>
+      </mat-form-field>
+
+    </div>
+
+    <mat-form-field>
+      <mat-label>Categories</mat-label>
+      <mat-select multiple formControlName="categories">
+        <mat-option [value]="group" *ngFor="let group of categoryGroups$ | async">{{group.name}}</mat-option>
+      </mat-select>
+    </mat-form-field>
+
+    <div style="display: flex; flex-direction: column">
+      <mat-label>Amount</mat-label>
+      <mat-slider min="0" formControlName="amount"></mat-slider>
+    </div>
+  </form>
+
 </mat-card>
