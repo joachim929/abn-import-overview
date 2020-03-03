@@ -7,6 +7,7 @@ export { RuleDto } from './models/rule-dto';
 export { Rule } from './models/rule';
 export { CategoryGroupDto } from './models/category-group-dto';
 export { UserDto } from './models/user-dto';
-export { InvoiceDto } from './models/invoice-dto';
 export { CreateInvoiceDto } from './models/create-invoice-dto';
+export { InvoiceDto } from './models/invoice-dto';
+export { InvoiceFilteredDto } from './models/invoice-filtered-dto';
 export { SplitInvoiceDto } from './models/split-invoice-dto';

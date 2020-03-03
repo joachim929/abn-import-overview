@@ -35,6 +35,10 @@ export class InvoicesMasterComponent implements OnInit {
     this.file = event.target.files[0];
   }
 
+  test() {
+    this.invoiceDataService.filteredInvoicesTest().subscribe((next) => console.log(next));
+  }
+
   upload() {
     this.invoiceDataService.multiUploadExcel(this.file);
   }

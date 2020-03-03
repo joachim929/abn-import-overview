@@ -10,6 +10,7 @@ import { map, filter } from 'rxjs/operators';
 
 import { CreateInvoiceDto } from '../models/create-invoice-dto';
 import { InvoiceDto } from '../models/invoice-dto';
+import { InvoiceFilteredDto } from '../models/invoice-filtered-dto';
 import { SplitInvoiceDto } from '../models/split-invoice-dto';
 
 @Injectable({
@@ -21,55 +22,6 @@ export class InvoiceApiService extends BaseService {
     http: HttpClient
   ) {
     super(config, http);
-  }
-
-  /**
-   * Path part for operation getInvoicesForUser
-   */
-  static readonly GetInvoicesForUserPath = '/invoice/{userId}';
-
-  /**
-   * This method provides access to the full `HttpResponse`, allowing access to response headers.
-   * To access only the response body, use `getInvoicesForUser()` instead.
-   *
-   * This method doesn't expect any request body.
-   */
-  getInvoicesForUser$Response(params: {
-    userId: number;
-
-  }): Observable<StrictHttpResponse<Array<InvoiceDto>>> {
-
-    const rb = new RequestBuilder(this.rootUrl, InvoiceApiService.GetInvoicesForUserPath, 'get');
-    if (params) {
-
-      rb.path('userId', params.userId);
-
-    }
-    return this.http.request(rb.build({
-      responseType: 'json',
-      accept: 'application/json'
-    })).pipe(
-      filter((r: any) => r instanceof HttpResponse),
-      map((r: HttpResponse<any>) => {
-        return r as StrictHttpResponse<Array<InvoiceDto>>;
-      })
-    );
-  }
-
-  /**
-   * This method provides access to only to the response body.
-   * To access the full response (for headers, for example), `getInvoicesForUser$Response()` instead.
-   *
-   * This method doesn't expect any request body.
-   */
-  getInvoicesForUser(params: {
-    userId: number;
-
-  }): Observable<Array<InvoiceDto>> {
-
-    return this.getInvoicesForUser$Response(params).pipe(
-      map((r: StrictHttpResponse<Array<InvoiceDto>>) => r.body as Array<InvoiceDto>)
-    );
   }
 
   /**
@@ -167,6 +119,55 @@ export class InvoiceApiService extends BaseService {
   }
 
   /**
+   * Path part for operation getInvoicesForUser
+   */
+  static readonly GetInvoicesForUserPath = '/invoice/{userId}';
+
+  /**
+   * This method provides access to the full `HttpResponse`, allowing access to response headers.
+   * To access only the response body, use `getInvoicesForUser()` instead.
+   *
+   * This method doesn't expect any request body.
+   */
+  getInvoicesForUser$Response(params: {
+    userId: number;
+
+  }): Observable<StrictHttpResponse<Array<InvoiceDto>>> {
+
+    const rb = new RequestBuilder(this.rootUrl, InvoiceApiService.GetInvoicesForUserPath, 'get');
+    if (params) {
+
+      rb.path('userId', params.userId);
+
+    }
+    return this.http.request(rb.build({
+      responseType: 'json',
+      accept: 'application/json'
+    })).pipe(
+      filter((r: any) => r instanceof HttpResponse),
+      map((r: HttpResponse<any>) => {
+        return r as StrictHttpResponse<Array<InvoiceDto>>;
+      })
+    );
+  }
+
+  /**
+   * This method provides access to only to the response body.
+   * To access the full response (for headers, for example), `getInvoicesForUser$Response()` instead.
+   *
+   * This method doesn't expect any request body.
+   */
+  getInvoicesForUser(params: {
+    userId: number;
+
+  }): Observable<Array<InvoiceDto>> {
+
+    return this.getInvoicesForUser$Response(params).pipe(
+      map((r: StrictHttpResponse<Array<InvoiceDto>>) => r.body as Array<InvoiceDto>)
+    );
+  }
+
+  /**
    * Path part for operation deleteInvoice
    */
   static readonly DeleteInvoicePath = '/invoice/{id}';
@@ -212,6 +213,53 @@ export class InvoiceApiService extends BaseService {
 
     return this.deleteInvoice$Response(params).pipe(
       map((r: StrictHttpResponse<{  }>) => r.body as {  })
+    );
+  }
+
+  /**
+   * Path part for operation filteredInvoices
+   */
+  static readonly FilteredInvoicesPath = '/invoice/filtered';
+
+  /**
+   * This method provides access to the full `HttpResponse`, allowing access to response headers.
+   * To access only the response body, use `filteredInvoices()` instead.
+   *
+   * This method sends `application/json` and handles request body of type `application/json`.
+   */
+  filteredInvoices$Response(params: {
+      body: InvoiceFilteredDto
+  }): Observable<StrictHttpResponse<InvoiceFilteredDto>> {
+
+    const rb = new RequestBuilder(this.rootUrl, InvoiceApiService.FilteredInvoicesPath, 'post');
+    if (params) {
+
+
+      rb.body(params.body, 'application/json');
+    }
+    return this.http.request(rb.build({
+      responseType: 'json',
+      accept: 'application/json'
+    })).pipe(
+      filter((r: any) => r instanceof HttpResponse),
+      map((r: HttpResponse<any>) => {
+        return r as StrictHttpResponse<InvoiceFilteredDto>;
+      })
+    );
+  }
+
+  /**
+   * This method provides access to only to the response body.
+   * To access the full response (for headers, for example), `filteredInvoices$Response()` instead.
+   *
+   * This method sends `application/json` and handles request body of type `application/json`.
+   */
+  filteredInvoices(params: {
+      body: InvoiceFilteredDto
+  }): Observable<InvoiceFilteredDto> {
+
+    return this.filteredInvoices$Response(params).pipe(
+      map((r: StrictHttpResponse<InvoiceFilteredDto>) => r.body as InvoiceFilteredDto)
     );
   }
 

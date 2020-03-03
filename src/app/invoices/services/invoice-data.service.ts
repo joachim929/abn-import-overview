@@ -36,6 +36,18 @@ export class InvoiceDataService {
   ) {
   }
 
+  filteredInvoicesTest() {
+    return this.invoiceApiService.filteredInvoices({
+        body:
+          {
+            endDate: '',
+            limit: 20,
+            start: 0
+          }
+      }
+    );
+  }
+
   openEditDialog(invoice: InvoiceDto) {
     const dialog = this.dialog.open(InvoicesEditDetailModalComponent, {
       width: '800px',
