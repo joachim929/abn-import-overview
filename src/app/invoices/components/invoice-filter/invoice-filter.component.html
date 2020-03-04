@@ -30,10 +30,20 @@
       </mat-select>
     </mat-form-field>
 
+    <mat-radio-group formControlName="unassigned">
+      <mat-radio-button [value]="true">Unassigned</mat-radio-button>
+      <mat-radio-button [value]="false">Assigned</mat-radio-button>
+    </mat-radio-group>
+
     <!-- todo: Create API call to get highest amount -->
-    <div style="display: flex; flex-direction: column">
-      <mat-label>Amount</mat-label>
-      <mat-slider min="0" formControlName="amount"></mat-slider>
+    <div style="margin-top: 12px; display: flex; flex-direction: column">
+      <mat-label>Minimum amount</mat-label>
+      <mat-slider min="0" formControlName="minAmount"
+                  [max]="filterForm.get('maxAmount').value"></mat-slider>
+
+      <mat-label>Maximum amount</mat-label>
+      <mat-slider formControlName="maxAmount"
+                 [min]="filterForm.get('minAmount').value"></mat-slider>
     </div>
   </form>
 

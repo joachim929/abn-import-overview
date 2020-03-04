@@ -4,8 +4,9 @@ export interface InvoiceFilteredDto {
   endDate?: string;
   limit?: number;
   maxAmount?: number;
+  minAmount?: number;
+  order?: 'ASC' | 'DESC';
   records?: Array<InvoiceDto>;
   skip?: number;
-  start?: number;
   startDate?: string;
 }

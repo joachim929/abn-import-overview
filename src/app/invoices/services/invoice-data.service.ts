@@ -42,7 +42,8 @@ export class InvoiceDataService {
           {
             endDate: '',
             limit: 20,
-            start: 0
+            minAmount: 0,
+            maxAmount: 0
           }
       }
     );

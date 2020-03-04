@@ -22,6 +22,7 @@ import {MatSortModule} from '@angular/material/sort';
 import {MatDividerModule} from '@angular/material/divider';
 import {MatDatepickerModule} from '@angular/material/datepicker';
 import {MatSliderModule} from '@angular/material/slider';
+import {MatRadioModule} from '@angular/material/radio';
 
 
 @NgModule({
@@ -33,22 +34,23 @@ import {MatSliderModule} from '@angular/material/slider';
     InvoicesEditDetailModalComponent,
     InvoicesSplitDetailModalComponent
   ],
-  imports: [
-    CommonModule,
-    InvoicesRoutingModule,
-    SharedModule,
-    MatButtonModule,
-    MatCardModule,
-    MatIconModule,
-    MatFormFieldModule,
-    ReactiveFormsModule,
-    MatInputModule,
-    MatSelectModule,
-    MatSortModule,
-    MatDividerModule,
-    MatDatepickerModule,
-    MatSliderModule
-  ],
+    imports: [
+        CommonModule,
+        InvoicesRoutingModule,
+        SharedModule,
+        MatButtonModule,
+        MatCardModule,
+        MatIconModule,
+        MatFormFieldModule,
+        ReactiveFormsModule,
+        MatInputModule,
+        MatSelectModule,
+        MatSortModule,
+        MatDividerModule,
+        MatDatepickerModule,
+        MatSliderModule,
+        MatRadioModule
+    ],
   providers: [
     CustomCurrencyPipe,
     InvoiceDataService
