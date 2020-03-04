@@ -62,10 +62,18 @@ export class InvoicesSplitDetailModalComponent implements OnInit {
   }
 
   save() {
-    this.dialogRef.close(this.form.valid ? {
-      patch: this.ocInvoice,
-      split: this.form.value
-    } : null);
+    if (this.form.valid) {
+      this.ocInvoice.amount = Number(this.ocInvoice.amount);
+      const split = this.form.value;
+      split.amount = Number(split.amount);
+
+      this.dialogRef.close({
+        patch: this.ocInvoice,
+        split
+      });
+    } else {
+      this.dialogRef.close();
+    }
   }
 
   cancel() {
