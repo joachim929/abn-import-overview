@@ -23,6 +23,7 @@ import {MatDividerModule} from '@angular/material/divider';
 import {MatDatepickerModule} from '@angular/material/datepicker';
 import {MatSliderModule} from '@angular/material/slider';
 import {MatRadioModule} from '@angular/material/radio';
+import {MatSlideToggleModule} from '@angular/material/slide-toggle';
 
 
 @NgModule({
@@ -49,7 +50,8 @@ import {MatRadioModule} from '@angular/material/radio';
         MatDividerModule,
         MatDatepickerModule,
         MatSliderModule,
-        MatRadioModule
+        MatRadioModule,
+        MatSlideToggleModule
     ],
   providers: [
     CustomCurrencyPipe,

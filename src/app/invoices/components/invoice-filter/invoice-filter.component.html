@@ -18,7 +18,7 @@
 
       <mat-form-field>
         <mat-label>To...</mat-label>
-        <input matInput [max]="today" [min]="filterForm.get('date.from').value || null" [matDatepicker]="picker"
+        <input matInput [max]="today" [min]="getControl('date.from').value || null" [matDatepicker]="picker"
                formControlName="to">
         <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
         <mat-datepicker startView="year" #picker></mat-datepicker>
@@ -33,22 +33,22 @@
       </mat-select>
     </mat-form-field>
 
-    <mat-radio-group formControlName="unassigned">
-      <mat-radio-button [value]="true">Unassigned</mat-radio-button>
-      <mat-radio-button [value]="false">Assigned</mat-radio-button>
-    </mat-radio-group>
-
     <div style="margin-top: 12px; display: flex; flex-direction: column">
-      <mat-label>Minimum amount</mat-label>
+
+      <mat-slide-toggle formControlName="minAmountToggle">Minimum amount</mat-slide-toggle>
       <mat-slider formControlName="minAmount"
                   thumbLabel
+                  tickInterval="auto"
+                  step="10"
                   [displayWith]="formatLabel"
                   [min]="minAmount"
                   [max]="maxAmount"></mat-slider>
 
-      <mat-label>Maximum amount</mat-label>
+      <mat-slide-toggle formControlName="maxAmountToggle">Maximum amount</mat-slide-toggle>
       <mat-slider formControlName="maxAmount"
                   thumbLabel
+                  tickInterval="auto"
+                  step="10"
                   [displayWith]="formatLabel"
                   [min]="minAmount"
                   [max]="maxAmount"></mat-slider>
