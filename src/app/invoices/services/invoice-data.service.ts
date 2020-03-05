@@ -12,6 +12,7 @@ import {
 import {split} from 'ts-node';
 import {filter, map, switchMap, tap} from 'rxjs/operators';
 import {SplitInvoiceDto} from '../../swagger/models/split-invoice-dto';
+import {Invoice, InvoiceFilteredDto} from '../../swagger/models';
 
 // https://coryrylan.com/blog/angular-observable-data-services
 @Injectable()
@@ -19,15 +20,67 @@ export class InvoiceDataService {
 
   private invoices = new BehaviorSubject<InvoiceDto[]>([]);
   private selectedInvoice = new BehaviorSubject<InvoiceDto>(null);
+  private minAmount = new BehaviorSubject<number>(null);
+  private maxAmount = new BehaviorSubject<number>(null);
+  private skip = new BehaviorSubject<number>(null);
   // Initial value
-  private dataStore: { invoices$: InvoiceDto[], selectedInvoice$: InvoiceDto } = {invoices$: [], selectedInvoice$: null};
+  private dataStore: {
+    invoices$: InvoiceDto[],
+    selectedInvoice$: InvoiceDto,
+    minAmount$: number,
+    maxAmount$: number,
+    skip$: number
+  } = {
+    invoices$: [],
+    selectedInvoice$: null,
+    minAmount$: 0,
+    maxAmount$: 0,
+    skip$: null
+  };
 
   get invoices$(): Observable<InvoiceDto[]> {
     return this.invoices.asObservable();
   }
 
+  setInvoices$(input: InvoiceDto[]) {
+    this.dataStore.invoices$ = input;
+    this.invoices.next(Object.assign({}, this.dataStore).invoices$);
+  }
+
   get selectedInvoice$(): Observable<InvoiceDto> {
     return this.selectedInvoice.asObservable();
+  }
+
+  setSelectedInvoice$(input: InvoiceDto) {
+    this.dataStore.selectedInvoice$ = input;
+    this.selectedInvoice.next(Object.assign({}, this.dataStore).selectedInvoice$);
+  }
+
+  get minAmount$(): Observable<number> {
+    return this.minAmount.asObservable();
+  }
+
+  setMinAmount$(input: number) {
+    this.dataStore.minAmount$ = input;
+    this.minAmount.next(Object.assign({}, this.dataStore).minAmount$);
+  }
+
+  get maxAmount$(): Observable<number> {
+    return this.maxAmount.asObservable();
+  }
+
+  setMaxAmount$(input: number) {
+    this.dataStore.maxAmount$ = input;
+    this.maxAmount.next(Object.assign({}, this.dataStore).maxAmount$);
+  }
+
+  get skip$(): Observable<number> {
+    return this.skip.asObservable();
+  }
+
+  setSkip$(input: number) {
+    this.dataStore.skip$ = input;
+    this.skip.next(Object.assign({}, this.dataStore).skip$);
   }
 
   constructor(
@@ -36,17 +89,23 @@ export class InvoiceDataService {
   ) {
   }
 
-  filteredInvoicesTest() {
-    return this.invoiceApiService.filteredInvoices({
+  getFilteredInvoices() {
+    this.invoiceApiService.filteredInvoices({
         body:
           {
             endDate: '',
             limit: 20,
             minAmount: 0,
-            maxAmount: 0
+            maxAmount: 0,
+            skip: this.dataStore.skip$ || 0
           }
       }
-    );
+    ).subscribe(((data: InvoiceFilteredDto) => {
+      this.setInvoices$(data.records);
+      this.setMinAmount$(data.minAmount);
+      this.setMaxAmount$(data.maxAmount);
+      this.setSkip$(data.records.length + this.dataStore.skip$);
+    }));
   }
 
   openEditDialog(invoice: InvoiceDto) {
@@ -98,26 +157,6 @@ export class InvoiceDataService {
     });
   }
 
-  selectInvoice(id?: number) {
-    let foundInvoice = null;
-    this.dataStore.invoices$.map(invoice => {
-      if (invoice.id === id) {
-        foundInvoice = invoice;
-      }
-    });
-    this.dataStore.selectedInvoice$ = foundInvoice;
-    this.selectedInvoice.next(Object.assign({}, this.dataStore).selectedInvoice$);
-  }
-
-  loadAll() {
-    this.loadInvoices().subscribe(
-      data => {
-        this.dataStore.invoices$ = data;
-        this.invoices.next(Object.assign({}, this.dataStore).invoices$);
-      }
-    );
-  }
-
   removeInvoice(id: number) {
     this.invoiceApiService.deleteInvoice({id}).subscribe(() => {
       this.dataStore.invoices$.map((invoice, index) => {
@@ -137,10 +176,6 @@ export class InvoiceDataService {
           this.invoices.next(Object.assign({}, this.dataStore).invoices$);
         });
     });
-  }
-
-  private loadInvoices(): Observable<InvoiceDto[]> {
-    return this.invoiceApiService.getInvoicesForUser({userId: 1});
   }
 
   private xlsToJson(file): Promise<any> {
@@ -164,3 +199,5 @@ export class InvoiceDataService {
     });
   }
 }
+
+``;

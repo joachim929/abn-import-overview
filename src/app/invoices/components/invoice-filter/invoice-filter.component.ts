@@ -4,6 +4,7 @@ import {CategoryDataService} from '../../../core/services/category-data.service'
 import {Observable} from 'rxjs';
 import {CategoryGroupDto} from '../../../swagger/models/category-group-dto';
 import {filter} from 'rxjs/operators';
+import * as moment from 'moment';
 
 @Component({
   selector: 'app-invoice-filter',
@@ -23,10 +24,12 @@ export class InvoiceFilterComponent implements OnInit {
   });
 
   categoryGroups$: Observable<CategoryGroupDto[]>;
+  today: Date;
 
   constructor(
     private categoryDataService: CategoryDataService
   ) {
+    this.today = moment().endOf('day').toDate();
   }
 
   ngOnInit(): void {

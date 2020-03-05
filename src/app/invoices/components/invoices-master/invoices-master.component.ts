@@ -28,15 +28,11 @@ export class InvoicesMasterComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.invoiceDataService.loadAll();
+    this.invoiceDataService.getFilteredInvoices();
   }
 
   incomingFile(event) {
     this.file = event.target.files[0];
-  }
-
-  test() {
-    this.invoiceDataService.filteredInvoicesTest().subscribe((next) => console.log(next));
   }
 
   upload() {
