@@ -5,6 +5,7 @@ import {Observable} from 'rxjs';
 import {CategoryGroupDto} from '../../../swagger/models/category-group-dto';
 import {filter} from 'rxjs/operators';
 import * as moment from 'moment';
+import {InvoiceDataService} from '../../services/invoice-data.service';
 
 @Component({
   selector: 'app-invoice-filter',
@@ -25,26 +26,41 @@ export class InvoiceFilterComponent implements OnInit {
 
   categoryGroups$: Observable<CategoryGroupDto[]>;
   today: Date;
+  minAmount;
+  maxAmount;
+  recordCount$: Observable<number>;
 
   constructor(
-    private categoryDataService: CategoryDataService
+    private categoryDataService: CategoryDataService,
+    private invoiceDataService: InvoiceDataService
   ) {
     this.today = moment().endOf('day').toDate();
   }
 
   ngOnInit(): void {
     this.categoryGroups$ = this.categoryDataService.categories$;
-    this.filterForm.valueChanges.subscribe(next => console.log(next));
+    // this.filterForm.valueChanges.subscribe(next => console.log(next));
     this.filterForm.get('categories').valueChanges.pipe(
       filter(value => !!value)
     ).subscribe(next => {
       if (next && next.length > 0) {
         this.filterForm.get('unassigned').setValue(false, {emitEvent: false});
       }
-     });
+    });
+    this.invoiceDataService.minAmount$.subscribe((next) => this.minAmount = next);
+    this.invoiceDataService.maxAmount$.subscribe((next) => this.maxAmount = next);
+    this.recordCount$ = this.invoiceDataService.recordCount$;
   }
 
   resetForm() {
     this.filterForm.reset();
+  }
+
+  formatLabel(value: number) {
+    if (value >= 1000) {
+      return Math.round(value / 1000) + 'k';
+    }
+
+    return value.toFixed(0);
   }
 }

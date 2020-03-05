@@ -2,7 +2,9 @@
   <ng-content></ng-content>
   <div style="display: flex; flex-direction: row; align-items: center; justify-content: space-between;">
     <h3>Filter</h3>
-    <button (click)="resetForm()" mat-icon-button><mat-icon>clear</mat-icon></button>
+    <button (click)="resetForm()" mat-icon-button>
+      <mat-icon>clear</mat-icon>
+    </button>
   </div>
 
   <form [formGroup]="filterForm" style="display: flex; flex-direction: column;">
@@ -16,7 +18,8 @@
 
       <mat-form-field>
         <mat-label>To...</mat-label>
-        <input matInput [max]="today" [min]="filterForm.get('date.from').value || null" [matDatepicker]="picker" formControlName="to">
+        <input matInput [max]="today" [min]="filterForm.get('date.from').value || null" [matDatepicker]="picker"
+               formControlName="to">
         <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
         <mat-datepicker startView="year" #picker></mat-datepicker>
       </mat-form-field>
@@ -35,16 +38,21 @@
       <mat-radio-button [value]="false">Assigned</mat-radio-button>
     </mat-radio-group>
 
-    <!-- todo: Create API call to get highest amount -->
     <div style="margin-top: 12px; display: flex; flex-direction: column">
       <mat-label>Minimum amount</mat-label>
-      <mat-slider min="0" formControlName="minAmount"
-                  [max]="filterForm.get('maxAmount').value"></mat-slider>
+      <mat-slider formControlName="minAmount"
+                  thumbLabel
+                  [displayWith]="formatLabel"
+                  [min]="minAmount"
+                  [max]="maxAmount"></mat-slider>
 
       <mat-label>Maximum amount</mat-label>
       <mat-slider formControlName="maxAmount"
-                 [min]="filterForm.get('minAmount').value"></mat-slider>
+                  thumbLabel
+                  [displayWith]="formatLabel"
+                  [min]="minAmount"
+                  [max]="maxAmount"></mat-slider>
     </div>
   </form>
-
+  <pre>Record count: {{recordCount$ | async}}</pre>
 </mat-card>

@@ -22,6 +22,7 @@ export class InvoiceDataService {
   private selectedInvoice = new BehaviorSubject<InvoiceDto>(null);
   private minAmount = new BehaviorSubject<number>(null);
   private maxAmount = new BehaviorSubject<number>(null);
+  private recordCount = new BehaviorSubject<number>(null);
   private skip = new BehaviorSubject<number>(null);
   // Initial value
   private dataStore: {
@@ -29,15 +30,18 @@ export class InvoiceDataService {
     selectedInvoice$: InvoiceDto,
     minAmount$: number,
     maxAmount$: number,
+    recordCount$: number,
     skip$: number
   } = {
     invoices$: [],
     selectedInvoice$: null,
     minAmount$: 0,
     maxAmount$: 0,
+    recordCount$: 0,
     skip$: null
   };
 
+  // todo: Setters are just theory, still needs to be tested thoroughly
   get invoices$(): Observable<InvoiceDto[]> {
     return this.invoices.asObservable();
   }
@@ -74,6 +78,15 @@ export class InvoiceDataService {
     this.maxAmount.next(Object.assign({}, this.dataStore).maxAmount$);
   }
 
+  get recordCount$(): Observable<number> {
+    return this.recordCount.asObservable();
+  }
+
+  setRecordCount$(input: number) {
+    this.dataStore.recordCount$ = input;
+    this.recordCount.next(Object.assign({}, this.dataStore).recordCount$);
+  }
+
   get skip$(): Observable<number> {
     return this.skip.asObservable();
   }
@@ -104,6 +117,7 @@ export class InvoiceDataService {
       this.setInvoices$(data.records);
       this.setMinAmount$(data.minAmount);
       this.setMaxAmount$(data.maxAmount);
+      this.setRecordCount$(data.count);
       this.setSkip$(data.records.length + this.dataStore.skip$);
     }));
   }
