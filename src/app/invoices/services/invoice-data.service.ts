@@ -102,17 +102,10 @@ export class InvoiceDataService {
   ) {
   }
 
-  getFilteredInvoices() {
-    this.invoiceApiService.filteredInvoices({
-        body:
-          {
-            endDate: '',
-            limit: 20,
-            minAmount: 0,
-            maxAmount: 0,
-            skip: this.dataStore.skip$ || 0
-          }
-      }
+  getFilteredInvoices(params: InvoiceFilteredDto) {
+    params.limit = 20;
+    console.log(params);
+    this.invoiceApiService.filteredInvoices({body: params}
     ).subscribe(((data: InvoiceFilteredDto) => {
       this.setInvoices$(data.records);
       this.setMinAmount$(data.minAmount);

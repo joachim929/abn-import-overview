@@ -28,7 +28,6 @@ export class InvoicesMasterComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.invoiceDataService.getFilteredInvoices();
   }
 
   incomingFile(event) {

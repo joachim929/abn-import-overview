@@ -7,6 +7,7 @@ import {debounceTime, distinctUntilChanged, filter, map, take} from 'rxjs/operat
 import * as moment from 'moment';
 import {InvoiceDataService} from '../../services/invoice-data.service';
 import {isEqual} from 'lodash';
+import {InvoiceFilteredDto} from '../../../swagger/models/invoice-filtered-dto';
 
 type InvoiceFilterControlNames = 'date.from' |
   'date.to' |
@@ -50,6 +51,7 @@ export class InvoiceFilterComponent implements OnInit {
   minAmount;
   maxAmount;
   recordCount$: Observable<number>;
+  defaultParams: InvoiceFilteredDto;
 
   constructor(
     private categoryDataService: CategoryDataService,
@@ -58,9 +60,11 @@ export class InvoiceFilterComponent implements OnInit {
     this.getControl('minAmount').disable({emitEvent: false});
     this.getControl('maxAmount').disable({emitEvent: false});
     this.today = moment().endOf('day').toDate();
+    this.defaultParams = this.buildParams();
   }
 
   ngOnInit(): void {
+    this.invoiceDataService.getFilteredInvoices(this.defaultParams);
     this.getControl('maxAmountToggle').valueChanges.subscribe(next =>
       next ? this.getControl('maxAmount').enable({emitEvent: false}) :
         this.getControl('maxAmount').disable({emitEvent: false}));
@@ -72,10 +76,13 @@ export class InvoiceFilterComponent implements OnInit {
     this.categoryGroups$ = this.categoryDataService.categories$;
 
     this.filterForm.valueChanges.pipe(
-      debounceTime(400),
+      debounceTime(500),
       distinctUntilChanged((a, b) => isEqual(a, b))
     ).subscribe((next) => {
-      console.log(next);
+      const params = this.buildParams();
+      if (!isEqual(this.defaultParams, params)) {
+        this.invoiceDataService.getFilteredInvoices(params);
+      }
     });
 
     this.getControl('maxAmount').valueChanges.pipe(
@@ -107,5 +114,15 @@ export class InvoiceFilterComponent implements OnInit {
     } else {
       return value.toFixed(0);
     }
+  }
+
+  private buildParams(): InvoiceFilteredDto {
+    return {
+      endDate: this.getControl('date.to').value || null,
+      startDate: this.getControl('date.from').value || null,
+      skip: 0,
+      maxAmount: this.getControl('maxAmount').disabled ? null : Number(this.getControl('maxAmount').value),
+      minAmount: this.getControl('minAmount').disabled ? null : Number(this.getControl('minAmount').value),
+    };
   }
 }
