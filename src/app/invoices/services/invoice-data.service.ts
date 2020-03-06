@@ -104,7 +104,6 @@ export class InvoiceDataService {
 
   getFilteredInvoices(params: InvoiceFilteredDto) {
     params.limit = 20;
-    console.log(params);
     this.invoiceApiService.filteredInvoices({body: params}
     ).subscribe(((data: InvoiceFilteredDto) => {
       this.setInvoices$(data.records);
@@ -206,5 +205,3 @@ export class InvoiceDataService {
     });
   }
 }
-
-``;

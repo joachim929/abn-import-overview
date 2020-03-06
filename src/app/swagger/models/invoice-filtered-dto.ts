@@ -1,7 +1,6 @@
 /* tslint:disable */
 import { InvoiceDto } from './invoice-dto';
 export interface InvoiceFilteredDto {
-  categories?: Array<number>;
   categoryId?: number;
   count?: number;
   endDate?: string;

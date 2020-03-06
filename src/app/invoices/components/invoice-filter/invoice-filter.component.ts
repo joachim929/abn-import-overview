@@ -3,19 +3,12 @@ import {FormControl, FormGroup} from '@angular/forms';
 import {CategoryDataService} from '../../../core/services/category-data.service';
 import {Observable} from 'rxjs';
 import {CategoryGroupDto} from '../../../swagger/models/category-group-dto';
-import {debounceTime, distinctUntilChanged, filter, map, take} from 'rxjs/operators';
+import {debounceTime, distinctUntilChanged, filter, map} from 'rxjs/operators';
 import * as moment from 'moment';
 import {InvoiceDataService} from '../../services/invoice-data.service';
 import {isEqual} from 'lodash';
 import {InvoiceFilteredDto} from '../../../swagger/models/invoice-filtered-dto';
-
-type InvoiceFilterControlNames = 'date.from' |
-  'date.to' |
-  'categories' |
-  'minAmount' |
-  'maxAmount' |
-  'maxAmountToggle' |
-  'minAmountToggle';
+import {InvoiceFilterControlNames, InvoiceFilterService} from '../../services/invoice-filter.service';
 
 @Component({
   selector: 'app-invoice-filter',
@@ -35,17 +28,6 @@ export class InvoiceFilterComponent implements OnInit {
     minAmountToggle: new FormControl()
   });
 
-  names = {
-    date: {
-      from: 'from',
-      to: 'to'
-    },
-    categories: 'categories',
-    minAmount: 'minAmount',
-    maxAmount: 'maxAmount',
-    assigned: 'assigned'
-  };
-
   categoryGroups$: Observable<CategoryGroupDto[]>;
   today: Date;
   minAmount;
@@ -55,22 +37,29 @@ export class InvoiceFilterComponent implements OnInit {
 
   constructor(
     private categoryDataService: CategoryDataService,
-    private invoiceDataService: InvoiceDataService
+    private invoiceDataService: InvoiceDataService,
+    private invoiceFilterService: InvoiceFilterService
   ) {
     this.getControl('minAmount').disable({emitEvent: false});
     this.getControl('maxAmount').disable({emitEvent: false});
     this.today = moment().endOf('day').toDate();
-    this.defaultParams = this.buildParams();
+    this.defaultParams = this.invoiceFilterService.buildParams(this.filterForm);
+  }
+
+  get names() {
+    return this.invoiceFilterService.names;
   }
 
   ngOnInit(): void {
     this.invoiceDataService.getFilteredInvoices(this.defaultParams);
     this.getControl('maxAmountToggle').valueChanges.subscribe(next =>
-      next ? this.getControl('maxAmount').enable({emitEvent: false}) :
+      next ?
+        this.getControl('maxAmount').enable({emitEvent: false}) :
         this.getControl('maxAmount').disable({emitEvent: false}));
 
     this.getControl('minAmountToggle').valueChanges.subscribe(next =>
-      next ? this.getControl('minAmount').enable({emitEvent: false}) :
+      next ?
+        this.getControl('minAmount').enable({emitEvent: false}) :
         this.getControl('minAmount').disable({emitEvent: false}));
 
     this.categoryGroups$ = this.categoryDataService.categories$;
@@ -79,21 +68,11 @@ export class InvoiceFilterComponent implements OnInit {
       debounceTime(500),
       distinctUntilChanged((a, b) => isEqual(a, b))
     ).subscribe((next) => {
-      const params = this.buildParams();
+      const params = this.invoiceFilterService.buildParams(this.filterForm);
       if (!isEqual(this.defaultParams, params)) {
         this.invoiceDataService.getFilteredInvoices(params);
       }
     });
-
-    this.getControl('maxAmount').valueChanges.pipe(
-      filter(x => !!x),
-      map(value => Number(value.toFixed(2)))
-    ).subscribe((x) => console.log(x));
-
-    this.getControl('minAmount').valueChanges.pipe(
-      filter(x => !!x),
-      map(value => Number(value.toFixed(2)))
-    ).subscribe((x) => console.log(x));
 
     this.invoiceDataService.minAmount$.subscribe((next) => this.minAmount = next);
     this.invoiceDataService.maxAmount$.subscribe((next) => this.maxAmount = next);
@@ -108,22 +87,11 @@ export class InvoiceFilterComponent implements OnInit {
     this.filterForm.reset();
   }
 
-  formatLabel(value: number) {
+  formatLabel(value: number): string {
     if (value >= 1000 || value <= -1000) {
       return (Math.round(value / 100) / 10) + 'k';
     } else {
       return value.toFixed(0);
     }
-  }
-
-  private buildParams(): InvoiceFilteredDto {
-    return {
-      endDate: this.getControl('date.to').value || null,
-      startDate: this.getControl('date.from').value || null,
-      skip: 0,
-      maxAmount: this.getControl('maxAmount').disabled ? null : Number(this.getControl('maxAmount').value),
-      minAmount: this.getControl('minAmount').disabled ? null : Number(this.getControl('minAmount').value),
-      categoryId: this.getControl('categories').value || null
-    };
   }
 }
