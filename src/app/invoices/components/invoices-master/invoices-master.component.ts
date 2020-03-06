@@ -1,4 +1,4 @@
-import {Component, OnDestroy, OnInit} from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import {InvoiceDto} from '../../../swagger/models/invoice-dto';
 import {Observable} from 'rxjs';
 import {InvoiceDataService} from '../../services/invoice-data.service';

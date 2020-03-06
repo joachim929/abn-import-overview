@@ -24,6 +24,8 @@ import {MatDatepickerModule} from '@angular/material/datepicker';
 import {MatSliderModule} from '@angular/material/slider';
 import {MatRadioModule} from '@angular/material/radio';
 import {MatSlideToggleModule} from '@angular/material/slide-toggle';
+import {InvoiceEditService} from './services/invoice-edit.service';
+import {InvoiceFilterService} from './services/invoice-filter.service';
 
 
 @NgModule({
@@ -55,7 +57,9 @@ import {MatSlideToggleModule} from '@angular/material/slide-toggle';
     ],
   providers: [
     CustomCurrencyPipe,
-    InvoiceDataService
+    InvoiceDataService,
+    InvoiceEditService,
+    InvoiceFilterService
   ]
 })
 export class InvoicesModule {

@@ -1,6 +1,7 @@
 import {Component, Input} from '@angular/core';
 import {InvoiceDto} from '../../../swagger/models/invoice-dto';
 import {InvoiceDataService} from '../../services/invoice-data.service';
+import {InvoiceEditService} from '../../services/invoice-edit.service';
 
 @Component({
   selector: 'app-invoice-detail',
@@ -11,16 +12,17 @@ export class InvoiceDetailComponent {
   @Input() invoice: InvoiceDto;
 
   constructor(
-    private invoiceDataService: InvoiceDataService
+    private invoiceDataService: InvoiceDataService,
+    private invoiceEditService: InvoiceEditService
   ) {
   }
 
   patch(invoice: InvoiceDto) {
-    this.invoiceDataService.openEditDialog(invoice);
+    this.invoiceEditService.openEditDialog(invoice);
   }
 
   split(invoice: InvoiceDto) {
-    this.invoiceDataService.openSplitDialog(invoice);
+    this.invoiceEditService.openSplitDialog(invoice);
   }
 
   remove(invoiceId: number) {

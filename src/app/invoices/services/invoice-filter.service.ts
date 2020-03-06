@@ -12,9 +12,7 @@ export type InvoiceFilterControlNames =
   'maxAmountToggle' |
   'minAmountToggle';
 
-@Injectable({
-  providedIn: 'root'
-})
+@Injectable()
 export class InvoiceFilterService {
   names = {
     date: {

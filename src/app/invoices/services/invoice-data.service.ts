@@ -3,16 +3,8 @@ import {InvoiceDto} from '../../swagger/models/invoice-dto';
 import {BehaviorSubject, Observable} from 'rxjs';
 import {InvoiceApiService} from '../../swagger/services/invoice-api.service';
 import * as XLSX from 'xlsx';
-import {MatDialog} from '@angular/material/dialog';
-import {InvoicesEditDetailModalComponent} from '../components/invoices-edit-detail-modal/invoices-edit-detail-modal.component';
-import {
-  InvoicesSplitDetail,
-  InvoicesSplitDetailModalComponent
-} from '../components/invoices-split-detail-modal/invoices-split-detail-modal.component';
-import {split} from 'ts-node';
-import {filter, map, switchMap, tap} from 'rxjs/operators';
 import {SplitInvoiceDto} from '../../swagger/models/split-invoice-dto';
-import {Invoice, InvoiceFilteredDto} from '../../swagger/models';
+import {InvoiceFilteredDto} from '../../swagger/models';
 
 // https://coryrylan.com/blog/angular-observable-data-services
 @Injectable()
@@ -41,7 +33,6 @@ export class InvoiceDataService {
     skip$: null
   };
 
-  // todo: Setters are just theory, still needs to be tested thoroughly
   get invoices$(): Observable<InvoiceDto[]> {
     return this.invoices.asObservable();
   }
@@ -97,8 +88,7 @@ export class InvoiceDataService {
   }
 
   constructor(
-    private invoiceApiService: InvoiceApiService,
-    private dialog: MatDialog
+    private invoiceApiService: InvoiceApiService
   ) {
   }
 
@@ -114,53 +104,22 @@ export class InvoiceDataService {
     }));
   }
 
-  openEditDialog(invoice: InvoiceDto) {
-    const dialog = this.dialog.open(InvoicesEditDetailModalComponent, {
-      width: '800px',
-      maxWidth: '95vw',
-      maxHeight: '95vh',
-      data: {invoice}
-    });
-
-    dialog.afterClosed().pipe(
-      filter(x => !!x),
-      switchMap(x => {
-        return this.invoiceApiService.patchInvoice({body: x});
-      })
-    ).subscribe(editedInvoice => {
-      this.dataStore.invoices$.map((_invoice, index) => {
-        if (_invoice.id === editedInvoice.id) {
-          this.dataStore.invoices$[index] = {...editedInvoice};
-        }
-      });
+  updateInvoice(updatedInvoice: InvoiceDto) {
+    this.dataStore.invoices$.map((_invoice, index) => {
+      if (_invoice.id === updatedInvoice.id) {
+        this.dataStore.invoices$[index] = {...updatedInvoice};
+      }
     });
   }
 
-  openSplitDialog(invoice: InvoiceDto) {
-
-    const dialog = this.dialog.open(InvoicesSplitDetailModalComponent, {
-      width: '800px',
-      maxWidth: '95vw',
-      maxHeight: '95vh',
-      data: {invoice}
-    });
-
-    dialog.afterClosed().pipe(
-      filter(x => !!x),
-      switchMap(x => {
-        return this.invoiceApiService.splitInvoice({body: x});
-      })
-    ).subscribe((editedInvoices: SplitInvoiceDto) => {
-      if (editedInvoices) {
-        this.dataStore.invoices$.map((_invoice, index) => {
-          if (_invoice.id === editedInvoices.patch.id) {
-            this.dataStore.invoices$[index] = {...editedInvoices.patch};
-            this.dataStore.invoices$.splice(index + 1, 0, editedInvoices.split);
-          }
-        });
-        this.invoices.next(Object.assign({}, this.dataStore).invoices$);
+  updateAndAddInvoice(editedInvoices: SplitInvoiceDto) {
+    this.dataStore.invoices$.map((_invoice, index) => {
+      if (_invoice.id === editedInvoices.patch.id) {
+        this.dataStore.invoices$[index] = {...editedInvoices.patch};
+        this.dataStore.invoices$.splice(index + 1, 0, editedInvoices.split);
       }
     });
+    this.invoices.next(Object.assign({}, this.dataStore).invoices$);
   }
 
   removeInvoice(id: number) {
