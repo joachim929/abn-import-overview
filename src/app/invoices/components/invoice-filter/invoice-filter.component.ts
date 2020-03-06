@@ -123,6 +123,7 @@ export class InvoiceFilterComponent implements OnInit {
       skip: 0,
       maxAmount: this.getControl('maxAmount').disabled ? null : Number(this.getControl('maxAmount').value),
       minAmount: this.getControl('minAmount').disabled ? null : Number(this.getControl('minAmount').value),
+      categoryId: this.getControl('categories').value || null
     };
   }
 }
