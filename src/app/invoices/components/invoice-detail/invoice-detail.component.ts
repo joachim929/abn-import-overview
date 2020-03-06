@@ -2,6 +2,7 @@ import {Component, Input} from '@angular/core';
 import {InvoiceDto} from '../../../swagger/models/invoice-dto';
 import {InvoiceDataService} from '../../services/invoice-data.service';
 import {InvoiceEditService} from '../../services/invoice-edit.service';
+import {CategoryDataService} from '../../../core/services/category-data.service';
 
 @Component({
   selector: 'app-invoice-detail',
@@ -13,8 +14,13 @@ export class InvoiceDetailComponent {
 
   constructor(
     private invoiceDataService: InvoiceDataService,
-    private invoiceEditService: InvoiceEditService
+    private invoiceEditService: InvoiceEditService,
+    private categoryDataService: CategoryDataService
   ) {
+  }
+
+  get categories$() {
+    return this.categoryDataService.categories$;
   }
 
   patch(invoice: InvoiceDto) {

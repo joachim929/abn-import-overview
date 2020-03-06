@@ -7,6 +7,11 @@
     <p>Start balance: {{invoice.startBalance | customCurrency}}</p>
     <p>End balance: {{invoice.endBalance | customCurrency}}</p>
     <p>Transaction date: {{invoice.transactionDate | date}}</p>
+    <p *ngIf="invoice.categoryId">Category:
+      <ng-container *ngFor="let categoryGroup of categories$ | async">
+        <span *ngIf="categoryGroup.id === invoice.categoryId">{{categoryGroup.name}}</span>
+      </ng-container>
+    </p>
   </div>
   <div class="column-container invoice-controls-container">
     <div class="column-container">

@@ -14,7 +14,6 @@ export class CategoryDataService {
   constructor(
     private categoryApiService: CategoryGroupApiService
   ) {
-    console.log('Constructor');
     this.loadCategories();
   }
 
