@@ -6,7 +6,7 @@ import {ListModule} from './list/list.module';
 
 const routes: Routes = [
   {
-    path: '', redirectTo: 'card', pathMatch: 'full'
+    path: '', redirectTo: 'list', pathMatch: 'full'
   },
   {
     path: '',

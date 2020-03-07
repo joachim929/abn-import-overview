@@ -2,9 +2,9 @@
 <main class="container column-container">
   <section class="content invoice-and-filters">
     <app-invoice-filter>
-      <div>
-        <a routerLinkActive="active" routerLink="list" mat-icon-button><mat-icon>view_headline</mat-icon></a>
-        <a routerLinkActive="active" routerLink="card" mat-icon-button><mat-icon>view_agenda</mat-icon></a>
+      <div style="display: flex; flex-direction: row; justify-content: space-between;">
+        <a style="flex: 0 0 50%; margin-right: 4px;" mat-button routerLinkActive="active" routerLink="list">List view <mat-icon>view_headline</mat-icon></a>
+        <a style="flex: 0 0 47%; margin-left: 4px;" mat-button routerLinkActive="active" routerLink="card">Card view <mat-icon>view_agenda</mat-icon></a>
       </div>
       <label class="invoices-import-container my-1">
         <button *ngIf="!file" mat-button color="primary" (click)="importInvoices.click()">Import</button>

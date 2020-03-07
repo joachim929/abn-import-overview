@@ -17,3 +17,9 @@
     width: 100%;
   }
 }
+
+::ng-deep {
+  .mat-button.active .mat-button-focus-overlay {
+    opacity: 0.04 !important;
+  }
+}
