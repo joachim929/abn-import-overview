@@ -3,7 +3,7 @@
          [dataSource]="dataSource" multiTemplateDataRows
          class="mat-elevation-z2">
     <ng-container matColumnDef="{{column}}" *ngFor="let column of displayedColumns">
-      <th mat-header-cell *matHeaderCellDef>{{headerColumns[column]}}</th>
+      <th mat-header-cell *matHeaderCellDef [style.width]="column === 'delete' ? '144px' : ''">{{headerColumns[column]}}</th>
       <td mat-cell *matCellDef="let invoice">
         <span *ngIf="column === 'transactionDate'; else deleteCol">{{invoice[column] | date}}</span>
         <ng-template #deleteCol>
