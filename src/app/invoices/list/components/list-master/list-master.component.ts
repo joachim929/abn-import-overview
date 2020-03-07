@@ -5,6 +5,7 @@ import {InvoiceDto} from '../../../../swagger/models/invoice-dto';
 import {MatSort} from '@angular/material/sort';
 import {MatTableDataSource} from '@angular/material/table';
 import {animate, state, style, transition, trigger} from '@angular/animations';
+import {InvoiceEditService} from '../../../services/invoice-edit.service';
 
 @Component({
   selector: 'app-list-master',
@@ -28,13 +29,14 @@ export class ListMasterComponent implements OnInit {
     amount: 'Amount',
     startBalance: 'Start balance',
     endBalance: 'End balance',
-    delete: ''
+    delete: ' '
   };
 
   @ViewChild(MatSort, {static: true}) sort: MatSort;
 
   constructor(
-    private invoiceDataService: InvoiceDataService
+    private invoiceDataService: InvoiceDataService,
+    private invoiceEditService: InvoiceEditService
   ) {
     this.invoiceDataService.invoices$.subscribe((invoices) => {
       this.dataSource.data = invoices;
@@ -50,7 +52,18 @@ export class ListMasterComponent implements OnInit {
     this.invoiceDataService.loadMore();
   }
 
-  delete(event) {
-    console.log(event);
+  patch(event, invoice: InvoiceDto) {
+    event.stopPropagation();
+    this.invoiceEditService.openEditDialog(invoice);
+  }
+
+  split(event, invoice: InvoiceDto) {
+    event.stopPropagation();
+    this.invoiceEditService.openSplitDialog(invoice);
+  }
+
+  remove(event, invoiceId: number) {
+    event.stopPropagation();
+    this.invoiceDataService.removeInvoice(invoiceId);
   }
 }

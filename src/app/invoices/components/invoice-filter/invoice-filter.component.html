@@ -8,7 +8,7 @@
   </div>
 
   <form [formGroup]="filterForm" style="display: flex; flex-direction: column;">
-    <div formGroupName="date">
+    <div formGroupName="date" style="display: flex; flex-direction: column;">
       <mat-form-field>
         <mat-label>From...</mat-label>
         <input matInput [max]="today" [matDatepicker]="picker1" formControlName="from">
