@@ -6,6 +6,7 @@ import {MatSort} from '@angular/material/sort';
 import {MatTableDataSource} from '@angular/material/table';
 import {animate, state, style, transition, trigger} from '@angular/animations';
 import {InvoiceEditService} from '../../../services/invoice-edit.service';
+import {BreakpointService} from '../../../../core/services/breakpoint.service';
 
 @Component({
   selector: 'app-list-master',
@@ -36,7 +37,8 @@ export class ListMasterComponent implements OnInit {
 
   constructor(
     private invoiceDataService: InvoiceDataService,
-    private invoiceEditService: InvoiceEditService
+    private invoiceEditService: InvoiceEditService,
+    private breakpointService: BreakpointService
   ) {
     this.invoiceDataService.invoices$.subscribe((invoices) => {
       this.dataSource.data = invoices;
@@ -46,6 +48,10 @@ export class ListMasterComponent implements OnInit {
   }
 
   ngOnInit() {
+  }
+
+  get isXSmall(): boolean {
+    return this.breakpointService.isXSmall;
   }
 
   loadMore() {

@@ -1,7 +1,11 @@
 .invoice-item {
   display: flex;
+  //flex-wrap: wrap;
   flex-direction: row;
   margin: 0.5em;
+}
+.invoice-item.is-x-small {
+  flex-direction: column;
 }
 
 .invoice-detail-container {
@@ -12,5 +16,21 @@
 
 .invoice-controls-container {
   margin-left: 1em;
+  display: flex;
+  flex-direction: column;
   justify-content: space-between;
+}
+
+.is-x-small .invoice-controls-container {
+  flex-direction: row;
+  margin: 0;
+}
+
+.invoice-edit-controls {
+  display: flex;
+  flex-direction: column;
+}
+
+.is-x-small .invoice-edit-controls {
+  flex-direction: row;
 }

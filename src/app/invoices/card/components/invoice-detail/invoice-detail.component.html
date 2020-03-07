@@ -1,4 +1,4 @@
-<mat-card class="invoice-item">
+<mat-card class="invoice-item" [class.is-x-small]="isXSmall">
   <div class="invoice-detail-container">
     <p>Account number: {{invoice.accountNumber}}</p>
     <p>Amount: {{invoice.amount | customCurrency}}</p>
@@ -13,8 +13,8 @@
       </ng-container>
     </p>
   </div>
-  <div class="column-container invoice-controls-container">
-    <div class="column-container">
+  <div class="invoice-controls-container" [class.is-x-small]="isXSmall">
+    <div class="invoice-edit-controls">
       <button (click)="patch(invoice)"
               aria-label="Edit button"
               mat-icon-button>

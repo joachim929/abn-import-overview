@@ -21,8 +21,14 @@ tr.example-element-row:not(.example-expanded-row):active {
 .example-element-detail {
   overflow: hidden;
   display: flex;
+  flex-wrap: wrap;
 }
 
 .example-element-description {
   padding: 16px;
+}
+
+.mat-table .mat-column-delete {
+  text-align: right;
+  padding: 0;
 }

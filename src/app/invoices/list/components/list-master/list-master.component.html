@@ -3,8 +3,9 @@
          [dataSource]="dataSource" multiTemplateDataRows
          class="mat-elevation-z2">
     <ng-container matColumnDef="{{column}}" *ngFor="let column of displayedColumns">
-      <th mat-header-cell *matHeaderCellDef [style.width]="column === 'delete' ? '144px' : ''">{{headerColumns[column]}}</th>
-      <td mat-cell *matCellDef="let invoice">
+      <th mat-header-cell *matHeaderCellDef [class.is-x-small]="isXSmall"
+          [class.invoice-edit-controls]="column === 'delete'">{{headerColumns[column]}}</th>
+      <td mat-cell *matCellDef="let invoice" [class.is-x-small]="isXSmall">
         <span *ngIf="column === 'transactionDate'; else deleteCol">{{invoice[column] | date}}</span>
         <ng-template #deleteCol>
           <ng-container *ngIf="column === 'delete'; else rest">
@@ -54,5 +55,6 @@
   </table>
 
   <button *ngIf="dataSource.data?.length !== (recordCount$ | async)"
-    style="margin-top: 0.5em;" (click)="loadMore()" mat-raised-button color="primary">Load more</button>
+          style="margin-top: 0.5em;" (click)="loadMore()" mat-raised-button color="primary">Load more
+  </button>
 </div>

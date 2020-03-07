@@ -1,18 +1,27 @@
-<!-- todo: Implement mobile version for filter -->
+<mat-toolbar class="invoice-toolbar">
+  <div>
+    <button *ngIf="!file" mat-button color="primary" class="mr-1" (click)="importInvoices.click()">Import</button>
+    <button *ngIf="file" mat-raised-button color="primary" class="mr-1" (click)="upload()">Upload</button>
+    <button *ngIf="file" mat-raised-button color="warn" class="my-1" (click)="cancelUpload()">Cancel</button>
+    <label class="invoices-import-container">
+      <input hidden type="file" accept="application/vnd.ms-excel" #importInvoices (change)="incomingFile($event)">
+    </label>
+    <a *ngIf="!file" mat-button class="my-1">Assign mode</a>
+  </div>
+  <div>
+    <button mat-icon-button class="search-icon" [class.is-small]="isSmall"><mat-icon>search</mat-icon></button>
+    <a mat-icon-button routerLinkActive="active" routerLink="list">
+      <mat-icon>view_headline</mat-icon>
+    </a>
+    <a mat-icon-button routerLinkActive="active" routerLink="card">
+      <mat-icon>view_agenda</mat-icon>
+    </a>
+  </div>
+</mat-toolbar>
+
 <main class="container column-container">
-  <section class="content invoice-and-filters">
-    <app-invoice-filter>
-      <div style="display: flex; flex-direction: row; justify-content: space-between;">
-        <a style="flex: 0 0 50%; margin-right: 4px;" mat-button routerLinkActive="active" routerLink="list">List view <mat-icon>view_headline</mat-icon></a>
-        <a style="flex: 0 0 47%; margin-left: 4px;" mat-button routerLinkActive="active" routerLink="card">Card view <mat-icon>view_agenda</mat-icon></a>
-      </div>
-      <label class="invoices-import-container my-1">
-        <button *ngIf="!file" mat-button color="primary" (click)="importInvoices.click()">Import</button>
-        <button *ngIf="file" mat-raised-button color="primary" (click)="upload()">Upload</button>
-        <input hidden type="file" accept="application/vnd.ms-excel" #importInvoices (change)="incomingFile($event)">
-      </label>
-      <a mat-button class="my-1">Assign mode</a>
-    </app-invoice-filter>
+  <section class="content invoice-and-filters" [class.is-small]="isSmall">
+    <app-invoice-filter class="invoice-filter" [class.is-small]="isSmall"></app-invoice-filter>
     <div class="invoice-items-overflow">
       <router-outlet></router-outlet>
     </div>

@@ -3,6 +3,7 @@ import {InvoiceDto} from '../../../../swagger/models/invoice-dto';
 import {InvoiceDataService} from '../../../services/invoice-data.service';
 import {InvoiceEditService} from '../../../services/invoice-edit.service';
 import {CategoryDataService} from '../../../../core/services/category-data.service';
+import {BreakpointService} from '../../../../core/services/breakpoint.service';
 
 @Component({
   selector: 'app-invoice-detail',
@@ -15,8 +16,13 @@ export class InvoiceDetailComponent {
   constructor(
     private invoiceDataService: InvoiceDataService,
     private invoiceEditService: InvoiceEditService,
-    private categoryDataService: CategoryDataService
+    private categoryDataService: CategoryDataService,
+    private breakpointService: BreakpointService
   ) {
+  }
+
+  get isXSmall(): boolean {
+    return this.breakpointService.isXSmall;
   }
 
   get categories$() {

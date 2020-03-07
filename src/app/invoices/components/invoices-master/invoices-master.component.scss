@@ -1,15 +1,23 @@
 .invoice-items-overflow {
+  flex: 3;
   overflow-y: auto;
   display: flex;
   flex-direction: column;
 }
 
 .invoice-and-filters {
-  display: grid;
-  grid-template-columns: 1fr 3fr;
+  display: flex;
+  flex-direction: row;
   overflow: hidden;
-  height: calc(100vh - 68px);
+  height: calc(100vh - 132px);
   padding: 10px 0;
+}
+
+//.invoice-and-filters.is-small {
+//  grid-template-columns: 0 1fr;
+//}
+.is-small-hide {
+  display: none;
 }
 
 .invoices-import-container {
@@ -18,8 +26,27 @@
   }
 }
 
-::ng-deep {
-  .mat-button.active .mat-button-focus-overlay {
-    opacity: 0.04 !important;
-  }
+::ng-deep .mat-icon-button.active .mat-ripple.mat-button-ripple {
+  transition: 0.5s;
+  background: black;
+  opacity: 0.08;
+}
+
+.search-icon {
+  visibility: hidden;
+}
+.search-icon.is-small {
+  visibility: visible;
+}
+
+.invoice-filter {
+  flex: 1;
+}
+
+.invoice-filter.is-small {
+  display: none;
+}
+
+.invoice-toolbar {
+  justify-content: space-between;
 }
