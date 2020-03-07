@@ -23,6 +23,13 @@ export class ListMasterComponent implements OnInit {
   displayedColumns: string[] = ['transactionDate', 'amount', 'startBalance', 'endBalance', 'delete'];
   dataSource = new MatTableDataSource();
   expandedElement: InvoiceDto | null;
+  headerColumns = {
+    transactionDate: 'Transaction date',
+    amount: 'Amount',
+    startBalance: 'Start balance',
+    endBalance: 'End balance',
+    delete: ''
+  };
 
   @ViewChild(MatSort, {static: true}) sort: MatSort;
 
