@@ -11,10 +11,14 @@
     </app-invoice-filter>
     <div class="invoice-items-overflow">
       <ng-container *ngFor="let invoice of invoices$ | async; let index = index;">
-        <app-invoice-detail [invoice]="invoice" *ngIf="index <= 10"
+        <app-invoice-detail [invoice]="invoice"
                             [style.opacity]="(splitItem && splitItem.id !== invoice.id) ? '0.3' : '1'">
         </app-invoice-detail>
       </ng-container>
+      <button *ngIf="(invoices$ | async).length !== (recordCount$ | async)"
+              style="margin: 0.5em;" mat-raised-button color="primary"
+              (click)="loadMore()">Load more
+      </button>
     </div>
   </section>
 </main>

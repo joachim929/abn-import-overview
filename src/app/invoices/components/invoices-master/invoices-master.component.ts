@@ -12,6 +12,7 @@ import {tap} from 'rxjs/operators';
 export class InvoicesMasterComponent implements OnInit {
   file: File;
   invoices$: Observable<InvoiceDto[]>;
+  recordCount$: Observable<number>;
   selectedInvoice$: Observable<InvoiceDto>;
 
   splitItem: InvoiceDto;
@@ -19,12 +20,9 @@ export class InvoicesMasterComponent implements OnInit {
   constructor(
     private invoiceDataService: InvoiceDataService
   ) {
-    this.invoices$ = this.invoiceDataService.invoices$.pipe(
-      tap(result =>
-        result.sort((a, b) =>
-          (a.transactionDate > b.transactionDate) ? 1 : -1))
-    );
+    this.invoices$ = this.invoiceDataService.invoices$;
     this.selectedInvoice$ = this.invoiceDataService.selectedInvoice$;
+    this.recordCount$ = this.invoiceDataService.recordCount$;
   }
 
   ngOnInit() {
@@ -36,5 +34,9 @@ export class InvoicesMasterComponent implements OnInit {
 
   upload() {
     this.invoiceDataService.multiUploadExcel(this.file);
+  }
+
+  loadMore() {
+    this.invoiceDataService.loadMore();
   }
 }

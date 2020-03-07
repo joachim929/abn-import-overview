@@ -1,7 +1,8 @@
 .invoice-items-overflow {
   overflow-y: auto;
+  display: flex;
+  flex-direction: column;
 }
-
 
 .invoice-and-filters {
   display: grid;

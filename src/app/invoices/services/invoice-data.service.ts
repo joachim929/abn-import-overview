@@ -4,7 +4,8 @@ import {BehaviorSubject, Observable} from 'rxjs';
 import {InvoiceApiService} from '../../swagger/services/invoice-api.service';
 import * as XLSX from 'xlsx';
 import {SplitInvoiceDto} from '../../swagger/models/split-invoice-dto';
-import {InvoiceFilteredDto} from '../../swagger/models';
+import {Invoice, InvoiceFilteredDto} from '../../swagger/models';
+import {switchMap} from 'rxjs/operators';
 
 // https://coryrylan.com/blog/angular-observable-data-services
 @Injectable()
@@ -16,6 +17,7 @@ export class InvoiceDataService {
   private maxAmount = new BehaviorSubject<number>(null);
   private recordCount = new BehaviorSubject<number>(null);
   private skip = new BehaviorSubject<number>(null);
+  private filter = new BehaviorSubject<InvoiceFilteredDto>(null);
   // Initial value
   private dataStore: {
     invoices$: InvoiceDto[],
@@ -23,15 +25,54 @@ export class InvoiceDataService {
     minAmount$: number,
     maxAmount$: number,
     recordCount$: number,
-    skip$: number
+    skip$: number,
+    filter: InvoiceFilteredDto
   } = {
     invoices$: [],
     selectedInvoice$: null,
     minAmount$: 0,
     maxAmount$: 0,
     recordCount$: 0,
-    skip$: null
+    skip$: null,
+    filter: null
   };
+
+  constructor(
+    private invoiceApiService: InvoiceApiService
+  ) {}
+
+  get filter$(): Observable<InvoiceFilteredDto> {
+    return this.filter.asObservable();
+  }
+
+  adjustFilter(input: InvoiceFilteredDto) {
+    this.dataStore.filter = input;
+    this.filter.next(Object.assign({}, this.dataStore).filter);
+    this.invoiceApiService.filteredInvoices({body: input}).subscribe((data: InvoiceFilteredDto) => {
+      this.setInvoices$(data.records);
+      this.setMinAmount$(data.minAmount);
+      this.setMaxAmount$(data.maxAmount);
+      this.setRecordCount$(data.count);
+      this.setSkip$(data.records.length + this.dataStore.skip$);
+    });
+  }
+
+  loadMore() {
+    const filter = {...this.dataStore.filter};
+    filter.skip += 20;
+    this.dataStore.filter = filter;
+    this.filter.next(Object.assign({}, this.dataStore).filter);
+    this.invoiceApiService.filteredInvoices({body: filter}).subscribe((data: InvoiceFilteredDto) => {
+      let accData = [...this.dataStore.invoices$];
+      accData = accData.concat(data.records);
+      this.dataStore.invoices$ = accData;
+      this.invoices.next(Object.assign({}, this.dataStore).invoices$);
+      this.setMinAmount$(data.minAmount);
+      this.setMaxAmount$(data.maxAmount);
+      this.setRecordCount$(data.count);
+      this.setSkip$(data.records.length + this.dataStore.skip$);
+    });
+  }
 
   get invoices$(): Observable<InvoiceDto[]> {
     return this.invoices.asObservable();
@@ -85,23 +126,6 @@ export class InvoiceDataService {
   setSkip$(input: number) {
     this.dataStore.skip$ = input;
     this.skip.next(Object.assign({}, this.dataStore).skip$);
-  }
-
-  constructor(
-    private invoiceApiService: InvoiceApiService
-  ) {
-  }
-
-  getFilteredInvoices(params: InvoiceFilteredDto) {
-    params.limit = 20;
-    this.invoiceApiService.filteredInvoices({body: params}
-    ).subscribe(((data: InvoiceFilteredDto) => {
-      this.setInvoices$(data.records);
-      this.setMinAmount$(data.minAmount);
-      this.setMaxAmount$(data.maxAmount);
-      this.setRecordCount$(data.count);
-      this.setSkip$(data.records.length + this.dataStore.skip$);
-    }));
   }
 
   updateInvoice(updatedInvoice: InvoiceDto) {

@@ -51,7 +51,7 @@ export class InvoiceFilterComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.invoiceDataService.getFilteredInvoices(this.defaultParams);
+    this.invoiceDataService.adjustFilter(this.defaultParams);
     this.getControl('maxAmountToggle').valueChanges.subscribe(next =>
       next ?
         this.getControl('maxAmount').enable({emitEvent: false}) :
@@ -69,9 +69,7 @@ export class InvoiceFilterComponent implements OnInit {
       distinctUntilChanged((a, b) => isEqual(a, b))
     ).subscribe((next) => {
       const params = this.invoiceFilterService.buildParams(this.filterForm);
-      if (!isEqual(this.defaultParams, params)) {
-        this.invoiceDataService.getFilteredInvoices(params);
-      }
+      this.invoiceDataService.adjustFilter(params);
     });
 
     this.invoiceDataService.minAmount$.subscribe((next) => this.minAmount = next);

@@ -39,7 +39,9 @@ export class InvoiceFilterService {
       skip: 0,
       maxAmount: this.formatNumber(this.getControl(formGroup, 'maxAmount')),
       minAmount: this.formatNumber(this.getControl(formGroup, 'minAmount')),
-      categoryId: this.getControl(formGroup, 'categories').value || null
+      categoryId: this.getControl(formGroup, 'categories').value || null,
+      limit: 20,
+      order: 'ASC'
     };
   }
 
@@ -49,8 +51,8 @@ export class InvoiceFilterService {
 
   private formatNumber(control: FormControl): number {
     let formattedValue = null;
-    if (control.enabled && control.value) {
-      formattedValue = Number(control.value.toFixed(2));
+    if (control.enabled) {
+      formattedValue = Number(Number(control.value).toFixed(2));
     }
 
     return formattedValue;
