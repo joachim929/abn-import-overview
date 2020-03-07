@@ -1,20 +1,20 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { InvoiceSplitComponent } from './invoice-split.component';
+import { CardMasterComponent } from './card-master.component';
 
-describe('InvoiceSplitComponent', () => {
-  let component: InvoiceSplitComponent;
-  let fixture: ComponentFixture<InvoiceSplitComponent>;
+describe('CardMasterComponent', () => {
+  let component: CardMasterComponent;
+  let fixture: ComponentFixture<CardMasterComponent>;
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ InvoiceSplitComponent ]
+      declarations: [ CardMasterComponent ]
     })
     .compileComponents();
   }));
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(InvoiceSplitComponent);
+    fixture = TestBed.createComponent(CardMasterComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

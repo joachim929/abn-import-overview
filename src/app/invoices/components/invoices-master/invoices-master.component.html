@@ -2,6 +2,10 @@
 <main class="container column-container">
   <section class="content invoice-and-filters">
     <app-invoice-filter>
+      <div>
+        <a routerLinkActive="active" routerLink="list" mat-icon-button><mat-icon>view_headline</mat-icon></a>
+        <a routerLinkActive="active" routerLink="card" mat-icon-button><mat-icon>view_agenda</mat-icon></a>
+      </div>
       <label class="invoices-import-container my-1">
         <button *ngIf="!file" mat-button color="primary" (click)="importInvoices.click()">Import</button>
         <button *ngIf="file" mat-raised-button color="primary" (click)="upload()">Upload</button>
@@ -10,15 +14,7 @@
       <a mat-button class="my-1">Assign mode</a>
     </app-invoice-filter>
     <div class="invoice-items-overflow">
-      <ng-container *ngFor="let invoice of invoices$ | async; let index = index;">
-        <app-invoice-detail [invoice]="invoice"
-                            [style.opacity]="(splitItem && splitItem.id !== invoice.id) ? '0.3' : '1'">
-        </app-invoice-detail>
-      </ng-container>
-      <button *ngIf="(invoices$ | async).length !== (recordCount$ | async)"
-              style="margin: 0.5em;" mat-raised-button color="primary"
-              (click)="loadMore()">Load more
-      </button>
+      <router-outlet></router-outlet>
     </div>
   </section>
 </main>

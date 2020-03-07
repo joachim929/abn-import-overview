@@ -1,15 +1,14 @@
 import {Component, OnInit} from '@angular/core';
-import {InvoiceDto} from '../../../swagger/models/invoice-dto';
 import {Observable} from 'rxjs';
-import {InvoiceDataService} from '../../services/invoice-data.service';
+import {InvoiceDto} from '../../../../swagger/models/invoice-dto';
+import {InvoiceDataService} from '../../../services/invoice-data.service';
 
 @Component({
-  selector: 'app-invoices-master',
-  templateUrl: './invoices-master.component.html',
-  styleUrls: ['./invoices-master.component.scss']
+  selector: 'app-card-master',
+  templateUrl: './card-master.component.html',
+  styleUrls: ['./card-master.component.scss']
 })
-export class InvoicesMasterComponent implements OnInit {
-  file: File;
+export class CardMasterComponent implements OnInit {
   invoices$: Observable<InvoiceDto[]>;
   recordCount$: Observable<number>;
   selectedInvoice$: Observable<InvoiceDto>;
@@ -25,12 +24,8 @@ export class InvoicesMasterComponent implements OnInit {
   ngOnInit() {
   }
 
-  incomingFile(event) {
-    this.file = event.target.files[0];
-  }
-
-  upload() {
-    this.invoiceDataService.multiUploadExcel(this.file);
+  loadMore() {
+    this.invoiceDataService.loadMore();
   }
 
 }

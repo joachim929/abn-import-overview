@@ -1,11 +1,11 @@
 import {Injectable} from '@angular/core';
 import {InvoiceDto} from '../../swagger/models/invoice-dto';
-import {InvoicesEditDetailModalComponent} from '../components/invoices-edit-detail-modal/invoices-edit-detail-modal.component';
+import {InvoicesEditDetailModalComponent} from '../card/components/invoices-edit-detail-modal/invoices-edit-detail-modal.component';
 import {filter, switchMap} from 'rxjs/operators';
 import {InvoiceApiService} from '../../swagger/services/invoice-api.service';
 import {InvoiceDataService} from './invoice-data.service';
 import {MatDialog} from '@angular/material/dialog';
-import {InvoicesSplitDetailModalComponent} from '../components/invoices-split-detail-modal/invoices-split-detail-modal.component';
+import {InvoicesSplitDetailModalComponent} from '../card/components/invoices-split-detail-modal/invoices-split-detail-modal.component';
 import {SplitInvoiceDto} from '../../swagger/models/split-invoice-dto';
 
 @Injectable()

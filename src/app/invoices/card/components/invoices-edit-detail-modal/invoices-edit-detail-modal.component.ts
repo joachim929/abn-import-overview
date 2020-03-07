@@ -1,10 +1,10 @@
 import {Component, Inject, OnInit} from '@angular/core';
 import {MAT_DIALOG_DATA, MatDialogRef} from '@angular/material/dialog';
-import {InvoiceDto} from '../../../swagger/models/invoice-dto';
+import {InvoiceDto} from '../../../../swagger/models/invoice-dto';
 import {FormControl, FormGroup, Validators} from '@angular/forms';
-import {CategoryDataService} from '../../../core/services/category-data.service';
+import {CategoryDataService} from '../../../../core/services/category-data.service';
 import {Observable} from 'rxjs';
-import {CategoryGroupDto} from '../../../swagger/models/category-group-dto';
+import {CategoryGroupDto} from '../../../../swagger/models/category-group-dto';
 import {filter} from 'rxjs/operators';
 
 @Component({

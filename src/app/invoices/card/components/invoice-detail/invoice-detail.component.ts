@@ -1,8 +1,8 @@
 import {Component, Input} from '@angular/core';
-import {InvoiceDto} from '../../../swagger/models/invoice-dto';
-import {InvoiceDataService} from '../../services/invoice-data.service';
-import {InvoiceEditService} from '../../services/invoice-edit.service';
-import {CategoryDataService} from '../../../core/services/category-data.service';
+import {InvoiceDto} from '../../../../swagger/models/invoice-dto';
+import {InvoiceDataService} from '../../../services/invoice-data.service';
+import {InvoiceEditService} from '../../../services/invoice-edit.service';
+import {CategoryDataService} from '../../../../core/services/category-data.service';
 
 @Component({
   selector: 'app-invoice-detail',
