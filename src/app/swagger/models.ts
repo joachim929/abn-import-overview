@@ -11,3 +11,8 @@ export { CreateInvoiceDto } from './models/create-invoice-dto';
 export { InvoiceDto } from './models/invoice-dto';
 export { InvoiceFilteredDto } from './models/invoice-filtered-dto';
 export { SplitInvoiceDto } from './models/split-invoice-dto';
+export { Transfer } from './models/transfer';
+export { TransferMutation } from './models/transfer-mutation';
+export { RawInvoiceJsonDto } from './models/raw-invoice-json-dto';
+export { RawTransferSerializerDto } from './models/raw-transfer-serializer-dto';
+export { TransferBatchImportDto } from './models/transfer-batch-import-dto';

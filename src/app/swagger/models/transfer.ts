@@ -1,0 +1,15 @@
+/* tslint:disable */
+import { TransferMutation } from './transfer-mutation';
+export interface Transfer {
+  accountNumber: number;
+  createdAt: string;
+  currencyCode: string;
+  endBalance: number;
+  hash: string;
+  id: string;
+  mutations: Array<TransferMutation>;
+  startBalance: number;
+  transactionDate: string;
+  updatedAt: string;
+  valueDate: string;
+}
