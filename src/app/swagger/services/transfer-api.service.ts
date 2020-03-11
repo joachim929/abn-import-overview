@@ -10,8 +10,8 @@ import { map, filter } from 'rxjs/operators';
 
 import { InvoiceDto } from '../models/invoice-dto';
 import { RawInvoiceJsonDto } from '../models/raw-invoice-json-dto';
-import { Transfer } from '../models/transfer';
 import { TransferBatchImportDto } from '../models/transfer-batch-import-dto';
+import { TransferMutationDto } from '../models/transfer-mutation-dto';
 
 @Injectable({
   providedIn: 'root',
@@ -37,7 +37,7 @@ export class TransferApiService extends BaseService {
    */
   getTransfer$Response(params?: {
 
-  }): Observable<StrictHttpResponse<Array<Transfer>>> {
+  }): Observable<StrictHttpResponse<Array<TransferMutationDto>>> {
 
     const rb = new RequestBuilder(this.rootUrl, TransferApiService.GetTransferPath, 'get');
     if (params) {
@@ -50,7 +50,7 @@ export class TransferApiService extends BaseService {
     })).pipe(
       filter((r: any) => r instanceof HttpResponse),
       map((r: HttpResponse<any>) => {
-        return r as StrictHttpResponse<Array<Transfer>>;
+        return r as StrictHttpResponse<Array<TransferMutationDto>>;
       })
     );
   }
@@ -63,10 +63,10 @@ export class TransferApiService extends BaseService {
    */
   getTransfer(params?: {
 
-  }): Observable<Array<Transfer>> {
+  }): Observable<Array<TransferMutationDto>> {
 
     return this.getTransfer$Response(params).pipe(
-      map((r: StrictHttpResponse<Array<Transfer>>) => r.body as Array<Transfer>)
+      map((r: StrictHttpResponse<Array<TransferMutationDto>>) => r.body as Array<TransferMutationDto>)
     );
   }
 

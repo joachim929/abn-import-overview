@@ -2,22 +2,22 @@
 <form [formGroup]="form" class="column-container m-0">
   <mat-form-field>
     <mat-label>Account number</mat-label>
-    <input class="cursor-default" matInput readonly value="{{data.invoice.accountNumber}}">
+    <input class="cursor-default" matInput readonly value="{{data.transferMutation.accountNumber}}">
   </mat-form-field>
 
   <mat-form-field>
     <mat-label>Transaction date</mat-label>
-    <input class="cursor-default" matInput readonly [value]="data.invoice.transactionDate | date">
+    <input class="cursor-default" matInput readonly [value]="data.transferMutation.transactionDate | date">
   </mat-form-field>
 
   <mat-form-field>
     <mat-label>Start balance</mat-label>
-    <input class="cursor-default" matInput readonly [value]="data.invoice.startBalance | customCurrency">
+    <input class="cursor-default" matInput readonly [value]="data.transferMutation.startBalance | customCurrency">
   </mat-form-field>
 
   <mat-form-field>
     <mat-label>End balance</mat-label>
-    <input class="cursor-default" matInput readonly [value]="data.invoice.endBalance | customCurrency">
+    <input class="cursor-default" matInput readonly [value]="data.transferMutation.endBalance | customCurrency">
   </mat-form-field>
 
   <div class="invoice-form-pair">

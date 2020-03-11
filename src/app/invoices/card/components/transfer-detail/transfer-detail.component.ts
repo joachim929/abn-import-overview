@@ -6,11 +6,11 @@ import {CategoryDataService} from '../../../../core/services/category-data.servi
 import {BreakpointService} from '../../../../core/services/breakpoint.service';
 
 @Component({
-  selector: 'app-invoice-detail',
-  templateUrl: './invoice-detail.component.html',
-  styleUrls: ['./invoice-detail.component.scss']
+  selector: 'app-transfer-detail',
+  templateUrl: './transfer-detail.component.html',
+  styleUrls: ['./transfer-detail.component.scss']
 })
-export class InvoiceDetailComponent {
+export class TransferDetailComponent {
   @Input() invoice: InvoiceDto;
 
   constructor(
@@ -30,11 +30,11 @@ export class InvoiceDetailComponent {
   }
 
   patch(invoice: InvoiceDto) {
-    this.invoiceEditService.openEditDialog(invoice);
+    // this.invoiceEditService.openEditDialog(invoice);
   }
 
   split(invoice: InvoiceDto) {
-    this.invoiceEditService.openSplitDialog(invoice);
+    // this.invoiceEditService.openSplitDialog(invoice);
   }
 
   remove(invoiceId: number) {

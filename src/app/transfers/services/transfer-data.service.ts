@@ -1,13 +1,13 @@
 import {Injectable} from '@angular/core';
 import {BehaviorSubject, Observable} from 'rxjs';
 import {TransferApiService} from '../../swagger/services/transfer-api.service';
-import {Transfer} from '../../swagger/models';
+import {Transfer, TransferMutationDto} from '../../swagger/models';
 
 @Injectable()
 export class TransferDataService {
-  private transfers = new BehaviorSubject<Transfer[]>([]);
+  private transfers = new BehaviorSubject<TransferMutationDto[]>([]);
   private dataStore: {
-    transfers$: Transfer[]
+    transfers$: TransferMutationDto[]
   } = {
     transfers$: []
   };
@@ -18,11 +18,11 @@ export class TransferDataService {
     this.loadItems();
   }
 
-  get transfers$(): Observable<Transfer[]> {
+  get transfers$(): Observable<TransferMutationDto[]> {
     return this.transfers.asObservable();
   }
 
-  setTransfers(input: Transfer[]) {
+  setTransfers(input: TransferMutationDto[]) {
     this.dataStore.transfers$ = input;
     this.transfers.next(Object.assign({}, this.dataStore).transfers$);
   }

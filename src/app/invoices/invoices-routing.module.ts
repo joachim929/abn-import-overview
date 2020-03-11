@@ -1,8 +1,8 @@
 import {NgModule} from '@angular/core';
 import {Routes, RouterModule} from '@angular/router';
-import {TransferMasterComponent} from './components/invoices-master/transfer-master.component';
 import {CardModule} from './card/card.module';
 import {ListModule} from './list/list.module';
+import {TransferMasterComponent} from './components/transfer-master/transfer-master.component';
 
 const routes: Routes = [
   {

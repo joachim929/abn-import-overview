@@ -1,53 +1,47 @@
 import {Component, Inject, OnInit} from '@angular/core';
 import {MAT_DIALOG_DATA, MatDialogRef} from '@angular/material/dialog';
-import {InvoiceDto} from '../../../../swagger/models/invoice-dto';
 import {FormControl, FormGroup, Validators} from '@angular/forms';
 import {filter, map} from 'rxjs/operators';
 import {CategoryDataService} from '../../../../core/services/category-data.service';
 import {Observable} from 'rxjs';
 import {CategoryGroupDto} from '../../../../swagger/models/category-group-dto';
-
-export interface InvoicesSplitDetail {
-  ocInvoice: InvoiceDto;
-  splitInvoice: InvoiceDto;
-}
+import {TransferMutationDto} from '../../../../swagger/models/transfer-mutation-dto';
 
 @Component({
-  selector: 'app-invoices-split-detail-modal',
-  templateUrl: './invoices-split-detail-modal.component.html',
+  selector: 'app-transfer-split-detail-modal',
+  templateUrl: './transfer-split-detail-modal.component.html',
   styleUrls: [
-    './invoices-split-detail-modal.component.scss',
+    './transfer-split-detail-modal.component.scss',
     '../../shared/transfer-dialog.styles.scss'
   ]
 })
-export class InvoicesSplitDetailModalComponent implements OnInit {
+export class TransferSplitDetailModalComponent implements OnInit {
   form: FormGroup;
-  ocInvoice: InvoiceDto;
+  ocInvoice: TransferMutationDto;
   ocAmount: number;
   categories$: Observable<CategoryGroupDto[]>;
 
   constructor(
-    public dialogRef: MatDialogRef<InvoicesSplitDetailModalComponent>,
-    @Inject(MAT_DIALOG_DATA) public data: { invoice: InvoiceDto },
+    public dialogRef: MatDialogRef<TransferSplitDetailModalComponent>,
+    @Inject(MAT_DIALOG_DATA) public data: { transferMutation: TransferMutationDto },
     private categoryDataService: CategoryDataService
   ) {
     this.form = new FormGroup({
       id: new FormControl(),
-      originalId: new FormControl(this.data.invoice.originalId),
-      accountNumber: new FormControl(this.data.invoice.accountNumber),
-      mutationCode: new FormControl(this.data.invoice.mutationCode),
-      transactionDate: new FormControl(this.data.invoice.transactionDate),
-      startBalance: new FormControl(this.data.invoice.startBalance),
-      endBalance: new FormControl(this.data.invoice.endBalance),
+      originalId: new FormControl(this.data.transferMutation.id),
+      accountNumber: new FormControl(this.data.transferMutation.accountNumber),
+      mutationCode: new FormControl(this.data.transferMutation.currencyCode),
+      transactionDate: new FormControl(this.data.transferMutation.transactionDate),
+      startBalance: new FormControl(this.data.transferMutation.startBalance),
+      endBalance: new FormControl(this.data.transferMutation.endBalance),
       amount: new FormControl(0, [Validators.required]),
-      description: new FormControl(this.data.invoice.description, [Validators.required]),
-      comment: new FormControl(this.data.invoice.comment || null, [Validators.required]),
-      categoryId: new FormControl(this.data.invoice.categoryId || null),
-      userId: new FormControl(this.data.invoice.userId || null)
+      description: new FormControl(this.data.transferMutation.description, [Validators.required]),
+      comment: new FormControl(this.data.transferMutation.comment || null, [Validators.required]),
+      categoryId: new FormControl(this.data.transferMutation.categoryId || null)
     });
 
-    this.ocInvoice = {...data.invoice};
-    this.ocAmount = data.invoice.amount;
+    this.ocInvoice = {...data.transferMutation};
+    this.ocAmount = data.transferMutation.amount;
 
     this.form.get('amount').valueChanges
       .pipe(map(x => Number(x)),

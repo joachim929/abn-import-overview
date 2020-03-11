@@ -1,12 +1,12 @@
 import {Component, OnInit, ViewChild} from '@angular/core';
 import {TransferDataService} from '../../../services/transfer-data.service';
 import {Observable} from 'rxjs';
-import {InvoiceDto} from '../../../../swagger/models/invoice-dto';
 import {MatSort} from '@angular/material/sort';
 import {MatTableDataSource} from '@angular/material/table';
 import {animate, state, style, transition, trigger} from '@angular/animations';
 import {TransferEditService} from '../../../services/transfer-edit.service';
 import {BreakpointService} from '../../../../core/services/breakpoint.service';
+import {TransferMutationDto} from '../../../../swagger/models/transfer-mutation-dto';
 
 @Component({
   selector: 'app-list-master',
@@ -24,7 +24,7 @@ export class ListMasterComponent implements OnInit {
   recordCount$: Observable<number>;
   displayedColumns: string[] = ['transactionDate', 'amount', 'startBalance', 'endBalance', 'delete'];
   dataSource = new MatTableDataSource();
-  expandedElement: InvoiceDto | null;
+  expandedElement: TransferMutationDto | null;
   headerColumns = {
     transactionDate: 'Transaction date',
     amount: 'Amount',
@@ -36,15 +36,15 @@ export class ListMasterComponent implements OnInit {
   @ViewChild(MatSort, {static: true}) sort: MatSort;
 
   constructor(
-    private invoiceDataService: TransferDataService,
-    private invoiceEditService: TransferEditService,
+    private transferDataService: TransferDataService,
+    private transferEditService: TransferEditService,
     private breakpointService: BreakpointService
   ) {
-    this.invoiceDataService.transfers.subscribe((invoices) => {
-      this.dataSource.data = invoices;
+    this.transferDataService.newTransfers.subscribe((transferMutations: TransferMutationDto[]) => {
+      this.dataSource.data = transferMutations;
       this.dataSource.sort = this.sort;
     });
-    this.recordCount$ = this.invoiceDataService.recordCount;
+    this.recordCount$ = this.transferDataService.recordCount;
   }
 
   ngOnInit() {
@@ -55,21 +55,23 @@ export class ListMasterComponent implements OnInit {
   }
 
   loadMore() {
-    // this.invoiceDataService.loadMore();
+    console.log('WIP');
+    // this.transferDataService.loadNew();
   }
 
-  patch(event, invoice: InvoiceDto) {
+  patch(event, transferMutation: TransferMutationDto) {
     event.stopPropagation();
-    this.invoiceEditService.openEditDialog(invoice);
+    this.transferEditService.openEditDialog(transferMutation);
   }
 
-  split(event, invoice: InvoiceDto) {
+  split(event, transferMutation: TransferMutationDto) {
     event.stopPropagation();
-    this.invoiceEditService.openSplitDialog(invoice);
+    this.transferEditService.openSplitDialog(transferMutation);
   }
 
-  remove(event, invoiceId: number) {
-    event.stopPropagation();
-    // this.invoiceDataService.removeInvoice(invoiceId);
+  remove(event, transferMutationId: number) {
+    console.log('WIP');
+    // event.stopPropagation();
+    // this.transferDataService.removeInvoice(transferMutationId);
   }
 }

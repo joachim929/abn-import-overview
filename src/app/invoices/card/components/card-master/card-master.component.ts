@@ -27,5 +27,4 @@ export class CardMasterComponent implements OnInit {
   loadMore() {
     // this.transferDataService.loadMore();
   }
-
 }

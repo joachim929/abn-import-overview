@@ -10,7 +10,6 @@ export class HeaderComponent implements OnInit {
     // {path: '/dashboard', label: 'Dashboard'},
     // {path: '/reports', label: 'Reports'},
     {path: '/transfers', label: 'Transfers'},
-    {path: '/invoices', label: 'Invoices'},
     {path: '/categories', label: 'Categories'},
     {path: '/rules', label: 'Rules'},
     {path: '/imports/all', label: 'Show all'},

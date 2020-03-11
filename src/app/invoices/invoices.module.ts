@@ -3,7 +3,6 @@ import {CommonModule} from '@angular/common';
 
 import {InvoicesRoutingModule} from './invoices-routing.module';
 import {SharedModule} from '../shared/shared.module';
-import {TransferMasterComponent} from './components/invoices-master/transfer-master.component';
 import {MatButtonModule} from '@angular/material/button';
 import {MatCardModule} from '@angular/material/card';
 import {MatIconModule} from '@angular/material/icon';
@@ -24,6 +23,7 @@ import {TransferFilterService} from './services/transfer-filter.service';
 import {MatTabsModule} from '@angular/material/tabs';
 import {MatToolbarModule} from '@angular/material/toolbar';
 import {TransferFilterComponent} from './components/transfer-filter/transfer-filter.component';
+import {TransferMasterComponent} from './components/transfer-master/transfer-master.component';
 
 
 @NgModule({

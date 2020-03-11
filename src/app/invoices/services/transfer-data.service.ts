@@ -2,7 +2,7 @@ import {Injectable} from '@angular/core';
 import {InvoiceDto} from '../../swagger/models/invoice-dto';
 import {BehaviorSubject, Observable} from 'rxjs';
 import * as XLSX from 'xlsx';
-import {Invoice, Transfer} from '../../swagger/models';
+import {Invoice, Transfer, TransferMutationDto} from '../../swagger/models';
 import {switchMap} from 'rxjs/operators';
 import {TransferApiService} from '../../swagger/services/transfer-api.service';
 
@@ -11,7 +11,7 @@ import {TransferApiService} from '../../swagger/services/transfer-api.service';
 export class TransferDataService {
 
   private transfers$ = new BehaviorSubject<InvoiceDto[]>([]);
-  private newTransfers$ = new BehaviorSubject<Transfer[]>([]);
+  private newTransfers$ = new BehaviorSubject<TransferMutationDto[]>([]);
   private selectedTransfer$ = new BehaviorSubject<InvoiceDto>(null);
   private minAmount$ = new BehaviorSubject<number>(null);
   private maxAmount$ = new BehaviorSubject<number>(null);
@@ -21,7 +21,7 @@ export class TransferDataService {
   // Initial value
   private dataStore: {
     transfer: InvoiceDto[],
-    newTransfer: Transfer[],
+    newTransfer: TransferMutationDto[],
     selectedTransfer: InvoiceDto,
     minAmount: number,
     maxAmount: number,
@@ -35,7 +35,7 @@ export class TransferDataService {
     minAmount: 0,
     maxAmount: 0,
     recordCount: 0,
-    skip: null,
+    skip: null
     // filter: null
   };
 
@@ -51,15 +51,15 @@ export class TransferDataService {
   // }
 
   // adjustFilter(input: InvoiceFilteredDto) {
-    // this.dataStore.filter = input;
-    // this.filter$.next(Object.assign({}, this.dataStore).filter);
-    // this.invoiceApiService.filteredInvoices({body: input}).subscribe((data: InvoiceFilteredDto) => {
-    //   this.setTransfers(data.records);
-    //   this.setMinAmount(data.minAmount);
-    //   this.setMaxAmount(data.maxAmount);
-    //   this.setRecordCount(data.count);
-    //   this.setSkip(data.records.length + this.dataStore.skip);
-    // });
+  // this.dataStore.filter = input;
+  // this.filter$.next(Object.assign({}, this.dataStore).filter);
+  // this.invoiceApiService.filteredInvoices({body: input}).subscribe((data: InvoiceFilteredDto) => {
+  //   this.setTransfers(data.records);
+  //   this.setMinAmount(data.minAmount);
+  //   this.setMaxAmount(data.maxAmount);
+  //   this.setRecordCount(data.count);
+  //   this.setSkip(data.records.length + this.dataStore.skip);
+  // });
   // }
 
   loadNew() {
@@ -85,6 +85,10 @@ export class TransferDataService {
   //     this.setSkip(data.records.length + this.dataStore.skip);
   //   });
   // }
+
+  get newTransfers(): Observable<TransferMutationDto[]> {
+    return this.newTransfers$.asObservable();
+  }
 
   get transfers(): Observable<InvoiceDto[]> {
     return this.transfers$.asObservable();

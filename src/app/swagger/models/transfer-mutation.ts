@@ -3,6 +3,7 @@ import { Transfer } from './transfer';
 export interface TransferMutation {
   active: boolean;
   amount: number;
+  categoryId?: number;
   children: Array<TransferMutation>;
   comment: string;
   createdAt: string;

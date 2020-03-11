@@ -1,17 +1,17 @@
 <h2 class="m-0">Edit invoice</h2>
 <dl class="invoice-edit-detail-readonly-container">
   <dt>Account number</dt>
-  <dd>{{data.invoice.accountNumber}}</dd>
+  <dd>{{data.transferMutation.accountNumber}}</dd>
   <dt>Currency</dt>
-  <dd>{{data.invoice.mutationCode}}</dd>
+  <dd>{{data.transferMutation.currencyCode}}</dd>
   <dt>Transaction date</dt>
-  <dd>{{data.invoice.transactionDate | date}}</dd>
+  <dd>{{data.transferMutation.transactionDate | date}}</dd>
   <dt>Start balance</dt>
-  <dd>{{data.invoice.startBalance | customCurrency}}</dd>
+  <dd>{{data.transferMutation.startBalance | customCurrency}}</dd>
   <dt>End balance</dt>
-  <dd>{{data.invoice.endBalance | customCurrency}}</dd>
+  <dd>{{data.transferMutation.endBalance | customCurrency}}</dd>
   <dt>Amount</dt>
-  <dd>{{data.invoice.amount | customCurrency}}</dd>
+  <dd>{{data.transferMutation.amount | customCurrency}}</dd>
 </dl>
 <form [formGroup]="form" class="column-container">
   <mat-form-field>

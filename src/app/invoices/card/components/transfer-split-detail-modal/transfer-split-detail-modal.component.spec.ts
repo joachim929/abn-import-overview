@@ -1,20 +1,20 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { InvoicesSplitDetailModalComponent } from './invoices-split-detail-modal.component';
+import { TransferSplitDetailModalComponent } from './transfer-split-detail-modal.component';
 
 describe('InvoicesSplitDetailModalComponent', () => {
-  let component: InvoicesSplitDetailModalComponent;
-  let fixture: ComponentFixture<InvoicesSplitDetailModalComponent>;
+  let component: TransferSplitDetailModalComponent;
+  let fixture: ComponentFixture<TransferSplitDetailModalComponent>;
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ InvoicesSplitDetailModalComponent ]
+      declarations: [ TransferSplitDetailModalComponent ]
     })
     .compileComponents();
   }));
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(InvoicesSplitDetailModalComponent);
+    fixture = TestBed.createComponent(TransferSplitDetailModalComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

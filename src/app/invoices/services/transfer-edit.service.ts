@@ -1,53 +1,55 @@
 import {Injectable} from '@angular/core';
-import {InvoiceDto} from '../../swagger/models/invoice-dto';
-import {InvoicesEditDetailModalComponent} from '../card/components/invoices-edit-detail-modal/invoices-edit-detail-modal.component';
-import {filter, switchMap} from 'rxjs/operators';
+import {TransferEditDetailModalComponent} from '../card/components/transfer-edit-detail-modal/transfer-edit-detail-modal.component';
+import {filter} from 'rxjs/operators';
 import {TransferDataService} from './transfer-data.service';
 import {MatDialog} from '@angular/material/dialog';
-import {InvoicesSplitDetailModalComponent} from '../card/components/invoices-split-detail-modal/invoices-split-detail-modal.component';
+import {TransferSplitDetailModalComponent} from '../card/components/transfer-split-detail-modal/transfer-split-detail-modal.component';
+import {TransferMutationDto} from '../../swagger/models/transfer-mutation-dto';
 
 @Injectable()
 export class TransferEditService {
 
   constructor(
     // private invoiceApiService: InvoiceApiService,
-    private invoiceDataService: TransferDataService,
+    private transferDataService: TransferDataService,
     private dialog: MatDialog
   ) {
   }
 
-  openEditDialog(invoice: InvoiceDto) {
-    const dialog = this.dialog.open(InvoicesEditDetailModalComponent, {
+  openEditDialog(transferMutation: TransferMutationDto) {
+    const dialog = this.dialog.open(TransferEditDetailModalComponent, {
       width: '800px',
       maxWidth: '95vw',
       maxHeight: '95vh',
-      data: {invoice}
+      data: {transferMutation}
     });
 
     dialog.afterClosed().pipe(
-      filter(x => !!x),
+      filter(x => !!x)
       // switchMap(x => {
-        // return this.invoiceApiService.patchInvoice({body: x});
+      // return this.invoiceApiService.patchInvoice({body: x});
       // })
-    ).subscribe((editedInvoice: InvoiceDto) => this.invoiceDataService.updateInvoice(editedInvoice));
+    ).subscribe((editedTransferMutation: TransferMutationDto) => console.log(editedTransferMutation));
+    // this.transferDataService.updateInvoice(editedInvoice));
   }
 
-  openSplitDialog(invoice: InvoiceDto) {
+  openSplitDialog(transferMutation: TransferMutationDto) {
 
-    // const dialog = this.dialog.open(InvoicesSplitDetailModalComponent, {
-    //   width: '800px',
-    //   maxWidth: '95vw',
-    //   maxHeight: '95vh',
-    //   data: {invoice}
-    // });
+    const dialog = this.dialog.open(TransferSplitDetailModalComponent, {
+      width: '800px',
+      maxWidth: '95vw',
+      maxHeight: '95vh',
+      data: {transferMutation}
+    });
 
-    // dialog.afterClosed().pipe(
-    //   filter(x => !!x),
+    dialog.afterClosed().pipe(
+      // filter(x => !!x),
       // switchMap(x => {
       //   return this.invoiceApiService.splitInvoice({body: x}).pipe(
       //     filter(y => !!y)
       //   );
       // })
-    // ).subscribe((editedInvoices: SplitInvoiceDto) => this.invoiceDataService.updateAndAddInvoice(editedInvoices));
+    ).subscribe((editedTransfers) => console.log(editedTransfers));
+    // this.transferDataService.updateAndAddInvoice(editedInvoices));
   }
 }
