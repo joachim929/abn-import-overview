@@ -10,11 +10,11 @@ import {isEqual} from 'lodash';
 import {InvoiceFilterControlNames, TransferFilterService} from '../../services/transfer-filter.service';
 
 @Component({
-  selector: 'app-invoice-filter',
-  templateUrl: './invoice-filter.component.html',
-  styleUrls: ['./invoice-filter.component.scss']
+  selector: 'app-transfer-filter',
+  templateUrl: './transfer-filter.component.html',
+  styleUrls: ['./transfer-filter.component.scss']
 })
-export class InvoiceFilterComponent implements OnInit {
+export class TransferFilterComponent implements OnInit {
   filterForm: FormGroup = new FormGroup({
     date: new FormGroup({
       from: new FormControl(),

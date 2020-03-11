@@ -1,20 +1,20 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { InvoiceFilterComponent } from './invoice-filter.component';
+import { TransferFilterComponent } from './transfer-filter.component';
 
 describe('InvoiceFilterComponent', () => {
-  let component: InvoiceFilterComponent;
-  let fixture: ComponentFixture<InvoiceFilterComponent>;
+  let component: TransferFilterComponent;
+  let fixture: ComponentFixture<TransferFilterComponent>;
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ InvoiceFilterComponent ]
+      declarations: [ TransferFilterComponent ]
     })
     .compileComponents();
   }));
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(InvoiceFilterComponent);
+    fixture = TestBed.createComponent(TransferFilterComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

@@ -1,6 +1,6 @@
 import {NgModule} from '@angular/core';
 import {Routes, RouterModule} from '@angular/router';
-import {InvoicesMasterComponent} from './components/invoices-master/invoices-master.component';
+import {TransferMasterComponent} from './components/invoices-master/transfer-master.component';
 import {CardModule} from './card/card.module';
 import {ListModule} from './list/list.module';
 
@@ -10,7 +10,7 @@ const routes: Routes = [
   },
   {
     path: '',
-    component: InvoicesMasterComponent,
+    component: TransferMasterComponent,
     children: [
       {path: 'card', loadChildren: () => import('./card/card.module').then(m => CardModule)},
       {path: 'list', loadChildren: () => import('./list/list.module').then(m => ListModule)}

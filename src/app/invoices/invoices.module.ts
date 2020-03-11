@@ -3,14 +3,13 @@ import {CommonModule} from '@angular/common';
 
 import {InvoicesRoutingModule} from './invoices-routing.module';
 import {SharedModule} from '../shared/shared.module';
-import {InvoicesMasterComponent} from './components/invoices-master/invoices-master.component';
+import {TransferMasterComponent} from './components/invoices-master/transfer-master.component';
 import {MatButtonModule} from '@angular/material/button';
 import {MatCardModule} from '@angular/material/card';
 import {MatIconModule} from '@angular/material/icon';
 import {MatFormFieldModule} from '@angular/material/form-field';
 import {ReactiveFormsModule} from '@angular/forms';
 import {MatInputModule} from '@angular/material/input';
-import {InvoiceFilterComponent} from './components/invoice-filter/invoice-filter.component';
 import {TransferDataService} from './services/transfer-data.service';
 import {CustomCurrencyPipe} from '../shared/pipes/custom-currency.pipe';
 import {MatSelectModule} from '@angular/material/select';
@@ -24,12 +23,13 @@ import {TransferEditService} from './services/transfer-edit.service';
 import {TransferFilterService} from './services/transfer-filter.service';
 import {MatTabsModule} from '@angular/material/tabs';
 import {MatToolbarModule} from '@angular/material/toolbar';
+import {TransferFilterComponent} from './components/transfer-filter/transfer-filter.component';
 
 
 @NgModule({
   declarations: [
-    InvoicesMasterComponent,
-    InvoiceFilterComponent
+    TransferMasterComponent,
+    TransferFilterComponent
   ],
   imports: [
     CommonModule,

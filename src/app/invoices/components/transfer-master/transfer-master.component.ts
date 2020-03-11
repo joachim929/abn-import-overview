@@ -5,11 +5,11 @@ import {TransferDataService} from '../../services/transfer-data.service';
 import {BreakpointService} from '../../../core/services/breakpoint.service';
 
 @Component({
-  selector: 'app-invoices-master',
-  templateUrl: './invoices-master.component.html',
-  styleUrls: ['./invoices-master.component.scss']
+  selector: 'app-transfer-master',
+  templateUrl: './transfer-master.component.html',
+  styleUrls: ['./transfer-master.component.scss']
 })
-export class InvoicesMasterComponent implements OnInit {
+export class TransferMasterComponent implements OnInit {
   file: File;
   invoices$: Observable<InvoiceDto[]>;
   recordCount$: Observable<number>;
