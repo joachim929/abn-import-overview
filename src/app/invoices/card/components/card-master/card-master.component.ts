@@ -2,6 +2,7 @@ import {Component, OnInit} from '@angular/core';
 import {Observable} from 'rxjs';
 import {InvoiceDto} from '../../../../swagger/models/invoice-dto';
 import {TransferDataService} from '../../../services/transfer-data.service';
+import {TransferMutationDto} from '../../../../swagger/models/transfer-mutation-dto';
 
 @Component({
   selector: 'app-card-master',
@@ -9,15 +10,15 @@ import {TransferDataService} from '../../../services/transfer-data.service';
   styleUrls: ['./card-master.component.scss']
 })
 export class CardMasterComponent implements OnInit {
-  invoices$: Observable<InvoiceDto[]>;
+  transferMutations$: Observable<TransferMutationDto[]>;
   recordCount$: Observable<number>;
-  selectedInvoice$: Observable<InvoiceDto>;
+  selectedTransferMutation$: Observable<InvoiceDto>;
 
   constructor(
     private transferDataService: TransferDataService
   ) {
-    this.invoices$ = this.transferDataService.transfers;
-    this.selectedInvoice$ = this.transferDataService.selectedTransfer;
+    this.transferMutations$ = this.transferDataService.newTransfers;
+    this.selectedTransferMutation$ = this.transferDataService.selectedTransfer;
     this.recordCount$ = this.transferDataService.recordCount;
   }
 
