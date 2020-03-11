@@ -37,7 +37,7 @@ export class InvoicesMasterComponent implements OnInit {
   }
 
   upload() {
-    this.invoiceDataService.multiUploadExcel(this.file);
+    // this.invoiceDataService.multiUploadExcel(this.file);
   }
 
   cancelUpload() {

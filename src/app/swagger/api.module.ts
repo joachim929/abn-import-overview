@@ -7,7 +7,6 @@ import { CategoryApiService } from './services/category-api.service';
 import { RulesApiService } from './services/rules-api.service';
 import { CategoryGroupApiService } from './services/category-group-api.service';
 import { UserApiService } from './services/user-api.service';
-import { InvoiceApiService } from './services/invoice-api.service';
 import { TransferApiService } from './services/transfer-api.service';
 
 /**
@@ -22,7 +21,6 @@ import { TransferApiService } from './services/transfer-api.service';
     RulesApiService,
     CategoryGroupApiService,
     UserApiService,
-    InvoiceApiService,
     TransferApiService,
     ApiConfiguration
   ],

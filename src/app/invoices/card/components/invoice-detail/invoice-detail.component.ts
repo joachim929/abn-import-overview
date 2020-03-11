@@ -38,7 +38,7 @@ export class InvoiceDetailComponent {
   }
 
   remove(invoiceId: number) {
-    this.invoiceDataService.removeInvoice(invoiceId);
+    // this.invoiceDataService.removeInvoice(invoiceId);
   }
 
 }

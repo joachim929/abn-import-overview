@@ -1,7 +1,6 @@
 import {Injectable} from '@angular/core';
 import {FormControl, FormGroup} from '@angular/forms';
 import * as moment from 'moment';
-import {InvoiceFilteredDto} from '../../swagger/models/invoice-filtered-dto';
 
 export type InvoiceFilterControlNames =
   'date.from' |
@@ -32,18 +31,18 @@ export class TransferFilterService {
     return group.get(name) as FormControl;
   }
 
-  buildParams(formGroup): InvoiceFilteredDto {
-    return {
-      endDate: this.formatDate(this.getControl(formGroup, 'date.to')),
-      startDate: this.formatDate(this.getControl(formGroup, 'date.from')),
-      skip: 0,
-      maxAmount: this.formatNumber(this.getControl(formGroup, 'maxAmount')),
-      minAmount: this.formatNumber(this.getControl(formGroup, 'minAmount')),
-      categoryId: this.getControl(formGroup, 'categories').value || null,
-      limit: 20,
-      order: 'ASC'
-    };
-  }
+  // buildParams(formGroup): InvoiceFilteredDto {
+  //   return {
+  //     endDate: this.formatDate(this.getControl(formGroup, 'date.to')),
+  //     startDate: this.formatDate(this.getControl(formGroup, 'date.from')),
+  //     skip: 0,
+  //     maxAmount: this.formatNumber(this.getControl(formGroup, 'maxAmount')),
+  //     minAmount: this.formatNumber(this.getControl(formGroup, 'minAmount')),
+  //     categoryId: this.getControl(formGroup, 'categories').value || null,
+  //     limit: 20,
+  //     order: 'ASC'
+  //   };
+  // }
 
   private formatDate(control: FormControl): string {
     return control.value ? moment(control.value).format('x') : null;

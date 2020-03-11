@@ -64,6 +64,7 @@ export class TransferApiService extends BaseService {
   getTransfer(params?: {
 
   }): Observable<Array<Transfer>> {
+
     return this.getTransfer$Response(params).pipe(
       map((r: StrictHttpResponse<Array<Transfer>>) => r.body as Array<Transfer>)
     );

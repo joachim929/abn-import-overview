@@ -7,10 +7,8 @@ export interface TransferMutation {
   comment: string;
   createdAt: string;
   description: string;
-  endBalance: number;
   id: number;
   parent: TransferMutation;
-  startBalance: number;
   transfer: Transfer;
   updatedAt: string;
 }

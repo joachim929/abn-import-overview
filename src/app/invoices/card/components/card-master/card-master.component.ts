@@ -14,18 +14,18 @@ export class CardMasterComponent implements OnInit {
   selectedInvoice$: Observable<InvoiceDto>;
 
   constructor(
-    private invoiceDataService: TransferDataService
+    private transferDataService: TransferDataService
   ) {
-    this.invoices$ = this.invoiceDataService.transfers;
-    this.selectedInvoice$ = this.invoiceDataService.selectedTransfer;
-    this.recordCount$ = this.invoiceDataService.recordCount;
+    this.invoices$ = this.transferDataService.transfers;
+    this.selectedInvoice$ = this.transferDataService.selectedTransfer;
+    this.recordCount$ = this.transferDataService.recordCount;
   }
 
   ngOnInit() {
   }
 
   loadMore() {
-    this.invoiceDataService.loadMore();
+    // this.transferDataService.loadMore();
   }
 
 }

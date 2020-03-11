@@ -55,7 +55,7 @@ export class ListMasterComponent implements OnInit {
   }
 
   loadMore() {
-    this.invoiceDataService.loadMore();
+    // this.invoiceDataService.loadMore();
   }
 
   patch(event, invoice: InvoiceDto) {
@@ -70,6 +70,6 @@ export class ListMasterComponent implements OnInit {
 
   remove(event, invoiceId: number) {
     event.stopPropagation();
-    this.invoiceDataService.removeInvoice(invoiceId);
+    // this.invoiceDataService.removeInvoice(invoiceId);
   }
 }

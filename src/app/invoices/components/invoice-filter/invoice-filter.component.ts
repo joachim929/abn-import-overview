@@ -7,7 +7,6 @@ import {debounceTime, distinctUntilChanged, filter, map} from 'rxjs/operators';
 import * as moment from 'moment';
 import {TransferDataService} from '../../services/transfer-data.service';
 import {isEqual} from 'lodash';
-import {InvoiceFilteredDto} from '../../../swagger/models/invoice-filtered-dto';
 import {InvoiceFilterControlNames, TransferFilterService} from '../../services/transfer-filter.service';
 
 @Component({
@@ -33,7 +32,7 @@ export class InvoiceFilterComponent implements OnInit {
   minAmount;
   maxAmount;
   recordCount$: Observable<number>;
-  defaultParams: InvoiceFilteredDto;
+  // defaultParams: InvoiceFilteredDto;
 
   constructor(
     private categoryDataService: CategoryDataService,
@@ -43,7 +42,7 @@ export class InvoiceFilterComponent implements OnInit {
     this.getControl('minAmount').disable({emitEvent: false});
     this.getControl('maxAmount').disable({emitEvent: false});
     this.today = moment().endOf('day').toDate();
-    this.defaultParams = this.invoiceFilterService.buildParams(this.filterForm);
+    // this.defaultParams = this.invoiceFilterService.buildParams(this.filterForm);
   }
 
   get names() {
@@ -51,7 +50,7 @@ export class InvoiceFilterComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.invoiceDataService.adjustFilter(this.defaultParams);
+    // this.invoiceDataService.adjustFilter(this.defaultParams);
     this.getControl('maxAmountToggle').valueChanges.subscribe(next =>
       next ?
         this.getControl('maxAmount').enable({emitEvent: false}) :
@@ -68,8 +67,8 @@ export class InvoiceFilterComponent implements OnInit {
       debounceTime(500),
       distinctUntilChanged((a, b) => isEqual(a, b))
     ).subscribe((next) => {
-      const params = this.invoiceFilterService.buildParams(this.filterForm);
-      this.invoiceDataService.adjustFilter(params);
+      // const params = this.invoiceFilterService.buildParams(this.filterForm);
+      // this.invoiceDataService.adjustFilter(params);
     });
 
     this.invoiceDataService.minAmount.subscribe((next) => this.minAmount = next);
