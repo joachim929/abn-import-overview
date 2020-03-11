@@ -1,4 +1,5 @@
-<app-transfer-detail *ngFor="let transferMutation of transferMutations$ | async; let index = index;" [invoice]="transferMutation">
+<app-transfer-detail *ngFor="let transferMutation of transferMutations$ | async; let index = index;"
+                     [transferMutation]="transferMutation">
 </app-transfer-detail>
 <button *ngIf="(transferMutations$ | async).length !== (recordCount$ | async)"
         style="margin: 0.5em;" mat-raised-button color="primary"

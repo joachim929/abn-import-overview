@@ -11,7 +11,7 @@ import {TransferMutationDto} from '../../../../swagger/models/transfer-mutation-
   styleUrls: ['./transfer-detail.component.scss']
 })
 export class TransferDetailComponent {
-  @Input() invoice: TransferMutationDto;
+  @Input() transferMutation: TransferMutationDto;
 
   constructor(
     private transferDataService: TransferDataService,
@@ -40,5 +40,4 @@ export class TransferDetailComponent {
   remove(transferMutationId: number) {
     // this.transferDataService.removeInvoice(transferMutationId);
   }
-
 }

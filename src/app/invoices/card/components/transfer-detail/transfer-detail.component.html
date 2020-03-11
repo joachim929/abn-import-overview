@@ -1,32 +1,32 @@
 <mat-card class="invoice-item" [class.is-x-small]="isXSmall">
   <div class="invoice-detail-container">
-    <p>Account number: {{invoice.accountNumber}}</p>
-    <p>Amount: {{invoice.amount | customCurrency}}</p>
-    <p>Description: {{invoice.description}}</p>
-    <p>Comment: {{invoice.comment}}</p>
-    <p>Start balance: {{invoice.startBalance | customCurrency}}</p>
-    <p>End balance: {{invoice.endBalance | customCurrency}}</p>
-    <p>Transaction date: {{invoice.transactionDate | date}}</p>
-    <p *ngIf="invoice.categoryId">Category:
+    <p>Account number: {{transferMutation.accountNumber}}</p>
+    <p>Amount: {{transferMutation.amount | customCurrency}}</p>
+    <p>Description: {{transferMutation.description}}</p>
+    <p>Comment: {{transferMutation.comment}}</p>
+    <p>Start balance: {{transferMutation.startBalance | customCurrency}}</p>
+    <p>End balance: {{transferMutation.endBalance | customCurrency}}</p>
+    <p>Transaction date: {{transferMutation.transactionDate | date}}</p>
+    <p *ngIf="transferMutation.categoryId">Category:
       <ng-container *ngFor="let categoryGroup of categories$ | async">
-        <span *ngIf="categoryGroup.id === invoice.categoryId">{{categoryGroup.name}}</span>
+        <span *ngIf="categoryGroup.id === transferMutation.categoryId">{{categoryGroup.name}}</span>
       </ng-container>
     </p>
   </div>
   <div class="invoice-controls-container" [class.is-x-small]="isXSmall">
     <div class="invoice-edit-controls">
-      <button (click)="patch(invoice)"
+      <button (click)="patch(transferMutation)"
               aria-label="Edit button"
               mat-icon-button>
         <mat-icon>edit</mat-icon>
       </button>
-      <button (click)="split(invoice)"
+      <button (click)="split(transferMutation)"
               aria-label="Split button"
               mat-icon-button>
         <mat-icon>file_copy</mat-icon>
       </button>
     </div>
-    <button (click)="remove(invoice.id)"
+    <button (click)="remove(transferMutation.mutationId)"
             aria-label="Delete button"
             mat-icon-button
             color="warn">
