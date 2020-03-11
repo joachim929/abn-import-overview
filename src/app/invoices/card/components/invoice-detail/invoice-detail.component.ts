@@ -1,7 +1,7 @@
 import {Component, Input} from '@angular/core';
 import {InvoiceDto} from '../../../../swagger/models/invoice-dto';
-import {InvoiceDataService} from '../../../services/invoice-data.service';
-import {InvoiceEditService} from '../../../services/invoice-edit.service';
+import {TransferDataService} from '../../../services/transfer-data.service';
+import {TransferEditService} from '../../../services/transfer-edit.service';
 import {CategoryDataService} from '../../../../core/services/category-data.service';
 import {BreakpointService} from '../../../../core/services/breakpoint.service';
 
@@ -14,8 +14,8 @@ export class InvoiceDetailComponent {
   @Input() invoice: InvoiceDto;
 
   constructor(
-    private invoiceDataService: InvoiceDataService,
-    private invoiceEditService: InvoiceEditService,
+    private invoiceDataService: TransferDataService,
+    private invoiceEditService: TransferEditService,
     private categoryDataService: CategoryDataService,
     private breakpointService: BreakpointService
   ) {

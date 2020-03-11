@@ -3,17 +3,17 @@ import {InvoiceDto} from '../../swagger/models/invoice-dto';
 import {InvoicesEditDetailModalComponent} from '../card/components/invoices-edit-detail-modal/invoices-edit-detail-modal.component';
 import {filter, switchMap} from 'rxjs/operators';
 import {InvoiceApiService} from '../../swagger/services/invoice-api.service';
-import {InvoiceDataService} from './invoice-data.service';
+import {TransferDataService} from './transfer-data.service';
 import {MatDialog} from '@angular/material/dialog';
 import {InvoicesSplitDetailModalComponent} from '../card/components/invoices-split-detail-modal/invoices-split-detail-modal.component';
 import {SplitInvoiceDto} from '../../swagger/models/split-invoice-dto';
 
 @Injectable()
-export class InvoiceEditService {
+export class TransferEditService {
 
   constructor(
     private invoiceApiService: InvoiceApiService,
-    private invoiceDataService: InvoiceDataService,
+    private invoiceDataService: TransferDataService,
     private dialog: MatDialog
   ) {
   }

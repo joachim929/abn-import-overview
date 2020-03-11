@@ -5,10 +5,10 @@ import {Observable} from 'rxjs';
 import {CategoryGroupDto} from '../../../swagger/models/category-group-dto';
 import {debounceTime, distinctUntilChanged, filter, map} from 'rxjs/operators';
 import * as moment from 'moment';
-import {InvoiceDataService} from '../../services/invoice-data.service';
+import {TransferDataService} from '../../services/transfer-data.service';
 import {isEqual} from 'lodash';
 import {InvoiceFilteredDto} from '../../../swagger/models/invoice-filtered-dto';
-import {InvoiceFilterControlNames, InvoiceFilterService} from '../../services/invoice-filter.service';
+import {InvoiceFilterControlNames, TransferFilterService} from '../../services/transfer-filter.service';
 
 @Component({
   selector: 'app-invoice-filter',
@@ -37,8 +37,8 @@ export class InvoiceFilterComponent implements OnInit {
 
   constructor(
     private categoryDataService: CategoryDataService,
-    private invoiceDataService: InvoiceDataService,
-    private invoiceFilterService: InvoiceFilterService
+    private invoiceDataService: TransferDataService,
+    private invoiceFilterService: TransferFilterService
   ) {
     this.getControl('minAmount').disable({emitEvent: false});
     this.getControl('maxAmount').disable({emitEvent: false});
@@ -72,9 +72,9 @@ export class InvoiceFilterComponent implements OnInit {
       this.invoiceDataService.adjustFilter(params);
     });
 
-    this.invoiceDataService.minAmount$.subscribe((next) => this.minAmount = next);
-    this.invoiceDataService.maxAmount$.subscribe((next) => this.maxAmount = next);
-    this.recordCount$ = this.invoiceDataService.recordCount$;
+    this.invoiceDataService.minAmount.subscribe((next) => this.minAmount = next);
+    this.invoiceDataService.maxAmount.subscribe((next) => this.maxAmount = next);
+    this.recordCount$ = this.invoiceDataService.recordCount;
   }
 
   getControl(name: InvoiceFilterControlNames): FormControl {

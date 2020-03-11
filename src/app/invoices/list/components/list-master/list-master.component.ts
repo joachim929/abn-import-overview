@@ -1,11 +1,11 @@
 import {Component, OnInit, ViewChild} from '@angular/core';
-import {InvoiceDataService} from '../../../services/invoice-data.service';
+import {TransferDataService} from '../../../services/transfer-data.service';
 import {Observable} from 'rxjs';
 import {InvoiceDto} from '../../../../swagger/models/invoice-dto';
 import {MatSort} from '@angular/material/sort';
 import {MatTableDataSource} from '@angular/material/table';
 import {animate, state, style, transition, trigger} from '@angular/animations';
-import {InvoiceEditService} from '../../../services/invoice-edit.service';
+import {TransferEditService} from '../../../services/transfer-edit.service';
 import {BreakpointService} from '../../../../core/services/breakpoint.service';
 
 @Component({
@@ -36,15 +36,15 @@ export class ListMasterComponent implements OnInit {
   @ViewChild(MatSort, {static: true}) sort: MatSort;
 
   constructor(
-    private invoiceDataService: InvoiceDataService,
-    private invoiceEditService: InvoiceEditService,
+    private invoiceDataService: TransferDataService,
+    private invoiceEditService: TransferEditService,
     private breakpointService: BreakpointService
   ) {
-    this.invoiceDataService.invoices$.subscribe((invoices) => {
+    this.invoiceDataService.transfers.subscribe((invoices) => {
       this.dataSource.data = invoices;
       this.dataSource.sort = this.sort;
     });
-    this.recordCount$ = this.invoiceDataService.recordCount$;
+    this.recordCount$ = this.invoiceDataService.recordCount;
   }
 
   ngOnInit() {

@@ -1,7 +1,7 @@
 import {Component, OnInit} from '@angular/core';
 import {Observable} from 'rxjs';
 import {InvoiceDto} from '../../../../swagger/models/invoice-dto';
-import {InvoiceDataService} from '../../../services/invoice-data.service';
+import {TransferDataService} from '../../../services/transfer-data.service';
 
 @Component({
   selector: 'app-card-master',
@@ -14,11 +14,11 @@ export class CardMasterComponent implements OnInit {
   selectedInvoice$: Observable<InvoiceDto>;
 
   constructor(
-    private invoiceDataService: InvoiceDataService
+    private invoiceDataService: TransferDataService
   ) {
-    this.invoices$ = this.invoiceDataService.invoices$;
-    this.selectedInvoice$ = this.invoiceDataService.selectedInvoice$;
-    this.recordCount$ = this.invoiceDataService.recordCount$;
+    this.invoices$ = this.invoiceDataService.transfers;
+    this.selectedInvoice$ = this.invoiceDataService.selectedTransfer;
+    this.recordCount$ = this.invoiceDataService.recordCount;
   }
 
   ngOnInit() {

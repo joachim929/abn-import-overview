@@ -11,7 +11,7 @@ import {MatFormFieldModule} from '@angular/material/form-field';
 import {ReactiveFormsModule} from '@angular/forms';
 import {MatInputModule} from '@angular/material/input';
 import {InvoiceFilterComponent} from './components/invoice-filter/invoice-filter.component';
-import {InvoiceDataService} from './services/invoice-data.service';
+import {TransferDataService} from './services/transfer-data.service';
 import {CustomCurrencyPipe} from '../shared/pipes/custom-currency.pipe';
 import {MatSelectModule} from '@angular/material/select';
 import {MatSortModule} from '@angular/material/sort';
@@ -20,8 +20,8 @@ import {MatDatepickerModule} from '@angular/material/datepicker';
 import {MatSliderModule} from '@angular/material/slider';
 import {MatRadioModule} from '@angular/material/radio';
 import {MatSlideToggleModule} from '@angular/material/slide-toggle';
-import {InvoiceEditService} from './services/invoice-edit.service';
-import {InvoiceFilterService} from './services/invoice-filter.service';
+import {TransferEditService} from './services/transfer-edit.service';
+import {TransferFilterService} from './services/transfer-filter.service';
 import {MatTabsModule} from '@angular/material/tabs';
 import {MatToolbarModule} from '@angular/material/toolbar';
 
@@ -53,9 +53,9 @@ import {MatToolbarModule} from '@angular/material/toolbar';
   ],
   providers: [
     CustomCurrencyPipe,
-    InvoiceDataService,
-    InvoiceEditService,
-    InvoiceFilterService
+    TransferDataService,
+    TransferEditService,
+    TransferFilterService
   ]
 })
 export class InvoicesModule {

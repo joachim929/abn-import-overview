@@ -13,7 +13,7 @@ export type InvoiceFilterControlNames =
   'minAmountToggle';
 
 @Injectable()
-export class InvoiceFilterService {
+export class TransferFilterService {
   names = {
     date: {
       from: 'from',

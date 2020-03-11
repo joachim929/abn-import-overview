@@ -12,7 +12,7 @@ import {filter} from 'rxjs/operators';
   templateUrl: './invoices-edit-detail-modal.component.html',
   styleUrls: [
     './invoices-edit-detail-modal.component.scss',
-    '../../shared/invoices-dialog.styles.scss'
+    '../../shared/transfer-dialog.styles.scss'
   ]
 })
 export class InvoicesEditDetailModalComponent implements OnInit {
