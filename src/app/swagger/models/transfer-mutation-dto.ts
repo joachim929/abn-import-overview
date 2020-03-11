@@ -8,7 +8,7 @@ export interface TransferMutationDto {
   description: string;
   endBalance: number;
   id: string;
-  mutationId: number;
+  mutationId?: number;
   startBalance: number;
   transactionDate: string;
   valueDate: string;

@@ -2,7 +2,7 @@ import {Injectable} from '@angular/core';
 import {InvoiceDto} from '../../swagger/models/invoice-dto';
 import {BehaviorSubject, Observable} from 'rxjs';
 import * as XLSX from 'xlsx';
-import {Invoice, Transfer, TransferMutationDto} from '../../swagger/models';
+import {SplitTransferMutationDto, TransferMutationDto} from '../../swagger/models';
 import {switchMap} from 'rxjs/operators';
 import {TransferApiService} from '../../swagger/services/transfer-api.service';
 
@@ -152,16 +152,16 @@ export class TransferDataService {
     });
   }
 
-  // updateAndAddInvoice(editedInvoices: SplitInvoiceDto) {
-  //   this.dataStore.transfer.map((_invoice, index) => {
-  //     if (_invoice.id === editedInvoices.patch.id) {
-  //       this.dataStore.transfer[index] = {...editedInvoices.patch};
-  //       this.dataStore.transfer.splice(index + 1, 0, editedInvoices.split);
-  //     }
-  //   });
-  //   this.transfers$.next(Object.assign({}, this.dataStore).transfer);
-  // }
-  //
+  updateAndAddInvoice(splitTransferMutations: SplitTransferMutationDto) {
+    this.dataStore.newTransfer.map((transfer, index) => {
+      if (transfer.id === splitTransferMutations.patch.id) {
+        this.dataStore.newTransfer[index] = {...splitTransferMutations.patch};
+        this.dataStore.newTransfer.splice(index + 1, 0, splitTransferMutations.new);
+      }
+    });
+    this.newTransfers$.next(Object.assign({}, this.dataStore).newTransfer);
+  }
+
   // removeInvoice(id: number) {
   //   this.invoiceApiService.deleteInvoice({id}).subscribe(() => {
   //     this.dataStore.transfer.map((invoice, index) => {

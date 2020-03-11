@@ -10,6 +10,7 @@ import { map, filter } from 'rxjs/operators';
 
 import { InvoiceDto } from '../models/invoice-dto';
 import { RawInvoiceJsonDto } from '../models/raw-invoice-json-dto';
+import { SplitTransferMutationDto } from '../models/split-transfer-mutation-dto';
 import { TransferBatchImportDto } from '../models/transfer-batch-import-dto';
 import { TransferMutationDto } from '../models/transfer-mutation-dto';
 
@@ -220,24 +221,25 @@ export class TransferApiService extends BaseService {
    * This method provides access to the full `HttpResponse`, allowing access to response headers.
    * To access only the response body, use `splitTransfer()` instead.
    *
-   * This method doesn't expect any request body.
+   * This method sends `application/json` and handles request body of type `application/json`.
    */
-  splitTransfer$Response(params?: {
-
-  }): Observable<StrictHttpResponse<void>> {
+  splitTransfer$Response(params: {
+      body: SplitTransferMutationDto
+  }): Observable<StrictHttpResponse<SplitTransferMutationDto>> {
 
     const rb = new RequestBuilder(this.rootUrl, TransferApiService.SplitTransferPath, 'post');
     if (params) {
 
 
+      rb.body(params.body, 'application/json');
     }
     return this.http.request(rb.build({
-      responseType: 'text',
-      accept: '*/*'
+      responseType: 'json',
+      accept: 'application/json'
     })).pipe(
       filter((r: any) => r instanceof HttpResponse),
       map((r: HttpResponse<any>) => {
-        return (r as HttpResponse<any>).clone({ body: undefined }) as StrictHttpResponse<void>;
+        return r as StrictHttpResponse<SplitTransferMutationDto>;
       })
     );
   }
@@ -246,14 +248,14 @@ export class TransferApiService extends BaseService {
    * This method provides access to only to the response body.
    * To access the full response (for headers, for example), `splitTransfer$Response()` instead.
    *
-   * This method doesn't expect any request body.
+   * This method sends `application/json` and handles request body of type `application/json`.
    */
-  splitTransfer(params?: {
-
-  }): Observable<void> {
+  splitTransfer(params: {
+      body: SplitTransferMutationDto
+  }): Observable<SplitTransferMutationDto> {
 
     return this.splitTransfer$Response(params).pipe(
-      map((r: StrictHttpResponse<void>) => r.body as void)
+      map((r: StrictHttpResponse<SplitTransferMutationDto>) => r.body as SplitTransferMutationDto)
     );
   }
 

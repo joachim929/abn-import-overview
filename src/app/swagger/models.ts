@@ -9,6 +9,7 @@ export { CategoryGroupDto } from './models/category-group-dto';
 export { UserDto } from './models/user-dto';
 export { TransferMutationDto } from './models/transfer-mutation-dto';
 export { InvoiceDto } from './models/invoice-dto';
+export { SplitTransferMutationDto } from './models/split-transfer-mutation-dto';
 export { RawInvoiceJsonDto } from './models/raw-invoice-json-dto';
 export { RawTransferSerializerDto } from './models/raw-transfer-serializer-dto';
 export { TransferMutation } from './models/transfer-mutation';
