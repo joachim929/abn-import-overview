@@ -60,10 +60,9 @@ export class TransferDataService {
     });
   }
 
-  loadNew() {
+  debugTransfers() {
     this.transferApiService.getTransfer().pipe().subscribe((next) => {
-      this.dataStore.transfer = next;
-      this.transfers$.next(Object.assign({}, this.dataStore).transfer);
+      console.log(next);
     });
   }
 
@@ -141,7 +140,9 @@ export class TransferDataService {
   updateTransferMutation(updateTransferMutation: TransferMutationDto) {
     this.dataStore.transfer.map((_invoice, index) => {
       if (_invoice.id === updateTransferMutation.id) {
-        this.dataStore.transfer[index] = {...updateTransferMutation};
+        console.log('somethings about to change?');
+        this.dataStore.transfer[index] = updateTransferMutation;
+        this.transfers$.next(Object.assign({}, this.dataStore).transfer);
       }
     });
   }

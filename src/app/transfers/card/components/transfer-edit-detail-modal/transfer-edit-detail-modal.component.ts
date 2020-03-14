@@ -50,9 +50,7 @@ export class TransferEditDetailModalComponent implements OnInit {
     Object.keys(this.ocTransferMutation)
       .map(key => !!this.ocTransferMutation[key] ? patchObject[key] = this.ocTransferMutation[key] : null);
 
-    this.dialogRef.close((this.form.valid && this.form.dirty && typeof patchObject.id !== 'undefined') ? {
-      patch: patchObject
-    } : null);
+    this.dialogRef.close((this.form.valid && this.form.dirty && typeof patchObject.id !== 'undefined') ? patchObject : null);
   }
 
   cancel() {
