@@ -2,6 +2,7 @@
 import { TransferMutation } from './transfer-mutation';
 export interface Transfer {
   accountNumber: number;
+  active: boolean;
   createdAt: string;
   currencyCode: string;
   endBalance: number;

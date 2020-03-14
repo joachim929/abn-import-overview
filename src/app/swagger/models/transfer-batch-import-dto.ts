@@ -1,7 +1,7 @@
 /* tslint:disable */
 import { RawTransferSerializerDto } from './raw-transfer-serializer-dto';
-import { Transfer } from './transfer';
+import { TransferMutationDto } from './transfer-mutation-dto';
 export interface TransferBatchImportDto {
   existingTransfers?: Array<RawTransferSerializerDto>;
-  savedTransfers?: Array<Transfer>;
+  savedTransfers?: Array<TransferMutationDto>;
 }

@@ -4,7 +4,7 @@ import {NotFoundComponent} from './shared/components/not-found/not-found.compone
 import {ImportModule} from './import/import.module';
 import {RulesModule} from './rules/rules.module';
 import {CategoriesModule} from './categories/categories.module';
-import {InvoicesModule} from './invoices/invoices.module';
+import {TransferModule} from './transfers/transfer.module';
 import {DashboardModule} from './dashboard/dashboard.module';
 import {ReportsModule} from './reports/reports.module';
 
@@ -13,7 +13,7 @@ const routes: Routes = [
   {path: 'imports', loadChildren: () => import('./import/import.module').then(m => ImportModule)},
   {path: 'categories', loadChildren: () => import('./categories/categories.module').then(m => CategoriesModule)},
   {path: 'rules', loadChildren: () => import('./rules/rules.module').then(m => RulesModule)},
-  {path: 'transfers', loadChildren: () => import('./invoices/invoices.module').then(m => InvoicesModule)},
+  {path: 'transfers', loadChildren: () => import('./transfers/transfer.module').then(m => TransferModule)},
   {path: 'dashboard', loadChildren: () => import('./dashboard/dashboard.module').then(m => DashboardModule)},
   {path: 'reports', loadChildren: () => import('./reports/reports.module').then(m => ReportsModule)},
   {path: '404', component: NotFoundComponent},

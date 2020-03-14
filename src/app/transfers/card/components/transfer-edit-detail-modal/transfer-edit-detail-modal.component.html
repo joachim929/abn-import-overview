@@ -1,0 +1,46 @@
+<h2 class="m-0">Edit transfer</h2>
+<dl class="transfer-mutation-readonly-container">
+  <dt>Account number</dt>
+  <dd>{{data.transferMutation.accountNumber}}</dd>
+  <dt>Currency</dt>
+  <dd>{{data.transferMutation.currencyCode}}</dd>
+  <dt>Transaction date</dt>
+  <dd>{{data.transferMutation.transactionDate | date}}</dd>
+  <dt>Start balance</dt>
+  <dd>{{data.transferMutation.startBalance | customCurrency}}</dd>
+  <dt>End balance</dt>
+  <dd>{{data.transferMutation.endBalance | customCurrency}}</dd>
+  <dt>Amount</dt>
+  <dd>{{data.transferMutation.amount | customCurrency}}</dd>
+</dl>
+<form [formGroup]="form" class="column-container">
+  <mat-form-field>
+    <mat-label>Description</mat-label>
+    <textarea cdkTextareaAutosize
+              cdkAutosizeMinRows="3"
+              cdkAutosizeMaxRows="5" formControlName="description" matInput></textarea>
+    <mat-error *ngIf="form.get('description').invalid && form.get('description').touched">
+      Description is <strong>required</strong>
+    </mat-error>
+  </mat-form-field>
+
+  <mat-form-field>
+    <mat-label>Comment</mat-label>
+    <textarea cdkTextareaAutosize
+              cdkAutosizeMinRows="3"
+              cdkAutosizeMaxRows="5" formControlName="comment" matInput></textarea>
+  </mat-form-field>
+
+  <mat-form-field>
+    <mat-label>Category</mat-label>
+    <mat-select formControlName="category">
+      <mat-option></mat-option>
+      <!-- todo: Set up categoryGroups -->
+      <mat-option [value]="categoryGroup.id" *ngFor="let categoryGroup of categories$ | async">{{categoryGroup.name}}</mat-option>
+    </mat-select>
+  </mat-form-field>
+</form>
+<div class="transfer-mutation-controls-container">
+  <button mat-raised-button (click)="cancel()">Cancel</button>
+  <button [disabled]="form.invalid || form.pristine" mat-raised-button (click)="save()">Save</button>
+</div>

@@ -8,10 +8,10 @@ import { RequestBuilder } from '../request-builder';
 import { Observable } from 'rxjs';
 import { map, filter } from 'rxjs/operators';
 
-import { InvoiceDto } from '../models/invoice-dto';
 import { RawInvoiceJsonDto } from '../models/raw-invoice-json-dto';
-import { SplitTransferMutationDto } from '../models/split-transfer-mutation-dto';
+import { Transfer } from '../models/transfer';
 import { TransferBatchImportDto } from '../models/transfer-batch-import-dto';
+import { TransferListParams } from '../models/transfer-list-params';
 import { TransferMutationDto } from '../models/transfer-mutation-dto';
 
 @Injectable({
@@ -72,23 +72,25 @@ export class TransferApiService extends BaseService {
   }
 
   /**
-   * Path part for operation patchTransfer
+   * Path part for operation getTransfer_1
    */
-  static readonly PatchTransferPath = '/transfer';
+  static readonly GetTransfer_1Path = '/transfer/{id}';
 
   /**
    * This method provides access to the full `HttpResponse`, allowing access to response headers.
-   * To access only the response body, use `patchTransfer()` instead.
+   * To access only the response body, use `getTransfer_1()` instead.
    *
    * This method doesn't expect any request body.
    */
-  patchTransfer$Response(params?: {
+  getTransfer_1$Response(params: {
+    id: string;
 
-  }): Observable<StrictHttpResponse<InvoiceDto>> {
+  }): Observable<StrictHttpResponse<Transfer>> {
 
-    const rb = new RequestBuilder(this.rootUrl, TransferApiService.PatchTransferPath, 'patch');
+    const rb = new RequestBuilder(this.rootUrl, TransferApiService.GetTransfer_1Path, 'get');
     if (params) {
 
+      rb.path('id', params.id);
 
     }
     return this.http.request(rb.build({
@@ -97,23 +99,24 @@ export class TransferApiService extends BaseService {
     })).pipe(
       filter((r: any) => r instanceof HttpResponse),
       map((r: HttpResponse<any>) => {
-        return r as StrictHttpResponse<InvoiceDto>;
+        return r as StrictHttpResponse<Transfer>;
       })
     );
   }
 
   /**
    * This method provides access to only to the response body.
-   * To access the full response (for headers, for example), `patchTransfer$Response()` instead.
+   * To access the full response (for headers, for example), `getTransfer_1$Response()` instead.
    *
    * This method doesn't expect any request body.
    */
-  patchTransfer(params?: {
+  getTransfer_1(params: {
+    id: string;
 
-  }): Observable<InvoiceDto> {
+  }): Observable<Transfer> {
 
-    return this.patchTransfer$Response(params).pipe(
-      map((r: StrictHttpResponse<InvoiceDto>) => r.body as InvoiceDto)
+    return this.getTransfer_1$Response(params).pipe(
+      map((r: StrictHttpResponse<Transfer>) => r.body as Transfer)
     );
   }
 
@@ -129,9 +132,9 @@ export class TransferApiService extends BaseService {
    * This method doesn't expect any request body.
    */
   deleteTransfer$Response(params: {
-    id: number;
+    id: string;
 
-  }): Observable<StrictHttpResponse<string>> {
+  }): Observable<StrictHttpResponse<{  }>> {
 
     const rb = new RequestBuilder(this.rootUrl, TransferApiService.DeleteTransferPath, 'delete');
     if (params) {
@@ -145,7 +148,7 @@ export class TransferApiService extends BaseService {
     })).pipe(
       filter((r: any) => r instanceof HttpResponse),
       map((r: HttpResponse<any>) => {
-        return r as StrictHttpResponse<string>;
+        return r as StrictHttpResponse<{  }>;
       })
     );
   }
@@ -157,12 +160,12 @@ export class TransferApiService extends BaseService {
    * This method doesn't expect any request body.
    */
   deleteTransfer(params: {
-    id: number;
+    id: string;
 
-  }): Observable<string> {
+  }): Observable<{  }> {
 
     return this.deleteTransfer$Response(params).pipe(
-      map((r: StrictHttpResponse<string>) => r.body as string)
+      map((r: StrictHttpResponse<{  }>) => r.body as {  })
     );
   }
 
@@ -175,59 +178,13 @@ export class TransferApiService extends BaseService {
    * This method provides access to the full `HttpResponse`, allowing access to response headers.
    * To access only the response body, use `filteredTransfers()` instead.
    *
-   * This method doesn't expect any request body.
-   */
-  filteredTransfers$Response(params?: {
-
-  }): Observable<StrictHttpResponse<void>> {
-
-    const rb = new RequestBuilder(this.rootUrl, TransferApiService.FilteredTransfersPath, 'post');
-    if (params) {
-
-
-    }
-    return this.http.request(rb.build({
-      responseType: 'text',
-      accept: '*/*'
-    })).pipe(
-      filter((r: any) => r instanceof HttpResponse),
-      map((r: HttpResponse<any>) => {
-        return (r as HttpResponse<any>).clone({ body: undefined }) as StrictHttpResponse<void>;
-      })
-    );
-  }
-
-  /**
-   * This method provides access to only to the response body.
-   * To access the full response (for headers, for example), `filteredTransfers$Response()` instead.
-   *
-   * This method doesn't expect any request body.
-   */
-  filteredTransfers(params?: {
-
-  }): Observable<void> {
-
-    return this.filteredTransfers$Response(params).pipe(
-      map((r: StrictHttpResponse<void>) => r.body as void)
-    );
-  }
-
-  /**
-   * Path part for operation splitTransfer
-   */
-  static readonly SplitTransferPath = '/transfer/split';
-
-  /**
-   * This method provides access to the full `HttpResponse`, allowing access to response headers.
-   * To access only the response body, use `splitTransfer()` instead.
-   *
    * This method sends `application/json` and handles request body of type `application/json`.
    */
-  splitTransfer$Response(params: {
-      body: SplitTransferMutationDto
-  }): Observable<StrictHttpResponse<SplitTransferMutationDto>> {
+  filteredTransfers$Response(params: {
+      body: TransferListParams
+  }): Observable<StrictHttpResponse<TransferListParams>> {
 
-    const rb = new RequestBuilder(this.rootUrl, TransferApiService.SplitTransferPath, 'post');
+    const rb = new RequestBuilder(this.rootUrl, TransferApiService.FilteredTransfersPath, 'post');
     if (params) {
 
 
@@ -239,23 +196,23 @@ export class TransferApiService extends BaseService {
     })).pipe(
       filter((r: any) => r instanceof HttpResponse),
       map((r: HttpResponse<any>) => {
-        return r as StrictHttpResponse<SplitTransferMutationDto>;
+        return r as StrictHttpResponse<TransferListParams>;
       })
     );
   }
 
   /**
    * This method provides access to only to the response body.
-   * To access the full response (for headers, for example), `splitTransfer$Response()` instead.
+   * To access the full response (for headers, for example), `filteredTransfers$Response()` instead.
    *
    * This method sends `application/json` and handles request body of type `application/json`.
    */
-  splitTransfer(params: {
-      body: SplitTransferMutationDto
-  }): Observable<SplitTransferMutationDto> {
+  filteredTransfers(params: {
+      body: TransferListParams
+  }): Observable<TransferListParams> {
 
-    return this.splitTransfer$Response(params).pipe(
-      map((r: StrictHttpResponse<SplitTransferMutationDto>) => r.body as SplitTransferMutationDto)
+    return this.filteredTransfers$Response(params).pipe(
+      map((r: StrictHttpResponse<TransferListParams>) => r.body as TransferListParams)
     );
   }
 

@@ -1,0 +1,19 @@
+.transfer-mutation-form-pair {
+  display: flex;
+
+  mat-form-field {
+    flex: 1;
+  }
+  @media (max-width: 575.98px) {
+    flex-direction: column;
+  }
+
+  @media (min-width: 992px) {
+    flex-direction: row;
+  }
+}
+
+.split-sub-header {
+  padding-left: 8px;
+}
+
