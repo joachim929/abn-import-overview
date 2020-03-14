@@ -134,7 +134,7 @@ export class TransferMutationApiService extends BaseService {
    */
   patchTransferMutation$Response(params: {
       body: TransferMutationDto
-  }): Observable<StrictHttpResponse<{  }>> {
+  }): Observable<StrictHttpResponse<TransferMutationDto>> {
 
     const rb = new RequestBuilder(this.rootUrl, TransferMutationApiService.PatchTransferMutationPath, 'patch');
     if (params) {
@@ -148,7 +148,7 @@ export class TransferMutationApiService extends BaseService {
     })).pipe(
       filter((r: any) => r instanceof HttpResponse),
       map((r: HttpResponse<any>) => {
-        return r as StrictHttpResponse<{  }>;
+        return r as StrictHttpResponse<TransferMutationDto>;
       })
     );
   }
@@ -161,10 +161,10 @@ export class TransferMutationApiService extends BaseService {
    */
   patchTransferMutation(params: {
       body: TransferMutationDto
-  }): Observable<{  }> {
+  }): Observable<TransferMutationDto> {
 
     return this.patchTransferMutation$Response(params).pipe(
-      map((r: StrictHttpResponse<{  }>) => r.body as {  })
+      map((r: StrictHttpResponse<TransferMutationDto>) => r.body as TransferMutationDto)
     );
   }
 

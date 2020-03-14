@@ -32,7 +32,6 @@ export class TransferEditService {
       switchMap(x => {
         return this.transferMutationApiService.patchTransferMutation({body: x});
       })).subscribe(
-        // todo: Fix return type as its not correct
       (editedTransferMutation: TransferMutationDto) => this.transferDataService.updateTransferMutation(editedTransferMutation));
   }
 
