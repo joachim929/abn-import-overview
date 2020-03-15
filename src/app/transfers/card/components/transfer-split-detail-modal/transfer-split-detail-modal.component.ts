@@ -27,10 +27,10 @@ export class TransferSplitDetailModalComponent implements OnInit {
     private categoryDataService: CategoryDataService
   ) {
     this.form = new FormGroup({
-      id: new FormControl(),
-      originalId: new FormControl(this.data.transferMutation.id),
+      id: new FormControl(data.transferMutation.id),
       accountNumber: new FormControl(this.data.transferMutation.accountNumber),
       mutationCode: new FormControl(this.data.transferMutation.currencyCode),
+      mutationId: new FormControl(data.transferMutation.mutationId),
       transactionDate: new FormControl(this.data.transferMutation.transactionDate),
       startBalance: new FormControl(this.data.transferMutation.startBalance),
       endBalance: new FormControl(this.data.transferMutation.endBalance),
@@ -63,7 +63,7 @@ export class TransferSplitDetailModalComponent implements OnInit {
 
       this.dialogRef.close({
         patch: this.ocInvoice,
-        split
+        new: split
       });
     } else {
       this.dialogRef.close();

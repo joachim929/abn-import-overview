@@ -7,6 +7,7 @@ import {TransferSplitDetailModalComponent} from '../card/components/transfer-spl
 import {TransferMutationDto} from '../../swagger/models/transfer-mutation-dto';
 import {TransferApiService} from '../../swagger/services/transfer-api.service';
 import {TransferMutationApiService} from '../../swagger/services/transfer-mutation-api.service';
+import {SplitTransferMutationDto} from '../../swagger/models';
 
 @Injectable()
 export class TransferEditService {
@@ -47,8 +48,8 @@ export class TransferEditService {
 
     dialog.afterClosed().pipe(
       filter(x => !!x),
-      tap(x => transferMutationId = x.patch.mutationId),
-      switchMap(x => {
+      tap((x: SplitTransferMutationDto) => transferMutationId = x.patch.mutationId),
+      switchMap((x: SplitTransferMutationDto) => {
         return this.transferMutationApiService.splitTransferMutation({body: x}).pipe(
           filter(y => !!y)
         );

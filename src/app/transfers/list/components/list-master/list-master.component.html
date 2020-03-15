@@ -5,53 +5,53 @@
     <ng-container matColumnDef="{{column}}" *ngFor="let column of displayedColumns">
       <th mat-header-cell *matHeaderCellDef [class.is-x-small]="isXSmall"
           [class.transfer-edit-controls]="column === 'delete'">{{headerColumns[column]}}</th>
-      <td mat-cell *matCellDef="let invoice" [class.is-x-small]="isXSmall">
-        <span *ngIf="column === 'transactionDate'; else deleteCol">{{invoice[column] | date}}</span>
+      <td mat-cell *matCellDef="let transferMutation" [class.is-x-small]="isXSmall">
+        <span *ngIf="column === 'transactionDate'; else deleteCol">{{transferMutation[column] | date}}</span>
         <ng-template #deleteCol>
           <ng-container *ngIf="column === 'delete'; else rest">
-            <button (click)="patch($event, invoice)"
+            <button (click)="patch($event, transferMutation)"
                     aria-label="Edit button"
                     mat-icon-button>
               <mat-icon>edit</mat-icon>
             </button>
-            <button (click)="split($event, invoice)"
+            <button (click)="split($event, transferMutation)"
                     aria-label="Split button"
                     mat-icon-button>
               <mat-icon>file_copy</mat-icon>
             </button>
             <button mat-icon-button
-                    (click)="remove($event, invoice.id)">
+                    (click)="remove($event, transferMutation.mutationId)">
               <mat-icon color="warn">delete</mat-icon>
             </button>
           </ng-container>
         </ng-template>
-        <ng-template #rest>{{invoice[column]}}</ng-template>
+        <ng-template #rest>{{transferMutation[column]}}</ng-template>
     </ng-container>
 
     <!-- Expanded Content Column - The detail row is made up of this one column that spans across all columns -->
     <ng-container matColumnDef="expandedDetail">
-      <td mat-cell *matCellDef="let invoice" [attr.colspan]="displayedColumns.length">
+      <td mat-cell *matCellDef="let transferMutation" [attr.colspan]="displayedColumns.length">
         <div class="example-element-detail"
-             [@detailExpand]="invoice == expandedElement ? 'expanded' : 'collapsed'">
-          <div *ngIf="invoice.description" class="example-element-description">Description:</div>
+             [@detailExpand]="transferMutation == expandedElement ? 'expanded' : 'collapsed'">
+          <div *ngIf="transferMutation.description" class="example-element-description">Description:</div>
           <div class="example-element-description">
-            {{invoice.description}}
+            {{transferMutation.description}}
           </div>
-          <div *ngIf="invoice.comment" class="example-element-description">Comment:</div>
+          <div *ngIf="transferMutation.comment" class="example-element-description">Comment:</div>
           <div class="example-element-description">
-            {{invoice.comment}}
+            {{transferMutation.comment}}
           </div>
           <div class="example-element-description">Category:</div>
-          <div class="example-element-description">{{invoice.categoryId}}</div>
+          <div class="example-element-description">{{transferMutation.categoryId}}</div>
         </div>
       </td>
     </ng-container>
 
     <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
-    <tr mat-row *matRowDef="let invoice; columns: displayedColumns;"
+    <tr mat-row *matRowDef="let transferMutation; columns: displayedColumns;"
         class="example-element-row"
-        [class.example-expanded-row]="expandedElement === invoice"
-        (click)="expandedElement = expandedElement === invoice ? null : invoice">
+        [class.example-expanded-row]="expandedElement === transferMutation"
+        (click)="expandedElement = expandedElement === transferMutation ? null : transferMutation">
     </tr>
     <tr mat-row *matRowDef="let row; columns: ['expandedDetail']" class="example-detail-row"></tr>
   </table>
