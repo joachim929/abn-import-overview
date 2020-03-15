@@ -1,4 +1,4 @@
-<div style="display: flex; flex-direction: column; margin: 0.5em">
+<div style="display: flex; flex-direction: column; margin: 0.5em 0.5em 0;">
   <table mat-table
          [dataSource]="dataSource" multiTemplateDataRows
          class="mat-elevation-z2">
@@ -56,7 +56,5 @@
     <tr mat-row *matRowDef="let row; columns: ['expandedDetail']" class="example-detail-row"></tr>
   </table>
 
-  <button *ngIf="dataSource.data?.length !== (recordCount$ | async)"
-          style="margin-top: 0.5em;" (click)="loadMore()" mat-raised-button color="primary">Load more
-  </button>
 </div>
+<app-load-more></app-load-more>

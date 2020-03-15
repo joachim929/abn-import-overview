@@ -40,8 +40,6 @@ export class TransferDataService {
     private transferApiService: TransferApiService,
     private transferMutationApiService: TransferMutationApiService
   ) {
-    // this.loadNew();
-    this.loadMore();
   }
 
   get filter(): Observable<TransferListParams> {

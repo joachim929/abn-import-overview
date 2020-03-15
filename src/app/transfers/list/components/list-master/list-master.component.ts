@@ -54,10 +54,6 @@ export class ListMasterComponent implements OnInit {
     return this.breakpointService.isXSmall;
   }
 
-  loadMore() {
-    this.transferDataService.loadMore();
-  }
-
   patch(event, transferMutation: TransferMutationDto) {
     event.stopPropagation();
     this.transferEditService.openEditDialog(transferMutation);

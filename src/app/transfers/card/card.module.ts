@@ -15,6 +15,7 @@ import {MatSelectModule} from '@angular/material/select';
 import {TransferEditDetailModalComponent} from './components/transfer-edit-detail-modal/transfer-edit-detail-modal.component';
 import {MatIconModule} from '@angular/material/icon';
 import {MatCardModule} from '@angular/material/card';
+import {SharedTransferModule} from '../shared/shared-transfer.module';
 
 @NgModule({
   declarations: [
@@ -33,7 +34,8 @@ import {MatCardModule} from '@angular/material/card';
     MatInputModule,
     MatSelectModule,
     MatIconModule,
-    MatCardModule
+    MatCardModule,
+    SharedTransferModule
   ],
   providers: [
     CustomCurrencyPipe
