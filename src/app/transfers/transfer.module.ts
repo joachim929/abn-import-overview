@@ -24,6 +24,7 @@ import {MatTabsModule} from '@angular/material/tabs';
 import {MatToolbarModule} from '@angular/material/toolbar';
 import {TransferFilterComponent} from './components/transfer-filter/transfer-filter.component';
 import {TransferMasterComponent} from './components/transfer-master/transfer-master.component';
+import {SharedTransferModule} from './shared/shared-transfer.module';
 
 
 @NgModule({
@@ -49,7 +50,8 @@ import {TransferMasterComponent} from './components/transfer-master/transfer-mas
     MatRadioModule,
     MatSlideToggleModule,
     MatTabsModule,
-    MatToolbarModule
+    MatToolbarModule,
+    SharedTransferModule
   ],
   providers: [
     CustomCurrencyPipe,

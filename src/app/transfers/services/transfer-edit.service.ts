@@ -1,9 +1,9 @@
 import {Injectable} from '@angular/core';
-import {TransferEditDetailModalComponent} from '../card/components/transfer-edit-detail-modal/transfer-edit-detail-modal.component';
+import {TransferEditDetailModalComponent} from '../shared/components/transfer-edit-detail-modal/transfer-edit-detail-modal.component';
 import {filter, switchMap, tap} from 'rxjs/operators';
 import {TransferDataService} from './transfer-data.service';
 import {MatDialog} from '@angular/material/dialog';
-import {TransferSplitDetailModalComponent} from '../card/components/transfer-split-detail-modal/transfer-split-detail-modal.component';
+import {TransferSplitDetailModalComponent} from '../shared/components/transfer-split-detail-modal/transfer-split-detail-modal.component';
 import {TransferMutationDto} from '../../swagger/models/transfer-mutation-dto';
 import {TransferApiService} from '../../swagger/services/transfer-api.service';
 import {TransferMutationApiService} from '../../swagger/services/transfer-mutation-api.service';

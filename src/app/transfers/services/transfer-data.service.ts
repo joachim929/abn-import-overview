@@ -94,8 +94,16 @@ export class TransferDataService {
     return this.selectedTransfer$.asObservable();
   }
 
-  setSelectedTransfer(input: TransferMutationDto) {
-    this.dataStore.selectedTransfer = input;
+  setSelectedTransferById(id?: number) {
+    this.dataStore.selectedTransfer = null;
+
+    if (id) {
+      this.dataStore.transfer.map((transfer) => {
+        if (transfer.mutationId === id) {
+          this.dataStore.selectedTransfer = transfer;
+        }
+      });
+    }
     this.selectedTransfer$.next(Object.assign({}, this.dataStore).selectedTransfer);
   }
 

@@ -3,6 +3,7 @@ import {Routes, RouterModule} from '@angular/router';
 import {CardModule} from './card/card.module';
 import {ListModule} from './list/list.module';
 import {TransferMasterComponent} from './components/transfer-master/transfer-master.component';
+import {TransferMutationHistoryModule} from './history/transfer-mutation-history.module';
 
 const routes: Routes = [
   {
@@ -16,6 +17,7 @@ const routes: Routes = [
       {path: 'list', loadChildren: () => import('./list/list.module').then(m => ListModule)}
     ]
   },
+  {path: 'history', loadChildren: () => import('./history/transfer-mutation-history.module').then(m => TransferMutationHistoryModule)}
 ];
 
 @NgModule({

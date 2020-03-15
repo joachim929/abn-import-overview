@@ -12,7 +12,7 @@ import {TransferMutationDto} from '../../../../swagger/models/transfer-mutation-
   templateUrl: './transfer-edit-detail-modal.component.html',
   styleUrls: [
     './transfer-edit-detail-modal.component.scss',
-    '../../shared/transfer-dialog.styles.scss'
+    '../../../card/shared/transfer-dialog.styles.scss'
   ]
 })
 export class TransferEditDetailModalComponent implements OnInit {
