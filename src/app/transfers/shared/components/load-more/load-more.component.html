@@ -1,4 +1,4 @@
-<button *ngIf="(transferMutations$ | async).length !== (recordCount$ | async)"
+<button *ngIf="(transferMutations$ | async).length < (recordCount$ | async)"
         mat-raised-button color="primary"
         (click)="loadMore()">Load more
 </button>
