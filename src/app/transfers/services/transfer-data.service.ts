@@ -58,12 +58,6 @@ export class TransferDataService {
     });
   }
 
-  debugTransfers() {
-    this.transferApiService.getTransfer().pipe().subscribe((next) => {
-      console.log(next);
-    });
-  }
-
   loadMore() {
     const filter = {...this.dataStore.filter};
     filter.skip += 20;

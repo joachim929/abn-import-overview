@@ -1,1 +1,33 @@
-<p>history-master works!</p>
+<main class="container column-container" style="padding-top: 8px;" *ngIf="transfer$ | async">
+  <mat-card>
+    <p>Account number: {{(transfer$ | async).accountNumber}}</p>
+    <p>Start balance: {{(transfer$ | async).startBalance | customCurrency}}</p>
+    <p>End balance: {{(transfer$ | async).endBalance | customCurrency}}</p>
+    <p>Value date: {{(transfer$ | async).valueDate | date}}</p>
+    <p>Transaction date: {{(transfer$ | async).transactionDate | date}}</p>
+    <p>Edits:</p>
+<!--    <ng-container *ngFor="let mutation of (transfer$ | async).mutations">-->
+<!--      <div *ngIf="mutationId === mutation.id">-->
+<!--        <p>{{mutation.updatedAt | date: 'long'}}</p>-->
+<!--        <p>Description: {{mutation.description}}</p>-->
+<!--        <p>Comment: {{mutation.comment}}</p>-->
+<!--        <p>Amount: {{mutation.amount}}</p>-->
+<!--      </div>-->
+<!--      <div *ngIf="mutationId !== mutation.id">-->
+<!--        <p>{{mutation.updatedAt | date: 'long'}}</p>-->
+<!--      </div>-->
+<!--    </ng-container>-->
+  </mat-card>
+  <mat-accordion displayMode="flat">
+    <mat-expansion-panel *ngFor="let mutation of (transfer$ | async).mutations">
+      <mat-expansion-panel-header>
+        <mat-panel-title>
+          {{mutation.updatedAt | date: 'long'}}
+        </mat-panel-title>
+      </mat-expansion-panel-header>
+      <p>Description: {{mutation.description}}</p>
+      <p>Comment: {{mutation.comment}}</p>
+      <p>Amount: {{mutation.amount}}</p>
+    </mat-expansion-panel>
+  </mat-accordion>
+</main>
