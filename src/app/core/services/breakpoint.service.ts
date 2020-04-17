@@ -16,7 +16,6 @@ export class BreakpointService {
       Breakpoints.XSmall,
       Breakpoints.Medium
     ]).subscribe((result) => {
-      console.log(result);
       this.isSmall = this.breakpointObserver.isMatched('(min-width: 600px) and (max-width: 959.99px)');
       this.isXSmall = this.breakpointObserver.isMatched('(max-width: 599.99px)');
       this.isMedium = this.breakpointObserver.isMatched('(min-width: 960px)');
