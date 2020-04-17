@@ -10,21 +10,15 @@ import {TransferMutationDto} from '../../../../swagger/models/transfer-mutation-
 })
 export class CardMasterComponent implements OnInit {
   transferMutations$: Observable<TransferMutationDto[]>;
-  recordCount$: Observable<number>;
-  selectedTransferMutation$: Observable<TransferMutationDto>;
+  recordCount$: Observable<number>; // todo needed for no data scenario?
 
   constructor(
     private transferDataService: TransferDataStore
   ) {
     this.transferMutations$ = this.transferDataService.transfers;
     this.recordCount$ = this.transferDataService.recordCount;
-    this.selectedTransferMutation$ = this.transferDataService.selectedTransfer;
   }
 
   ngOnInit() {
-  }
-
-  loadMore() {
-    this.transferDataService.loadMore();
   }
 }
