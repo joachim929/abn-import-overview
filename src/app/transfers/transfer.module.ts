@@ -9,7 +9,7 @@ import {MatIconModule} from '@angular/material/icon';
 import {MatFormFieldModule} from '@angular/material/form-field';
 import {ReactiveFormsModule} from '@angular/forms';
 import {MatInputModule} from '@angular/material/input';
-import {TransferDataService} from './services/transfer-data.service';
+import {TransferDataStore} from './services/transfer-data.store';
 import {CustomCurrencyPipe} from '../shared/pipes/custom-currency.pipe';
 import {MatSelectModule} from '@angular/material/select';
 import {MatSortModule} from '@angular/material/sort';
@@ -55,7 +55,7 @@ import {SharedTransferModule} from './shared/shared-transfer.module';
   ],
   providers: [
     CustomCurrencyPipe,
-    TransferDataService,
+    TransferDataStore,
     TransferEditService,
     TransferFilterService
   ]

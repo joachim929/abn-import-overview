@@ -5,7 +5,7 @@ import {Observable} from 'rxjs';
 import {CategoryGroupDto} from '../../../swagger/models/category-group-dto';
 import {debounceTime, distinctUntilChanged} from 'rxjs/operators';
 import * as moment from 'moment';
-import {TransferDataService} from '../../services/transfer-data.service';
+import {TransferDataStore} from '../../services/transfer-data.store';
 import {isEqual} from 'lodash';
 import {InvoiceFilterControlNames, TransferFilterService} from '../../services/transfer-filter.service';
 import {TransferListParams} from '../../../swagger/models/transfer-list-params';
@@ -37,7 +37,7 @@ export class TransferFilterComponent implements OnInit {
 
   constructor(
     private categoryDataService: CategoryDataService,
-    private transferDataService: TransferDataService,
+    private transferDataService: TransferDataStore,
     private transferFilterService: TransferFilterService
   ) {
     this.getControl('minAmount').disable({emitEvent: false});

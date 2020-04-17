@@ -1,5 +1,5 @@
 import {Component, Input} from '@angular/core';
-import {TransferDataService} from '../../../services/transfer-data.service';
+import {TransferDataStore} from '../../../services/transfer-data.store';
 import {TransferEditService} from '../../../services/transfer-edit.service';
 import {CategoryDataService} from '../../../../core/services/category-data.service';
 import {BreakpointService} from '../../../../core/services/breakpoint.service';
@@ -14,7 +14,7 @@ export class TransferDetailComponent {
   @Input() transferMutation: TransferMutationDto;
 
   constructor(
-    private transferDataService: TransferDataService,
+    private transferDataService: TransferDataStore,
     private transferEditService: TransferEditService,
     private categoryDataService: CategoryDataService,
     private breakpointService: BreakpointService

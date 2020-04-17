@@ -1,6 +1,6 @@
 import {Component, OnInit} from '@angular/core';
 import {Observable} from 'rxjs';
-import {TransferDataService} from '../../../services/transfer-data.service';
+import {TransferDataStore} from '../../../services/transfer-data.store';
 import {TransferMutationDto} from '../../../../swagger/models/transfer-mutation-dto';
 
 @Component({
@@ -14,7 +14,7 @@ export class CardMasterComponent implements OnInit {
   selectedTransferMutation$: Observable<TransferMutationDto>;
 
   constructor(
-    private transferDataService: TransferDataService
+    private transferDataService: TransferDataStore
   ) {
     this.transferMutations$ = this.transferDataService.transfers;
     this.recordCount$ = this.transferDataService.recordCount;

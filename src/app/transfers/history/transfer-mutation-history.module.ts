@@ -3,7 +3,7 @@ import {CommonModule} from '@angular/common';
 
 import {TransferMutationHistoryRoutingModule} from './transfer-mutation-history-routing.module';
 import {HistoryMasterComponent} from './components/history-master/history-master.component';
-import {HistoryDataService} from './services/history-data.service';
+import {HistoryDataStore} from './services/history-data.store';
 import {SharedModule} from '../../shared/shared.module';
 import {MatCardModule} from '@angular/material/card';
 import {MatExpansionModule} from '@angular/material/expansion';
@@ -21,7 +21,7 @@ import {MatExpansionModule} from '@angular/material/expansion';
     MatExpansionModule
   ],
   providers: [
-    HistoryDataService
+    HistoryDataStore
   ]
 })
 export class TransferMutationHistoryModule {

@@ -1,7 +1,7 @@
 import {Injectable} from '@angular/core';
 import {TransferEditDetailModalComponent} from '../shared/components/transfer-edit-detail-modal/transfer-edit-detail-modal.component';
 import {filter, switchMap, tap} from 'rxjs/operators';
-import {TransferDataService} from './transfer-data.service';
+import {TransferDataStore} from './transfer-data.store';
 import {MatDialog} from '@angular/material/dialog';
 import {TransferSplitDetailModalComponent} from '../shared/components/transfer-split-detail-modal/transfer-split-detail-modal.component';
 import {TransferMutationDto} from '../../swagger/models/transfer-mutation-dto';
@@ -13,7 +13,7 @@ import {SplitTransferMutationDto} from '../../swagger/models';
 export class TransferEditService {
 
   constructor(
-    private transferDataService: TransferDataService,
+    private transferDataService: TransferDataStore,
     private transferApiService: TransferApiService,
     private transferMutationApiService: TransferMutationApiService,
     private dialog: MatDialog

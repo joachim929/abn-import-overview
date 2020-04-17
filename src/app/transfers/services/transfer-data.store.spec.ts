@@ -1,13 +1,13 @@
 import { TestBed } from '@angular/core/testing';
 
-import { TransferDataService } from './transfer-data.service';
+import { TransferDataStore } from './transfer-data.store';
 
-describe('TransferDataService', () => {
-  let service: TransferDataService;
+describe('TransferDataStore', () => {
+  let service: TransferDataStore;
 
   beforeEach(() => {
     TestBed.configureTestingModule({});
-    service = TestBed.inject(TransferDataService);
+    service = TestBed.inject(TransferDataStore);
   });
 
   it('should be created', () => {

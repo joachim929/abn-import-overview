@@ -1,7 +1,7 @@
 import {Component} from '@angular/core';
 import {Observable} from 'rxjs';
 import {TransferMutationDto} from '../../../../swagger/models/transfer-mutation-dto';
-import {TransferDataService} from '../../../services/transfer-data.service';
+import {TransferDataStore} from '../../../services/transfer-data.store';
 
 @Component({
   selector: 'app-load-more',
@@ -13,7 +13,7 @@ export class LoadMoreComponent {
   recordCount$: Observable<number>;
 
   constructor(
-    private transferDataService: TransferDataService
+    private transferDataService: TransferDataStore
   ) {
     this.transferMutations$ = this.transferDataService.transfers;
     this.recordCount$ = this.transferDataService.recordCount;

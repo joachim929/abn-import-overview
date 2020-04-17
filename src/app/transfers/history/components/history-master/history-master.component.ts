@@ -1,5 +1,5 @@
 import {Component, OnInit} from '@angular/core';
-import {HistoryDataService} from '../../services/history-data.service';
+import {HistoryDataStore} from '../../services/history-data.store';
 import {Transfer} from '../../../../swagger/models/transfer';
 import {Observable} from 'rxjs';
 import {ActivatedRoute} from '@angular/router';
@@ -17,7 +17,7 @@ export class HistoryMasterComponent implements OnInit {
   mutationId: number;
 
   constructor(
-    private historyDataService: HistoryDataService,
+    private historyDataService: HistoryDataStore,
     private activatedRoute: ActivatedRoute
   ) {
   }

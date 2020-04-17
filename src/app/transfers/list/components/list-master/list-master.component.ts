@@ -1,5 +1,5 @@
 import {Component, OnInit, ViewChild} from '@angular/core';
-import {TransferDataService} from '../../../services/transfer-data.service';
+import {TransferDataStore} from '../../../services/transfer-data.store';
 import {Observable} from 'rxjs';
 import {MatSort} from '@angular/material/sort';
 import {MatTableDataSource} from '@angular/material/table';
@@ -36,7 +36,7 @@ export class ListMasterComponent implements OnInit {
   @ViewChild(MatSort, {static: true}) sort: MatSort;
 
   constructor(
-    private transferDataService: TransferDataService,
+    private transferDataService: TransferDataStore,
     private transferEditService: TransferEditService,
     private breakpointService: BreakpointService
   ) {

@@ -5,7 +5,7 @@ import {Transfer} from '../../../swagger/models';
 import {filter, tap} from 'rxjs/operators';
 
 @Injectable()
-export class HistoryDataService {
+export class HistoryDataStore {
   private transfer = new BehaviorSubject<Transfer>(null);
   private dataStore: {
     transfer: Transfer

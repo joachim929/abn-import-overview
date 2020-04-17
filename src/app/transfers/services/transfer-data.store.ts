@@ -7,7 +7,7 @@ import {TransferMutationApiService} from '../../swagger/services/transfer-mutati
 
 // https://coryrylan.com/blog/angular-observable-data-services
 @Injectable()
-export class TransferDataService {
+export class TransferDataStore {
 
   private transfers$ = new BehaviorSubject<TransferMutationDto[]>([]);
   private selectedTransfer$ = new BehaviorSubject<TransferMutationDto>(null);

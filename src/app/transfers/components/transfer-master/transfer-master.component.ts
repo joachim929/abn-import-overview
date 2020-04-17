@@ -1,6 +1,6 @@
 import {Component, OnInit} from '@angular/core';
 import {Observable} from 'rxjs';
-import {TransferDataService} from '../../services/transfer-data.service';
+import {TransferDataStore} from '../../services/transfer-data.store';
 import {BreakpointService} from '../../../core/services/breakpoint.service';
 import {TransferMutationDto} from '../../../swagger/models/transfer-mutation-dto';
 
@@ -16,7 +16,7 @@ export class TransferMasterComponent implements OnInit {
   selectedTransferMutation$: Observable<TransferMutationDto>;
 
   constructor(
-    private invoiceDataService: TransferDataService,
+    private invoiceDataService: TransferDataStore,
     private breakpointService: BreakpointService
   ) {
 
