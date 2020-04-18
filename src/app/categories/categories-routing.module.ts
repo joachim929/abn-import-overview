@@ -5,12 +5,16 @@ import {AddCategoryComponent} from './components/add-category/add-category.compo
 import {AddCategoryGroupComponent} from './components/add-category-group/add-category-group.component';
 import {EditCategoryComponent} from './components/edit-category/edit-category.component';
 import {EditCategoryGroupComponent} from './components/edit-category-group/edit-category-group.component';
+import {CategoryListComponent} from './components/category-list/category-list.component';
 
 const routes: Routes = [
   {
     path: '',
     component: CategoriesMasterComponent,
     children: [
+      {
+        path: '', component: CategoryListComponent
+      },
       {
         path: 'add-category', component: AddCategoryComponent
       },

@@ -1,7 +1,7 @@
 import {Component, Input} from '@angular/core';
 import {TransferDataStore} from '../../../services/transfer-data.store';
 import {TransferEditService} from '../../../services/transfer-edit.service';
-import {CategoryDataService} from '../../../../core/services/category-data.service';
+import {CategoryDataStore} from '../../../../core/services/category-data.store';
 import {BreakpointService} from '../../../../core/services/breakpoint.service';
 import {TransferMutationDto} from '../../../../swagger/models/transfer-mutation-dto';
 
@@ -16,7 +16,7 @@ export class TransferDetailComponent {
   constructor(
     private transferDataService: TransferDataStore,
     private transferEditService: TransferEditService,
-    private categoryDataService: CategoryDataService,
+    private categoryDataService: CategoryDataStore,
     private breakpointService: BreakpointService
   ) {
   }

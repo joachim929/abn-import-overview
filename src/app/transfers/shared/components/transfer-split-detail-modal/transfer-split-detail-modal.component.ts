@@ -2,7 +2,7 @@ import {Component, Inject, OnInit} from '@angular/core';
 import {MAT_DIALOG_DATA, MatDialogRef} from '@angular/material/dialog';
 import {FormControl, FormGroup, Validators} from '@angular/forms';
 import {filter, map} from 'rxjs/operators';
-import {CategoryDataService} from '../../../../core/services/category-data.service';
+import {CategoryDataStore} from '../../../../core/services/category-data.store';
 import {Observable} from 'rxjs';
 import {CategoryGroupDto} from '../../../../swagger/models/category-group-dto';
 import {TransferMutationDto} from '../../../../swagger/models/transfer-mutation-dto';
@@ -24,7 +24,7 @@ export class TransferSplitDetailModalComponent implements OnInit {
   constructor(
     public dialogRef: MatDialogRef<TransferSplitDetailModalComponent>,
     @Inject(MAT_DIALOG_DATA) public data: { transferMutation: TransferMutationDto },
-    private categoryDataService: CategoryDataService
+    private categoryDataService: CategoryDataStore
   ) {
     this.form = new FormGroup({
       id: new FormControl(data.transferMutation.id),

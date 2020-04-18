@@ -1,6 +1,6 @@
 import {Component, OnInit} from '@angular/core';
 import {FormControl, FormGroup} from '@angular/forms';
-import {CategoryDataService} from '../../../core/services/category-data.service';
+import {CategoryDataStore} from '../../../core/services/category-data.store';
 import {Observable} from 'rxjs';
 import {CategoryGroupDto} from '../../../swagger/models/category-group-dto';
 import {debounceTime, distinctUntilChanged} from 'rxjs/operators';
@@ -36,7 +36,7 @@ export class TransferFilterComponent implements OnInit {
   defaultParams: TransferListParams;
 
   constructor(
-    private categoryDataService: CategoryDataService,
+    private categoryDataService: CategoryDataStore,
     private transferDataService: TransferDataStore,
     private transferFilterService: TransferFilterService
   ) {

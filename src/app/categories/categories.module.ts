@@ -13,15 +13,19 @@ import { EditCategoryGroupComponent } from './components/edit-category-group/edi
 import { DeleteCategoryComponent } from './components/delete-category/delete-category.component';
 import { DeleteCategoryGroupComponent } from './components/delete-category-group/delete-category-group.component';
 import { CategoryListComponent } from './components/category-list/category-list.component';
+import {MatExpansionModule} from '@angular/material/expansion';
+import {MatIconModule} from '@angular/material/icon';
 
 
 @NgModule({
   declarations: [CategoriesMasterComponent, CategoryDetailComponent, AddCategoryComponent, AddCategoryGroupComponent, EditCategoryComponent, EditCategoryGroupComponent, DeleteCategoryComponent, DeleteCategoryGroupComponent, CategoryListComponent],
-    imports: [
-        CommonModule,
-        CategoriesRoutingModule,
-        SharedModule,
-        MatButtonModule
-    ]
+  imports: [
+    CommonModule,
+    CategoriesRoutingModule,
+    SharedModule,
+    MatButtonModule,
+    MatExpansionModule,
+    MatIconModule
+  ]
 })
 export class CategoriesModule { }

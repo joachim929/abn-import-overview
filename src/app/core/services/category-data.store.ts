@@ -6,7 +6,7 @@ import {CategoryGroupApiService} from '../../swagger/services/category-group-api
 @Injectable({
   providedIn: 'root'
 })
-export class CategoryDataService {
+export class CategoryDataStore {
   private categories = new BehaviorSubject<CategoryGroupDto[]>([]);
   private selectedCategory = new BehaviorSubject(null);
   private dataStore: { categories$: CategoryGroupDto[], selectedCategory$ } = {categories$: [], selectedCategory$: null};
