@@ -6,16 +6,13 @@
 }
 
 .invoice-and-filters {
-  display: flex;
-  flex-direction: row;
-  overflow: hidden;
-  height: calc(100vh - 132px);
-  padding: 10px 0;
+  height: calc(100vh - 112px);
+
+  .transfer-side-nav {
+    box-shadow: none;
+  }
 }
 
-//.invoice-and-filters.is-small {
-//  grid-template-columns: 0 1fr;
-//}
 .is-small-hide {
   display: none;
 }
@@ -30,13 +27,6 @@
   transition: 0.5s;
   background: black;
   opacity: 0.08;
-}
-
-.search-icon {
-  visibility: hidden;
-}
-.search-icon.is-small {
-  visibility: visible;
 }
 
 .invoice-filter {

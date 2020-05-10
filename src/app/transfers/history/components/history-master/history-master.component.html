@@ -6,17 +6,6 @@
     <p>Value date: {{(transfer$ | async).valueDate | date}}</p>
     <p>Transaction date: {{(transfer$ | async).transactionDate | date}}</p>
     <p>Edits:</p>
-<!--    <ng-container *ngFor="let mutation of (transfer$ | async).mutations">-->
-<!--      <div *ngIf="mutationId === mutation.id">-->
-<!--        <p>{{mutation.updatedAt | date: 'long'}}</p>-->
-<!--        <p>Description: {{mutation.description}}</p>-->
-<!--        <p>Comment: {{mutation.comment}}</p>-->
-<!--        <p>Amount: {{mutation.amount}}</p>-->
-<!--      </div>-->
-<!--      <div *ngIf="mutationId !== mutation.id">-->
-<!--        <p>{{mutation.updatedAt | date: 'long'}}</p>-->
-<!--      </div>-->
-<!--    </ng-container>-->
   </mat-card>
   <mat-accordion displayMode="flat">
     <mat-expansion-panel *ngFor="let mutation of (transfer$ | async).mutations">
@@ -25,6 +14,7 @@
           {{mutation.updatedAt | date: 'long'}}
         </mat-panel-title>
       </mat-expansion-panel-header>
+      <pre>{{mutation | json }}</pre>
       <p>Description: {{mutation.description}}</p>
       <p>Comment: {{mutation.comment}}</p>
       <p>Amount: {{mutation.amount}}</p>

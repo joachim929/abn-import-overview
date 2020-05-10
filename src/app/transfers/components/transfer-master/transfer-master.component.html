@@ -1,5 +1,6 @@
 <mat-toolbar class="invoice-toolbar">
   <div>
+    <button mat-icon-button [class.active]="opened" class="search-icon" (click)="sidenav.toggle()"><mat-icon>filter_list</mat-icon></button>
     <button *ngIf="!file" mat-button color="primary" class="mr-1" (click)="importInvoices.click()">Import</button>
     <button *ngIf="file" mat-raised-button color="primary" class="mr-1" (click)="upload()">Upload</button>
     <button *ngIf="file" mat-raised-button color="warn" class="my-1" (click)="cancelUpload()">Cancel</button>
@@ -9,7 +10,6 @@
     <a *ngIf="!file" mat-button class="my-1">Assign mode</a>
   </div>
   <div>
-    <button mat-icon-button class="search-icon" [class.is-small]="isSmall"><mat-icon>search</mat-icon></button>
     <a mat-icon-button routerLinkActive="active" routerLink="list">
       <mat-icon>view_headline</mat-icon>
     </a>
@@ -19,11 +19,11 @@
   </div>
 </mat-toolbar>
 
-<main class="container column-container">
-  <section class="content invoice-and-filters" [class.is-small]="isSmall">
-    <app-transfer-filter class="invoice-filter" [class.is-small]="isSmall"></app-transfer-filter>
-    <div class="invoice-items-overflow">
+<mat-sidenav-container [autosize]="true" class="example-container invoice-and-filters" >
+  <mat-sidenav #sidenav [mode]="sideNavMode" class="transfer-side-nav" [(opened)]="opened" style="background: none">
+    <app-transfer-filter></app-transfer-filter>
+  </mat-sidenav>
+  <mat-sidenav-content>
       <router-outlet></router-outlet>
-    </div>
-  </section>
-</main>
+  </mat-sidenav-content>
+</mat-sidenav-container>

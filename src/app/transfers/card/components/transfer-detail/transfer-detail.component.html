@@ -25,6 +25,7 @@
               mat-icon-button>
         <mat-icon>file_copy</mat-icon>
       </button>
+      <a mat-icon-button [routerLink]="['/transfers/history', transferMutation.mutationId]"><mat-icon>description</mat-icon></a>
     </div>
     <button (click)="remove(transferMutation.mutationId)"
             aria-label="Delete button"

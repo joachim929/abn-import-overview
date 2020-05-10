@@ -3,6 +3,7 @@ import {Observable} from 'rxjs';
 import {TransferDataStore} from '../../services/transfer-data.store';
 import {BreakpointService} from '../../../core/services/breakpoint.service';
 import {TransferMutationDto} from '../../../swagger/models/transfer-mutation-dto';
+import {BreakpointObserver, Breakpoints} from '@angular/cdk/layout';
 
 @Component({
   selector: 'app-transfer-master',
@@ -14,10 +15,14 @@ export class TransferMasterComponent implements OnInit {
   transferMutations$: Observable<TransferMutationDto[]>;
   recordCount$: Observable<number>;
   selectedTransferMutation$: Observable<TransferMutationDto>;
+  showFilter = true;
+  events: string[] = [];
+  opened: boolean;
 
   constructor(
     private invoiceDataService: TransferDataStore,
-    private breakpointService: BreakpointService
+    private breakpointService: BreakpointService,
+    private breakpointObserver: BreakpointObserver
   ) {
 
     this.transferMutations$ = this.invoiceDataService.transfers;
@@ -26,10 +31,22 @@ export class TransferMasterComponent implements OnInit {
   }
 
   ngOnInit() {
+    this.breakpointObserver.observe([
+      Breakpoints.Small,
+      Breakpoints.XSmall
+    ]).subscribe((result) => {
+      if (!this.breakpointObserver.isMatched('(max-width: 599.99px)')) {
+        this.opened = true;
+      }
+    });
   }
 
   get isSmall(): boolean {
     return this.breakpointService.isXSmall || this.breakpointService.isSmall;
+  }
+
+  get sideNavMode() {
+    return this.isSmall ? 'over' : 'side';
   }
 
   incomingFile(event) {
@@ -42,6 +59,12 @@ export class TransferMasterComponent implements OnInit {
 
   cancelUpload() {
     this.file = undefined;
+  }
+
+  toggleFilter() {
+    if (this.isSmall) {
+      this.showFilter = !this.showFilter;
+    }
   }
 
 }
