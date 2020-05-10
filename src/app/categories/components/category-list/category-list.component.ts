@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import {CategoryDataStore} from '../../../core/services/category-data.store';
 import {CategoryGroupDto} from '../../../swagger/models/category-group-dto';
 import {Observable} from 'rxjs';
+import {CdkDragDrop, moveItemInArray, transferArrayItem} from '@angular/cdk/drag-drop';
 
 @Component({
   selector: 'app-category-list',
@@ -10,6 +11,20 @@ import {Observable} from 'rxjs';
 })
 export class CategoryListComponent implements OnInit {
   categoryGroups$: Observable<CategoryGroupDto[]>;
+
+  drop(event: CdkDragDrop<CategoryGroupDto>) {
+    if (event.previousContainer === event.container) {
+      moveItemInArray(event.container.data.categories, event.previousIndex, event.currentIndex);
+    } else {
+      const categories = (event.previousContainer.data as CategoryGroupDto).categories;
+
+      transferArrayItem(categories,
+        event.container.data.categories,
+        event.previousIndex,
+        event.currentIndex);
+    }
+    // todo: Patch categories
+  }
 
   constructor(
     private categoryDataStore: CategoryDataStore
