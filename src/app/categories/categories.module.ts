@@ -16,6 +16,10 @@ import {CategoryListComponent} from './components/category-list/category-list.co
 import {MatExpansionModule} from '@angular/material/expansion';
 import {MatIconModule} from '@angular/material/icon';
 import {DragDropModule} from '@angular/cdk/drag-drop';
+import {MatFormFieldModule} from '@angular/material/form-field';
+import {MatInputModule} from '@angular/material/input';
+import {ReactiveFormsModule} from '@angular/forms';
+import {MatCardModule} from '@angular/material/card';
 
 
 @NgModule({
@@ -37,7 +41,11 @@ import {DragDropModule} from '@angular/cdk/drag-drop';
     MatButtonModule,
     MatExpansionModule,
     MatIconModule,
-    DragDropModule
+    DragDropModule,
+    MatFormFieldModule,
+    MatInputModule,
+    ReactiveFormsModule,
+    MatCardModule
   ]
 })
 export class CategoriesModule {

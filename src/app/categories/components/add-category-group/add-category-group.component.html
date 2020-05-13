@@ -1,1 +1,21 @@
-<p>add-category-group works!</p>
+<mat-card>
+  <form [formGroup]="form" style="display: flex; flex-direction: column;">
+    <h3>Category group</h3>
+    <mat-form-field>
+      <mat-label>Name</mat-label>
+      <input matInput type="text" formControlName="name">
+    </mat-form-field>
+    <mat-form-field>
+      <mat-label>Description</mat-label>
+      <textarea matTextareaAutosize
+                [matAutosizeMinRows]="2"
+                [matAutosizeMaxRows]="4"
+                matInput formControlName="description"></textarea>
+    </mat-form-field>
+    <div style="padding-left: 20px;">
+      <mat-label>Categories</mat-label>
+      <app-add-category *ngFor="let subCategory of getSubCategories().controls" [formControl]="subCategory"></app-add-category>
+    </div>
+    <button (click)="addSubCategory()">Add category</button>
+  </form>
+</mat-card>

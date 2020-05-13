@@ -19,7 +19,7 @@ const routes: Routes = [
         path: 'add-category', component: AddCategoryComponent
       },
       {
-        path: 'add-category-group', component: AddCategoryGroupComponent
+        path: 'add', component: AddCategoryGroupComponent
       },
       /** todo: Prolly going to be using dialogs so these need to be children from the list route
        *    Seems the way to do this would be having a subscriber in the master component and opening the dialog once a certain route is called
