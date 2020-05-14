@@ -1,1 +1,23 @@
-<p>edit-category-group works!</p>
+<mat-card *ngIf="selectedCategory$ | async">
+  <form [formGroup]="form">
+    <mat-form-field>
+      <mat-label>Category group name</mat-label>
+      <input matInput formControlName="name">
+    </mat-form-field>
+    <mat-form-field>
+      <mat-label>Category group description</mat-label>
+      <input matInput formControlName="description">
+    </mat-form-field>
+
+    <div *ngFor="let category of getCategories()" [formGroup]="category">
+      <mat-form-field>
+        <mat-label>Category name</mat-label>
+        <input matInput formControlName="name">
+      </mat-form-field>
+      <mat-form-field>
+        <mat-label>Category description</mat-label>
+        <input matInput formControlName="description">
+      </mat-form-field>
+    </div>
+  </form>
+</mat-card>

@@ -1,7 +1,6 @@
 import {Component, forwardRef, Input, OnInit} from '@angular/core';
 import {ControlValueAccessor, FormControl, FormGroup, NG_VALUE_ACCESSOR, Validators} from '@angular/forms';
 import {CategoryGroupDto} from '../../../swagger/models/category-group-dto';
-import {CategoryDto} from '../../../swagger/models/category-dto';
 import {debounceTime, distinctUntilChanged} from 'rxjs/operators';
 
 @Component({

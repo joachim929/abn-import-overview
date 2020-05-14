@@ -32,7 +32,10 @@ todo:
   <!-- All lists in here will be connected. -->
   <div class="example-list" cdkDropList *ngFor="let group of categoryGroups$ | async"
        [cdkDropListData]="group" (cdkDropListDropped)="drop($event)">
-    <h2>Test</h2>
+    <div style="display: flex; flex-direction: row; justify-content: space-between; align-items: center; padding: 0 8px;">
+      <h2>Test</h2>
+      <a mat-icon-button [routerLink]="['edit', group.id]"><mat-icon>edit</mat-icon></a>
+    </div>
     <div class="example-bod" *ngFor="let category of group.categories" cdkDrag>
       {{category | json}}
     </div>

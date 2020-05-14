@@ -1,8 +1,9 @@
 /* tslint:disable */
+import { CategoryDto } from './category-dto';
 export interface CategoryGroupDto {
-  categories?: Array<string>;
+  categories?: Array<CategoryDto>;
   description?: string;
-  id: number;
-  name: string;
-  userId: number;
+  id?: number;
+  name?: string;
+  userId?: number;
 }

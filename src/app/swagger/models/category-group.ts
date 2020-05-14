@@ -7,6 +7,5 @@ export interface CategoryGroup {
   editedAt: string;
   id: number;
   name: string;
-  user: {  };
   userId: number;
 }

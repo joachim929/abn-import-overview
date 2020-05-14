@@ -2,14 +2,14 @@ import {Injectable} from '@angular/core';
 import {BehaviorSubject, Observable} from 'rxjs';
 import {CategoryDto, CategoryGroupDto} from '../../swagger/models';
 import {CategoryGroupApiService} from '../../swagger/services/category-group-api.service';
-import {map} from 'rxjs/operators';
+import {map, tap} from 'rxjs/operators';
 
 @Injectable({
   providedIn: 'root'
 })
 export class CategoryDataStore {
   private categories = new BehaviorSubject<CategoryGroupDto[]>([]);
-  private selectedCategory = new BehaviorSubject(null);
+  private selectedCategory = new BehaviorSubject<CategoryGroupDto>(null);
   private dataStore: { categories$: CategoryGroupDto[], selectedCategory$ } = {categories$: [], selectedCategory$: null};
 
   constructor(
@@ -22,11 +22,19 @@ export class CategoryDataStore {
     return this.categories.asObservable();
   }
 
+  get selectedCategory$(): Observable<CategoryGroupDto> {
+    return this.selectedCategory.asObservable();
+  }
+
+  setSelectedCategory(id: number) {
+    const selectedCategory = this.dataStore.categories$.find(category => category.id === id);
+    this.dataStore.selectedCategory$ = {...selectedCategory};
+    this.selectedCategory.next(Object.assign({}, this.dataStore).selectedCategory$);
+  }
+
   loadCategories() {
-    this.categoryApiService.getAllCategoryGroupsWithCategories().pipe(
-      map((response: CategoryGroupDto[]) => response.map((group) => ({...group, categories: ['Test-1', 'Test-2']})))
-    ).subscribe((next) => {
-      this.dataStore.categories$ = next;
+    this.categoryApiService.getAllCategoryGroupsWithCategories().subscribe((next) => {
+      this.dataStore.categories$ = [...next];
       this.categories.next(Object.assign({}, this.dataStore).categories$);
     });
   }
