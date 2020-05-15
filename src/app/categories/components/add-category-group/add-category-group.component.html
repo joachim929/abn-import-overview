@@ -1,4 +1,4 @@
-<mat-card>
+<mat-card class="m-2">
   <form [formGroup]="form" style="display: flex; flex-direction: column;">
     <h3>Category group</h3>
     <mat-form-field>
@@ -12,10 +12,27 @@
                 [matAutosizeMaxRows]="4"
                 matInput formControlName="description"></textarea>
     </mat-form-field>
-    <div style="padding-left: 20px;">
+    <div style="padding-left: 20px; display: flex; flex-direction: column">
       <mat-label>Categories</mat-label>
-      <app-add-category *ngFor="let subCategory of getSubCategories().controls" [formControl]="subCategory"></app-add-category>
+      <div *ngFor="let subCategory of getSubCategories(); let index = index" [formGroup]="subCategory"
+           style="display: flex; flex-direction: column;">
+        <mat-label>{{index + 1}})</mat-label>
+        <mat-form-field>
+          <mat-label>Name</mat-label>
+          <input matInput type="text" formControlName="name">
+          <mat-hint *ngIf="subCategory.get('name').invalid && subCategory.get('name').touched">Name needs a minimum
+            length of 3
+          </mat-hint>
+        </mat-form-field>
+        <mat-form-field>
+          <mat-label>Description</mat-label>
+          <textarea matTextareaAutosize
+                    [matAutosizeMinRows]="2"
+                    [matAutosizeMaxRows]="4"
+                    matInput formControlName="description"></textarea>
+        </mat-form-field>
+      </div>
     </div>
-    <button (click)="addSubCategory()">Add category</button>
+    <button color="primary" mat-raised-button (click)="addSubCategory()">Add category</button>
   </form>
 </mat-card>

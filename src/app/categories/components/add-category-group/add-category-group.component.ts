@@ -7,9 +7,14 @@ import {FormArray, FormControl, FormGroup, Validators} from '@angular/forms';
   styleUrls: ['./add-category-group.component.scss']
 })
 export class AddCategoryGroupComponent implements OnInit {
+  nameValidators = [
+    Validators.required,
+    Validators.minLength(3),
+    Validators.maxLength(250)
+  ];
   form = new FormGroup({
-    name: new FormControl(),
-    description: new FormControl(),
+    name: new FormControl(null, this.nameValidators),
+    description: new FormControl(null),
     categories: new FormArray([])
   });
 
@@ -17,21 +22,27 @@ export class AddCategoryGroupComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.form.valueChanges.subscribe((next) => console.log(next));
-    (this.form.get('categories') as FormArray).push(new FormControl(null, [Validators.required]));
+    (this.form.get('categories') as FormArray).push(this.getNewSubCategory());
   }
 
-  getSubCategories(): FormArray {
-    return this.form.get('categories') as FormArray;
+  getSubCategories(): FormGroup[] {
+    return (this.form.get('categories') as FormArray).controls as FormGroup[];
   }
 
   addSubCategory() {
     const categoriesArray = this.form.get('categories') as FormArray;
     if (categoriesArray.at(categoriesArray.length - 1).valid) {
-      categoriesArray.push(new FormControl(null, [Validators.required]));
+      categoriesArray.push(this.getNewSubCategory());
     } else {
-      categoriesArray.at(categoriesArray.length - 1).markAsDirty();
+      categoriesArray.at(categoriesArray.length - 1).get('name').markAsTouched();
     }
+  }
+
+  private getNewSubCategory(): FormGroup {
+    return new FormGroup({
+      name: new FormControl(null, this.nameValidators),
+      description: new FormControl(null)
+    });
   }
 
 }

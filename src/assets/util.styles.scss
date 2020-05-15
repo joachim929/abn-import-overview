@@ -1,98 +1,93 @@
-.ml-0, .mx-0 {
-  margin-left: 0 !important;
-}
+$sizes: 1, 2, 3, 4, 5;
+.app-root {
+  @each $size in $sizes {
+    .m-#{$size} {
+      margin: #{$size * 4}px;
+    }
+    .ml-#{$size}, .mx-#{$size} {
+      margin-left: #{$size * 4}px;
+    }
+    .mr-#{$size}, .mx-#{$size} {
+      margin-right: #{$size * 4px};
+    }
+    .mb-#{$size}, .my-#{$size} {
+      margin-bottom: #{$size * 4}px;
+    }
+    .mt-#{$size}, .my-#{$size} {
+      margin-top: #{$size * 4px};
+    }
+    .p-#{$size} {
+      padding: #{$size * 4}px;
+    }
+    .pl-#{$size}, .px-#{$size} {
+      padding-left: #{$size * 4}px;
+    }
+    .pr-#{$size}, .px-#{$size} {
+      padding-right: #{$size * 4px};
+    }
+    .pb-#{$size}, .py-#{$size} {
+      padding-bottom: #{$size * 4}px;
+    }
+    .pt-#{$size}, .py-#{$size} {
+      padding-top: #{$size * 4px};
+    }
+  }
 
-.mr-0, .mx-0 {
-  margin-right: 0 !important;
-}
+  .ml-auto, .mx-auto {
+    margin-left: auto;
+  }
 
-.mt-0, .my-0 {
-  margin-top: 0 !important
-}
+  .mr-auto, .mx-auto {
+    margin-right: auto;
+  }
 
-.mb-0, .my-0 {
-  margin-bottom: 0 !important;
-}
+  .mt-auto, .my-auto {
+    margin-top: auto;
+  }
 
-.m-0 {
-  margin: 0 !important;
-}
+  .mb-auto, .my-auto {
+    margin-bottom: auto;
+  }
 
-.ml-1, .mx-1 {
-  margin-left: 0.25em !important;
-}
+  .m-auto {
+    margin: auto;
+  }
 
-.mr-1, .mx-1 {
-  margin-right: 0.25em !important;
-}
+  .w-100 {
+    width: 100%;
+  }
 
-.mt-1, .my-1 {
-  margin-top: 0.25em !important
-}
+  .w-75 {
+    width: 75%;
+  }
 
-.mb-1, .my-1 {
-  margin-bottom: 0.25em !important;
-}
+  .w-50 {
+    width: 50%;
+  }
 
-.m-1 {
-  margin: 0.25em !important;
-}
+  .w-25 {
+    width: 25%;
+  }
+  .cursor-default {
+    cursor: default;
+  }
 
-.ml-auto, .mx-auto {
-  margin-left: auto !important;
-}
+  .container, .column-container, .row-container {
+    display: flex;
+    margin: 0 auto;
+    max-width: 1200px;
+  }
 
-.mr-auto, .mx-auto {
-  margin-right: auto !important;
-}
+  .column-container {
+    flex-direction: column;
+  }
 
-.mt-auto, .my-auto {
-  margin-top: auto !important
-}
+  .row-container {
+    flex-direction: row;
+  }
 
-.mb-auto, .my-auto {
-  margin-bottom: auto !important;
-}
+  .content {
+    max-width: 1200px;
+  }
 
-.m-auto {
-  margin: auto !important;
 }
-
-.w-100 {
-  width: 100% !important;
-}
-
-.w-75 {
-  width: 75% !important;
-}
-
-.w-50 {
-  width: 50% !important;
-}
-
-.w-25 {
-  width: 25% !important;
-}
-
-.cursor-default {
-  cursor: default;
-}
-
-.container, .column-container, .row-container {
-  display: flex;
-  margin: 0 auto;
-  max-width: 1200px;
-}
-
-.column-container {
-  flex-direction: column;
-}
-
-.row-container {
-  flex-direction: row;
-}
-
-.content {
-  max-width: 1200px;
-}
-
