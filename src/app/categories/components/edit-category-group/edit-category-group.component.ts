@@ -28,7 +28,7 @@ export class EditCategoryGroupComponent implements OnInit {
       ),
       this.categoryDataService.categories$.pipe(filter(x => !!x && x.length > 0))
     ]).pipe(
-      tap(([paramMap, categories]) => this.categoryDataService.setSelectedCategory(Number(paramMap.get('id')))),
+      tap(([paramMap, categories]) => this.categoryDataService.setSelectedCategory(paramMap.get('id'))),
       switchMap(() => this.categoryDataService.selectedCategory$),
       filter((categoryGroup) => !!categoryGroup),
       tap((next) => this.initForm(next))
@@ -44,7 +44,7 @@ export class EditCategoryGroupComponent implements OnInit {
       userId: new FormControl(categoryGroup.id)
     });
 
-    categoryGroup.categories.map((category => {
+    categoryGroup.categories.map(((category) => {
       (this.form.get('categories') as FormArray).push(new FormGroup({
         name: new FormControl(category.name),
         description: new FormControl(category.description),

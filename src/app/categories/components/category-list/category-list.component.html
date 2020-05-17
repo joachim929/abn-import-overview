@@ -10,61 +10,22 @@ todo:
     Will have edit "button" <a>, "routes" to the dialog
   No data scenario
 -->
-<!--<mat-accordion style="width: 100%;">-->
-<!--  <mat-expansion-panel *ngFor="let group of categoryGroups$ | async">-->
-<!--    <mat-expansion-panel-header>-->
-<!--      <mat-panel-title>{{group.name}}</mat-panel-title>-->
-<!--      <mat-panel-description style="display: flex; justify-content: end">-->
-<!--        <mat-icon>edit</mat-icon>-->
-<!--        <mat-icon>delete</mat-icon>-->
-<!--      </mat-panel-description>-->
-<!--    </mat-expansion-panel-header>-->
-<!--    &lt;!&ndash; Content &ndash;&gt;-->
-<!--    <p>{{group.description}}</p>-->
-<!--    <ng-container *ngFor="let category of group.categories">-->
-<!--      <p>{{category | json}}</p>-->
-<!--    </ng-container>-->
-<!--  </mat-expansion-panel>-->
-<!--</mat-accordion>-->
 
-
-<div cdkDropListGroup class="example-container">
+<div cdkDropListGroup class="example-container" style="flex: 1">
   <!-- All lists in here will be connected. -->
   <div class="example-list" cdkDropList *ngFor="let group of categoryGroups$ | async"
        [cdkDropListData]="group" (cdkDropListDropped)="drop($event)">
     <div style="display: flex; flex-direction: row; justify-content: space-between; align-items: center; padding: 0 8px;">
-      <h2>Test</h2>
+      <div style="flex-direction: column; flex: 1">
+        <h2 class="mt-2 mb-0">{{group.name}}</h2>
+        <p class="my-0">{{group.description}}</p>
+        <h4 *ngIf="group.categories.length > 0" class="my-2">Items:</h4>
+      </div>
       <a mat-icon-button [routerLink]="['edit', group.id]"><mat-icon>edit</mat-icon></a>
     </div>
-    <div class="example-bod" *ngFor="let category of group.categories" cdkDrag>
-      {{category | json}}
+    <div class="example-bod p-2" style="border: 1px solid red;" *ngFor="let category of group.categories" cdkDrag>
+      <p class="m-0"><span>{{category.name}}</span></p>
+      <p class="m-0"><span><small *ngIf="category.description"> - {{category.description}}</small></span></p>
     </div>
   </div>
 </div>
-<!--<div class="example-container">-->
-<!--  <h2>To do</h2>-->
-
-<!--  <div-->
-<!--    cdkDropList-->
-<!--    #todoList="cdkDropList"-->
-<!--    [cdkDropListData]="todo"-->
-<!--    [cdkDropListConnectedTo]="[doneList]"-->
-<!--    class="example-list"-->
-<!--    (cdkDropListDropped)="drop($event)">-->
-<!--    <div class="example-box" *ngFor="let item of todo" cdkDrag>{{item}}</div>-->
-<!--  </div>-->
-<!--</div>-->
-
-<!--<div class="example-container">-->
-<!--  <h2>Done</h2>-->
-
-<!--  <div-->
-<!--    cdkDropList-->
-<!--    #doneList="cdkDropList"-->
-<!--    [cdkDropListData]="done"-->
-<!--    [cdkDropListConnectedTo]="[todoList]"-->
-<!--    class="example-list"-->
-<!--    (cdkDropListDropped)="drop($event)">-->
-<!--    <div class="example-box" *ngFor="let item of done" cdkDrag>{{item}}</div>-->
-<!--  </div>-->
-<!--</div>-->

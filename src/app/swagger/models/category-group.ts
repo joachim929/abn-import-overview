@@ -5,7 +5,6 @@ export interface CategoryGroup {
   createdAt: string;
   description: string;
   editedAt: string;
-  id: number;
+  id: string;
   name: string;
-  userId: number;
 }

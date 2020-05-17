@@ -1,8 +1,8 @@
 import {Injectable} from '@angular/core';
 import {BehaviorSubject, Observable} from 'rxjs';
-import {CategoryDto, CategoryGroupDto} from '../../swagger/models';
+import {CategoryGroupDto} from '../../swagger/models';
 import {CategoryGroupApiService} from '../../swagger/services/category-group-api.service';
-import {map, tap} from 'rxjs/operators';
+import {take} from 'rxjs/operators';
 
 @Injectable({
   providedIn: 'root'
@@ -26,7 +26,7 @@ export class CategoryDataStore {
     return this.selectedCategory.asObservable();
   }
 
-  setSelectedCategory(id: number) {
+  setSelectedCategory(id: string) {
     const selectedCategory = this.dataStore.categories$.find(category => category.id === id);
     this.dataStore.selectedCategory$ = {...selectedCategory};
     this.selectedCategory.next(Object.assign({}, this.dataStore).selectedCategory$);
@@ -39,6 +39,29 @@ export class CategoryDataStore {
     });
   }
 
-  patchCategoryGroups(categoryGroups: CategoryGroupDto[]) {
+  createCategory(category: CategoryGroupDto) {
+    this.categoryApiService.createCategoryGroup({body: category}).subscribe((response) => {
+      this.dataStore.categories$ = [...this.dataStore.categories$, response];
+      this.categories.next(Object.assign({}, this.dataStore).categories$);
+    });
+  }
+
+  moveCategories(categoryGroups: CategoryGroupDto[]) {
+    categoryGroups.map((categoryGroup) => categoryGroup.categories.map((category, index) => {
+      category.order = index;
+    }));
+
+    this.categoryApiService.patchMultiple({body: categoryGroups}).pipe(
+      take(1)
+    ).subscribe((patchedCategories) => {
+      for (let category of this.dataStore.categories$) {
+        for (const patchedCategory of patchedCategories) {
+          if (patchedCategory.id === category.id) {
+            category = {...patchedCategory};
+          }
+        }
+      }
+      this.categories.next(Object.assign({}, this.dataStore).categories$);
+    });
   }
 }

@@ -1,7 +1,8 @@
 /* tslint:disable */
 export interface CategoryDto {
-  categoryGroupId?: number;
+  categoryGroupId: string;
   description?: string;
-  id?: number;
-  name?: string;
+  id: number;
+  name: string;
+  order: number;
 }

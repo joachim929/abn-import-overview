@@ -13,15 +13,20 @@
                 matInput formControlName="description"></textarea>
     </mat-form-field>
     <div style="padding-left: 20px; display: flex; flex-direction: column">
-      <mat-label>Categories</mat-label>
+      <mat-label *ngIf="getSubCategories().length > 0">Categories</mat-label>
       <div *ngFor="let subCategory of getSubCategories(); let index = index" [formGroup]="subCategory"
            style="display: flex; flex-direction: column;">
-        <mat-label>{{index + 1}})</mat-label>
+        <div style="display:flex; justify-content: space-between">
+          <mat-label>{{index + 1}})</mat-label>
+          <button (click)="removeSubCategory(index)"
+                  mat-button mat-icon-button>
+            <mat-icon>cancel</mat-icon>
+          </button>
+        </div>
         <mat-form-field>
           <mat-label>Name</mat-label>
           <input matInput type="text" formControlName="name">
-          <mat-hint *ngIf="subCategory.get('name').invalid && subCategory.get('name').touched">Name needs a minimum
-            length of 3
+          <mat-hint *ngIf="subCategory.get('name').invalid && subCategory.get('name').touched">Invalid input
           </mat-hint>
         </mat-form-field>
         <mat-form-field>
@@ -33,6 +38,13 @@
         </mat-form-field>
       </div>
     </div>
-    <button color="primary" mat-raised-button (click)="addSubCategory()">Add category</button>
+    <div style="display: flex; justify-content: space-between">
+      <button class="ml-5" color="primary" mat-raised-button (click)="addSubCategory()">Add category</button>
+      <div>
+        <a class="mx-2" color="warn" mat-raised-button [routerLink]="['../']">Cancel</a>
+        <button mat-raised-button color="accent" [disabled]="form.invalid" (click)="submit()">Save</button>
+      </div>
+    </div>
+
   </form>
 </mat-card>

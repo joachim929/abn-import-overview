@@ -12,6 +12,14 @@ import {CdkDragDrop, moveItemInArray, transferArrayItem} from '@angular/cdk/drag
 export class CategoryListComponent implements OnInit {
   categoryGroups$: Observable<CategoryGroupDto[]>;
 
+  constructor(
+    private categoryDataStore: CategoryDataStore
+  ) { }
+
+  ngOnInit(): void {
+    this.categoryGroups$ = this.categoryDataStore.categories$;
+  }
+
   drop(event: CdkDragDrop<CategoryGroupDto>) {
     if (event.previousContainer === event.container) {
       moveItemInArray(event.container.data.categories, event.previousIndex, event.currentIndex);
@@ -23,15 +31,9 @@ export class CategoryListComponent implements OnInit {
         event.previousIndex,
         event.currentIndex);
     }
-    // todo: Patch categories
+    if (event.previousContainer === event.container && event.previousIndex !== event.currentIndex ||
+    event.previousContainer !== event.container) {
+      this.categoryDataStore.moveCategories([event.previousContainer.data, event.container.data]);
+    }
   }
-
-  constructor(
-    private categoryDataStore: CategoryDataStore
-  ) { }
-
-  ngOnInit(): void {
-    this.categoryGroups$ = this.categoryDataStore.categories$;
-  }
-
 }

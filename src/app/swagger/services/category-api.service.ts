@@ -80,7 +80,7 @@ export class CategoryApiService extends BaseService {
    * This method sends `application/json` and handles request body of type `application/json`.
    */
   createCategory$Response(params: {
-      body: Category
+      body: CategoryDto
   }): Observable<StrictHttpResponse<CategoryDto>> {
 
     const rb = new RequestBuilder(this.rootUrl, CategoryApiService.CreateCategoryPath, 'post');
@@ -107,7 +107,7 @@ export class CategoryApiService extends BaseService {
    * This method sends `application/json` and handles request body of type `application/json`.
    */
   createCategory(params: {
-      body: Category
+      body: CategoryDto
   }): Observable<CategoryDto> {
 
     return this.createCategory$Response(params).pipe(
