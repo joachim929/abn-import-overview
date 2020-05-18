@@ -31,8 +31,9 @@ export class CategoryListComponent implements OnInit {
         event.previousIndex,
         event.currentIndex);
     }
-    if (event.previousContainer === event.container && event.previousIndex !== event.currentIndex ||
-    event.previousContainer !== event.container) {
+    if (event.previousContainer === event.container && event.previousIndex !== event.currentIndex) {
+      this.categoryDataStore.moveCategories([event.container.data]);
+    } else if ( event.previousContainer !== event.container) {
       this.categoryDataStore.moveCategories([event.previousContainer.data, event.container.data]);
     }
   }
