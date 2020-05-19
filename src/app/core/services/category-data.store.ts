@@ -51,9 +51,7 @@ export class CategoryDataStore {
       category.order = index;
     }));
 
-    this.categoryApiService.patchMultiple({body: categoryGroups}).pipe(
-      take(1)
-    ).subscribe((patchedCategories) => {
+    this.categoryApiService.patchMultiple({body: categoryGroups}).subscribe((patchedCategories) => {
       for (let category of this.dataStore.categories$) {
         for (const patchedCategory of patchedCategories) {
           if (patchedCategory.id === category.id) {
