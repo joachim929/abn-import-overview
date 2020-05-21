@@ -1,7 +1,6 @@
 import {Component, Input, OnInit} from '@angular/core';
 import {Rule} from '../../../core/interfaces-types/rule.interface';
 import {FormArray, FormControl, FormGroup, Validators} from '@angular/forms';
-import {CategoryService} from '../../../import/services/category.service';
 import {RuleService} from '../../../core/services/rule.service';
 import {amountOptions, descriptionOptions} from '../../constants/amount-options.constant';
 import {CategoryGroup} from '../../../core/interfaces-types/category.interface';
@@ -33,16 +32,11 @@ export class RuleEditComponent implements OnInit {
   testDescriptionOptions = descriptionOptions;
 
   constructor(
-    private categoryService: CategoryService,
     private ruleService: RuleService
   ) {
   }
 
   ngOnInit() {
-  }
-
-  get categoryGroups(): CategoryGroup[] {
-    return this.categoryService.categoryGroups;
   }
 
   getArray(name: string): FormArray {

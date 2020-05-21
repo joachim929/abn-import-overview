@@ -1,7 +1,0 @@
-<article class="row-container">
-  <label class="" for="file">Browse...</label>
-  <input id="file" type="file" hidden (change)="incomingFile($event)" placeholder="Upload file" accept=".xls">
-  <button [disabled]="!file" type="button" class="" (click)="upload()" >Upload</button>
-</article>
-
-<pre>{{formattedData[0] | json}}</pre>

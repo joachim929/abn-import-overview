@@ -1,6 +1,5 @@
 import {Component, Input, OnInit} from '@angular/core';
 import {Rule} from '../../../core/interfaces-types/rule.interface';
-import {Category, CategoryService} from '../../../import/services/category.service';
 import {RuleService} from '../../../core/services/rule.service';
 
 @Component({
@@ -13,7 +12,6 @@ export class RuleDetailComponent implements OnInit {
   showEdit = false;
 
   constructor(
-    private categoryService: CategoryService,
     private ruleService: RuleService
   ) {
   }
@@ -21,9 +19,9 @@ export class RuleDetailComponent implements OnInit {
   ngOnInit() {
   }
 
-  getCategoryById(id: number): Category | null {
+  getCategoryById(id: number) {
     if (id) {
-      return this.categoryService.getCategoryById(id);
+      // return this.categoryService.getCategoryById(id);
     }
   }
 

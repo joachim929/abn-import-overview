@@ -1,7 +1,6 @@
 import {NgModule} from '@angular/core';
 import {Routes, RouterModule} from '@angular/router';
 import {NotFoundComponent} from './shared/components/not-found/not-found.component';
-import {ImportModule} from './import/import.module';
 import {RulesModule} from './rules/rules.module';
 import {CategoriesModule} from './categories/categories.module';
 import {TransferModule} from './transfers/transfer.module';
@@ -10,7 +9,6 @@ import {ReportsModule} from './reports/reports.module';
 
 const routes: Routes = [
   {path: '', redirectTo: 'dashboard', pathMatch: 'full'},
-  {path: 'imports', loadChildren: () => import('./import/import.module').then(m => ImportModule)},
   {path: 'categories', loadChildren: () => import('./categories/categories.module').then(m => CategoriesModule)},
   {path: 'rules', loadChildren: () => import('./rules/rules.module').then(m => RulesModule)},
   {path: 'transfers', loadChildren: () => import('./transfers/transfer.module').then(m => TransferModule)},

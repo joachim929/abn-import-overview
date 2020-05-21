@@ -5,19 +5,20 @@ import {RouterModule} from '@angular/router';
 import {NotFoundComponent} from './components/not-found/not-found.component';
 import {RuleNameControlComponent} from './components/rule-name-control/rule-name-control.component';
 import {ReactiveFormsModule} from '@angular/forms';
-import {RuleAmountDescriptionControlComponent} from './components/rule-amount-description-control/rule-amount-description-control.component';
+import {
+  RuleAmountDescriptionControlComponent
+} from './components/rule-amount-description-control/rule-amount-description-control.component';
 import {RuleRadioControlComponent} from './components/rule-radio-control/rule-radio-control.component';
-import {CategoryPipe} from './pipes/category.pipe';
 import {MatButtonModule} from '@angular/material/button';
 import {MatTabsModule} from '@angular/material/tabs';
 import {MatToolbarModule} from '@angular/material/toolbar';
 import {MatInputComponent} from './components/mat-input/mat-input.component';
 import {MatFormFieldModule} from '@angular/material/form-field';
 import {MatInputModule} from '@angular/material/input';
-import { MatSelectGroupsComponent } from './components/mat-select-groups/mat-select-groups.component';
+import {MatSelectGroupsComponent} from './components/mat-select-groups/mat-select-groups.component';
 import {MatSelectModule} from '@angular/material/select';
-import { MatSelectComponent } from './components/mat-select/mat-select.component';
-import { CustomCurrencyPipe } from './pipes/custom-currency.pipe';
+import {MatSelectComponent} from './components/mat-select/mat-select.component';
+import {CustomCurrencyPipe} from './pipes/custom-currency.pipe';
 
 
 @NgModule({
@@ -27,7 +28,6 @@ import { CustomCurrencyPipe } from './pipes/custom-currency.pipe';
     RuleNameControlComponent,
     RuleAmountDescriptionControlComponent,
     RuleRadioControlComponent,
-    CategoryPipe,
     MatInputComponent,
     MatSelectGroupsComponent,
     MatSelectComponent,
@@ -50,7 +50,6 @@ import { CustomCurrencyPipe } from './pipes/custom-currency.pipe';
     RuleNameControlComponent,
     RuleAmountDescriptionControlComponent,
     RuleRadioControlComponent,
-    CategoryPipe,
     MatInputComponent,
     MatSelectGroupsComponent,
     MatSelectComponent,

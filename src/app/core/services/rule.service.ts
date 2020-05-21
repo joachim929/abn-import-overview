@@ -1,6 +1,5 @@
 import {Injectable} from '@angular/core';
 import {Rule} from '../interfaces-types/rule.interface';
-import {CategoryService} from '../../import/services/category.service';
 import {AmountRuleEnum, AmountRuleType, DescriptionRuleEnum, DescriptionRuleType} from '../interfaces-types/hint.types';
 
 @Injectable({
@@ -34,7 +33,6 @@ export class RuleService {
   ];
 
   constructor(
-    private categoryService: CategoryService
   ) {
   }
 
@@ -66,14 +64,9 @@ export class RuleService {
 
     if (Array.isArray(importedRules) && importedRules.length > 0) {
       let validArray = true;
-      const categoryIds = this.categoryService.categories.map(category => category.id);
       for (const rule of importedRules) {
         if (!this.validateAmount(rule) && !this.validateDescription(rule)) {
           validArray = false;
-          break;
-        }
-
-        if (!categoryIds.includes(rule.categoryId)) {
           break;
         }
 
