@@ -5,10 +5,11 @@ todo:
   Category:
     Think trello
 -->
-
+<a [routerLink]="['add']" color="primary" mat-raised-button>Create category-group</a>
 <div cdkDropListGroup class="list-container">
-  <div class="category-group-list" cdkDropList *ngFor="let group of categoryGroups$ | async"
+  <mat-card class="category-group-list" cdkDropList *ngFor="let group of categoryGroups$ | async"
        [cdkDropListData]="group" (cdkDropListDropped)="drop($event)">
+<!--    todo: Remove inline CSS-->
     <div class="px-2" style="display: flex; flex-direction: row; justify-content: space-between; align-items: center;
   border-bottom: solid 1px #ccc;">
       <div style="flex-direction: column; flex: 1">
@@ -26,5 +27,5 @@ todo:
       <p class="m-0">{{category.name}}</p>
       <p class="m-0"><small *ngIf="category.description"> - {{category.description}}</small></p>
     </div>
-  </div>
+  </mat-card>
 </div>

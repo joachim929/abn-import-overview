@@ -5,7 +5,6 @@ import {CategoriesRoutingModule} from './categories-routing.module';
 import {CategoriesMasterComponent} from './components/categories-master/categories-master.component';
 import {SharedModule} from '../shared/shared.module';
 import {MatButtonModule} from '@angular/material/button';
-import {AddCategoryComponent} from './components/add-category/add-category.component';
 import {AddCategoryGroupComponent} from './components/add-category-group/add-category-group.component';
 import {CategoryListComponent} from './components/category-list/category-list.component';
 import {MatExpansionModule} from '@angular/material/expansion';
@@ -21,7 +20,6 @@ import { EditCategoryGroupComponent } from './components/edit-category-group/edi
 @NgModule({
   declarations: [
     CategoriesMasterComponent,
-    AddCategoryComponent,
     AddCategoryGroupComponent,
     CategoryListComponent,
     EditCategoryGroupComponent
