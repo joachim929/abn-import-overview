@@ -39,7 +39,6 @@ export class CategoryListComponent implements OnInit {
   }
 
   deleteCategoryGroup(group: CategoryGroupDto) {
-    // create dialog to check if you really want to delete it
     this.categoryDataStore.deleteCategoryGroup(group);
   }
 }

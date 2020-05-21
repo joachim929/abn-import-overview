@@ -1,33 +1,30 @@
 <!--
 todo:
   Category-group:
-    Can't think of a reason it should have a detail page
-    Will have delete button, will display dialog to confirm and move/delete categories within the group
-    Will have edit "button" <a>, "routes" to the dialog
+    Think trello
   Category:
-    The idea is if you click on an item you go to the detail page
-    Will have delete button, display dialog to confirm, maybe show number of transfers it effects
-    Will have edit "button" <a>, "routes" to the dialog
-  No data scenario
+    Think trello
 -->
 
-<div cdkDropListGroup class="example-container" style="flex: 1">
-  <!-- All lists in here will be connected. -->
-  <div class="example-list my-2" cdkDropList *ngFor="let group of categoryGroups$ | async"
+<div cdkDropListGroup class="list-container">
+  <div class="category-group-list" cdkDropList *ngFor="let group of categoryGroups$ | async"
        [cdkDropListData]="group" (cdkDropListDropped)="drop($event)">
-    <div class="px-2" style="display: flex; flex-direction: row; justify-content: space-between; align-items: center;">
+    <div class="px-2" style="display: flex; flex-direction: row; justify-content: space-between; align-items: center;
+  border-bottom: solid 1px #ccc;">
       <div style="flex-direction: column; flex: 1">
         <h2 class="mt-2 mb-0">{{group.name}}</h2>
         <p class="my-0">{{group.description}}</p>
         <h4 *ngIf="group.categories.length > 0" class="my-2">Items:</h4>
       </div>
       <a mat-icon-button [routerLink]="['edit', group.id]"><mat-icon>edit</mat-icon></a>
-      <button mat-icon-button mat-button (click)="deleteCategoryGroup(group)" color="warn"><mat-icon>delete</mat-icon></button>
+      <button mat-icon-button mat-button
+              [disabled]="group.categories.length > 0"
+              (click)="deleteCategoryGroup(group)" color="warn"><mat-icon>delete</mat-icon></button>
     </div>
-    <div class="example-box p-2" *ngIf="group.categories.length === 0"></div>
-    <div class="example-box p-2" *ngFor="let category of group.categories" cdkDrag>
-      <p class="m-0"><span>{{category.name}}</span></p>
-      <p class="m-0"><span><small *ngIf="category.description"> - {{category.description}}</small></span></p>
+    <div class="category-box px-2 py-4" *ngIf="group.categories.length === 0"></div>
+    <div class="category-box p-2" *ngFor="let category of group.categories" cdkDrag cdkDragLockAxis="y">
+      <p class="m-0">{{category.name}}</p>
+      <p class="m-0"><small *ngIf="category.description"> - {{category.description}}</small></p>
     </div>
   </div>
 </div>
