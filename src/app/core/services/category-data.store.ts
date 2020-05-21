@@ -5,6 +5,7 @@ import {CategoryGroupApiService} from '../../swagger/services/category-group-api
 import {catchError} from 'rxjs/operators';
 import {MatSnackBar} from '@angular/material/snack-bar';
 import {HttpErrorResponse} from '@angular/common/http';
+import {ActivatedRoute, Router} from '@angular/router';
 
 @Injectable({
   providedIn: 'root'
@@ -16,7 +17,9 @@ export class CategoryDataStore {
 
   constructor(
     private categoryApiService: CategoryGroupApiService,
-    private snackBarService: MatSnackBar
+    private snackBarService: MatSnackBar,
+    private router: Router,
+    private activatedRoute: ActivatedRoute
   ) {
     this.loadCategories();
   }
@@ -43,9 +46,18 @@ export class CategoryDataStore {
   }
 
   createCategory(category: CategoryGroupDto) {
-    this.categoryApiService.createCategoryGroup({body: category}).subscribe((response) => {
+    this.categoryApiService.createCategoryGroup({body: category}).pipe(
+      catchError((error) => {
+        this.handleError(error);
+        return of(null);
+      })
+    ).subscribe((response) => {
+      if (!response) {
+        return;
+      }
       this.dataStore.categories$ = [...this.dataStore.categories$, response];
       this.categories.next(Object.assign({}, this.dataStore).categories$);
+      this.router.navigate(['/categories'], {relativeTo: this.activatedRoute});
     });
   }
 
