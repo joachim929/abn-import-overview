@@ -1,31 +1,42 @@
+
 <!--
 todo:
-  Category-group:
-    Think trello
-  Category:
-    Think trello
+  Think Trello,
+  maybe have a button to enable editing, as all assigned-mutations might not be in the correct category group anymore
+  Need to give feedback to the user that editing this will have consequences
 -->
-<a [routerLink]="['add']" color="primary" mat-raised-button>Create category-group</a>
+<a routerLinkActive="hide" class="create-category" [routerLink]="['add']" color="primary" mat-raised-button>Create category-group</a>
+<router-outlet></router-outlet>
 <div cdkDropListGroup class="list-container">
   <mat-card class="category-group-list" cdkDropList *ngFor="let group of categoryGroups$ | async"
        [cdkDropListData]="group" (cdkDropListDropped)="drop($event)">
-<!--    todo: Remove inline CSS-->
-    <div class="px-2" style="display: flex; flex-direction: row; justify-content: space-between; align-items: center;
-  border-bottom: solid 1px #ccc;">
-      <div style="flex-direction: column; flex: 1">
+
+    <div class="px-2 category-group-header">
+      <div class="category-group-header-content">
         <h2 class="mt-2 mb-0">{{group.name}}</h2>
         <p class="my-0">{{group.description}}</p>
+        <!-- todo: Add checkbox to check all -->
         <h4 *ngIf="group.categories.length > 0" class="my-2">Items:</h4>
       </div>
+      <!-- todo: Redundant I think, taking Trello route -->
       <a mat-icon-button [routerLink]="['edit', group.id]"><mat-icon>edit</mat-icon></a>
       <button mat-icon-button mat-button
               [disabled]="group.categories.length > 0"
               (click)="deleteCategoryGroup(group)" color="warn"><mat-icon>delete</mat-icon></button>
     </div>
-    <div class="category-box px-2 py-4" *ngIf="group.categories.length === 0"></div>
-    <div class="category-box p-2" *ngFor="let category of group.categories" cdkDrag cdkDragLockAxis="y">
-      <p class="m-0">{{category.name}}</p>
-      <p class="m-0"><small *ngIf="category.description"> - {{category.description}}</small></p>
+    <div class="category-box empty-category-box" *ngIf="group.categories.length === 0"></div>
+    <div class="category-box" *ngFor="let category of group.categories" cdkDrag cdkDragLockAxis="y">
+      <!-- todo: add checkboxes for multi delete -->
+      <div>
+        <p class="m-0">{{category.name}}</p>
+        <p class="m-0"><small *ngIf="category.description"> - {{category.description}}</small></p>
+      </div>
+      <!-- todo: Redundant I think, taking Trello route -->
+      <button mat-button mat-icon-button><mat-icon>edit</mat-icon></button>
+    </div>
+    <div class="p-2 test">
+      <button mat-stroked-button><mat-icon>add</mat-icon>Add category</button>
+      <button mat-stroked-button color="warn"><mat-icon>delete</mat-icon>Remove selected</button>
     </div>
   </mat-card>
 </div>

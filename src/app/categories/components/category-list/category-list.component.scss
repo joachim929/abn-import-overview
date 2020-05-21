@@ -4,6 +4,16 @@
   margin: 8px;
 }
 
+.create-category {
+  height: auto;
+  transition: 300ms ease-in;
+}
+.create-category.hide {
+  height: 0;
+  opacity: 0;
+  overflow:hidden;
+}
+
 .list-container {
   flex: 1;
 }
@@ -13,15 +23,53 @@
   margin-top: 8px;
 }
 
+.category-group-header {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  border-bottom: solid 1px #ccc;
+}
+
+.test {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  height: auto;
+  opacity: 1;
+  transition: 300ms ease-in-out;
+}
+
+.cdk-drop-list-dragging, .cdk-drop-list-receiving {
+  .test {
+    overflow: hidden;
+    opacity: 0;
+    border: 1px solid red;
+}
+}
+
+.category-group-header-content {
+  flex: 1;
+  flex-direction: column;
+}
+
+.category-box.empty-category-box {
+  padding: 16px 8px;
+  cursor: default;
+}
+
 .category-box {
   border-bottom: solid 1px #ccc;
   color: rgba(0, 0, 0, 0.87);
   display: flex;
-  flex-direction: column;
+  flex-direction: row;
   box-sizing: border-box;
+  justify-content: space-between;
+  align-items: center;
   cursor: move;
   background: white;
   font-size: 14px;
+  padding: 8px;
 }
 
 .cdk-drag-preview {
@@ -33,6 +81,7 @@
 
   p {
     margin: 0;
+    //padding: 8px;
   }
 }
 

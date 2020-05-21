@@ -11,10 +11,12 @@ const routes: Routes = [
     component: CategoriesMasterComponent,
     children: [
       {
-        path: '', component: CategoryListComponent
-      },
-      {
-        path: 'add', component: AddCategoryGroupComponent
+        path: '', component: CategoryListComponent,
+        children: [
+          {
+            path: 'add', component: AddCategoryGroupComponent
+          },
+        ]
       },
       {
         path: 'edit/:id', component: EditCategoryGroupComponent
