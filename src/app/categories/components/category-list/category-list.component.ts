@@ -37,4 +37,9 @@ export class CategoryListComponent implements OnInit {
       this.categoryDataStore.moveCategories([event.previousContainer.data, event.container.data]);
     }
   }
+
+  deleteCategoryGroup(group: CategoryGroupDto) {
+    // create dialog to check if you really want to delete it
+    this.categoryDataStore.deleteCategoryGroup(group);
+  }
 }

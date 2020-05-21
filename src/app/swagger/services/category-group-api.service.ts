@@ -173,22 +173,24 @@ export class CategoryGroupApiService extends BaseService {
    *
    * This method doesn't expect any request body.
    */
-  deleteCategoryGroup$Response(params?: {
+  deleteCategoryGroup$Response(params: {
+    id: string;
 
-  }): Observable<StrictHttpResponse<{  }>> {
+  }): Observable<StrictHttpResponse<void>> {
 
     const rb = new RequestBuilder(this.rootUrl, CategoryGroupApiService.DeleteCategoryGroupPath, 'delete');
     if (params) {
 
+      rb.path('id', params.id);
 
     }
     return this.http.request(rb.build({
-      responseType: 'json',
-      accept: 'application/json'
+      responseType: 'text',
+      accept: '*/*'
     })).pipe(
       filter((r: any) => r instanceof HttpResponse),
       map((r: HttpResponse<any>) => {
-        return r as StrictHttpResponse<{  }>;
+        return (r as HttpResponse<any>).clone({ body: undefined }) as StrictHttpResponse<void>;
       })
     );
   }
@@ -199,12 +201,13 @@ export class CategoryGroupApiService extends BaseService {
    *
    * This method doesn't expect any request body.
    */
-  deleteCategoryGroup(params?: {
+  deleteCategoryGroup(params: {
+    id: string;
 
-  }): Observable<{  }> {
+  }): Observable<void> {
 
     return this.deleteCategoryGroup$Response(params).pipe(
-      map((r: StrictHttpResponse<{  }>) => r.body as {  })
+      map((r: StrictHttpResponse<void>) => r.body as void)
     );
   }
 

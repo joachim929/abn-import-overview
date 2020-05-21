@@ -22,6 +22,7 @@ import {MatSliderModule} from '@angular/material/slider';
 import {MatNativeDateModule} from '@angular/material/core';
 import {DragDropModule} from '@angular/cdk/drag-drop';
 import {MatSidenavModule} from '@angular/material/sidenav';
+import {MatSnackBarModule} from '@angular/material/snack-bar';
 
 
 @NgModule({
@@ -49,7 +50,8 @@ import {MatSidenavModule} from '@angular/material/sidenav';
     MatNativeDateModule,
     MatSliderModule,
     DragDropModule,
-    MatSidenavModule
+    MatSidenavModule,
+    MatSnackBarModule
   ],
   providers: [],
   bootstrap: [AppComponent]
