@@ -11,9 +11,7 @@ export class HeaderComponent implements OnInit {
     // {path: '/reports', label: 'Reports'},
     {path: '/categories', label: 'Categories'},
     {path: '/transfers', label: 'Transfers'},
-    {path: '/rules', label: 'Rules'},
-    {path: '/imports/all', label: 'Show all'},
-    {path: '/imports/assign', label: 'Assign Categories'}
+    // {path: '/rules', label: 'Rules'}
   ];
 
   constructor() {
