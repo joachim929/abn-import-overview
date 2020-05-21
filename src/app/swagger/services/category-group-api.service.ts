@@ -9,6 +9,7 @@ import { Observable } from 'rxjs';
 import { map, filter } from 'rxjs/operators';
 
 import { CategoryGroupDto } from '../models/category-group-dto';
+import { CreateCategoryGroupDto } from '../models/create-category-group-dto';
 
 @Injectable({
   providedIn: 'root',
@@ -79,7 +80,7 @@ export class CategoryGroupApiService extends BaseService {
    * This method sends `application/json` and handles request body of type `application/json`.
    */
   createCategoryGroup$Response(params: {
-      body: CategoryGroupDto
+      body: CreateCategoryGroupDto
   }): Observable<StrictHttpResponse<CategoryGroupDto>> {
 
     const rb = new RequestBuilder(this.rootUrl, CategoryGroupApiService.CreateCategoryGroupPath, 'post');
@@ -106,7 +107,7 @@ export class CategoryGroupApiService extends BaseService {
    * This method sends `application/json` and handles request body of type `application/json`.
    */
   createCategoryGroup(params: {
-      body: CategoryGroupDto
+      body: CreateCategoryGroupDto
   }): Observable<CategoryGroupDto> {
 
     return this.createCategoryGroup$Response(params).pipe(

@@ -2,7 +2,6 @@ import {Injectable} from '@angular/core';
 import {BehaviorSubject, Observable} from 'rxjs';
 import {CategoryGroupDto} from '../../swagger/models';
 import {CategoryGroupApiService} from '../../swagger/services/category-group-api.service';
-import {take} from 'rxjs/operators';
 
 @Injectable({
   providedIn: 'root'
