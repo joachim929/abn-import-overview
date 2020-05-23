@@ -15,6 +15,8 @@ import {MatInputModule} from '@angular/material/input';
 import {ReactiveFormsModule} from '@angular/forms';
 import {MatCardModule} from '@angular/material/card';
 import { EditCategoryGroupComponent } from './components/edit-category-group/edit-category-group.component';
+import { CategoryDetailComponent } from './components/category-detail/category-detail.component';
+import { CategoryGroupDetailComponent } from './components/category-group-detail/category-group-detail.component';
 
 
 @NgModule({
@@ -22,7 +24,9 @@ import { EditCategoryGroupComponent } from './components/edit-category-group/edi
     CategoriesMasterComponent,
     AddCategoryGroupComponent,
     CategoryListComponent,
-    EditCategoryGroupComponent
+    EditCategoryGroupComponent,
+    CategoryDetailComponent,
+    CategoryGroupDetailComponent
   ],
   imports: [
     CommonModule,

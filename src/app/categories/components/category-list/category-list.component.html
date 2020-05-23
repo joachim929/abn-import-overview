@@ -8,35 +8,62 @@ todo:
 <a routerLinkActive="hide" class="create-category" [routerLink]="['add']" color="primary" mat-raised-button>Create category-group</a>
 <router-outlet></router-outlet>
 <div cdkDropListGroup class="list-container">
-  <mat-card class="category-group-list" cdkDropList *ngFor="let group of categoryGroups$ | async"
-       [cdkDropListData]="group" (cdkDropListDropped)="drop($event)">
 
+  <mat-card class="category-group-list" cdkDropList *ngFor="let group of getFormGroups(); let i = index"
+            [cdkDropListData]="group" (cdkDropListDropped)="drop($event)" [cdkDropListDisabled]="isSaving$ | async">
     <div class="px-2 category-group-header">
-      <div class="category-group-header-content">
-        <h2 class="mt-2 mb-0">{{group.name}}</h2>
-        <p class="my-0">{{group.description}}</p>
-        <!-- todo: Add checkbox to check all -->
-        <h4 *ngIf="group.categories.length > 0" class="my-2">Items:</h4>
-      </div>
-      <!-- todo: Redundant I think, taking Trello route -->
-      <a mat-icon-button [routerLink]="['edit', group.id]"><mat-icon>edit</mat-icon></a>
-      <button mat-icon-button mat-button
-              [disabled]="group.categories.length > 0"
-              (click)="deleteCategoryGroup(group)" color="warn"><mat-icon>delete</mat-icon></button>
+      <h2 class="mt-2 mb-0">{{group.get('name').value}}</h2>
+      <p class="my-0">{{group.get('description').value}}</p>
+      <h4 *ngIf="getCategoriesFormArray(group).controls.length > 0" class="my-2">Items</h4>
     </div>
-    <div class="category-box empty-category-box" *ngIf="group.categories.length === 0"></div>
-    <div class="category-box" *ngFor="let category of group.categories" cdkDrag cdkDragLockAxis="y">
-      <!-- todo: add checkboxes for multi delete -->
-      <div>
-        <p class="m-0">{{category.name}}</p>
-        <p class="m-0"><small *ngIf="category.description"> - {{category.description}}</small></p>
-      </div>
-      <!-- todo: Redundant I think, taking Trello route -->
-      <button mat-button mat-icon-button><mat-icon>edit</mat-icon></button>
-    </div>
-    <div class="p-2 test">
-      <button mat-stroked-button><mat-icon>add</mat-icon>Add category</button>
-      <button mat-stroked-button color="warn"><mat-icon>delete</mat-icon>Remove selected</button>
+
+    <button mat-icon-button mat-button
+            [disabled]="getCategoriesFormArray(group).length > 0"
+            (click)="removeCategoryGroup(i)"
+            color="warn">
+      <mat-icon>delete</mat-icon>
+    </button>
+
+    <div class="category-box empty-category-box" *ngIf="getCategoriesFormArray(group).controls.length === 0"></div>
+    <div class="category-box" *ngFor="let category of getCategoriesFormArray(group).controls" cdkDrag cdkDragLockAxis="y">
+      <app-category-detail [category]="category"></app-category-detail>
+<!--      <div>-->
+<!--        -->
+<!--        <p class="m-0">{{category.get('name').value}}</p>-->
+<!--        <p class="m-0"><small *ngIf="category.get('description').value">- {{category.get('description').value}}</small></p>-->
+<!--      </div>-->
     </div>
   </mat-card>
+
+<!--  <mat-card class="category-group-list" cdkDropList *ngFor="let group of categoryGroups$ | async; let i = index;"-->
+<!--       [cdkDropListData]="group" (cdkDropListDropped)="drop($event)">-->
+
+<!--    <div class="px-2 category-group-header">-->
+<!--      <div class="category-group-header-content">-->
+<!--        <h2 class="mt-2 mb-0">{{group.name}}</h2>-->
+<!--        <p class="my-0">{{group.description}}</p>-->
+<!--        &lt;!&ndash; todo: Add checkbox to check all &ndash;&gt;-->
+<!--        <h4 *ngIf="group.categories.length > 0" class="my-2">Items:</h4>-->
+<!--      </div>-->
+<!--      &lt;!&ndash; todo: Redundant I think, taking Trello route &ndash;&gt;-->
+<!--      <a mat-icon-button [routerLink]="['edit', group.id]"><mat-icon>edit</mat-icon></a>-->
+<!--      <button mat-icon-button mat-button-->
+<!--              [disabled]="group.categories.length > 0"-->
+<!--              (click)="deleteCategoryGroup(group)" color="warn"><mat-icon>delete</mat-icon></button>-->
+<!--    </div>-->
+<!--    -->
+<!--    <div class="category-box empty-category-box" *ngIf="group.categories.length === 0"></div>-->
+<!--    <div class="category-box" *ngFor="let category of group.categories" cdkDrag cdkDragLockAxis="y">-->
+<!--      &lt;!&ndash; todo: add checkboxes for multi delete &ndash;&gt;-->
+<!--      <app-category-detail [category]="category"></app-category-detail>-->
+<!--      <div>-->
+<!--        <p class="m-0">{{category.name}}</p>-->
+<!--        <p class="m-0"><small *ngIf="category.description"> - {{category.description}}</small></p>-->
+<!--      </div>-->
+<!--    </div>-->
+<!--    <div class="p-2 test">-->
+<!--      <button mat-stroked-button><mat-icon>add</mat-icon>Add category</button>-->
+<!--      <button mat-stroked-button color="warn"><mat-icon>delete</mat-icon>Remove selected</button>-->
+<!--    </div>-->
+<!--  </mat-card>-->
 </div>

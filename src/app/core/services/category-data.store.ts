@@ -11,9 +11,18 @@ import {ActivatedRoute, Router} from '@angular/router';
   providedIn: 'root'
 })
 export class CategoryDataStore {
+  private isSaving = new BehaviorSubject<boolean>(false);
   private categories = new BehaviorSubject<CategoryGroupDto[]>([]);
   private selectedCategory = new BehaviorSubject<CategoryGroupDto>(null);
-  private dataStore: { categories$: CategoryGroupDto[], selectedCategory$ } = {categories$: [], selectedCategory$: null};
+  private dataStore: {
+    categories$: CategoryGroupDto[],
+    selectedCategory$,
+    isSaving$: boolean
+  } = {
+    categories$: [],
+    selectedCategory$: null,
+    isSaving$: false
+  };
 
   constructor(
     private categoryApiService: CategoryGroupApiService,
@@ -22,6 +31,10 @@ export class CategoryDataStore {
     private activatedRoute: ActivatedRoute
   ) {
     this.loadCategories();
+  }
+
+  get isSaving$(): Observable<boolean> {
+    return this.isSaving.asObservable();
   }
 
   get categories$(): Observable<CategoryGroupDto[]> {
@@ -33,19 +46,24 @@ export class CategoryDataStore {
   }
 
   setSelectedCategory(id: string) {
-    const selectedCategory = this.dataStore.categories$.find(category => category.id === id);
-    this.dataStore.selectedCategory$ = {...selectedCategory};
+    this.dataStore.selectedCategory$ = this.dataStore.categories$.find(category => category.id === id);
     this.selectedCategory.next(Object.assign({}, this.dataStore).selectedCategory$);
+  }
+
+  setSaving(value: boolean) {
+    this.dataStore.isSaving$ = value;
+    this.isSaving.next(Object.assign({}, this.dataStore).isSaving$);
   }
 
   loadCategories() {
     this.categoryApiService.getAllCategoryGroupsWithCategories().subscribe((next) => {
-      this.dataStore.categories$ = [...next];
+      this.dataStore.categories$ = next;
       this.categories.next(Object.assign({}, this.dataStore).categories$);
     });
   }
 
   createCategory(category: CategoryGroupDto) {
+    this.setSaving(true);
     this.categoryApiService.createCategoryGroup({body: category}).pipe(
       catchError((error) => {
         this.handleError(error);
@@ -62,37 +80,42 @@ export class CategoryDataStore {
   }
 
   moveCategories(categoryGroups: CategoryGroupDto[]) {
+    this.setSaving(true);
     categoryGroups.map((categoryGroup) => categoryGroup.categories.map((category, index) => {
       category.order = index;
     }));
 
     this.categoryApiService.patchMultiple({body: categoryGroups}).subscribe((patchedCategories) => {
-      for (let category of this.dataStore.categories$) {
-        for (const patchedCategory of patchedCategories) {
+      this.setSaving(false);
+      this.dataStore.categories$.map((category, index) => {
+        patchedCategories.map((patchedCategory) => {
           if (patchedCategory.id === category.id) {
-            category = {...patchedCategory};
+            this.dataStore.categories$[index] = patchedCategory;
           }
-        }
-      }
+        });
+      });
       this.categories.next(Object.assign({}, this.dataStore).categories$);
     });
   }
 
   deleteCategoryGroup(categoryGroup: CategoryGroupDto) {
+    this.setSaving(true);
     this.categoryApiService.deleteCategoryGroup({id: categoryGroup.id}).pipe(
       catchError(e => {
         this.handleError(e);
         return of(categoryGroup);
       })
     ).subscribe((response) => {
+      this.setSaving(false);
       if (!response) {
-        this.dataStore.categories$ = [...this.dataStore.categories$.filter(category => category.id !== categoryGroup.id)];
+        this.dataStore.categories$ = [...this.dataStore.categories$].filter(category => category.id !== categoryGroup.id);
         this.categories.next(Object.assign({}, this.dataStore).categories$);
       }
     });
   }
 
   private handleError(error: HttpErrorResponse) {
+    this.setSaving(false);
     if (error.error instanceof ErrorEvent) {
       console.error('An error occurred:', error.error.message);
     } else {

@@ -1,0 +1,16 @@
+<form [formGroup]="category">
+  <mat-form-field appearance="outline">
+    <mat-label>Name</mat-label>
+    <input matInput type="text" formControlName="name"
+           (focus)="focusTest($event)"
+           (blur)="blurTest($event)"
+           [readonly]="!editMode">
+  </mat-form-field>
+  <mat-form-field appearance="outline">
+    <mat-label>Description</mat-label>
+    <input matInput type="text" formControlName="description"
+           (focus)="focusTest($event)"
+           (blur)="blurTest($event)"
+           [readonly]="!editMode">
+  </mat-form-field>
+</form>
