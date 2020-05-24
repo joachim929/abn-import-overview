@@ -5,7 +5,7 @@
 .category-form {
   padding: 8px 8px 8px 40px;
   display: flex;
-  flex-direction: column;
+  flex-direction: row;
   box-shadow: none;
   transition: box-shadow 300ms ease-in-out;
 
@@ -20,6 +20,12 @@
       color: rgba(0, 0, 0);
     }
   }
+}
+
+.category-form-controls-container {
+  display: flex;
+  flex-direction: column;
+  flex: 1 1 auto;
 }
 
 .edit-mode {
@@ -55,4 +61,9 @@
   max-height: 0;
   overflow: hidden;
   opacity: 0;
+}
+
+.category-description-control {
+  resize: none;
+  flex: 1;
 }
