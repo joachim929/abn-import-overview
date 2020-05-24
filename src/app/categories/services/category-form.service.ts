@@ -38,7 +38,7 @@ export class CategoryFormService {
 
   private buildCategoryFormArray(categories: CategoryDto[]): FormArray {
     const sortedCategories = [...categories].sort((a, b) => a.order - b.order);
-    return new FormArray(sortedCategories.map(category => this.buildCategoryFormGroup(category)));
+    return new FormArray(categories.map(category => this.buildCategoryFormGroup(category)));
   }
 
   private buildCategoryFormGroup(category: CategoryDto): FormGroup {

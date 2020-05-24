@@ -1,5 +1,10 @@
 import {Component, Input, OnInit} from '@angular/core';
-import {FormGroup} from '@angular/forms';
+import {FormControl, FormGroup} from '@angular/forms';
+
+/**
+ * todo: seems like the way to solve this issue is using a directive
+ *    prolly want to use formValueAccessor for this
+ */
 
 @Component({
   selector: 'app-category-detail',
@@ -8,19 +13,18 @@ import {FormGroup} from '@angular/forms';
 })
 export class CategoryDetailComponent implements OnInit {
   @Input() category: FormGroup;
-  editMode = false;
 
-  constructor() { }
+  editModeControl = new FormControl(false);
+
+  constructor() {
+  }
 
   ngOnInit(): void {
   }
 
-  blurTest($event) {
-    this.editMode = false;
-  }
-
-  focusTest(event) {
-    this.editMode = true;
+  resetControl(control) {
+    control.reset();
+    this.editModeControl.setValue(true);
   }
 
 }

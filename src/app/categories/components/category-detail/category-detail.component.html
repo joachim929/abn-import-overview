@@ -1,16 +1,34 @@
-<form [formGroup]="category">
-  <mat-form-field appearance="outline">
-    <mat-label>Name</mat-label>
-    <input matInput type="text" formControlName="name"
-           (focus)="focusTest($event)"
-           (blur)="blurTest($event)"
-           [readonly]="!editMode">
-  </mat-form-field>
-  <mat-form-field appearance="outline">
-    <mat-label>Description</mat-label>
-    <input matInput type="text" formControlName="description"
-           (focus)="focusTest($event)"
-           (blur)="blurTest($event)"
-           [readonly]="!editMode">
-  </mat-form-field>
+<form [formGroup]="category" [class.edit-mode]="editModeControl.value" class="category-form">
+  <div style="display: flex; flex-direction: row;">
+    <div style="display: flex; flex-direction: column; flex: 1 1 auto;">
+      <mat-form-field>
+        <mat-label>Category name</mat-label>
+        <input matInput type="text" formControlName="name" [readonly]="!editModeControl.value">
+        <button mat-button class="clear-form-control-button"
+                [class.hidden]="!category.get('name').value || !editModeControl.value"
+                matSuffix mat-icon-button aria-label="Clear" (click)="resetControl(category.get('name'))">
+          <mat-icon>close</mat-icon>
+        </button>
+      </mat-form-field>
+      <mat-form-field>
+        <mat-label>Category description</mat-label>
+        <textarea matInput type="text" formControlName="description" [readonly]="!editModeControl.value"
+                  style="resize: none; flex: 1"></textarea>
+        <button mat-button class="clear-form-control-button"
+                [class.hidden]="!category.get('description').value || !editModeControl.value"
+                matSuffix mat-icon-button aria-label="Clear" (click)="resetControl(category.get('description'))">
+          <mat-icon>close</mat-icon>
+        </button>
+      </mat-form-field>
+    </div>
+    <button class="edit-category-button" mat-icon-button mat-button
+            (click)="editModeControl.setValue(!editModeControl.value)">
+      <mat-icon>edit</mat-icon>
+    </button>
+  </div>
+  <div class="category-crud-controls-container" [class.show-controls]="editModeControl.value">
+    <button mat-button mat-stroked-button color="primary" [disabled]="category.pristine || category.invalid">Save
+    </button>
+    <button mat-button mat-stroked-button (click)="editModeControl.setValue(false)">Cancel</button>
+  </div>
 </form>

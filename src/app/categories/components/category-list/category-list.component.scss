@@ -2,25 +2,39 @@
   display: flex;
   flex-direction: column;
   margin: 8px;
+
+  .category-group-list .empty-category-container {
+    padding: 8px 8px 8px 40px;
+    margin-top: 0;
+    cursor: default;
+  }
 }
 
-.create-category {
-  height: auto;
+.category-group-create-link {
+  max-height: 36px;
   transition: 300ms ease-in;
 }
-.create-category.hide {
-  height: 0;
-  opacity: 0;
-  overflow:hidden;
-}
 
-.list-container {
-  flex: 1;
+.category-group-create-link.hide {
+  max-height: 0;
+  opacity: 0;
+  overflow: hidden;
 }
 
 .category-group-list {
   padding: 0;
   margin-top: 8px;
+
+  &:hover {
+    border-radius: 4px;
+    box-shadow: 0 3px 5px -1px rgba(0, 0, 0, 0.2),
+    0 5px 8px 0px rgba(0, 0, 0, 0.14),
+    0px 1px 14px 0px rgba(0, 0, 0, 0.12)
+  }
+
+  &.cdk-drop-list-dragging .category-container:not(.cdk-drag-placeholder) {
+    transition: transform 300ms cubic-bezier(0, 0, 0.2, 1);
+  }
 }
 
 .category-group-header {
@@ -29,23 +43,7 @@
   justify-content: space-between;
   align-items: center;
   border-bottom: solid 1px #ccc;
-}
-
-.test {
-  display: flex;
-  flex-direction: row;
-  justify-content: space-between;
-  height: auto;
-  opacity: 1;
-  transition: 300ms ease-in-out;
-}
-
-.cdk-drop-list-dragging, .cdk-drop-list-receiving {
-  .test {
-    overflow: hidden;
-    opacity: 0;
-    border: 1px solid red;
-}
+  padding: 0 8px;
 }
 
 .category-group-header-content {
@@ -53,23 +51,21 @@
   flex-direction: column;
 }
 
-.category-box.empty-category-box {
-  padding: 16px 8px;
-  cursor: default;
-}
-
-.category-box {
+.category-container {
   border-bottom: solid 1px #ccc;
-  color: rgba(0, 0, 0, 0.87);
   display: flex;
-  flex-direction: row;
-  box-sizing: border-box;
-  justify-content: space-between;
-  align-items: center;
+  font-size: 14px;
   cursor: move;
   background: white;
-  font-size: 14px;
-  padding: 8px;
+}
+
+.category-container:last-child {
+  border-bottom-left-radius: 4px;
+  border-bottom-right-radius: 4px;
+}
+
+.mat-card > :first-child, .mat-card-content > :first-child {
+  margin-top: 8px;
 }
 
 .cdk-drag-preview {
@@ -81,7 +77,6 @@
 
   p {
     margin: 0;
-    //padding: 8px;
   }
 }
 
@@ -90,13 +85,6 @@
 }
 
 .cdk-drag-animating {
-  transition: transform 250ms cubic-bezier(0, 0, 0.2, 1);
+  transition: transform 300ms cubic-bezier(0, 0, 0.2, 1);
 }
 
-.category-box:last-child {
-  border: none;
-}
-
-.category-group-list.cdk-drop-list-dragging .category-box:not(.cdk-drag-placeholder) {
-  transition: transform 250ms cubic-bezier(0, 0, 0.2, 1);
-}
