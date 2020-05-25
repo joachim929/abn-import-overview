@@ -3,10 +3,10 @@ import {CategoryDataStore} from '../../../core/services/category-data.store';
 import {CategoryGroupDto} from '../../../swagger/models/category-group-dto';
 import {Observable, Subject} from 'rxjs';
 import {CdkDragDrop} from '@angular/cdk/drag-drop';
-import {takeUntil, tap} from 'rxjs/operators';
-import {FormArray, FormControl, FormGroup, Validators} from '@angular/forms';
-import {CategoryDto} from '../../../swagger/models/category-dto';
+import {debounceTime, distinctUntilChanged, filter, takeUntil, tap} from 'rxjs/operators';
+import {FormArray, FormGroup} from '@angular/forms';
 import {CategoryFormService} from '../../services/category-form.service';
+import {isEqual} from 'lodash';
 
 @Component({
   selector: 'app-category-list',
@@ -17,6 +17,7 @@ export class CategoryListComponent implements OnInit, OnDestroy {
   form = new FormArray([]);
   isSaving$: Observable<boolean>;
   unSub = new Subject();
+  originalValue: CategoryGroupDto[];
 
   constructor(
     private categoryDataStore: CategoryDataStore,
@@ -26,12 +27,29 @@ export class CategoryListComponent implements OnInit, OnDestroy {
 
   ngOnInit(): void {
     this.isSaving$ = this.categoryDataStore.isSaving$;
+
+    /**
+     * todo:
+     *    use combineLatest or something like that
+     *    valueChanges triggers when array is adjusted
+     */
     this.categoryDataStore.categories$.pipe(
-      tap(() => this.form.clear()),
-      tap((groups) => groups.map(group =>
-        this.form.push(this.categoryFormService.buildCategoryGroupFormGroup(group)))),
+      tap((groups) => this.originalValue = {...groups}),
+      tap((groups) => this.form = new FormArray(groups.map(group => this.categoryFormService.buildCategoryGroupFormGroup(group)))),
       takeUntil(this.unSub)
     ).subscribe();
+
+    this.form.valueChanges.pipe(
+      takeUntil(this.unSub),
+      debounceTime(300),
+      distinctUntilChanged((a, b) => isEqual(a, b)),
+      filter((formValue) => !isEqual(formValue, this.originalValue)),
+    ).subscribe((formValue) => {
+      console.log(formValue);
+      if (this.form.valid) {
+        this.categoryDataStore.initPatchCategoryGroup(formValue);
+      }
+    });
   }
 
   ngOnDestroy(): void {

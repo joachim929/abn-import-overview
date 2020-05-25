@@ -1,11 +1,12 @@
 import {Injectable} from '@angular/core';
 import {BehaviorSubject, Observable, of} from 'rxjs';
-import {CategoryGroupDto} from '../../swagger/models';
+import {CategoryDto, CategoryGroupDto} from '../../swagger/models';
 import {CategoryGroupApiService} from '../../swagger/services/category-group-api.service';
 import {catchError} from 'rxjs/operators';
 import {MatSnackBar} from '@angular/material/snack-bar';
 import {HttpErrorResponse} from '@angular/common/http';
 import {ActivatedRoute, Router} from '@angular/router';
+import {isEqual} from 'lodash';
 
 @Injectable({
   providedIn: 'root'
@@ -112,6 +113,47 @@ export class CategoryDataStore {
         this.categories.next(Object.assign({}, this.dataStore).categories$);
       }
     });
+  }
+
+  initPatchCategoryGroup(categoryGroups: CategoryGroupDto[]) {
+    const originalCategoryGroups = [...this.dataStore.categories$];
+
+    const groupIndex = this.getIndexAtDifference(originalCategoryGroups, categoryGroups);
+    if (typeof groupIndex !== 'undefined' &&
+      isEqual(originalCategoryGroups[groupIndex]?.categories, categoryGroups[groupIndex]?.categories)) {
+
+      this.patchCategoryGroup(categoryGroups[groupIndex], groupIndex);
+    } else {
+
+      const categoryIndex =
+        this.getIndexAtDifference(originalCategoryGroups[groupIndex]?.categories, categoryGroups[groupIndex]?.categories);
+
+      if (typeof categoryIndex !== 'undefined') {
+        this.patchCategory(categoryGroups[groupIndex].categories[categoryIndex], groupIndex, categoryIndex);
+      }
+    }
+  }
+
+  // todo: WIP
+  private patchCategoryGroup(categoryGroup: CategoryGroupDto, index: number) {
+
+  }
+
+  // todo: WIP
+  private patchCategory(category: CategoryDto, groupIndex: number, categoryIndex: number) {
+
+  }
+
+  private getIndexAtDifference(originalItems: unknown[], patchItems: unknown[]): number | undefined {
+    let atIndex: number;
+    if (Array.isArray(patchItems) && Array.isArray(originalItems)) {
+      patchItems.map((patchItem, index) => {
+        if (!isEqual(originalItems[index], patchItem)) {
+          atIndex = index;
+        }
+      });
+    }
+    return atIndex;
   }
 
   private handleError(error: HttpErrorResponse) {

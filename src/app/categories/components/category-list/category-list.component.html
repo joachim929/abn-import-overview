@@ -31,7 +31,7 @@ todo:
       <h4 *ngIf="getCategoriesFormArray(group).controls.length > 0" class="m-2 pl-8">Categories</h4>
       <div class="category-container" *ngFor="let category of getCategoriesFormArray(group).controls" cdkDrag
            cdkDragLockAxis="y">
-        <app-category-detail [category]="category"></app-category-detail>
+        <app-category-detail [formControl]="category"></app-category-detail>
       </div>
     </mat-card-content>
 

@@ -37,21 +37,16 @@ export class CategoryFormService {
   }
 
   private buildCategoryFormArray(categories: CategoryDto[]): FormArray {
-    const sortedCategories = [...categories].sort((a, b) => a.order - b.order);
     return new FormArray(categories.map(category => this.buildCategoryFormGroup(category)));
   }
 
-  private buildCategoryFormGroup(category: CategoryDto): FormGroup {
-    return new FormGroup({
-      categoryGroupId: new FormControl(category.categoryGroupId),
-      description: new FormControl(category.description),
-      id: new FormControl(category.id),
-      name: new FormControl(category.name, [
-        Validators.minLength(3),
-        Validators.required,
-        Validators.maxLength(255)
-      ]),
-      order: new FormControl(category.order)
+  private buildCategoryFormGroup(category: CategoryDto): FormControl {
+    return new FormControl({
+      categoryGroupId: category.categoryGroupId,
+      description: category.description,
+      id: category.id,
+      name: category.name,
+      order: category.order
     });
   }
 }
