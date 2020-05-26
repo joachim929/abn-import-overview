@@ -5,7 +5,7 @@
         <input matInput type="text" formControlName="name" [readonly]="!editModeControl.value">
         <button mat-button class="clear-form-control-button"
                 [class.hidden]="!form.get('name').value || !editModeControl.value"
-                matSuffix mat-icon-button aria-label="Clear" (click)="resetControl('name')">
+                matSuffix mat-icon-button aria-label="Clear" (click)="clearControl('name')">
           <mat-icon>close</mat-icon>
         </button>
       </mat-form-field>
@@ -16,7 +16,7 @@
                   class="category-description-control"></textarea>
         <button mat-button class="clear-form-control-button"
                 [class.hidden]="!form.get('description').value || !editModeControl.value"
-                matSuffix mat-icon-button aria-label="Clear" (click)="resetControl('description')">
+                matSuffix mat-icon-button aria-label="Clear" (click)="clearControl('description')">
           <mat-icon>close</mat-icon>
         </button>
       </mat-form-field>

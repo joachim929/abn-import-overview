@@ -90,7 +90,7 @@ export class CategoryDetailComponent implements ControlValueAccessor, OnInit, On
     }
   }
 
-  resetControl(name: string) {
+  clearControl(name: string) {
     this.form.get(name).reset();
     this.form.markAsDirty();
   }

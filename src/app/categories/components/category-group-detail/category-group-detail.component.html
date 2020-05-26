@@ -1,1 +1,19 @@
-<p>category-group-detail works!</p>
+<form [formGroup]="form">
+  <mat-form-field>
+    <mat-label>Category group name</mat-label>
+    <input type="text" matInput formControlName="name" [readonly]="!editModeControl.value">
+    <button mat-button class="clear-form-control-button"
+            [class.hidden]="!form.get('name').value || !editModeControl.value"
+            matSuffix mat-icon-button aria-label="Clear" (click)="clearControl('name')">
+      <mat-icon>close</mat-icon>
+    </button>
+  </mat-form-field>
+
+  <mat-form-field>
+    <mat-label>Category description</mat-label>
+    <input type="text" matInput formControlName="description" [readonly]="!editModeControl.value">
+    <button mat-button mat-icon-button aria-label="Clear" (click)="clearControl('description')">
+      <mat-icon>close</mat-icon>
+    </button>
+  </mat-form-field>
+</form>
