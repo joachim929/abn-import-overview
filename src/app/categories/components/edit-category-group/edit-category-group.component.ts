@@ -17,7 +17,7 @@ export class EditCategoryGroupComponent implements OnInit {
 
   constructor(
     private activatedRoute: ActivatedRoute,
-    private categoryDataService: CategoryDataStore
+    private categoryDataStore: CategoryDataStore
   ) {
   }
 
@@ -26,10 +26,10 @@ export class EditCategoryGroupComponent implements OnInit {
       this.activatedRoute.paramMap.pipe(
         filter(paramMap => paramMap.has('id'))
       ),
-      this.categoryDataService.categories$.pipe(filter(x => !!x && x.length > 0))
+      this.categoryDataStore.categories$.pipe(filter(x => !!x && x.length > 0))
     ]).pipe(
-      tap(([paramMap, categories]) => this.categoryDataService.setSelectedCategory(paramMap.get('id'))),
-      switchMap(() => this.categoryDataService.selectedCategory$),
+      tap(([paramMap, categories]) => this.categoryDataStore.setSelectedCategory(paramMap.get('id'))),
+      switchMap(() => this.categoryDataStore.selectedCategory$),
       filter((categoryGroup) => !!categoryGroup),
       tap((next) => this.initForm(next))
     );
@@ -48,7 +48,6 @@ export class EditCategoryGroupComponent implements OnInit {
       (this.form.get('categories') as FormArray).push(new FormGroup({
         name: new FormControl(category.name),
         description: new FormControl(category.description),
-        categoryGroupId: new FormControl(categoryGroup.id),
         id: new FormControl(category.id)
       }));
     }));

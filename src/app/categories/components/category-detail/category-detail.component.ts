@@ -1,9 +1,10 @@
 import {Component, forwardRef, OnDestroy, OnInit} from '@angular/core';
 import {ControlValueAccessor, FormControl, FormGroup, NG_VALUE_ACCESSOR, Validators} from '@angular/forms';
 import {CategoryDto} from '../../../swagger/models/category-dto';
-import {distinctUntilChanged, takeUntil} from 'rxjs/operators';
+import {distinctUntilChanged, take, takeUntil} from 'rxjs/operators';
 import {isEqual} from 'lodash';
 import {Subject} from 'rxjs';
+import {CategoryDataService} from '../../services/category-data.service';
 
 @Component({
   selector: 'app-category-detail',
@@ -19,7 +20,6 @@ import {Subject} from 'rxjs';
 })
 export class CategoryDetailComponent implements ControlValueAccessor, OnInit, OnDestroy {
   form = new FormGroup({
-    categoryGroupId: new FormControl(),
     description: new FormControl(),
     id: new FormControl(),
     name: new FormControl(null, [
@@ -34,7 +34,7 @@ export class CategoryDetailComponent implements ControlValueAccessor, OnInit, On
   originalValue: CategoryDto;
   editModeControl = new FormControl(false);
 
-  constructor() {
+  constructor(private categoryDataService: CategoryDataService) {
   }
 
   ngOnInit() {
@@ -80,9 +80,14 @@ export class CategoryDetailComponent implements ControlValueAccessor, OnInit, On
 
   save() {
     if (this.form.valid && !(isEqual(this.originalValue, this.form.value))) {
-      this.onChange(this.form.value);
+      this.categoryDataService.patchCategory(this.form.value).pipe(
+        take(1)
+      ).subscribe((updatedCategory) => {
+        if (updatedCategory) {
+          this.editModeControl.setValue(false);
+        }
+      });
     }
-    this.editModeControl.setValue(false);
   }
 
   resetControl(name: string) {

@@ -38,18 +38,6 @@ export class CategoryListComponent implements OnInit, OnDestroy {
       tap((groups) => this.form = new FormArray(groups.map(group => this.categoryFormService.buildCategoryGroupFormGroup(group)))),
       takeUntil(this.unSub)
     ).subscribe();
-
-    this.form.valueChanges.pipe(
-      takeUntil(this.unSub),
-      debounceTime(300),
-      distinctUntilChanged((a, b) => isEqual(a, b)),
-      filter((formValue) => !isEqual(formValue, this.originalValue)),
-    ).subscribe((formValue) => {
-      console.log(formValue);
-      if (this.form.valid) {
-        this.categoryDataStore.initPatchCategoryGroup(formValue);
-      }
-    });
   }
 
   ngOnDestroy(): void {

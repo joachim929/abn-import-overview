@@ -1,6 +1,4 @@
 export { CategoryDto } from './models/category-dto';
-export { Category } from './models/category';
-export { CategoryGroup } from './models/category-group';
 export { RuleDto } from './models/rule-dto';
 export { Rule } from './models/rule';
 export { CategoryGroupDto } from './models/category-group-dto';

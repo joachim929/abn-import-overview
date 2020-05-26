@@ -24,7 +24,7 @@ export class TransferSplitDetailModalComponent implements OnInit {
   constructor(
     public dialogRef: MatDialogRef<TransferSplitDetailModalComponent>,
     @Inject(MAT_DIALOG_DATA) public data: { transferMutation: TransferMutationDto },
-    private categoryDataService: CategoryDataStore
+    private categoryDataStore: CategoryDataStore
   ) {
     this.form = new FormGroup({
       id: new FormControl(data.transferMutation.id),
@@ -52,7 +52,7 @@ export class TransferSplitDetailModalComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.categories$ = this.categoryDataService.categories$;
+    this.categories$ = this.categoryDataStore.categories$;
   }
 
   save() {

@@ -42,7 +42,6 @@ export class CategoryFormService {
 
   private buildCategoryFormGroup(category: CategoryDto): FormControl {
     return new FormControl({
-      categoryGroupId: category.categoryGroupId,
       description: category.description,
       id: category.id,
       name: category.name,

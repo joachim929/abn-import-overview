@@ -6,7 +6,6 @@ import {catchError} from 'rxjs/operators';
 import {MatSnackBar} from '@angular/material/snack-bar';
 import {HttpErrorResponse} from '@angular/common/http';
 import {ActivatedRoute, Router} from '@angular/router';
-import {isEqual} from 'lodash';
 
 @Injectable({
   providedIn: 'root'
@@ -115,45 +114,22 @@ export class CategoryDataStore {
     });
   }
 
-  initPatchCategoryGroup(categoryGroups: CategoryGroupDto[]) {
-    const originalCategoryGroups = [...this.dataStore.categories$];
-
-    const groupIndex = this.getIndexAtDifference(originalCategoryGroups, categoryGroups);
-    if (typeof groupIndex !== 'undefined' &&
-      isEqual(originalCategoryGroups[groupIndex]?.categories, categoryGroups[groupIndex]?.categories)) {
-
-      this.patchCategoryGroup(categoryGroups[groupIndex], groupIndex);
-    } else {
-
-      const categoryIndex =
-        this.getIndexAtDifference(originalCategoryGroups[groupIndex]?.categories, categoryGroups[groupIndex]?.categories);
-
-      if (typeof categoryIndex !== 'undefined') {
-        this.patchCategory(categoryGroups[groupIndex].categories[categoryIndex], groupIndex, categoryIndex);
-      }
+  updateCategory(updatedCategory: CategoryDto) {
+    let categoryGroup = this.dataStore.categories$.find((categoryGroups) =>
+      categoryGroups.categories.find((category) =>
+        category.id === updatedCategory.id));
+    if (categoryGroup) {
+      categoryGroup = {
+        ...categoryGroup,
+        categories: categoryGroup.categories.map((category) => category.id === updatedCategory.id ? updatedCategory : category)
+      };
+      this.dataStore = {
+        ...this.dataStore,
+        categories$: this.dataStore.categories$.map(group => categoryGroup.id === group.id ? categoryGroup : group)
+      };
+      console.log(this.dataStore.categories$);
+      this.categories.next(Object.assign({}, this.dataStore).categories$);
     }
-  }
-
-  // todo: WIP
-  private patchCategoryGroup(categoryGroup: CategoryGroupDto, index: number) {
-
-  }
-
-  // todo: WIP
-  private patchCategory(category: CategoryDto, groupIndex: number, categoryIndex: number) {
-
-  }
-
-  private getIndexAtDifference(originalItems: unknown[], patchItems: unknown[]): number | undefined {
-    let atIndex: number;
-    if (Array.isArray(patchItems) && Array.isArray(originalItems)) {
-      patchItems.map((patchItem, index) => {
-        if (!isEqual(originalItems[index], patchItem)) {
-          atIndex = index;
-        }
-      });
-    }
-    return atIndex;
   }
 
   private handleError(error: HttpErrorResponse) {

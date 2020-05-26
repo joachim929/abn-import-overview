@@ -16,7 +16,7 @@ export class TransferDetailComponent {
   constructor(
     private transferDataService: TransferDataStore,
     private transferEditService: TransferEditService,
-    private categoryDataService: CategoryDataStore,
+    private categoryDataStore: CategoryDataStore,
     private breakpointService: BreakpointService
   ) {
   }
@@ -26,7 +26,7 @@ export class TransferDetailComponent {
   }
 
   get categories$() {
-    return this.categoryDataService.categories$;
+    return this.categoryDataStore.categories$;
   }
 
   patch(transferMutation: TransferMutationDto) {

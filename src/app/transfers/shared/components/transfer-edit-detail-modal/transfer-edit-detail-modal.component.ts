@@ -23,7 +23,7 @@ export class TransferEditDetailModalComponent implements OnInit {
   constructor(
     public dialogRef: MatDialogRef<TransferEditDetailModalComponent>,
     @Inject(MAT_DIALOG_DATA) public data: { transferMutation: TransferMutationDto },
-    private categoryDataService: CategoryDataStore
+    private categoryDataStore: CategoryDataStore
   ) {
     this.ocTransferMutation = {...data.transferMutation};
     this.form = new FormGroup({
@@ -42,7 +42,7 @@ export class TransferEditDetailModalComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.categories$ = this.categoryDataService.categories$;
+    this.categories$ = this.categoryDataStore.categories$;
   }
 
   save() {

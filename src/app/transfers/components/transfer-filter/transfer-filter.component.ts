@@ -36,7 +36,7 @@ export class TransferFilterComponent implements OnInit {
   defaultParams: TransferListParams;
 
   constructor(
-    private categoryDataService: CategoryDataStore,
+    private categoryDataStore: CategoryDataStore,
     private transferDataService: TransferDataStore,
     private transferFilterService: TransferFilterService
   ) {
@@ -62,7 +62,7 @@ export class TransferFilterComponent implements OnInit {
         this.getControl('minAmount').enable({emitEvent: false}) :
         this.getControl('minAmount').disable({emitEvent: false}));
 
-    this.categoryGroups$ = this.categoryDataService.categories$;
+    this.categoryGroups$ = this.categoryDataStore.categories$;
 
     this.filterForm.valueChanges.pipe(
       debounceTime(500),
