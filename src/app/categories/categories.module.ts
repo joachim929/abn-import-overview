@@ -18,6 +18,7 @@ import { EditCategoryGroupComponent } from './components/edit-category-group/edi
 import { CategoryDetailComponent } from './components/category-detail/category-detail.component';
 import { CategoryGroupDetailComponent } from './components/category-group-detail/category-group-detail.component';
 import {CategoryDataService} from './services/category-data.service';
+import {CategoryFormService} from './services/category-form.service';
 
 
 @NgModule({
@@ -43,7 +44,8 @@ import {CategoryDataService} from './services/category-data.service';
     MatCardModule
   ],
   providers: [
-    CategoryDataService
+    CategoryDataService,
+    CategoryFormService
   ]
 })
 export class CategoriesModule {

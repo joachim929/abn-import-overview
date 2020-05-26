@@ -21,7 +21,13 @@
 
   &:hover, &:focus {
     .edit-category-button {
-      color: rgba(0, 0, 0);
+      opacity: 0.5;
+    }
+  }
+
+  &.edit-mode, &.edit-mode:hover {
+    .edit-category-button {
+      opacity: 1;
     }
   }
 }
@@ -37,16 +43,13 @@
     opacity: 1;
     max-height: 40px;
   }
-
-  .edit-category-button {
-    color: rgba(0, 0, 0);
-  }
 }
 
 .edit-category-button {
-  transition: color 300ms ease-in-out;
+  opacity: 0;
+  transition: opacity 300ms ease-in-out;
   flex: 0 0 auto;
-  color: rgba(0, 0, 0, .26);
+  color: rgba(0, 0, 0);
 }
 
 .clear-form-control-button {

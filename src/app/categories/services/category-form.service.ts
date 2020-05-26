@@ -3,9 +3,7 @@ import {FormArray, FormControl, FormGroup, Validators} from '@angular/forms';
 import {CategoryGroupDto} from '../../swagger/models/category-group-dto';
 import {CategoryDto} from '../../swagger/models/category-dto';
 
-@Injectable({
-  providedIn: 'root'
-})
+@Injectable()
 export class CategoryFormService {
 
   constructor() {
