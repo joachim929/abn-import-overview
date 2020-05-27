@@ -4,7 +4,7 @@ import {CategoryGroupDto} from '../../../swagger/models/category-group-dto';
 import {Observable, Subject} from 'rxjs';
 import {CdkDragDrop} from '@angular/cdk/drag-drop';
 import {debounceTime, distinctUntilChanged, filter, takeUntil, tap} from 'rxjs/operators';
-import {FormArray, FormGroup} from '@angular/forms';
+import {FormArray, FormControl, FormGroup} from '@angular/forms';
 import {CategoryFormService} from '../../services/category-form.service';
 import {isEqual} from 'lodash';
 

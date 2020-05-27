@@ -14,17 +14,7 @@ todo:
   <mat-card class="category-group-list" cdkDropList *ngFor="let group of getFormGroups(); let i = index"
             [cdkDropListData]="group" (cdkDropListDropped)="drop($event)" [cdkDropListDisabled]="isSaving$ | async">
     <mat-card-header class="category-group-header">
-      <div class="category-group-header-content">
-        <h2 class="mt-2">{{group.get('name').value}}</h2>
-        <mat-card-subtitle class="mt-0">{{group.get('description').value}}</mat-card-subtitle>
-      </div>
-
-      <button mat-icon-button mat-button
-              [disabled]="getCategoriesFormArray(group).length > 0"
-              (click)="removeCategoryGroup(i)"
-              color="warn">
-        <mat-icon>delete</mat-icon>
-      </button>
+      <app-category-group-detail [formCategoryGroup]="group"></app-category-group-detail>
     </mat-card-header>
     <mat-card-content>
       <p class="empty-category-container" *ngIf="getCategoriesFormArray(group).controls.length === 0">Empty</p>

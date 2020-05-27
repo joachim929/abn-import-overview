@@ -1,32 +1,25 @@
-import {Component, forwardRef, OnDestroy, OnInit} from '@angular/core';
-import {ControlValueAccessor, FormControl, FormGroup, NG_VALUE_ACCESSOR, Validators} from '@angular/forms';
-import {distinctUntilChanged, takeUntil} from 'rxjs/operators';
-import {isEqual} from 'lodash';
+import {Component, Input, OnDestroy, OnInit} from '@angular/core';
+import {FormArray, FormControl, FormGroup} from '@angular/forms';
 import {Subject} from 'rxjs';
 import {CategoryGroupDto} from '../../../swagger/models/category-group-dto';
 
 @Component({
   selector: 'app-category-group-detail',
   templateUrl: './category-group-detail.component.html',
-  styleUrls: ['./category-group-detail.component.scss'],
-  providers: [
-    {
-      provide: NG_VALUE_ACCESSOR,
-      useExisting: forwardRef(() => CategoryGroupDetailComponent),
-      multi: true
-    }
-  ]
+  styleUrls: ['./category-group-detail.component.scss']
 })
-export class CategoryGroupDetailComponent implements ControlValueAccessor, OnInit, OnDestroy {
-  form = new FormGroup({
-    description: new FormControl(),
-    id: new FormControl(),
-    name: new FormControl(null, [
-      Validators.minLength(3),
-      Validators.required,
-      Validators.maxLength(255)
-    ])
-  });
+export class CategoryGroupDetailComponent implements OnInit, OnDestroy {
+  _form: FormGroup;
+
+  @Input() set formCategoryGroup(input: FormGroup) {
+    this.originalValue = input.value;
+    this._form = input;
+  }
+
+  get formCategoryGroup(): FormGroup {
+    return this._form;
+  }
+
   unSub = new Subject<void>();
   originalValue: CategoryGroupDto;
   editModeControl = new FormControl(false);
@@ -35,10 +28,6 @@ export class CategoryGroupDetailComponent implements ControlValueAccessor, OnIni
   }
 
   ngOnInit() {
-    this.form.valueChanges.pipe(
-      takeUntil(this.unSub),
-      distinctUntilChanged((a, b) => isEqual(a, b))
-    ).subscribe();
   }
 
   ngOnDestroy(): void {
@@ -46,43 +35,27 @@ export class CategoryGroupDetailComponent implements ControlValueAccessor, OnIni
     this.unSub.complete();
   }
 
-  onChange = (_) => {};
-  onTouched = () => {};
-
-  registerOnChange(fn: any): void {
-    this.onChange = fn;
-  }
-
-  registerOnTouched(fn: any): void {
-    this.onTouched = fn;
-  }
-
-  clearControl(name: string) {
-    this.form.get(name).reset();
-    this.form.markAsDirty();
-  }
-
-  writeValue(group?: CategoryGroupDto) {
-    console.log(group);
-    if (group.id) {
-      this.originalValue = {...group};
-      this.form.setValue(group);
-    } else {
-      this.originalValue = undefined;
-      this.form.reset();
-    }
-  }
-
   cancel() {
     if (this.originalValue) {
-      this.form.reset({...this.originalValue});
+      this.formCategoryGroup.setValue(this.originalValue, {emitEvent: false});
     }
     this.editModeControl.setValue(false);
   }
 
-  save() {
-    if (this.form.valid && !(isEqual(this.originalValue, this.form.value))) {
-      // todo: Patch group
-    }
+  clearControl(name: string) {
+    this.formCategoryGroup.get(name).setValue('', {emitEvent: false});
   }
+
+  deleteCategoryGroup() {
+    // todo: deleteGroup
+  }
+
+  categoriesLength(): number {
+    return (this.formCategoryGroup.get('categories') as FormArray).controls.length;
+  }
+
+  save() {
+    // todo: patchGroup
+  }
+
 }
