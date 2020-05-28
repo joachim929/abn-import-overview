@@ -26,6 +26,7 @@
       </button>
       <button mat-button mat-stroked-button (click)="cancel()">Cancel</button>
     </div>
+
   </div>
   <div class="edit-category-button-container">
 
@@ -35,9 +36,21 @@
     </button>
     <!-- todo: Implement action menu to confirm -->
     <button mat-button mat-icon-button color="warn" class="edit-category-button"
-            [disabled]="categoriesLength() > 0" style="justify-self: flex-start"
-            (click)="deleteCategoryGroup()">
+            [matMenuTriggerFor]="menu"
+            [disabled]="categoriesLength() > 0">
       <mat-icon color="warn">delete</mat-icon>
     </button>
+    <mat-menu #menu="matMenu">
+      <div mat-menu-item>Are you sure?</div>
+      <button mat-menu-item (click)="deleteCategoryGroup()">Confirm</button>
+    </mat-menu>
+
+    <button class="edit-category-button" mat-icon-button mat-button [disabled]="editModeControl.value === false"
+            (click)="toggleNewCategory()"><mat-icon color="accent">add</mat-icon></button>
   </div>
 </form>
+<div class="add-category-container" [class.hidden]="newCategory.disabled">
+  <app-category-detail [isNew]="true"
+                       [parentId]="formCategoryGroup.get('id').value"
+                       [formControl]="newCategory"></app-category-detail>
+</div>

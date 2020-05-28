@@ -1,4 +1,4 @@
-import {Component, forwardRef, OnDestroy, OnInit} from '@angular/core';
+import {Component, forwardRef, Input, OnDestroy, OnInit} from '@angular/core';
 import {ControlValueAccessor, FormControl, FormGroup, NG_VALUE_ACCESSOR, Validators} from '@angular/forms';
 import {CategoryDto} from '../../../swagger/models/category-dto';
 import {distinctUntilChanged, take, takeUntil} from 'rxjs/operators';
@@ -19,6 +19,8 @@ import {CategoryDataService} from '../../services/category-data.service';
   ]
 })
 export class CategoryDetailComponent implements ControlValueAccessor, OnInit, OnDestroy {
+  @Input() isNew = false;
+  @Input() parentId: string;
   form = new FormGroup({
     description: new FormControl(),
     id: new FormControl(),
@@ -61,12 +63,11 @@ export class CategoryDetailComponent implements ControlValueAccessor, OnInit, On
   }
 
   writeValue(category?: CategoryDto): void {
-    if (category.id) {
+    if (category?.id) {
       this.originalValue = {...category};
       this.form.setValue(category);
     } else {
       this.originalValue = undefined;
-      console.warn('no category', category);
       this.form.reset();
     }
   }
@@ -79,7 +80,9 @@ export class CategoryDetailComponent implements ControlValueAccessor, OnInit, On
   }
 
   save() {
-    if (this.form.valid && !(isEqual(this.originalValue, this.form.value))) {
+    if (this.isNew === true && !!this.parentId) {
+      this.categoryDataService.createCategory(this.form.value, this.parentId);
+    } else if (this.form.valid && !(isEqual(this.originalValue, this.form.value))) {
       this.categoryDataService.patchCategory(this.form.value).pipe(
         take(1)
       ).subscribe((updatedCategory) => {

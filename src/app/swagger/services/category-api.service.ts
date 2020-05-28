@@ -68,53 +68,6 @@ export class CategoryApiService extends BaseService {
   }
 
   /**
-   * Path part for operation createCategory
-   */
-  static readonly CreateCategoryPath = '/category';
-
-  /**
-   * This method provides access to the full `HttpResponse`, allowing access to response headers.
-   * To access only the response body, use `createCategory()` instead.
-   *
-   * This method sends `application/json` and handles request body of type `application/json`.
-   */
-  createCategory$Response(params: {
-      body: CategoryDto
-  }): Observable<StrictHttpResponse<CategoryDto>> {
-
-    const rb = new RequestBuilder(this.rootUrl, CategoryApiService.CreateCategoryPath, 'post');
-    if (params) {
-
-
-      rb.body(params.body, 'application/json');
-    }
-    return this.http.request(rb.build({
-      responseType: 'json',
-      accept: 'application/json'
-    })).pipe(
-      filter((r: any) => r instanceof HttpResponse),
-      map((r: HttpResponse<any>) => {
-        return r as StrictHttpResponse<CategoryDto>;
-      })
-    );
-  }
-
-  /**
-   * This method provides access to only to the response body.
-   * To access the full response (for headers, for example), `createCategory$Response()` instead.
-   *
-   * This method sends `application/json` and handles request body of type `application/json`.
-   */
-  createCategory(params: {
-      body: CategoryDto
-  }): Observable<CategoryDto> {
-
-    return this.createCategory$Response(params).pipe(
-      map((r: StrictHttpResponse<CategoryDto>) => r.body as CategoryDto)
-    );
-  }
-
-  /**
    * Path part for operation patchCategory
    */
   static readonly PatchCategoryPath = '/category';
@@ -250,6 +203,56 @@ export class CategoryApiService extends BaseService {
 
     return this.deleteCategory$Response(params).pipe(
       map((r: StrictHttpResponse<{  }>) => r.body as {  })
+    );
+  }
+
+  /**
+   * Path part for operation createCategory
+   */
+  static readonly CreateCategoryPath = '/category/{parentId}';
+
+  /**
+   * This method provides access to the full `HttpResponse`, allowing access to response headers.
+   * To access only the response body, use `createCategory()` instead.
+   *
+   * This method sends `application/json` and handles request body of type `application/json`.
+   */
+  createCategory$Response(params: {
+    parentId: string;
+      body: CategoryDto
+  }): Observable<StrictHttpResponse<CategoryDto>> {
+
+    const rb = new RequestBuilder(this.rootUrl, CategoryApiService.CreateCategoryPath, 'post');
+    if (params) {
+
+      rb.path('parentId', params.parentId);
+
+      rb.body(params.body, 'application/json');
+    }
+    return this.http.request(rb.build({
+      responseType: 'json',
+      accept: 'application/json'
+    })).pipe(
+      filter((r: any) => r instanceof HttpResponse),
+      map((r: HttpResponse<any>) => {
+        return r as StrictHttpResponse<CategoryDto>;
+      })
+    );
+  }
+
+  /**
+   * This method provides access to only to the response body.
+   * To access the full response (for headers, for example), `createCategory$Response()` instead.
+   *
+   * This method sends `application/json` and handles request body of type `application/json`.
+   */
+  createCategory(params: {
+    parentId: string;
+      body: CategoryDto
+  }): Observable<CategoryDto> {
+
+    return this.createCategory$Response(params).pipe(
+      map((r: StrictHttpResponse<CategoryDto>) => r.body as CategoryDto)
     );
   }
 

@@ -1,5 +1,5 @@
 import {Component, Input, OnDestroy, OnInit} from '@angular/core';
-import {FormArray, FormControl, FormGroup} from '@angular/forms';
+import {FormArray, FormControl, FormGroup, Validators} from '@angular/forms';
 import {Subject} from 'rxjs';
 import {CategoryGroupDto} from '../../../swagger/models/category-group-dto';
 import {CategoryDataService} from '../../services/category-data.service';
@@ -11,6 +11,8 @@ import {CategoryDataStore} from '../../../core/services/category-data.store';
   styleUrls: ['./category-group-detail.component.scss']
 })
 export class CategoryGroupDetailComponent implements OnInit, OnDestroy {
+  newCategory = new FormControl({value: null, disabled: true});
+
   _form: FormGroup;
 
   @Input() set formCategoryGroup(input: FormGroup) {
@@ -41,6 +43,7 @@ export class CategoryGroupDetailComponent implements OnInit, OnDestroy {
   }
 
   cancel() {
+    this.newCategory.disable();
     if (this.originalValue) {
       this.formCategoryGroup.setValue(this.originalValue, {emitEvent: false});
     }
@@ -67,4 +70,7 @@ export class CategoryGroupDetailComponent implements OnInit, OnDestroy {
     }
   }
 
+  toggleNewCategory() {
+    this.newCategory.enable();
+  }
 }

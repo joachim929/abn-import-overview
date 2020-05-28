@@ -19,6 +19,8 @@ import { CategoryDetailComponent } from './components/category-detail/category-d
 import { CategoryGroupDetailComponent } from './components/category-group-detail/category-group-detail.component';
 import {CategoryDataService} from './services/category-data.service';
 import {CategoryFormService} from './services/category-form.service';
+import {_MatMenuDirectivesModule, MatMenuModule} from '@angular/material/menu';
+import {MatCheckboxModule} from '@angular/material/checkbox';
 
 
 @NgModule({
@@ -41,7 +43,10 @@ import {CategoryFormService} from './services/category-form.service';
     MatFormFieldModule,
     MatInputModule,
     ReactiveFormsModule,
-    MatCardModule
+    MatCardModule,
+    _MatMenuDirectivesModule,
+    MatMenuModule,
+    MatCheckboxModule
   ],
   providers: [
     CategoryDataService,

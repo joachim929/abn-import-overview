@@ -18,6 +18,7 @@ export class CategoryDataService {
   }
 
   patchCategory(category: CategoryDto): Observable<CategoryDto> {
+    console.log(category);
     return this.categoryApiService.patchCategory({body: category}).pipe(
       tap((response) => {
         this.categoryDataStore.updateCategory(response);
@@ -29,12 +30,19 @@ export class CategoryDataService {
     this.categoryGroupApiService.patchMultiple({body: [updatedGroup]}).pipe(
       take(1),
       catchError(err => {
-        return of (false);
+        return of(false);
       })
     ).subscribe((response) => {
       if (response !== false && (response as CategoryGroupDto[]).length === 1) {
         this.categoryDataStore.updateCategoryGroup(response[0]);
       }
     });
+  }
+
+  createCategory(newCategory: CategoryDto, parentId: string) {
+    this.categoryApiService.createCategory({
+      body: newCategory,
+      parentId
+    }).pipe(tap(console.log)).subscribe();
   }
 }
