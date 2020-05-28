@@ -2,7 +2,7 @@ import {Injectable} from '@angular/core';
 import {BehaviorSubject, Observable, of} from 'rxjs';
 import {CategoryDto, CategoryGroupDto} from '../../swagger/models';
 import {CategoryGroupApiService} from '../../swagger/services/category-group-api.service';
-import {catchError} from 'rxjs/operators';
+import {catchError, take} from 'rxjs/operators';
 import {MatSnackBar} from '@angular/material/snack-bar';
 import {HttpErrorResponse} from '@angular/common/http';
 import {ActivatedRoute, Router} from '@angular/router';
@@ -98,17 +98,17 @@ export class CategoryDataStore {
     });
   }
 
-  deleteCategoryGroup(categoryGroup: CategoryGroupDto) {
+  deleteCategoryGroup(id: string) {
     this.setSaving(true);
-    this.categoryApiService.deleteCategoryGroup({id: categoryGroup.id}).pipe(
+    this.categoryApiService.deleteCategoryGroup({id}).pipe(
       catchError(e => {
         this.handleError(e);
-        return of(categoryGroup);
+        return of(false);
       })
     ).subscribe((response) => {
       this.setSaving(false);
-      if (!response) {
-        this.dataStore.categories$ = [...this.dataStore.categories$].filter(category => category.id !== categoryGroup.id);
+      if (response !== false) {
+        this.dataStore.categories$ = [...this.dataStore.categories$].filter(category => category.id !== id);
         this.categories.next(Object.assign({}, this.dataStore).categories$);
       }
     });
@@ -127,9 +127,17 @@ export class CategoryDataStore {
         ...this.dataStore,
         categories$: this.dataStore.categories$.map(group => categoryGroup.id === group.id ? categoryGroup : group)
       };
-      console.log(this.dataStore.categories$);
       this.categories.next(Object.assign({}, this.dataStore).categories$);
     }
+  }
+
+  updateCategoryGroup(updatedGroup: CategoryGroupDto): void {
+    this.dataStore = {
+      ...this.dataStore,
+      categories$: {...this.dataStore}.categories$.map((category) =>
+        category.id === updatedGroup.id ? updatedGroup : category)
+    };
+    this.categories.next(Object.assign({}, this.dataStore).categories$);
   }
 
   private handleError(error: HttpErrorResponse) {

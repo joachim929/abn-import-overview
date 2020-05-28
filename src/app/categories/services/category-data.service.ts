@@ -2,15 +2,18 @@ import {Injectable} from '@angular/core';
 import {CategoryDataStore} from '../../core/services/category-data.store';
 import {CategoryApiService} from '../../swagger/services/category-api.service';
 import {CategoryDto} from '../../swagger/models/category-dto';
-import {tap} from 'rxjs/operators';
-import {Observable} from 'rxjs';
+import {catchError, take, tap} from 'rxjs/operators';
+import {Observable, of} from 'rxjs';
+import {CategoryGroupDto} from '../../swagger/models/category-group-dto';
+import {CategoryGroupApiService} from '../../swagger/services/category-group-api.service';
 
 @Injectable()
 export class CategoryDataService {
 
   constructor(
     private categoryDataStore: CategoryDataStore,
-    private categoryApiService: CategoryApiService
+    private categoryApiService: CategoryApiService,
+    private categoryGroupApiService: CategoryGroupApiService
   ) {
   }
 
@@ -20,5 +23,18 @@ export class CategoryDataService {
         this.categoryDataStore.updateCategory(response);
       })
     );
+  }
+
+  patchCategoryGroup(updatedGroup: CategoryGroupDto): void {
+    this.categoryGroupApiService.patchMultiple({body: [updatedGroup]}).pipe(
+      take(1),
+      catchError(err => {
+        return of (false);
+      })
+    ).subscribe((response) => {
+      if (response !== false && (response as CategoryGroupDto[]).length === 1) {
+        this.categoryDataStore.updateCategoryGroup(response[0]);
+      }
+    });
   }
 }

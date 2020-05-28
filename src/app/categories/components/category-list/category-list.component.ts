@@ -74,10 +74,4 @@ export class CategoryListComponent implements OnInit, OnDestroy {
     }
 
   }
-
-  removeCategoryGroup(index) {
-    const removedGroup = this.form.at(index).value;
-    this.form.removeAt(index);
-    this.categoryDataStore.deleteCategoryGroup(removedGroup);
-  }
 }

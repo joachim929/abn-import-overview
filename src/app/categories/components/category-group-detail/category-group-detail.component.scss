@@ -21,6 +21,10 @@
     .edit-category-button {
       opacity: 1;
     }
+
+    .edit-category-button:disabled {
+      opacity: 0.5;
+    }
   }
 }
 

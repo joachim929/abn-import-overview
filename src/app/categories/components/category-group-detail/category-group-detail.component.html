@@ -10,7 +10,7 @@
         <mat-icon>close</mat-icon>
       </button>
     </mat-form-field>
-    <h4 class="mb-0">Group description</h4>
+    <h4 class="m-0">Group description</h4>
     <mat-form-field>
       <input type="text" matInput formControlName="description" [readonly]="!editModeControl.value">
       <button mat-button matSuffix mat-icon-button aria-label="Clear" class="clear-form-control-button"
@@ -37,7 +37,7 @@
     <button mat-button mat-icon-button color="warn" class="edit-category-button"
             [disabled]="categoriesLength() > 0" style="justify-self: flex-start"
             (click)="deleteCategoryGroup()">
-      <mat-icon>delete</mat-icon>
+      <mat-icon color="warn">delete</mat-icon>
     </button>
   </div>
 </form>

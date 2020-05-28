@@ -2,6 +2,8 @@ import {Component, Input, OnDestroy, OnInit} from '@angular/core';
 import {FormArray, FormControl, FormGroup} from '@angular/forms';
 import {Subject} from 'rxjs';
 import {CategoryGroupDto} from '../../../swagger/models/category-group-dto';
+import {CategoryDataService} from '../../services/category-data.service';
+import {CategoryDataStore} from '../../../core/services/category-data.store';
 
 @Component({
   selector: 'app-category-group-detail',
@@ -24,7 +26,10 @@ export class CategoryGroupDetailComponent implements OnInit, OnDestroy {
   originalValue: CategoryGroupDto;
   editModeControl = new FormControl(false);
 
-  constructor() {
+  constructor(
+    private categoryDataService: CategoryDataService,
+    private categoryDataStore: CategoryDataStore
+  ) {
   }
 
   ngOnInit() {
@@ -47,7 +52,9 @@ export class CategoryGroupDetailComponent implements OnInit, OnDestroy {
   }
 
   deleteCategoryGroup() {
-    // todo: deleteGroup
+    if ((this.formCategoryGroup.get('categories') as FormArray).controls.length === 0) {
+      this.categoryDataStore.deleteCategoryGroup(this.formCategoryGroup.get('id').value);
+    }
   }
 
   categoriesLength(): number {
@@ -55,7 +62,9 @@ export class CategoryGroupDetailComponent implements OnInit, OnDestroy {
   }
 
   save() {
-    // todo: patchGroup
+    if (this.formCategoryGroup.valid) {
+      this.categoryDataService.patchCategoryGroup(this.formCategoryGroup.value);
+    }
   }
 
 }
