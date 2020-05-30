@@ -7,7 +7,7 @@
     <label class="invoices-import-container">
       <input hidden type="file" accept="application/vnd.ms-excel" #importInvoices (change)="incomingFile($event)">
     </label>
-    <a *ngIf="!file" mat-button class="my-1">Assign mode</a>
+    <a *ngIf="!file" [routerLink]="['/transfers/assign']" mat-button class="my-1">Assign mode</a>
   </div>
   <div>
     <a mat-icon-button routerLinkActive="active" routerLink="list">
