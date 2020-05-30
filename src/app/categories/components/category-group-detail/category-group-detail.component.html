@@ -41,7 +41,7 @@
       <mat-icon color="warn">delete</mat-icon>
     </button>
     <mat-menu #menu="matMenu">
-      <div mat-menu-item>Are you sure?</div>
+      <div mat-menu-item disabled>Are you sure?</div>
       <button mat-menu-item (click)="deleteCategoryGroup()">Confirm</button>
     </mat-menu>
 
@@ -50,7 +50,6 @@
   </div>
 </form>
 <div class="add-category-container" [class.hidden]="newCategory.disabled">
-  <app-category-detail [isNew]="true"
-                       [parentId]="formCategoryGroup.get('id').value"
-                       [formControl]="newCategory"></app-category-detail>
+  <app-add-category [parentId]="formCategoryGroup.get('id').value" (cancelAdd)="newCategory.disable()"
+                       [formControl]="newCategory"></app-add-category>
 </div>

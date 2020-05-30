@@ -9,6 +9,7 @@ import { Observable } from 'rxjs';
 import { map, filter } from 'rxjs/operators';
 
 import { CategoryDto } from '../models/category-dto';
+import { CreateCategoryDto } from '../models/create-category-dto';
 
 @Injectable({
   providedIn: 'root',
@@ -171,13 +172,15 @@ export class CategoryApiService extends BaseService {
    *
    * This method doesn't expect any request body.
    */
-  deleteCategory$Response(params?: {
+  deleteCategory$Response(params: {
+    id: number;
 
   }): Observable<StrictHttpResponse<{  }>> {
 
     const rb = new RequestBuilder(this.rootUrl, CategoryApiService.DeleteCategoryPath, 'delete');
     if (params) {
 
+      rb.path('id', params.id);
 
     }
     return this.http.request(rb.build({
@@ -197,7 +200,8 @@ export class CategoryApiService extends BaseService {
    *
    * This method doesn't expect any request body.
    */
-  deleteCategory(params?: {
+  deleteCategory(params: {
+    id: number;
 
   }): Observable<{  }> {
 
@@ -219,7 +223,7 @@ export class CategoryApiService extends BaseService {
    */
   createCategory$Response(params: {
     parentId: string;
-      body: CategoryDto
+      body: CreateCategoryDto
   }): Observable<StrictHttpResponse<CategoryDto>> {
 
     const rb = new RequestBuilder(this.rootUrl, CategoryApiService.CreateCategoryPath, 'post');
@@ -248,7 +252,7 @@ export class CategoryApiService extends BaseService {
    */
   createCategory(params: {
     parentId: string;
-      body: CategoryDto
+      body: CreateCategoryDto
   }): Observable<CategoryDto> {
 
     return this.createCategory$Response(params).pipe(

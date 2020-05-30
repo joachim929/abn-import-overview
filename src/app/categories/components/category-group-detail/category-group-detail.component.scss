@@ -71,9 +71,12 @@
 
 .add-category-container {
   transition: 300ms ease-in;
+  max-height: 217px;
+  opacity: 1;
 
   &.hidden {
     overflow: hidden;
     max-height: 0;
+    opacity: 0;
   }
 }

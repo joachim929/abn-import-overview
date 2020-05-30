@@ -40,9 +40,29 @@ export class CategoryDataService {
   }
 
   createCategory(newCategory: CategoryDto, parentId: string) {
+    if (newCategory.order === null || typeof newCategory.order === 'undefined') {
+      newCategory = {...newCategory, order: 0};
+    }
     this.categoryApiService.createCategory({
       body: newCategory,
       parentId
-    }).pipe(tap(console.log)).subscribe();
+    }).pipe(
+      take(1)
+    ).subscribe((category) => {
+      this.categoryDataStore.addNewCategory(category, parentId);
+    });
+  }
+
+  deleteCategory(id: number) {
+    this.categoryApiService.deleteCategory({id}).pipe(
+      take(1),
+      catchError(error => {
+        return of(false);
+      })
+    ).subscribe((response) => {
+      if (response !== false) {
+        this.categoryDataStore.removeCategory(id);
+      }
+    });
   }
 }

@@ -2,7 +2,7 @@ import {Injectable} from '@angular/core';
 import {BehaviorSubject, Observable, of} from 'rxjs';
 import {CategoryDto, CategoryGroupDto} from '../../swagger/models';
 import {CategoryGroupApiService} from '../../swagger/services/category-group-api.service';
-import {catchError, take} from 'rxjs/operators';
+import {catchError} from 'rxjs/operators';
 import {MatSnackBar} from '@angular/material/snack-bar';
 import {HttpErrorResponse} from '@angular/common/http';
 import {ActivatedRoute, Router} from '@angular/router';
@@ -147,5 +147,29 @@ export class CategoryDataStore {
     } else {
       this.snackBarService.open(`Something went wrong, HttpStatus: ${error.status}, body was: ${error.error}`, 'OK', {duration: 5000});
     }
+  }
+
+  addNewCategory(category: CategoryDto, parentId: string) {
+    this.dataStore = {
+      ...this.dataStore,
+      categories$: {...this.dataStore}.categories$.map((categoryGroup) => {
+        if (categoryGroup.id === parentId) {
+          categoryGroup = {...categoryGroup, categories: [...categoryGroup.categories, category].sort((a, b) => a.order - b.order)};
+        }
+        return categoryGroup;
+      })
+    };
+
+    this.categories.next(Object.assign({}, this.dataStore).categories$);
+  }
+
+  removeCategory(id: number) {
+    this.dataStore = {
+      ...this.dataStore,
+      categories$: {...this.dataStore}.categories$.map((categoryGroup) => ({
+        ...categoryGroup, categories: [...categoryGroup.categories].filter((category) => category.id !== id)
+      }))
+    };
+    this.categories.next(Object.assign({}, this.dataStore).categories$);
   }
 }

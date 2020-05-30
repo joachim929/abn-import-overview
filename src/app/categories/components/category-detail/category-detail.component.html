@@ -1,35 +1,46 @@
 <form [formGroup]="form" [class.edit-mode]="editModeControl.value" class="category-form category-form-content">
-    <div class="category-form-controls-container">
-      <mat-form-field>
-        <mat-label>Category name</mat-label>
-        <input matInput type="text" formControlName="name" [readonly]="!editModeControl.value">
-        <button mat-button class="clear-form-control-button"
-                [class.hidden]="!form.get('name').value || !editModeControl.value"
-                matSuffix mat-icon-button aria-label="Clear" (click)="clearControl('name')">
-          <mat-icon>close</mat-icon>
-        </button>
-      </mat-form-field>
-      <mat-form-field>
-        <mat-label>Category description</mat-label>
-        <textarea matInput type="text" formControlName="description"
-                  [readonly]="!editModeControl.value"
-                  class="category-description-control"></textarea>
-        <button mat-button class="clear-form-control-button"
-                [class.hidden]="!form.get('description').value || !editModeControl.value"
-                matSuffix mat-icon-button aria-label="Clear" (click)="clearControl('description')">
-          <mat-icon>close</mat-icon>
-        </button>
-      </mat-form-field>
-      <div class="category-crud-controls-container" [class.show-controls]="editModeControl.value">
-        <button mat-button mat-stroked-button color="primary"
-                (click)="save()"
-                [disabled]="form.pristine || form.invalid">Save
-        </button>
-        <button mat-button mat-stroked-button (click)="cancel()">Cancel</button>
-      </div>
+  <div class="category-form-controls-container">
+    <mat-form-field>
+      <mat-label>Category name</mat-label>
+      <input matInput type="text" formControlName="name" [readonly]="!editModeControl.value">
+      <button mat-button class="clear-form-control-button"
+              [class.hidden]="!form.get('name').value || !editModeControl.value"
+              matSuffix mat-icon-button aria-label="Clear" (click)="clearControl('name')">
+        <mat-icon>close</mat-icon>
+      </button>
+    </mat-form-field>
+    <mat-form-field>
+      <mat-label>Category description</mat-label>
+      <textarea matInput type="text" formControlName="description"
+                [readonly]="!editModeControl.value"
+                class="category-description-control"></textarea>
+      <button mat-button class="clear-form-control-button"
+              [class.hidden]="!form.get('description').value || !editModeControl.value"
+              matSuffix mat-icon-button aria-label="Clear" (click)="clearControl('description')">
+        <mat-icon>close</mat-icon>
+      </button>
+    </mat-form-field>
+    <div class="category-crud-controls-container" [class.show-controls]="editModeControl.value">
+      <button mat-button mat-stroked-button color="primary"
+              (click)="save()"
+              [disabled]="form.pristine || form.invalid">Save
+      </button>
+      <button mat-button mat-stroked-button (click)="cancel()">Cancel</button>
     </div>
+  </div>
+  <div style="display: flex; flex-direction: column; justify-content: space-between;">
     <button class="edit-category-button" mat-icon-button mat-button
             (click)="editModeControl.setValue(!editModeControl.value)">
       <mat-icon>edit</mat-icon>
     </button>
+    <button class="edit-category-button" mat-icon-button mat-button
+            [matMenuTriggerFor]="menu"
+            [disabled]="!editModeControl.value">
+      <mat-icon color="warn">delete</mat-icon>
+    </button>
+    <mat-menu #menu="matMenu">
+      <div mat-menu-item disabled>Are you sure?</div>
+      <button mat-menu-item (click)="remove()">Confirm</button>
+    </mat-menu>
+  </div>
 </form>

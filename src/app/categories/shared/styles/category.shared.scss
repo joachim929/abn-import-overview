@@ -1,0 +1,31 @@
+:host {
+  flex: 1;
+}
+
+.category-form {
+  padding: 8px 8px 8px 40px;
+  display: flex;
+  flex-direction: row;
+  box-shadow: none;
+  transition: 300ms ease-in-out;
+}
+
+.category-form-controls-container {
+  display: flex;
+  flex-direction: column;
+  flex: 1 1 auto;
+}
+
+.clear-form-control-button {
+  transition: opacity 300ms ease-in-out;
+  opacity: 1;
+
+  &.hidden {
+    opacity: 0;
+  }
+}
+
+.category-description-control {
+  resize: none;
+  flex: 1;
+}

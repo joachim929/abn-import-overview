@@ -1,24 +1,26 @@
-import {Component, forwardRef, Input, OnDestroy, OnInit} from '@angular/core';
+import {Component, EventEmitter, forwardRef, Input, OnDestroy, OnInit, Output} from '@angular/core';
 import {ControlValueAccessor, FormControl, FormGroup, NG_VALUE_ACCESSOR, Validators} from '@angular/forms';
-import {CategoryDto} from '../../../swagger/models/category-dto';
+import {Subject} from 'rxjs';
 import {distinctUntilChanged, take, takeUntil} from 'rxjs/operators';
 import {isEqual} from 'lodash';
-import {Subject} from 'rxjs';
 import {CategoryDataService} from '../../services/category-data.service';
+import {CategoryDto} from '../../../swagger/models/category-dto';
 
 @Component({
-  selector: 'app-category-detail',
-  templateUrl: './category-detail.component.html',
-  styleUrls: ['./category-detail.component.scss', '../../shared/styles/category.shared.scss'],
+  selector: 'app-add-category',
+  templateUrl: './add-category.component.html',
+  styleUrls: ['./add-category.component.scss', '../../shared/styles/category.shared.scss'],
   providers: [
     {
       provide: NG_VALUE_ACCESSOR,
-      useExisting: forwardRef(() => CategoryDetailComponent),
+      useExisting: forwardRef(() => AddCategoryComponent),
       multi: true
     }
   ]
 })
-export class CategoryDetailComponent implements ControlValueAccessor, OnInit, OnDestroy {
+export class AddCategoryComponent implements ControlValueAccessor, OnInit, OnDestroy {
+  @Output() cancelAdd = new EventEmitter<void>();
+  @Input() parentId: string;
   form = new FormGroup({
     description: new FormControl(),
     id: new FormControl(),
@@ -27,17 +29,14 @@ export class CategoryDetailComponent implements ControlValueAccessor, OnInit, On
       Validators.required,
       Validators.maxLength(255)
     ]),
-    order: new FormControl()
+    order: new FormControl(0)
   });
-
   unSub = new Subject<void>();
-  originalValue: CategoryDto;
-  editModeControl = new FormControl(false);
 
   constructor(private categoryDataService: CategoryDataService) {
   }
 
-  ngOnInit() {
+  ngOnInit(): void {
     this.form.valueChanges.pipe(
       takeUntil(this.unSub),
       distinctUntilChanged((a, b) => isEqual(a, b))
@@ -62,41 +61,26 @@ export class CategoryDetailComponent implements ControlValueAccessor, OnInit, On
 
   writeValue(category?: CategoryDto): void {
     if (category?.id) {
-      this.originalValue = {...category};
       this.form.setValue(category);
     } else {
-      this.originalValue = undefined;
       this.form.reset();
     }
   }
 
   cancel() {
-    if (this.originalValue) {
-      this.form.reset({...this.originalValue});
-    }
-    this.editModeControl.setValue(false);
+    this.form.reset();
+    this.cancelAdd.emit();
   }
 
   save() {
-    if (this.form.valid && !(isEqual(this.originalValue, this.form.value))) {
-      this.categoryDataService.patchCategory(this.form.value).pipe(
-        take(1)
-      ).subscribe((updatedCategory) => {
-        if (updatedCategory) {
-          this.editModeControl.setValue(false);
-        }
-      });
-    }
-  }
-
-  remove() {
-    if (this.form.get('id').value) {
-      this.categoryDataService.deleteCategory(this.form.get('id').value);
+    if (this.form.valid && this.parentId) {
+      this.categoryDataService.createCategory(this.form.value, this.parentId);
     }
   }
 
   clearControl(name: string) {
     this.form.get(name).reset();
+    this.form.markAsPristine();
     this.form.markAsDirty();
   }
 }

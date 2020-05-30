@@ -1,0 +1,30 @@
+<form [formGroup]="form" class="category-form category-form-content">
+  <div class="category-form-controls-container">
+    <mat-form-field>
+      <mat-label>Category name</mat-label>
+      <input matInput type="text" formControlName="name">
+      <button mat-button class="clear-form-control-button"
+              [class.hidden]="!form.get('name').value"
+              matSuffix mat-icon-button aria-label="Clear" (click)="clearControl('name')">
+        <mat-icon>close</mat-icon>
+      </button>
+    </mat-form-field>
+    <mat-form-field>
+      <mat-label>Category description</mat-label>
+      <textarea matInput type="text" formControlName="description"
+                class="category-description-control"></textarea>
+      <button mat-button class="clear-form-control-button"
+              [class.hidden]="!form.get('description').value"
+              matSuffix mat-icon-button aria-label="Clear" (click)="clearControl('description')">
+        <mat-icon>close</mat-icon>
+      </button>
+    </mat-form-field>
+    <div class="category-crud-controls-container">
+      <button mat-button mat-stroked-button color="primary"
+              (click)="save()"
+              [disabled]="form.pristine || form.invalid">Save
+      </button>
+      <button mat-button mat-stroked-button (click)="cancel()">Cancel</button>
+    </div>
+  </div>
+</form>

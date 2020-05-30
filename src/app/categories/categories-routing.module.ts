@@ -3,7 +3,6 @@ import {Routes, RouterModule} from '@angular/router';
 import {CategoriesMasterComponent} from './components/categories-master/categories-master.component';
 import {AddCategoryGroupComponent} from './components/add-category-group/add-category-group.component';
 import {CategoryListComponent} from './components/category-list/category-list.component';
-import {EditCategoryGroupComponent} from './components/edit-category-group/edit-category-group.component';
 
 const routes: Routes = [
   {
@@ -17,9 +16,6 @@ const routes: Routes = [
             path: 'add', component: AddCategoryGroupComponent
           },
         ]
-      },
-      {
-        path: 'edit/:id', component: EditCategoryGroupComponent
       }
     ]
   },

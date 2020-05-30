@@ -14,13 +14,13 @@ import {MatFormFieldModule} from '@angular/material/form-field';
 import {MatInputModule} from '@angular/material/input';
 import {ReactiveFormsModule} from '@angular/forms';
 import {MatCardModule} from '@angular/material/card';
-import { EditCategoryGroupComponent } from './components/edit-category-group/edit-category-group.component';
 import { CategoryDetailComponent } from './components/category-detail/category-detail.component';
 import { CategoryGroupDetailComponent } from './components/category-group-detail/category-group-detail.component';
 import {CategoryDataService} from './services/category-data.service';
 import {CategoryFormService} from './services/category-form.service';
 import {_MatMenuDirectivesModule, MatMenuModule} from '@angular/material/menu';
 import {MatCheckboxModule} from '@angular/material/checkbox';
+import { AddCategoryComponent } from './components/add-category/add-category.component';
 
 
 @NgModule({
@@ -28,9 +28,9 @@ import {MatCheckboxModule} from '@angular/material/checkbox';
     CategoriesMasterComponent,
     AddCategoryGroupComponent,
     CategoryListComponent,
-    EditCategoryGroupComponent,
     CategoryDetailComponent,
-    CategoryGroupDetailComponent
+    CategoryGroupDetailComponent,
+    AddCategoryComponent
   ],
   imports: [
     CommonModule,

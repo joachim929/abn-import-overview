@@ -4,8 +4,8 @@ import { HttpClient } from '@angular/common/http';
 import { ApiConfiguration, ApiConfigurationParams } from './api-configuration';
 
 import { CategoryApiService } from './services/category-api.service';
-import { RulesApiService } from './services/rules-api.service';
 import { CategoryGroupApiService } from './services/category-group-api.service';
+import { RulesApiService } from './services/rules-api.service';
 import { TransferApiService } from './services/transfer-api.service';
 import { TransferMutationApiService } from './services/transfer-mutation-api.service';
 
@@ -18,8 +18,8 @@ import { TransferMutationApiService } from './services/transfer-mutation-api.ser
   declarations: [],
   providers: [
     CategoryApiService,
-    RulesApiService,
     CategoryGroupApiService,
+    RulesApiService,
     TransferApiService,
     TransferMutationApiService,
     ApiConfiguration
