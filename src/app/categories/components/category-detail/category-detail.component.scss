@@ -1,19 +1,31 @@
 .category-form {
+
   &.edit-mode, &:hover {
     box-shadow: 0 3px 5px -1px rgba(0, 0, 0, 0.2),
     0 5px 8px 0px rgba(0, 0, 0, 0.14),
     0px 1px 14px 0px rgba(0, 0, 0, 0.12);
   }
 
-  &:hover, &:focus {
+  @media (max-width: 991.98px) {
     .edit-category-button {
+      opacity: 1;
+    }
+    .edit-category-button:disabled {
       opacity: 0.5;
     }
   }
 
-  &.edit-mode, &.edit-mode:hover {
-    .edit-category-button {
-      opacity: 1;
+  @media (min-width: 992px) {
+    &:hover, &:focus {
+      .edit-category-button {
+        opacity: 0.5;
+      }
+    }
+
+    &.edit-mode, &.edit-mode:hover {
+      .edit-category-button {
+        opacity: 1;
+      }
     }
   }
 }

@@ -11,19 +11,30 @@
   flex: 1;
   transition: 300ms ease-in-out;
 
-  &:hover, &:focus {
+  @media (max-width: 991.98px) {
     .edit-category-button {
+      opacity: 1;
+    }
+    .edit-category-button:disabled {
       opacity: 0.5;
     }
   }
 
-  &.edit-mode, &.edit-mode:hover {
-    .edit-category-button {
-      opacity: 1;
+  @media (min-width: 992px) {
+    &:hover, &:focus {
+      .edit-category-button {
+        opacity: 0.5;
+      }
     }
 
-    .edit-category-button:disabled {
-      opacity: 0.5;
+    &.edit-mode, &.edit-mode:hover {
+      .edit-category-button {
+        opacity: 1;
+      }
+
+      .edit-category-button:disabled {
+        opacity: 0.5;
+      }
     }
   }
 }
