@@ -2,42 +2,61 @@ import { Injectable } from '@angular/core';
 import {BehaviorSubject, Observable} from 'rxjs';
 import {TransferMutationDto} from '../../../swagger/models/transfer-mutation-dto';
 import {TransferMutationApiService} from '../../../swagger/services/transfer-mutation-api.service';
-import {take} from 'rxjs/operators';
+import {switchMap, take, tap} from 'rxjs/operators';
 import {TransferListParams} from '../../../swagger/models/transfer-list-params';
 
 @Injectable()
 export class AssignTransferDataStore {
   private transferMutations = new BehaviorSubject<TransferMutationDto[]>([]);
+  private skip = new BehaviorSubject<number>(null);
+  private isSaving = new BehaviorSubject<boolean>(false);
 
   private dataStore: {
-    transferMutations: TransferMutationDto[]
+    transferMutations: TransferMutationDto[],
+    skip: number,
+    limit: number,
+    isSaving: boolean
   } = {
-    transferMutations: []
+    transferMutations: [],
+    skip: 0,
+    limit: 10,
+    isSaving: false
   };
 
   constructor(private apiService: TransferMutationApiService) {
+    this.skip.pipe(
+      switchMap((skipValue) => this.apiService.getByCategoryId({
+        body: {skip: skipValue, limit: this.dataStore.limit}
+      })
+      )
+    ).subscribe((response) => {
+      this.dataStore.transferMutations = [...this.dataStore.transferMutations, ...response.transferMutations];
+      this.dataStore = {...this.dataStore, skip: this.dataStore.skip + response.transferMutations.length, limit: 1, isSaving: false};
+      this.transferMutations.next(Object.assign({}, this.dataStore).transferMutations);
+      this.isSaving.next(Object.assign({}, this.dataStore).isSaving);
+    });
+    this.skip.next(0);
   }
 
   get transferMutations$(): Observable<TransferMutationDto[]> {
     return this.transferMutations.asObservable();
   }
 
-  loadInit() {
-    this.apiService.getByCategoryId({
-      body: {limit: 10}
-    }).pipe(take(1)).subscribe((response) => {
-      console.log(response);
-      this.dataStore.transferMutations = [...this.dataStore.transferMutations, ...response.transferMutations];
-      this.transferMutations.next(Object.assign({}, this.dataStore).transferMutations);
-    });
+  getIsSaving$(): Observable<boolean> {
+    return this.isSaving.asObservable();
   }
 
   assignCategory(assignedMutation: TransferMutationDto) {
-    const listParams: TransferListParams = {
-      skip: this.dataStore.transferMutations.length,
-      transferMutations: [assignedMutation],
-      limit: 1
-    };
-    // assignMutation and update according to response
+    this.dataStore.isSaving = true;
+    this.isSaving.next(Object.assign({}, this.dataStore).isSaving);
+    this.apiService.patchTransferMutation({
+      body: assignedMutation
+    }).pipe(
+      take(1),
+    ).subscribe(() => {
+      this.dataStore.transferMutations = [...this.dataStore.transferMutations].filter((mutation) => mutation.id !== assignedMutation.id);
+      this.transferMutations.next(Object.assign({}, this.dataStore).transferMutations);
+      this.skip.next(Object.assign({}, this.dataStore).skip + 1);
+    });
   }
 }

@@ -10,21 +10,23 @@ import {SharedModule} from '../../shared/shared.module';
 import {MatButtonModule} from '@angular/material/button';
 import {MatDividerModule} from '@angular/material/divider';
 import {MatFormFieldModule} from '@angular/material/form-field';
+import {MatProgressSpinnerModule} from '@angular/material/progress-spinner';
 
 
 @NgModule({
   declarations: [
     AssignComponent
   ],
-  imports: [
-    CommonModule,
-    AssignRoutingModule,
-    MatCardModule,
-    SharedModule,
-    MatButtonModule,
-    MatDividerModule,
-    MatFormFieldModule
-  ],
+    imports: [
+        CommonModule,
+        AssignRoutingModule,
+        MatCardModule,
+        SharedModule,
+        MatButtonModule,
+        MatDividerModule,
+        MatFormFieldModule,
+        MatProgressSpinnerModule
+    ],
   providers: [
     AssignTransferDataStore,
     AssignTransferService
