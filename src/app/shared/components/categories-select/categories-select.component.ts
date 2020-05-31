@@ -27,6 +27,7 @@ export class CategoriesSelectComponent implements ControlValueAccessor, OnInit, 
 
   ngOnInit() {
     this.categoryGroups$ = this.categoryDataStore.categories$;
+    this.control.valueChanges.subscribe((next) => this.onChange(next));
   }
 
   ngOnDestroy(): void {
@@ -34,10 +35,8 @@ export class CategoriesSelectComponent implements ControlValueAccessor, OnInit, 
     this.unSub.complete();
   }
 
-  onChange = (_) => {
-  };
-  onTouched = () => {
-  };
+  onChange = (_) => {};
+  onTouched = () => {};
 
   registerOnChange(fn: any): void {
     this.onChange = fn;

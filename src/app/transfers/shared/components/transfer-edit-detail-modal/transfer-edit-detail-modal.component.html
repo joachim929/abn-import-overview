@@ -31,14 +31,7 @@
               cdkAutosizeMaxRows="5" formControlName="comment" matInput></textarea>
   </mat-form-field>
 
-  <mat-form-field>
-    <mat-label>Category</mat-label>
-    <mat-select formControlName="category">
-      <mat-option></mat-option>
-      <!-- todo: Set up categoryGroups -->
-      <mat-option [value]="categoryGroup.id" *ngFor="let categoryGroup of categories$ | async">{{categoryGroup.name}}</mat-option>
-    </mat-select>
-  </mat-form-field>
+  <app-categories-select formControlName="category"></app-categories-select>
 </form>
 <div class="transfer-mutation-controls-container">
   <button mat-raised-button (click)="cancel()">Cancel</button>
