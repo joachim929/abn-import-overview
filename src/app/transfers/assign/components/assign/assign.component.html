@@ -1,9 +1,24 @@
 <div class="container column-container">
-  <mat-card class="m-2">
-    <p>assign works!</p>
-  </mat-card>
-  <mat-card class="m-2">
-    <p>assign works!</p>
+  <mat-card class="m-2" *ngFor="let mutation of transferMutations$ | async; let index = index">
+    <mat-card-header>
+      <mat-card-title>{{mutation.valueDate | date}}</mat-card-title>
+      <mat-card-subtitle>{{mutation.description}}</mat-card-subtitle>
+    </mat-card-header>
+    <mat-card-content>
+      <p *ngIf="mutation.comment">{{mutation.comment}}</p>
+      <p>Amount: {{mutation.amount | customCurrency}}</p>
+      <p>Start balance: {{mutation.startBalance}}</p>
+      <p>End balance: {{mutation.endBalance}}</p>
+    </mat-card-content>
+    <mat-card-actions *ngIf="index === 0">
+      <div *ngFor="let group of categories$ | async" style="display: flex; flex-direction: column">
+        <mat-divider></mat-divider>
+        <p class="my-2">{{group.name}}</p>
+        <div class="mb-2" style="display: flex; flex-direction: row;">
+          <button *ngFor="let category of group.categories" (click)="assignCategory(category, mutation)" mat-stroked-button mat-button>{{category.name}}</button>
+        </div>
+      </div>
+    </mat-card-actions>
   </mat-card>
 </div>
 <pre>{{transferMutations$ | async | json}}</pre>
