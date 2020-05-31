@@ -11,6 +11,7 @@ import {MatButtonModule} from '@angular/material/button';
 import {MatDividerModule} from '@angular/material/divider';
 import {MatFormFieldModule} from '@angular/material/form-field';
 import {MatProgressSpinnerModule} from '@angular/material/progress-spinner';
+import {MatIconModule} from '@angular/material/icon';
 
 
 @NgModule({
@@ -25,7 +26,8 @@ import {MatProgressSpinnerModule} from '@angular/material/progress-spinner';
         MatButtonModule,
         MatDividerModule,
         MatFormFieldModule,
-        MatProgressSpinnerModule
+        MatProgressSpinnerModule,
+        MatIconModule
     ],
   providers: [
     AssignTransferDataStore,
