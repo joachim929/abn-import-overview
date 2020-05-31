@@ -1,3 +1,7 @@
+<mat-toolbar>
+  <a [routerLink]="['/transfers']" mat-button class="my-1"><mat-icon>arrow_back_ios</mat-icon>Back</a>
+</mat-toolbar>
+
 <div class="container column-container" *ngIf="(transferMutations$ | async) as transferMutations;">
   <mat-card class="m-2" *ngFor="let mutation of transferMutations; let index = index">
     <div [class.is-loading]="isSaving$ | async" *ngIf="index === 0" class="spinner">

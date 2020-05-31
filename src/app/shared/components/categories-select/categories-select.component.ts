@@ -54,4 +54,8 @@ export class CategoriesSelectComponent implements ControlValueAccessor, OnInit, 
     }
   }
 
+  compareFn(c1: CategoryDto, c2: CategoryDto): boolean {
+    return c1 && c2 ? c1.id === c2.id : c1 === c2;
+  }
+
 }

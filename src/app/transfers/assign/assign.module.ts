@@ -12,6 +12,7 @@ import {MatDividerModule} from '@angular/material/divider';
 import {MatFormFieldModule} from '@angular/material/form-field';
 import {MatProgressSpinnerModule} from '@angular/material/progress-spinner';
 import {MatIconModule} from '@angular/material/icon';
+import {MatToolbarModule} from '@angular/material/toolbar';
 
 
 @NgModule({
@@ -27,7 +28,8 @@ import {MatIconModule} from '@angular/material/icon';
         MatDividerModule,
         MatFormFieldModule,
         MatProgressSpinnerModule,
-        MatIconModule
+        MatIconModule,
+        MatToolbarModule
     ],
   providers: [
     AssignTransferDataStore,
