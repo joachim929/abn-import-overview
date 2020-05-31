@@ -6,6 +6,8 @@ export { HttpException } from './models/http-exception';
 export { RuleDto } from './models/rule-dto';
 export { Rule } from './models/rule';
 export { Transfer } from './models/transfer';
+export { CategoryGroup } from './models/category-group';
+export { Category } from './models/category';
 export { TransferMutation } from './models/transfer-mutation';
 export { TransferMutationDto } from './models/transfer-mutation-dto';
 export { TransferListParams } from './models/transfer-list-params';

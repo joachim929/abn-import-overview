@@ -11,7 +11,6 @@ import { map, filter } from 'rxjs/operators';
 import { SplitTransferMutationDto } from '../models/split-transfer-mutation-dto';
 import { Transfer } from '../models/transfer';
 import { TransferListParams } from '../models/transfer-list-params';
-import { TransferMutation } from '../models/transfer-mutation';
 import { TransferMutationDto } from '../models/transfer-mutation-dto';
 
 @Injectable({
@@ -212,55 +211,6 @@ export class TransferMutationApiService extends BaseService {
 
     return this.splitTransferMutation$Response(params).pipe(
       map((r: StrictHttpResponse<Array<TransferMutationDto>>) => r.body as Array<TransferMutationDto>)
-    );
-  }
-
-  /**
-   * Path part for operation getTransferMutation
-   */
-  static readonly GetTransferMutationPath = '/transfer-mutation/{id}';
-
-  /**
-   * This method provides access to the full `HttpResponse`, allowing access to response headers.
-   * To access only the response body, use `getTransferMutation()` instead.
-   *
-   * This method doesn't expect any request body.
-   */
-  getTransferMutation$Response(params: {
-    id: number;
-
-  }): Observable<StrictHttpResponse<TransferMutation>> {
-
-    const rb = new RequestBuilder(this.rootUrl, TransferMutationApiService.GetTransferMutationPath, 'get');
-    if (params) {
-
-      rb.path('id', params.id);
-
-    }
-    return this.http.request(rb.build({
-      responseType: 'json',
-      accept: 'application/json'
-    })).pipe(
-      filter((r: any) => r instanceof HttpResponse),
-      map((r: HttpResponse<any>) => {
-        return r as StrictHttpResponse<TransferMutation>;
-      })
-    );
-  }
-
-  /**
-   * This method provides access to only to the response body.
-   * To access the full response (for headers, for example), `getTransferMutation$Response()` instead.
-   *
-   * This method doesn't expect any request body.
-   */
-  getTransferMutation(params: {
-    id: number;
-
-  }): Observable<TransferMutation> {
-
-    return this.getTransferMutation$Response(params).pipe(
-      map((r: StrictHttpResponse<TransferMutation>) => r.body as TransferMutation)
     );
   }
 

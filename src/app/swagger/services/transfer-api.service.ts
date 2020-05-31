@@ -121,55 +121,6 @@ export class TransferApiService extends BaseService {
   }
 
   /**
-   * Path part for operation deleteTransfer
-   */
-  static readonly DeleteTransferPath = '/transfer/{id}';
-
-  /**
-   * This method provides access to the full `HttpResponse`, allowing access to response headers.
-   * To access only the response body, use `deleteTransfer()` instead.
-   *
-   * This method doesn't expect any request body.
-   */
-  deleteTransfer$Response(params: {
-    id: string;
-
-  }): Observable<StrictHttpResponse<{  }>> {
-
-    const rb = new RequestBuilder(this.rootUrl, TransferApiService.DeleteTransferPath, 'delete');
-    if (params) {
-
-      rb.path('id', params.id);
-
-    }
-    return this.http.request(rb.build({
-      responseType: 'json',
-      accept: 'application/json'
-    })).pipe(
-      filter((r: any) => r instanceof HttpResponse),
-      map((r: HttpResponse<any>) => {
-        return r as StrictHttpResponse<{  }>;
-      })
-    );
-  }
-
-  /**
-   * This method provides access to only to the response body.
-   * To access the full response (for headers, for example), `deleteTransfer$Response()` instead.
-   *
-   * This method doesn't expect any request body.
-   */
-  deleteTransfer(params: {
-    id: string;
-
-  }): Observable<{  }> {
-
-    return this.deleteTransfer$Response(params).pipe(
-      map((r: StrictHttpResponse<{  }>) => r.body as {  })
-    );
-  }
-
-  /**
    * Path part for operation filteredTransfers
    */
   static readonly FilteredTransfersPath = '/transfer/filtered';
