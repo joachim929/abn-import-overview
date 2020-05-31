@@ -5,7 +5,6 @@ export interface TransferMutation {
   active: boolean;
   amount: number;
   category: Category;
-  categoryId: number;
   children: Array<TransferMutation>;
   comment: string;
   createdAt: string;
