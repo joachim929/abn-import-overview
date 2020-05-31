@@ -1,4 +1,4 @@
-import {Component, forwardRef, OnDestroy, OnInit} from '@angular/core';
+import {Component, forwardRef, Input, OnDestroy, OnInit} from '@angular/core';
 import {ControlValueAccessor, FormControl, NG_VALUE_ACCESSOR} from '@angular/forms';
 import {Observable, Subject} from 'rxjs';
 import {CategoryDataStore} from '../../../core/services/category-data.store';
@@ -18,6 +18,7 @@ import {CategoryDto} from '../../../swagger/models/category-dto';
   ]
 })
 export class CategoriesSelectComponent implements ControlValueAccessor, OnInit, OnDestroy {
+  @Input() label?: string;
   control = new FormControl();
   categoryGroups$: Observable<CategoryGroupDto[]>;
   unSub = new Subject<void>();

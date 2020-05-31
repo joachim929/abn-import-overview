@@ -25,14 +25,6 @@ export class TransferDetailComponent {
     return this.breakpointService.isXSmall;
   }
 
-  get categories$() {
-    return this.categoryDataStore.categories$;
-  }
-
-  debug(test) {
-    console.log(test);
-  }
-
   patch(transferMutation: TransferMutationDto) {
     this.transferEditService.openEditDialog(transferMutation);
   }

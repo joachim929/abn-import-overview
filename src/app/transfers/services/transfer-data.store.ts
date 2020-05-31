@@ -140,7 +140,6 @@ export class TransferDataStore {
   updateTransferMutation(updateTransferMutation: TransferMutationDto) {
     this.dataStore.transfer.map((_invoice, index) => {
       if (_invoice.id === updateTransferMutation.id) {
-        console.log('somethings about to change?');
         this.dataStore.transfer[index] = updateTransferMutation;
         this.transfers$.next(Object.assign({}, this.dataStore).transfer);
       }

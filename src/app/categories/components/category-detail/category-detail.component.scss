@@ -19,6 +19,10 @@
     &:hover, &:focus {
       .edit-category-button {
         opacity: 0.5;
+
+        &.edit-button {
+          opacity: 1;
+        }
       }
     }
 
