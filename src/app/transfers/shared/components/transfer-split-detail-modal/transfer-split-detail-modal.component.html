@@ -82,16 +82,9 @@
   <div class="transfer-mutation-form-pair">
     <mat-form-field>
       <mat-label>Category</mat-label>
-      <input class="cursor-default" readonly matInput value="{{ocInvoice.categoryId || ''}}">
+      <input class="cursor-default" readonly matInput value="{{ocInvoice?.category?.name || ''}}">
     </mat-form-field>
-    <mat-form-field>
-      <mat-label>New</mat-label>
-      <mat-select formControlName="categoryId">
-        <!-- todo: Implement option groups -->
-        <mat-option></mat-option>
-        <mat-option [value]="category.id" *ngFor="let category of categories$ | async">{{category.name}}</mat-option>
-      </mat-select>
-    </mat-form-field>
+    <app-categories-select label="New" formControlName="category"></app-categories-select>
   </div>
 </form>
 <div class="transfer-mutation-controls-container">

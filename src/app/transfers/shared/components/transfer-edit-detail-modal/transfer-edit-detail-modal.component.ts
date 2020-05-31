@@ -29,7 +29,7 @@ export class TransferEditDetailModalComponent implements OnInit {
     this.form = new FormGroup({
       description: new FormControl(this.ocTransferMutation.description, [Validators.required]),
       comment: new FormControl(this.ocTransferMutation.comment || null),
-      category: new FormControl(this.ocTransferMutation.categoryId || null)
+      category: new FormControl(this.ocTransferMutation?.category || null)
     });
 
     this.form.get('description').valueChanges.pipe(
@@ -38,7 +38,7 @@ export class TransferEditDetailModalComponent implements OnInit {
 
     this.form.get('comment').valueChanges.subscribe(next => this.ocTransferMutation.comment = next);
 
-    this.form.get('category').valueChanges.subscribe(next => this.ocTransferMutation.categoryId = next);
+    this.form.get('category').valueChanges.subscribe(next => this.ocTransferMutation.category = next);
   }
 
   ngOnInit() {

@@ -25,10 +25,6 @@ export class TransferDetailComponent {
     return this.breakpointService.isXSmall;
   }
 
-  get categories$() {
-    return this.categoryDataStore.categories$;
-  }
-
   patch(transferMutation: TransferMutationDto) {
     this.transferEditService.openEditDialog(transferMutation);
   }

@@ -1,0 +1,38 @@
+<mat-toolbar>
+  <a [routerLink]="['/transfers']" mat-button class="my-1"><mat-icon>arrow_back_ios</mat-icon>Back</a>
+</mat-toolbar>
+
+<div class="container column-container" *ngIf="(transferMutations$ | async) as transferMutations;">
+  <mat-card class="m-2" *ngFor="let mutation of transferMutations; let index = index">
+    <div [class.is-loading]="isSaving$ | async" *ngIf="index === 0" class="spinner">
+      <mat-progress-spinner mode="indeterminate"></mat-progress-spinner>
+    </div>
+    <mat-card-header>
+      <mat-card-title>{{mutation.valueDate | date}}</mat-card-title>
+      <mat-card-subtitle>{{mutation.description}}</mat-card-subtitle>
+    </mat-card-header>
+    <mat-card-content>
+      <p *ngIf="mutation.comment">{{mutation.comment}}</p>
+      <p>Amount: {{mutation.amount | customCurrency}}</p>
+      <p>Start balance: {{mutation.startBalance}}</p>
+      <p>End balance: {{mutation.endBalance}}</p>
+    </mat-card-content>
+    <mat-card-actions *ngIf="index === 0">
+      <div class="category-group-container" *ngFor="let group of categories$ | async">
+        <mat-divider></mat-divider>
+        <p class="my-2">{{group.name}}</p>
+        <div class="mb-2" style="display: flex; flex-direction: row;">
+          <button *ngFor="let category of group.categories"
+                  [disabled]="isSaving$ | async"
+                  (click)="assignCategory(category, mutation)"
+                  mat-stroked-button mat-button>{{category.name}}</button>
+        </div>
+      </div>
+    </mat-card-actions>
+  </mat-card>
+
+  <mat-card *ngIf="transferMutations.length === 0" class="py-5 no-data-container">
+    <mat-label>Nothing to assign</mat-label>
+    <mat-icon>weekend</mat-icon>
+  </mat-card>
+</div>

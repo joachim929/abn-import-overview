@@ -30,11 +30,10 @@
   </div>
   <div class="edit-category-button-container">
 
-    <button class="edit-category-button" mat-icon-button mat-button
+    <button class="edit-category-button edit-button" mat-icon-button mat-button
             (click)="editModeControl.setValue(!editModeControl.value)">
       <mat-icon>edit</mat-icon>
     </button>
-    <!-- todo: Implement action menu to confirm -->
     <button mat-button mat-icon-button color="warn" class="edit-category-button"
             [matMenuTriggerFor]="menu"
             [disabled]="categoriesLength() > 0">

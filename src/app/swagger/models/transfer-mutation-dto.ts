@@ -1,7 +1,9 @@
 /* tslint:disable */
+import { CategoryDto } from './category-dto';
 export interface TransferMutationDto {
   accountNumber: number;
   amount: number;
+  category: CategoryDto;
   categoryId?: number;
   comment?: string;
   currencyCode: string;

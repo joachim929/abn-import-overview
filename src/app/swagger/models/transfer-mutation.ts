@@ -1,9 +1,10 @@
 /* tslint:disable */
+import { Category } from './category';
 import { Transfer } from './transfer';
 export interface TransferMutation {
   active: boolean;
   amount: number;
-  categoryId?: number;
+  category: Category;
   children: Array<TransferMutation>;
   comment: string;
   createdAt: string;

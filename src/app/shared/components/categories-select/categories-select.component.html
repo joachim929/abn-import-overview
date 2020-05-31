@@ -1,0 +1,10 @@
+<mat-form-field>
+  <mat-label *ngIf="label">{{label}}</mat-label>
+  <mat-select [formControl]="control" [compareWith]="compareFn">
+    <mat-option></mat-option>
+    <mat-optgroup *ngFor="let group of categoryGroups$ | async" [label]="group.name">
+      <mat-option *ngFor="let category of group.categories" [value]="category">
+        {{category.name}}</mat-option>
+    </mat-optgroup>
+  </mat-select>
+</mat-form-field>

@@ -37,7 +37,7 @@ export class TransferSplitDetailModalComponent implements OnInit {
       amount: new FormControl(0, [Validators.required]),
       description: new FormControl(this.data.transferMutation.description, [Validators.required]),
       comment: new FormControl(this.data.transferMutation.comment || null, [Validators.required]),
-      categoryId: new FormControl(this.data.transferMutation.categoryId || null)
+      category: new FormControl(this.data.transferMutation.category || null)
     });
 
     this.ocInvoice = {...data.transferMutation};

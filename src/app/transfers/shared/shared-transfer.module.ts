@@ -11,6 +11,7 @@ import {TextFieldModule} from '@angular/cdk/text-field';
 import {MatInputModule} from '@angular/material/input';
 import {MatSelectModule} from '@angular/material/select';
 import {CustomCurrencyPipe} from '../../shared/pipes/custom-currency.pipe';
+import {MatDialogModule} from '@angular/material/dialog';
 
 @NgModule({
   declarations: [
@@ -18,16 +19,17 @@ import {CustomCurrencyPipe} from '../../shared/pipes/custom-currency.pipe';
     TransferEditDetailModalComponent,
     TransferSplitDetailModalComponent
   ],
-  imports: [
-    CommonModule,
-    MatButtonModule,
-    MatFormFieldModule,
-    ReactiveFormsModule,
-    SharedModule,
-    TextFieldModule,
-    MatInputModule,
-    MatSelectModule
-  ],
+    imports: [
+        CommonModule,
+        MatButtonModule,
+        MatFormFieldModule,
+        ReactiveFormsModule,
+        SharedModule,
+        TextFieldModule,
+        MatInputModule,
+        MatSelectModule,
+        MatDialogModule
+    ],
   exports: [
     LoadMoreComponent,
     TransferEditDetailModalComponent,

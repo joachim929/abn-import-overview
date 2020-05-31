@@ -7,11 +7,7 @@
     <p>Start balance: {{transferMutation.startBalance | customCurrency}}</p>
     <p>End balance: {{transferMutation.endBalance | customCurrency}}</p>
     <p>Transaction date: {{transferMutation.transactionDate | date}}</p>
-    <p *ngIf="transferMutation.categoryId">Category:
-      <ng-container *ngFor="let categoryGroup of categories$ | async">
-        <span *ngIf="categoryGroup.id === transferMutation.categoryId">{{categoryGroup.name}}</span>
-      </ng-container>
-    </p>
+    <p *ngIf="transferMutation?.category">Category: {{transferMutation.category.name}}</p>
   </div>
   <div class="transfer-mutation-controls-container" [class.is-x-small]="isXSmall">
     <div class="transfer-edit-controls">

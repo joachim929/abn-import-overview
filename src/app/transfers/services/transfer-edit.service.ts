@@ -25,7 +25,7 @@ export class TransferEditService {
       width: '800px',
       maxWidth: '95vw',
       maxHeight: '95vh',
-      data: {transferMutation}
+      data: {transferMutation},
     });
 
     dialog.afterClosed().pipe(

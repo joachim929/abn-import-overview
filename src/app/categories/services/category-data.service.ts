@@ -18,7 +18,6 @@ export class CategoryDataService {
   }
 
   patchCategory(category: CategoryDto): Observable<CategoryDto> {
-    console.log(category);
     return this.categoryApiService.patchCategory({body: category}).pipe(
       tap((response) => {
         this.categoryDataStore.updateCategory(response);

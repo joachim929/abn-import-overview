@@ -19,6 +19,7 @@ import {MatSelectGroupsComponent} from './components/mat-select-groups/mat-selec
 import {MatSelectModule} from '@angular/material/select';
 import {MatSelectComponent} from './components/mat-select/mat-select.component';
 import {CustomCurrencyPipe} from './pipes/custom-currency.pipe';
+import { CategoriesSelectComponent } from './components/categories-select/categories-select.component';
 
 
 @NgModule({
@@ -31,7 +32,8 @@ import {CustomCurrencyPipe} from './pipes/custom-currency.pipe';
     MatInputComponent,
     MatSelectGroupsComponent,
     MatSelectComponent,
-    CustomCurrencyPipe
+    CustomCurrencyPipe,
+    CategoriesSelectComponent
   ],
   imports: [
     CommonModule,
@@ -53,7 +55,8 @@ import {CustomCurrencyPipe} from './pipes/custom-currency.pipe';
     MatInputComponent,
     MatSelectGroupsComponent,
     MatSelectComponent,
-    CustomCurrencyPipe
+    CustomCurrencyPipe,
+    CategoriesSelectComponent
   ]
 })
 export class SharedModule {
