@@ -1,7 +1,7 @@
 import {NgModule} from '@angular/core';
 import {CommonModule} from '@angular/common';
 
-import {CardRoutingModule} from './card-routing.module';
+import {TransferCardRoutingModule} from './transfer-card-routing.module';
 import {TransferDetailComponent} from './components/transfer-detail/transfer-detail.component';
 import {SharedModule} from '../../shared/shared.module';
 import {CustomCurrencyPipe} from '../../shared/pipes/custom-currency.pipe';
@@ -22,7 +22,7 @@ import {SharedTransferModule} from '../shared/shared-transfer.module';
   ],
   imports: [
     CommonModule,
-    CardRoutingModule,
+    TransferCardRoutingModule,
     SharedModule,
     MatButtonModule,
     MatFormFieldModule,
@@ -37,5 +37,5 @@ import {SharedTransferModule} from '../shared/shared-transfer.module';
     CustomCurrencyPipe
   ]
 })
-export class CardModule {
+export class TransferCardModule {
 }

@@ -1,6 +1,6 @@
 <mat-toolbar class="invoice-toolbar">
   <div>
-    <button mat-icon-button [class.active]="opened" class="search-icon" (click)="sidenav.toggle()"><mat-icon>filter_list</mat-icon></button>
+    <button mat-icon-button [class.active]="opened" class="search-icon mr-1" (click)="sidenav.toggle()"><mat-icon>filter_list</mat-icon></button>
     <button *ngIf="!file" mat-button color="primary" class="mr-1" (click)="importInvoices.click()">Import</button>
     <button *ngIf="file" mat-raised-button color="primary" class="mr-1" (click)="upload()">Upload</button>
     <button *ngIf="file" mat-raised-button color="warn" class="my-1" (click)="cancelUpload()">Cancel</button>

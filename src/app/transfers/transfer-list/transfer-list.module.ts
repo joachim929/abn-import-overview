@@ -1,8 +1,8 @@
 import {NgModule} from '@angular/core';
 import {CommonModule} from '@angular/common';
 
-import {ListRoutingModule} from './list-routing.module';
-import {ListMasterComponent} from './components/list-master/list-master.component';
+import {TransferListRoutingModule} from './transfer-list-routing.module';
+import {TransferListMasterComponent} from './components/list-master/transfer-list-master.component';
 import {CustomCurrencyPipe} from '../../shared/pipes/custom-currency.pipe';
 import {MatTableModule} from '@angular/material/table';
 import {MatSortModule} from '@angular/material/sort';
@@ -13,10 +13,10 @@ import {SharedTransferModule} from '../shared/shared-transfer.module';
 
 
 @NgModule({
-  declarations: [ListMasterComponent],
+  declarations: [TransferListMasterComponent],
   imports: [
     CommonModule,
-    ListRoutingModule,
+    TransferListRoutingModule,
     MatTableModule,
     MatSortModule,
     SharedModule,
@@ -28,5 +28,5 @@ import {SharedTransferModule} from '../shared/shared-transfer.module';
     CustomCurrencyPipe
   ]
 })
-export class ListModule {
+export class TransferListModule {
 }

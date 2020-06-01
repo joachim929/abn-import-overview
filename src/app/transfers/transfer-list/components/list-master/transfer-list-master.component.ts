@@ -9,9 +9,9 @@ import {BreakpointService} from '../../../../core/services/breakpoint.service';
 import {TransferMutationDto} from '../../../../swagger/models/transfer-mutation-dto';
 
 @Component({
-  selector: 'app-list-master',
-  templateUrl: './list-master.component.html',
-  styleUrls: ['./list-master.component.scss'],
+  selector: 'app-transfer-list-master',
+  templateUrl: './transfer-list-master.component.html',
+  styleUrls: ['./transfer-list-master.component.scss'],
   animations: [
     trigger('detailExpand', [
       state('collapsed', style({height: '0px', minHeight: '0'})),
@@ -20,7 +20,7 @@ import {TransferMutationDto} from '../../../../swagger/models/transfer-mutation-
     ]),
   ],
 })
-export class ListMasterComponent implements OnInit {
+export class TransferListMasterComponent implements OnInit {
   recordCount$: Observable<number>;
   displayedColumns: string[] = ['transactionDate', 'amount', 'startBalance', 'endBalance', 'delete'];
   dataSource = new MatTableDataSource();
