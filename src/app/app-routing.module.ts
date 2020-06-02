@@ -1,11 +1,11 @@
 import {NgModule} from '@angular/core';
 import {Routes, RouterModule} from '@angular/router';
 import {NotFoundComponent} from './shared/components/not-found/not-found.component';
-import {RulesModule} from './rules/rules.module';
 import {CategoriesModule} from './categories/categories.module';
 import {TransferModule} from './transfers/transfer.module';
 import {DashboardModule} from './dashboard/dashboard.module';
 import {ReportsModule} from './reports/reports.module';
+import {RulesModule} from './rules/rules.module';
 
 const routes: Routes = [
   {path: '', redirectTo: 'dashboard', pathMatch: 'full'},

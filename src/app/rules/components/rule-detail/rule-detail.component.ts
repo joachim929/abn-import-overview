@@ -1,6 +1,4 @@
-import {Component, Input, OnInit} from '@angular/core';
-import {Rule} from '../../../core/interfaces-types/rule.interface';
-import {RuleService} from '../../../core/services/rule.service';
+import { Component, OnInit } from '@angular/core';
 
 @Component({
   selector: 'app-rule-detail',
@@ -8,29 +6,10 @@ import {RuleService} from '../../../core/services/rule.service';
   styleUrls: ['./rule-detail.component.scss']
 })
 export class RuleDetailComponent implements OnInit {
-  @Input() rule: Rule;
-  showEdit = false;
 
-  constructor(
-    private ruleService: RuleService
-  ) {
-  }
+  constructor() { }
 
-  ngOnInit() {
-  }
-
-  getCategoryById(id: number) {
-    if (id) {
-      // return this.categoryService.getCategoryById(id);
-    }
-  }
-
-  toggleEdit(): void {
-    this.showEdit = !this.showEdit;
-  }
-
-  deleteRule(): void {
-    this.ruleService.removeRule(this.rule.id);
+  ngOnInit(): void {
   }
 
 }

@@ -9,7 +9,7 @@ export class RulesMasterComponent implements OnInit {
 
   constructor() { }
 
-  ngOnInit() {
+  ngOnInit(): void {
   }
 
 }
