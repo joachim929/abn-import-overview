@@ -1,9 +1,3 @@
-<!--
-todo:
-  Think Trello,
-  maybe have a button to enable editing, as all assigned-mutations might not be in the correct category group anymore
-  Need to give feedback to the user that editing this will have consequences
--->
 <a routerLinkActive="hide" color="primary"
    class="category-group-create-link"
    [routerLink]="['add']" mat-raised-button>Create category-group</a>
@@ -24,6 +18,7 @@ todo:
         <app-category-detail [formControl]="category"></app-category-detail>
       </div>
     </mat-card-content>
-
   </mat-card>
+
+  <app-empty-state *ngIf="getFormGroups().length === 0" icon="weekend" text="No categories"></app-empty-state>
 </div>

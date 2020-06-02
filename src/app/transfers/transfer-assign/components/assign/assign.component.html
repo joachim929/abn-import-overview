@@ -1,5 +1,5 @@
 <mat-toolbar>
-  <a [routerLink]="['/transfers']" mat-button class="my-1"><mat-icon>arrow_back_ios</mat-icon>Back</a>
+  <button (click)="goBack()" mat-button class="my-1"><mat-icon>arrow_back_ios</mat-icon>Back</button>
 </mat-toolbar>
 
 <div class="container column-container" *ngIf="(transferMutations$ | async) as transferMutations;">
@@ -31,8 +31,5 @@
     </mat-card-actions>
   </mat-card>
 
-  <mat-card *ngIf="transferMutations.length === 0" class="py-5 no-data-container">
-    <mat-label>Nothing to assign</mat-label>
-    <mat-icon>weekend</mat-icon>
-  </mat-card>
+  <app-empty-state *ngIf="transferMutations.length === 0" icon="weekend" text="Nothing to assign"></app-empty-state>
 </div>

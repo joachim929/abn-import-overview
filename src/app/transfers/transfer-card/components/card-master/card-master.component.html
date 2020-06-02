@@ -1,5 +1,8 @@
-<app-transfer-detail *ngFor="let transferMutation of transferMutations$ | async; let index = index;"
-                     [transferMutation]="transferMutation">
-</app-transfer-detail>
+<ng-container *ngIf="transferMutations$ | async as transferMutation">
+  <app-transfer-detail *ngFor="let transferMutation of transferMutation; let index = index;"
+                       [transferMutation]="transferMutation">
+  </app-transfer-detail>
+  <app-empty-state *ngIf="transferMutation.length === 0" icon="weekend" text="No transfers have been imported yet"></app-empty-state>
+</ng-container>
+
 <app-load-more></app-load-more>
-<!-- todo: No data scenario -->

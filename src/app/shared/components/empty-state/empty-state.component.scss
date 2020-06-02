@@ -1,0 +1,14 @@
+.no-data-container {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  margin-top: 8px;
+  color: rgba(0, 0, 0, 0.5);
+
+  mat-icon {
+    font-size: 100px;
+    width: 100px;
+    height: 100px;
+  }
+}

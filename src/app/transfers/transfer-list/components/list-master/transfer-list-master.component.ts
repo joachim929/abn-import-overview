@@ -1,12 +1,13 @@
-import {Component, OnInit, ViewChild} from '@angular/core';
+import {Component, OnDestroy, OnInit, ViewChild} from '@angular/core';
 import {TransferDataStore} from '../../../services/transfer-data.store';
-import {Observable} from 'rxjs';
+import {Observable, Subject} from 'rxjs';
 import {MatSort} from '@angular/material/sort';
 import {MatTableDataSource} from '@angular/material/table';
 import {animate, state, style, transition, trigger} from '@angular/animations';
 import {TransferEditService} from '../../../services/transfer-edit.service';
 import {BreakpointService} from '../../../../core/services/breakpoint.service';
 import {TransferMutationDto} from '../../../../swagger/models/transfer-mutation-dto';
+import {takeUntil} from 'rxjs/operators';
 
 @Component({
   selector: 'app-transfer-list-master',
@@ -20,7 +21,7 @@ import {TransferMutationDto} from '../../../../swagger/models/transfer-mutation-
     ]),
   ],
 })
-export class TransferListMasterComponent implements OnInit {
+export class TransferListMasterComponent implements OnInit, OnDestroy {
   recordCount$: Observable<number>;
   displayedColumns: string[] = ['transactionDate', 'amount', 'startBalance', 'endBalance', 'delete'];
   dataSource = new MatTableDataSource();
@@ -32,6 +33,7 @@ export class TransferListMasterComponent implements OnInit {
     endBalance: 'End balance',
     delete: ' '
   };
+  unSub = new Subject();
 
   @ViewChild(MatSort, {static: true}) sort: MatSort;
 
@@ -40,14 +42,21 @@ export class TransferListMasterComponent implements OnInit {
     private transferEditService: TransferEditService,
     private breakpointService: BreakpointService
   ) {
-    this.transferDataService.transfers.subscribe((transferMutations: TransferMutationDto[]) => {
+  }
+
+  ngOnInit() {
+    this.transferDataService.transfers.pipe(
+      takeUntil(this.unSub)
+    ).subscribe((transferMutations: TransferMutationDto[]) => {
       this.dataSource.data = transferMutations;
       this.dataSource.sort = this.sort;
     });
     this.recordCount$ = this.transferDataService.recordCount;
   }
 
-  ngOnInit() {
+  ngOnDestroy() {
+    this.unSub.next();
+    this.unSub.complete();
   }
 
   get isXSmall(): boolean {

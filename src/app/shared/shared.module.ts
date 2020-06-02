@@ -20,6 +20,9 @@ import {MatSelectModule} from '@angular/material/select';
 import {MatSelectComponent} from './components/mat-select/mat-select.component';
 import {CustomCurrencyPipe} from './pipes/custom-currency.pipe';
 import { CategoriesSelectComponent } from './components/categories-select/categories-select.component';
+import { EmptyStateComponent } from './components/empty-state/empty-state.component';
+import {MatCardModule} from '@angular/material/card';
+import {MatIconModule} from '@angular/material/icon';
 
 
 @NgModule({
@@ -33,7 +36,8 @@ import { CategoriesSelectComponent } from './components/categories-select/catego
     MatSelectGroupsComponent,
     MatSelectComponent,
     CustomCurrencyPipe,
-    CategoriesSelectComponent
+    CategoriesSelectComponent,
+    EmptyStateComponent
   ],
   imports: [
     CommonModule,
@@ -44,7 +48,9 @@ import { CategoriesSelectComponent } from './components/categories-select/catego
     MatTabsModule,
     MatFormFieldModule,
     MatInputModule,
-    MatSelectModule
+    MatSelectModule,
+    MatCardModule,
+    MatIconModule
   ],
   exports: [
     HeaderComponent,
@@ -56,7 +62,8 @@ import { CategoriesSelectComponent } from './components/categories-select/catego
     MatSelectGroupsComponent,
     MatSelectComponent,
     CustomCurrencyPipe,
-    CategoriesSelectComponent
+    CategoriesSelectComponent,
+    EmptyStateComponent
   ]
 })
 export class SharedModule {
