@@ -1,6 +1,11 @@
 <mat-card class="mb-2">
-  <form [formGroup]="form" style="display: flex; flex-direction: column;">
-    <h3>Category group</h3>
+
+  <mat-card-header>
+    <mat-card-title>
+      Category group
+    </mat-card-title>
+  </mat-card-header>
+  <mat-card-content style="display: flex; flex-direction: column;" [formGroup]="form">
     <mat-form-field>
       <mat-label>Name</mat-label>
       <input matInput type="text" formControlName="name">
@@ -12,7 +17,7 @@
                 [matAutosizeMaxRows]="4"
                 matInput formControlName="description"></textarea>
     </mat-form-field>
-    <div style="padding-left: 20px; display: flex; flex-direction: column">
+    <div style="display: flex; flex-direction: column">
       <mat-label *ngIf="getSubCategories().length > 0">Categories</mat-label>
       <div *ngFor="let subCategory of getSubCategories(); let index = index" [formGroup]="subCategory"
            style="display: flex; flex-direction: column;">
@@ -38,13 +43,13 @@
         </mat-form-field>
       </div>
     </div>
-    <div style="display: flex; justify-content: space-between">
-      <button class="ml-5" color="primary" mat-raised-button (click)="addSubCategory()">Add category</button>
-      <div>
-        <a class="mx-2" color="warn" mat-raised-button [routerLink]="['../']">Cancel</a>
-        <button mat-raised-button color="accent" [disabled]="form.invalid" (click)="submit()">Save</button>
-      </div>
+  </mat-card-content>
+  <mat-card-actions style="display: flex; justify-content: space-between; margin-bottom: 0;">
+    <button class="ml-5" color="primary" mat-raised-button (click)="addSubCategory()">Add category</button>
+    <div>
+      <a class="mx-2" color="warn" mat-raised-button [routerLink]="['../']">Cancel</a>
+      <button mat-raised-button color="accent" [disabled]="form.invalid" (click)="submit()">Save</button>
     </div>
+  </mat-card-actions>
 
-  </form>
 </mat-card>
