@@ -1,0 +1,21 @@
+<form [formGroup]="form" style="display: flex; flex-direction: row;">
+  <mat-form-field style="flex: 1">
+    <mat-label>Name</mat-label>
+    <input type="text" matInput formControlName="name">
+  </mat-form-field>
+  <mat-form-field style="flex: 1">
+    <mat-label>Value</mat-label>
+    <input type="text" matInput formControlName="valueOne">
+  </mat-form-field>
+  <mat-form-field style="flex: 1">
+    <mat-label>Operator</mat-label>
+    <mat-select>
+      <mat-option>Equals</mat-option>
+      <mat-option>Greater than</mat-option>
+    </mat-select>
+  </mat-form-field>
+  <mat-form-field style="flex: 1">
+    <mat-label>Value</mat-label>
+    <input type="text" matInput formControlName="valueTwo">
+  </mat-form-field>
+</form>

@@ -1,20 +1,20 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { RuleRadioControlComponent } from './rule-radio-control.component';
+import { RulesLogicComponent } from './rules-logic.component';
 
-describe('RuleRadioControlComponent', () => {
-  let component: RuleRadioControlComponent;
-  let fixture: ComponentFixture<RuleRadioControlComponent>;
+describe('RulesLogicComponent', () => {
+  let component: RulesLogicComponent;
+  let fixture: ComponentFixture<RulesLogicComponent>;
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ RuleRadioControlComponent ]
+      declarations: [ RulesLogicComponent ]
     })
     .compileComponents();
   }));
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(RuleRadioControlComponent);
+    fixture = TestBed.createComponent(RulesLogicComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

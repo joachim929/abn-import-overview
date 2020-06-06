@@ -1,1 +1,46 @@
-<p>rule-add works!</p>
+<mat-card>
+  <mat-card-header>
+    <mat-card-title>New rule</mat-card-title>
+  </mat-card-header>
+  <mat-card-content [formGroup]="form" style="display: flex; flex-direction: column;">
+    <div style="display: flex; flex-direction: row; justify-content: space-between; align-items: center;">
+      <mat-form-field style="flex: 1;">
+        <mat-label>Name</mat-label>
+        <input matInput formControlName="name" type="text">
+      </mat-form-field>
+      <mat-checkbox class="mx-4" formControlName="autoAssign">Auto assign</mat-checkbox>
+      <button mat-button mat-icon-button [matMenuTriggerFor]="autoAssignInfo" matTooltip="Info about auto assign">
+        <mat-icon>info</mat-icon>
+      </button>
+      <mat-menu #autoAssignInfo>
+        Info about auto assign
+      </mat-menu>
+    </div>
+    <mat-form-field style="flex: 1">
+      <mat-label>Description</mat-label>
+      <textarea matTextareaAutosize
+                [matAutosizeMinRows]="4"
+                [matAutosizeMaxRows]="4"
+                matInput formControlName="description"></textarea>
+    </mat-form-field>
+    <mat-form-field>
+      <mat-label>Transfer attribute</mat-label>
+      <mat-select formControlName="transferKey">
+        <mat-option>Some option</mat-option>
+      </mat-select>
+    </mat-form-field>
+    <app-categories-select label="Category" formControlName="category"></app-categories-select>
+
+    <mat-card-title>Logic</mat-card-title>
+    <mat-card-subtitle>And</mat-card-subtitle>
+    <app-rules-logic *ngFor="let andLogic of getFormArrayControls('andLogic')" [formControl]="andLogic">
+    </app-rules-logic>
+
+    <mat-card-subtitle>Or</mat-card-subtitle>
+    <app-rules-logic *ngFor="let andLogic of getFormArrayControls('orLogic')" [formControl]="andLogic">
+    </app-rules-logic>
+    <!-- andLogic -->
+    <!-- orLogic -->
+
+  </mat-card-content>
+</mat-card>
