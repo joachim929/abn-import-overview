@@ -1,0 +1,9 @@
+<a routerLinkActive="hide" color="primary"
+   class="rule-create-link"
+   [routerLink]="['add']" mat-raised-button>Create category-group</a>
+<router-outlet></router-outlet>
+
+<ng-container *ngIf="rules$ | async as rules">
+  <app-rule-detail *ngFor="let rule of rules" [rule]="rule"></app-rule-detail>
+  <app-empty-state icon="weekend" text="No rules created yet..." *ngIf="rules.length === 0"></app-empty-state>
+</ng-container>

@@ -1,3 +1,5 @@
+@import '../../../shared/styles/create-link.styles';
+
 :host {
   display: flex;
   flex-direction: column;
@@ -21,14 +23,11 @@
 }
 
 .category-group-create-link {
-  max-height: 36px;
-  transition: 300ms ease-in;
+  @include create-link();
 }
 
 .category-group-create-link.hide {
-  max-height: 0;
-  opacity: 0;
-  overflow: hidden;
+  @include create-link-hide();
 }
 
 .category-group-list {
