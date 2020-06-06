@@ -17,6 +17,8 @@ export { RawTransferSerializerDto } from './models/raw-transfer-serializer-dto';
 export { TransferBatchImportDto } from './models/transfer-batch-import-dto';
 export { SplitTransferMutationDto } from './models/split-transfer-mutation-dto';
 export { LogicValueDto } from './models/logic-value-dto';
+export { ConditionOperatorEnum } from './models/condition-operator-enum';
+export { TransferKeyEnum } from './models/transfer-key-enum';
 export { LogicDto } from './models/logic-dto';
 export { TransferConditionDto } from './models/transfer-condition-dto';
 export { CreateTransferConditionDto } from './models/create-transfer-condition-dto';

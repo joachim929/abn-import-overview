@@ -11,6 +11,5 @@ export interface TransferCondition {
   id: string;
   name: string;
   orLogic: Array<Logic>;
-  transferKey: 'amount' | 'description' | 'transactionDate' | 'currencyCode' | 'accountNumber' | 'startBalance' | 'endBalance';
   type: 'String' | 'Number' | 'Date';
 }

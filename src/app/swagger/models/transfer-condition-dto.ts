@@ -9,6 +9,6 @@ export interface TransferConditionDto {
   id: string;
   name: string;
   orLogic: Array<LogicDto>;
-  transferKey: 'amount' | 'description' | 'transactionDate' | 'currencyCode' | 'accountNumber' | 'startBalance' | 'endBalance';
+  transferKey: 'Amount' | 'Description' | 'TransactionDate' | 'CurrencyCode' | 'AccountNumber' | 'StartBalance' | 'EndBalance';
   type: 'String' | 'Number' | 'Date';
 }

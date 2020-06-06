@@ -1,6 +1,9 @@
 /* tslint:disable */
+import { ConditionOperatorEnum } from './condition-operator-enum';
+import { TransferKeyEnum } from './transfer-key-enum';
 export interface CreateLogicDto {
-  conditionOperator: 'equals' | 'greaterThan' | 'greaterorEqualThan' | 'lessThan' | 'lessOrEqualThan' | 'contains' | 'not' | 'like';
+  conditionOperator: ConditionOperatorEnum;
   name: string;
+  transferKey: TransferKeyEnum;
   values: Array<string>;
 }
