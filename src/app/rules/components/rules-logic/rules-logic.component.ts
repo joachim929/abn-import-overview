@@ -27,7 +27,7 @@ export class RulesLogicComponent implements ControlValueAccessor, OnInit, OnDest
     id: new FormControl(),
     transferKey: new FormControl(),
     value: new FormControl({value: null, disabled: true}),
-    conditionOperator: new FormControl({value: null, disabled: true}),
+    conditionOperator: new FormControl({value: null, disabled: true}, [Validators.required]),
     type: new FormControl()
   });
   dateOptions = dateOperators;

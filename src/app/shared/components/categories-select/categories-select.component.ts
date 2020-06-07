@@ -25,7 +25,6 @@ import {CategoryDto} from '../../../swagger/models/category-dto';
 export class CategoriesSelectComponent implements ControlValueAccessor, OnInit, OnDestroy {
   @Input() label?: string;
   @Input() set required(input: boolean) {
-    console.log('required', input);
     if (input) {
       this.control.setValidators([Validators.required]);
     } else {
@@ -42,7 +41,6 @@ export class CategoriesSelectComponent implements ControlValueAccessor, OnInit, 
   ngOnInit() {
     this.categoryGroups$ = this.categoryDataStore.categories$;
     this.control.valueChanges.subscribe((next) => this.onChange(next));
-    console.log(this.control);
   }
 
   ngOnDestroy(): void {

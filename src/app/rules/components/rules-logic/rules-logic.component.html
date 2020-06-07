@@ -10,6 +10,7 @@
     <mat-select formControlName="conditionOperator">
       <mat-option *ngFor="let item of conditionOperatorOptions$ | async" [value]="item.value">{{item.name}}</mat-option>
     </mat-select>
+    <mat-error *ngIf="form.get('conditionOperator').invalid">Required</mat-error>
   </mat-form-field>
   <mat-form-field style="flex: 1" class="mx-2">
     <mat-label>Value</mat-label>

@@ -14,7 +14,7 @@ export function minLengthThisOrThat(thatArray: FormArray): ValidatorFn {
         thatHasValue = true;
       }
     });
-    return (thatHasValue || thisHasValue) ? null : {error: 'true'};
+    return (thatHasValue || thisHasValue) ? null : {error: 'Can\'t be empty'};
   };
 }
 
