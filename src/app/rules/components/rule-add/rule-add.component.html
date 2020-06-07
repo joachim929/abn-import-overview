@@ -27,14 +27,26 @@
 
     <mat-card-title>Logic</mat-card-title>
     <mat-card-subtitle>And</mat-card-subtitle>
-    <app-rules-logic *ngFor="let andLogic of getFormArrayControls('andLogic')" [formControl]="andLogic">
-    </app-rules-logic>
+    <div *ngFor="let andLogic of getFormArrayControls('andLogic'); let i = index;" style="display: flex; flex-direction: row;">
+      <app-rules-logic [formControl]="andLogic" style="flex: 1;">
+      </app-rules-logic>
+      <button mat-button mat-icon-button color="warn" (click)="removeLogic('andLogic', i)"><mat-icon>delete</mat-icon></button>
+    </div>
+    <mat-card-actions>
+      <button mat-button mat-stroked-button color="primary" (click)="addCondition('andLogic')">Add 'And' condition</button>
+    </mat-card-actions>
 
     <mat-card-subtitle>Or</mat-card-subtitle>
-    <app-rules-logic *ngFor="let andLogic of getFormArrayControls('orLogic')" [formControl]="andLogic">
-    </app-rules-logic>
-    <!-- andLogic -->
-    <!-- orLogic -->
+
+    <div *ngFor="let andLogic of getFormArrayControls('orLogic'); let i = index;" style="display: flex; flex-direction: row;">
+      <app-rules-logic [formControl]="andLogic" style="flex: 1;">
+      </app-rules-logic>
+      <button mat-button mat-icon-button color="warn" (click)="removeLogic('orLogic', i)"><mat-icon>delete</mat-icon></button>
+    </div>
+
+    <mat-card-actions>
+      <button mat-button mat-stroked-button color="primary" (click)="addCondition('orLogic')">Add 'Or' condition</button>
+    </mat-card-actions>
 
   </mat-card-content>
 </mat-card>

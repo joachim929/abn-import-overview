@@ -40,4 +40,12 @@ export class RuleAddComponent implements OnInit {
     });
   }
 
+  addCondition(name: 'andLogic' | 'orLogic'): void {
+    (this.form.get(name) as FormArray).push(new FormControl());
+  }
+
+  removeLogic(name: 'andLogic' | 'orLogic', index: number): void {
+    (this.form.get(name) as FormArray).removeAt(index);
+  }
+
 }

@@ -16,6 +16,7 @@ export { RawInvoiceJsonDto } from './models/raw-invoice-json-dto';
 export { RawTransferSerializerDto } from './models/raw-transfer-serializer-dto';
 export { TransferBatchImportDto } from './models/transfer-batch-import-dto';
 export { SplitTransferMutationDto } from './models/split-transfer-mutation-dto';
+export { LogicEnum } from './models/logic-enum';
 export { LogicValueDto } from './models/logic-value-dto';
 export { ConditionOperatorEnum } from './models/condition-operator-enum';
 export { TransferKeyEnum } from './models/transfer-key-enum';

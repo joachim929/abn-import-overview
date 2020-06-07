@@ -1,7 +1,8 @@
 import {Component, forwardRef, OnDestroy, OnInit} from '@angular/core';
-import {ControlValueAccessor, FormArray, FormControl, FormGroup, NG_VALUE_ACCESSOR} from '@angular/forms';
+import {ControlValueAccessor, FormControl, FormGroup, NG_VALUE_ACCESSOR, Validators} from '@angular/forms';
 import {Observable, Subject} from 'rxjs';
-import {map} from 'rxjs/operators';
+import {distinctUntilChanged, filter, map, takeUntil, tap} from 'rxjs/operators';
+import {ConditionOperatorEnum, TransferKeyEnum} from '../../../../swagger/models';
 
 @Component({
   selector: 'app-rules-logic',
@@ -25,22 +26,85 @@ export class RulesLogicComponent implements ControlValueAccessor, OnInit, OnDest
   form = new FormGroup({
     id: new FormControl(),
     transferKey: new FormControl(),
-    valueOne: new FormControl({value: null, disabled: true}),
-    valueTwo: new FormControl({value: null, disabled: true}),
+    value: new FormControl({value: null, disabled: true}),
     conditionOperator: new FormControl({value: null, disabled: true})
   });
+  dateOperators = [
+    {value: ConditionOperatorEnum.Equals, name: 'Equals'},
+    {value: ConditionOperatorEnum.GreaterThan, name: 'Greater than'},
+    {value: ConditionOperatorEnum.GreaterOrEqualThan, name: 'Greater or equal than'},
+    {value: ConditionOperatorEnum.LessThan, name: 'Less than'},
+    {value: ConditionOperatorEnum.LessOrEqualThan, name: 'Less or equal than'},
+    {value: ConditionOperatorEnum.Not, name: 'Not'}
+  ];
+  numberOperators = [
+    {value: ConditionOperatorEnum.Equals, name: 'Equals'},
+    {value: ConditionOperatorEnum.GreaterThan, name: 'Greater than'},
+    {value: ConditionOperatorEnum.GreaterOrEqualThan, name: 'Greater or equal than'},
+    {value: ConditionOperatorEnum.LessThan, name: 'Less than'},
+    {value: ConditionOperatorEnum.LessOrEqualThan, name: 'Less or equal than'},
+    {value: ConditionOperatorEnum.Not, name: 'Not'}
+  ];
+  stringOperators = [
+    {value: ConditionOperatorEnum.Equals, name: 'Equals'},
+    {value: ConditionOperatorEnum.Contains, name: 'Contains'},
+    {value: ConditionOperatorEnum.Like, name: 'Like'},
+    {value: ConditionOperatorEnum.Not, name: 'Not'}
+  ];
   unSub = new Subject<void>();
   conditionOperatorOptions$: Observable<any[]>;
   conditionOperatorMap = {
-
+    Amount: this.numberOperators,
+    Description: this.stringOperators,
+    TransactionDate: this.dateOperators,
+    CurrencyCode: this.stringOperators,
+    AccountNumber: this.stringOperators,
+    StartBalance: this.numberOperators,
+    EndBalance: this.numberOperators
   };
+  valueType = 'text';
+
+  allTransferKeys = Object.keys(TransferKeyEnum);
+
 
   constructor() {
   }
 
   ngOnInit(): void {
     this.conditionOperatorOptions$ = this.form.get('transferKey').valueChanges.pipe(
-      map((value) => this.conditionOperatorMap[value])
+      distinctUntilChanged(),
+      map((value) => this.conditionOperatorMap[value]),
+      tap((value) => {
+          this.valueType = 'text';
+          this.form.get('value').clearValidators();
+          if (value === this.numberOperators) {
+            this.form.get('value').setValidators([
+              Validators.required,
+              Validators.pattern('^d+.d{0,2}$')
+            ]);
+          } else if (value === this.stringOperators) {
+            this.form.get('value').setValidators([
+              Validators.required
+            ]);
+          } else if (value === this.dateOperators) {
+            this.form.get('value').setValidators([
+              Validators.required
+            ]);
+            this.valueType = 'date';
+          }
+        }
+      ),
+      tap((x) => {
+        this.form.get('conditionOperator').reset();
+        this.form.get('value').reset();
+        if (!!x) {
+          this.form.get('value').enable();
+          this.form.get('conditionOperator').enable();
+        } else {
+          this.form.get('value').disable();
+          this.form.get('conditionOperator').disable();
+        }
+      })
     );
   }
 
@@ -49,10 +113,8 @@ export class RulesLogicComponent implements ControlValueAccessor, OnInit, OnDest
     this.unSub.complete();
   }
 
-  onChange = (_) => {
-  };
-  onTouched = () => {
-  };
+  onChange = (_) => {};
+  onTouched = () => {};
 
   registerOnChange(fn: any): void {
     this.onChange = fn;

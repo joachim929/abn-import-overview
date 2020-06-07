@@ -1,6 +1,7 @@
 /* tslint:disable */
 import { CategoryDto } from './category-dto';
 import { LogicDto } from './logic-dto';
+import { LogicEnum } from './logic-enum';
 export interface CreateTransferConditionDto {
   andLogic: Array<LogicDto>;
   autoAssign?: boolean;
@@ -8,6 +9,5 @@ export interface CreateTransferConditionDto {
   description?: string;
   name: string;
   orLogic: Array<LogicDto>;
-  transferKey: 'Amount' | 'Description' | 'TransactionDate' | 'CurrencyCode' | 'AccountNumber' | 'StartBalance' | 'EndBalance';
-  type: 'String' | 'Number' | 'Date';
+  type: LogicEnum;
 }

@@ -18,6 +18,7 @@ import { CategoriesSelectComponent } from './components/categories-select/catego
 import { EmptyStateComponent } from './components/empty-state/empty-state.component';
 import {MatCardModule} from '@angular/material/card';
 import {MatIconModule} from '@angular/material/icon';
+import { HumanizePipe } from './pipes/humanize.pipe';
 
 
 @NgModule({
@@ -29,7 +30,8 @@ import {MatIconModule} from '@angular/material/icon';
     MatSelectComponent,
     CustomCurrencyPipe,
     CategoriesSelectComponent,
-    EmptyStateComponent
+    EmptyStateComponent,
+    HumanizePipe
   ],
   imports: [
     CommonModule,
@@ -52,7 +54,8 @@ import {MatIconModule} from '@angular/material/icon';
     MatSelectComponent,
     CustomCurrencyPipe,
     CategoriesSelectComponent,
-    EmptyStateComponent
+    EmptyStateComponent,
+    HumanizePipe
   ]
 })
 export class SharedModule {
