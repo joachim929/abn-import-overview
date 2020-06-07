@@ -14,5 +14,6 @@
   <mat-form-field style="flex: 1" class="mx-2">
     <mat-label>Value</mat-label>
     <input [type]="valueType" matInput formControlName="value">
+    <mat-error *ngIf="form.get('value').invalid">{{form.get('value').hasError('pattern') ? 'Not a valid number' : 'Required'}}</mat-error>
   </mat-form-field>
 </form>

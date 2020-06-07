@@ -7,5 +7,6 @@ export interface LogicDto {
   id: string;
   name: string;
   transferKey: TransferKeyEnum;
+  value: string;
   values: Array<LogicValueDto>;
 }

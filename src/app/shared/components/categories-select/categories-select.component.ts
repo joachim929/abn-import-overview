@@ -1,5 +1,10 @@
 import {Component, forwardRef, Input, OnDestroy, OnInit} from '@angular/core';
-import {ControlValueAccessor, FormControl, NG_VALUE_ACCESSOR} from '@angular/forms';
+import {
+  ControlValueAccessor,
+  FormControl,
+  NG_VALUE_ACCESSOR,
+  Validators
+} from '@angular/forms';
 import {Observable, Subject} from 'rxjs';
 import {CategoryDataStore} from '../../../core/services/category-data.store';
 import {CategoryGroupDto} from '../../../swagger/models/category-group-dto';
@@ -19,6 +24,14 @@ import {CategoryDto} from '../../../swagger/models/category-dto';
 })
 export class CategoriesSelectComponent implements ControlValueAccessor, OnInit, OnDestroy {
   @Input() label?: string;
+  @Input() set required(input: boolean) {
+    console.log('required', input);
+    if (input) {
+      this.control.setValidators([Validators.required]);
+    } else {
+      this.control.clearValidators();
+    }
+  }
   control = new FormControl();
   categoryGroups$: Observable<CategoryGroupDto[]>;
   unSub = new Subject<void>();
@@ -29,6 +42,7 @@ export class CategoriesSelectComponent implements ControlValueAccessor, OnInit, 
   ngOnInit() {
     this.categoryGroups$ = this.categoryDataStore.categories$;
     this.control.valueChanges.subscribe((next) => this.onChange(next));
+    console.log(this.control);
   }
 
   ngOnDestroy(): void {
@@ -36,8 +50,8 @@ export class CategoriesSelectComponent implements ControlValueAccessor, OnInit, 
     this.unSub.complete();
   }
 
-  onChange = (_) => {};
-  onTouched = () => {};
+  onChange = (_) => ({});
+  onTouched = () => ({});
 
   registerOnChange(fn: any): void {
     this.onChange = fn;
@@ -58,5 +72,4 @@ export class CategoriesSelectComponent implements ControlValueAccessor, OnInit, 
   compareFn(c1: CategoryDto, c2: CategoryDto): boolean {
     return c1 && c2 ? c1.id === c2.id : c1 === c2;
   }
-
 }

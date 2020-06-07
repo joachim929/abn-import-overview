@@ -1,5 +1,4 @@
 /* tslint:disable */
-import { LogicValue } from './logic-value';
 import { TransferCondition } from './transfer-condition';
 export interface Logic {
   amountPassed: number;
@@ -9,9 +8,8 @@ export interface Logic {
   createdAt: string;
   editedAt: string;
   id: string;
-  name: string;
   orCondition: TransferCondition;
   passDifficulty: number;
   transferKey: 'Amount' | 'Description' | 'TransactionDate' | 'CurrencyCode' | 'AccountNumber' | 'StartBalance' | 'EndBalance';
-  values: Array<LogicValue>;
+  values: string;
 }

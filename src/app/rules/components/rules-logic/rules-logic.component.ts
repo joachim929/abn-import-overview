@@ -27,7 +27,8 @@ export class RulesLogicComponent implements ControlValueAccessor, OnInit, OnDest
     id: new FormControl(),
     transferKey: new FormControl(),
     value: new FormControl({value: null, disabled: true}),
-    conditionOperator: new FormControl({value: null, disabled: true})
+    conditionOperator: new FormControl({value: null, disabled: true}),
+    type: new FormControl()
   });
   dateOptions = dateOperators;
   numberOptions = numberOperators;
@@ -57,7 +58,7 @@ export class RulesLogicComponent implements ControlValueAccessor, OnInit, OnDest
     this.conditionOperatorOptions$ = this.form.get('transferKey').valueChanges.pipe(
       distinctUntilChanged(),
       map((value) => this.conditionOperatorMap[value]),
-      tap((value) => this.valueType = this.rulesLogicService.applyValidators(this.form.get('value') as FormControl, value)),
+      tap((value) => this.form.get('type').setValue(this.rulesLogicService.applyValidators(this.form.get('value') as FormControl, value))),
       tap((x) => {
         this.form.get('conditionOperator').reset(null, {emitEvent: false});
         this.form.get('value').reset(null, {emitEvent: false});
@@ -73,8 +74,12 @@ export class RulesLogicComponent implements ControlValueAccessor, OnInit, OnDest
 
     this.form.valueChanges.pipe(
       takeUntil(this.unSub),
-      distinctUntilChanged(),
+      distinctUntilChanged()
     ).subscribe((next) => this.onChange(this.form.valid ? next : null));
+
+    this.form.get('type').valueChanges.subscribe((next) => {
+      this.valueType = next === 'date' ? 'date' : 'text';
+    });
   }
 
   ngOnDestroy(): void {

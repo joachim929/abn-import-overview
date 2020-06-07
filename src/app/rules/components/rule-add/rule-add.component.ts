@@ -13,7 +13,7 @@ export class RuleAddComponent implements OnInit, OnDestroy {
   form = new FormGroup({
     autoAssign: new FormControl(),
     name: new FormControl('', [Validators.required]), // async for unique name
-    category: new FormControl(null, [Validators.required]),
+    category: new FormControl(null, [Validators.required, Validators.nullValidator]),
     description: new FormControl(),
     orLogic: new FormArray([
       new FormControl()
@@ -53,6 +53,13 @@ export class RuleAddComponent implements OnInit, OnDestroy {
 
   removeLogic(name: 'andLogic' | 'orLogic', index: number): void {
     (this.form.get(name) as FormArray).removeAt(index);
+  }
+
+  save() {
+    if (this.form.valid) {
+
+    }
+    this.form.markAllAsTouched();
   }
 
 }
