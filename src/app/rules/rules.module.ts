@@ -17,7 +17,7 @@ import {_MatMenuDirectivesModule, MatMenuModule} from '@angular/material/menu';
 import {MatIconModule} from '@angular/material/icon';
 import {MatTooltipModule} from '@angular/material/tooltip';
 import {MatSelectModule} from '@angular/material/select';
-import { RulesLogicComponent } from './shared/components/rules-logic/rules-logic.component';
+import { RulesLogicComponent } from './components/rules-logic/rules-logic.component';
 
 
 @NgModule({

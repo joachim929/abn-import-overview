@@ -48,5 +48,9 @@
       <button mat-button mat-stroked-button color="primary" (click)="addCondition('orLogic')">Add 'Or' condition</button>
     </mat-card-actions>
 
+    <mat-card-actions style="display:flex; flex-direction: row; justify-content: end;">
+      <a mat-button mat-raised-button color="warn" routerLink="/rules">Cancel</a>
+      <button mat-button mat-raised-button [disabled]="form.invalid" color="accent">Save</button>
+    </mat-card-actions>
   </mat-card-content>
 </mat-card>
