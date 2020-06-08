@@ -11,5 +11,7 @@ export interface Logic {
   orCondition: TransferCondition;
   passDifficulty: number;
   transferKey: 'Amount' | 'Description' | 'TransactionDate' | 'CurrencyCode' | 'AccountNumber' | 'StartBalance' | 'EndBalance';
+  type: 'String' | 'Number' | 'Date';
+  value: string;
   values: string;
 }

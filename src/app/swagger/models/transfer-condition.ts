@@ -11,5 +11,4 @@ export interface TransferCondition {
   id: string;
   name: string;
   orLogic: Array<Logic>;
-  type: 'String' | 'Number' | 'Date';
 }

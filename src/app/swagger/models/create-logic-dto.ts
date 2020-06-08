@@ -1,11 +1,12 @@
 /* tslint:disable */
 import { ConditionOperatorEnum } from './condition-operator-enum';
-import { LogicValueDto } from './logic-value-dto';
 import { TransferKeyEnum } from './transfer-key-enum';
 export interface CreateLogicDto {
+  andCondition: {  };
   conditionOperator: ConditionOperatorEnum;
   name: string;
+  orCondition: {  };
   transferKey: TransferKeyEnum;
+  type: 'String' | 'Number' | 'Date';
   value: string;
-  values: Array<LogicValueDto>;
 }
