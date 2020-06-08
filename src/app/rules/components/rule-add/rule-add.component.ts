@@ -1,8 +1,10 @@
 import {Component, OnDestroy, OnInit} from '@angular/core';
 import {FormArray, FormControl, FormGroup, Validators} from '@angular/forms';
 import {takeUntil} from 'rxjs/operators';
-import {Subject} from 'rxjs';
+import {Observable, Subject} from 'rxjs';
 import {minLengthThisOrThat} from '../../shared/rules-custom.validators';
+import {RulesLogicService} from '../../services/rules-logic.service';
+import {RulesDataStore} from '../../../core/services/rules-data.store';
 
 @Component({
   selector: 'app-rule-add',
@@ -23,16 +25,21 @@ export class RuleAddComponent implements OnInit, OnDestroy {
     ])
   });
   unSub = new Subject<void>();
+  isSaving$: Observable<boolean>;
 
-  constructor() {
+  constructor(
+    private rulesLogicService: RulesLogicService,
+    private rulesDataStore: RulesDataStore
+  ) {
   }
 
   ngOnInit(): void {
+    this.isSaving$ = this.rulesDataStore.getIsSaving();
     this.form.get('orLogic').setValidators(minLengthThisOrThat(this.form.get('andLogic') as FormArray));
     this.form.get('andLogic').setValidators(minLengthThisOrThat(this.form.get('orLogic') as FormArray));
     this.form.valueChanges.pipe(
       takeUntil(this.unSub)
-    ).subscribe((next) => {
+    ).subscribe(() => {
       this.form.get('orLogic').updateValueAndValidity({emitEvent: false});
       this.form.get('andLogic').updateValueAndValidity({emitEvent: false});
     });
@@ -49,6 +56,7 @@ export class RuleAddComponent implements OnInit, OnDestroy {
 
   addCondition(name: 'andLogic' | 'orLogic'): void {
     (this.form.get(name) as FormArray).push(new FormControl());
+    this.form.get(name).markAsDirty();
   }
 
   removeLogic(name: 'andLogic' | 'orLogic', index: number): void {
@@ -57,9 +65,11 @@ export class RuleAddComponent implements OnInit, OnDestroy {
 
   save() {
     if (this.form.valid) {
-
+      this.rulesLogicService.save(this.form.value);
     }
     this.form.markAllAsTouched();
+    this.form.get('andLogic').markAsDirty();
+    this.form.get('orLogic').markAsDirty();
   }
 
 }

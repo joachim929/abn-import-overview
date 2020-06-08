@@ -1,4 +1,4 @@
-import {Component, forwardRef, OnDestroy, OnInit} from '@angular/core';
+import {Component, forwardRef, Input, OnDestroy, OnInit} from '@angular/core';
 import {ControlValueAccessor, FormControl, FormGroup, NG_VALUE_ACCESSOR, Validators} from '@angular/forms';
 import {Observable, Subject} from 'rxjs';
 import {distinctUntilChanged, map, takeUntil, tap} from 'rxjs/operators';
@@ -19,10 +19,6 @@ import {RulesLogicService} from '../../services/rules-logic.service';
   ]
 })
 export class RulesLogicComponent implements ControlValueAccessor, OnInit, OnDestroy {
-  /**
-   * todo:
-   *  logicValue entity will be removed, implement changes once BE changes are made
-   */
   form = new FormGroup({
     id: new FormControl(),
     transferKey: new FormControl(),
@@ -78,7 +74,7 @@ export class RulesLogicComponent implements ControlValueAccessor, OnInit, OnDest
     ).subscribe((next) => this.onChange(this.form.valid ? next : null));
 
     this.form.get('type').valueChanges.subscribe((next) => {
-      this.valueType = next === 'date' ? 'date' : 'text';
+      this.valueType = next === 'Date' ? 'date' : 'text';
     });
   }
 

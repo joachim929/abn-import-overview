@@ -18,6 +18,7 @@ import {MatIconModule} from '@angular/material/icon';
 import {MatTooltipModule} from '@angular/material/tooltip';
 import {MatSelectModule} from '@angular/material/select';
 import { RulesLogicComponent } from './components/rules-logic/rules-logic.component';
+import {RulesLogicService} from './services/rules-logic.service';
 
 
 @NgModule({
@@ -43,6 +44,9 @@ import { RulesLogicComponent } from './components/rules-logic/rules-logic.compon
     MatIconModule,
     MatTooltipModule,
     MatSelectModule
+  ],
+  providers: [
+    RulesLogicService
   ]
 })
 export class RulesModule {

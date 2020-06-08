@@ -2,6 +2,8 @@ import {Injectable} from '@angular/core';
 import {BehaviorSubject, Observable} from 'rxjs';
 import {TransferConditionDto} from '../../swagger/models/transfer-condition-dto';
 import {RulesApiService} from '../../swagger/services/rules-api.service';
+import {sortBy} from 'lodash';
+import {take} from 'rxjs/operators';
 
 @Injectable({
   providedIn: 'root'
@@ -27,7 +29,11 @@ export class RulesDataStore {
 
   loadRules(): void {
     this.setIsLoading(true);
-    this.rulesApiService.rulesControllerGetAll().subscribe((response) => this.setRules(response));
+    this.rulesApiService.rulesControllerGetAll()
+      .pipe(take(1))
+      .subscribe((response) => {
+      this.setRules(response);
+    });
   }
 
   getIsSaving(): Observable<boolean> {
@@ -40,6 +46,17 @@ export class RulesDataStore {
 
   getRules(): Observable<TransferConditionDto[]> {
     return this.rules.asObservable();
+  }
+
+  addRule(rule: TransferConditionDto): void {
+    this.setIsSaving(true);
+    this.rulesApiService.rulesControllerPost({body: rule})
+      .pipe(take(1))
+      .subscribe((response) => {
+        this.dataStore = {...this.dataStore, rules: sortBy([...this.dataStore.rules, response], 'name')};
+        this.rules.next(Object.assign({}, this.dataStore).rules);
+        this.setIsSaving(false);
+      });
   }
 
   private setRules(rules: TransferConditionDto[]): void {
