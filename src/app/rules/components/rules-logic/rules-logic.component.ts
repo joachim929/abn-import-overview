@@ -96,9 +96,18 @@ export class RulesLogicComponent implements ControlValueAccessor, OnInit, OnDest
 
   writeValue(obj: any) {
     if (obj) {
+      this.form.enable({emitEvent: false});
       this.form.setValue(obj);
     } else {
       this.form.reset();
+    }
+  }
+
+  setDisabledState(isDisabled: boolean): void {
+    if (isDisabled) {
+      this.form.disable();
+    } else {
+      this.form.enable();
     }
   }
 }

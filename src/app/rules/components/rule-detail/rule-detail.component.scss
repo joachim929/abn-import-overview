@@ -1,0 +1,91 @@
+.rule-detail-logic-container {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+}
+
+.edit-mode {
+  .rule-detail-remove-logic {
+    &:focus, &:hover {
+      opacity: 1;
+    }
+    opacity: 0.5;
+  }
+}
+
+.rule-detail-remove-logic {
+  opacity: 0;
+  transition: 300ms ease-in-out;
+}
+
+.rule-detail-logic {
+  flex: 1;
+}
+
+.logic-action-buttons {
+  display: flex;
+  justify-content: space-between;
+  max-height: 0;
+  transition: 300ms ease-in-out;
+  overflow: hidden;
+  opacity: 0;
+
+  button {
+    margin: 8px 0;
+  }
+}
+
+.edit-mode {
+  .logic-action-buttons {
+    max-height: 52px;
+    opacity: 1;
+  }
+
+  .rule-action-buttons {
+    max-height: 44px;
+    opacity: 1;
+    margin-top: 8px;
+  }
+
+  mat-label {
+    opacity: 1;
+  }
+}
+
+.rule-action-buttons {
+  max-height: 0;
+  opacity: 0;
+  transition: 300ms ease-in-out;;
+}
+
+
+.rule-action-buttons, .rule-side-action-buttons {
+  display: flex;
+  justify-content: space-between;
+}
+
+.rule-side-action-buttons {
+  flex-direction: column;
+  flex: 0;
+}
+
+.rule-detail {
+  display: flex;
+  flex-direction: row;
+  mat-label {
+    opacity: 0.54;
+  }
+  mat-form-field {
+    mat-label {
+      opacity: inherit;
+    }
+  }
+}
+
+.edit-rule-button:disabled {
+  opacity: 0.5;
+}
+
+.rule-detail-content {
+  flex: 1;
+}
