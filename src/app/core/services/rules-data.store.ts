@@ -6,6 +6,7 @@ import {sortBy} from 'lodash';
 import {catchError, take} from 'rxjs/operators';
 import {HttpErrorResponse} from '@angular/common/http';
 import {MatSnackBar} from '@angular/material/snack-bar';
+import {Router} from '@angular/router';
 
 @Injectable({
   providedIn: 'root'
@@ -26,7 +27,8 @@ export class RulesDataStore {
 
   constructor(
     private rulesApiService: RulesApiService,
-    private snackBarService: MatSnackBar
+    private snackBarService: MatSnackBar,
+    private router: Router
   ) {
   }
 
@@ -56,9 +58,8 @@ export class RulesDataStore {
     this.rulesApiService.rulesControllerPost({body: rule})
       .pipe(take(1))
       .subscribe((response) => {
-        this.dataStore = {...this.dataStore, rules: sortBy([...this.dataStore.rules, response], 'name')};
-        this.rules.next(Object.assign({}, this.dataStore).rules);
-        this.setIsSaving(false);
+        this.setRules(sortBy([...this.dataStore.rules, response], 'name'));
+        this.router.navigate(['/rules']);
       });
   }
 
@@ -66,14 +67,8 @@ export class RulesDataStore {
     this.setIsSaving(true);
     this.rulesApiService.rulesControllerPatch({body: editedRule})
       .pipe(take(1))
-      .subscribe((response) => {
-        this.dataStore = {
-          ...this.dataStore,
-          rules: [...this.dataStore.rules].map((rule) => rule.id === response.id ? response : rule)
-        };
-        this.rules.next(Object.assign({}, this.dataStore).rules);
-        this.setIsSaving(false);
-      });
+      .subscribe((response) =>
+        this.setRules([...this.dataStore.rules].map((rule) => rule.id === response.id ? response : rule)));
   }
 
   deleteRule(id: string) {
