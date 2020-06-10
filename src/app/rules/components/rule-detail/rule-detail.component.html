@@ -50,7 +50,7 @@
         </button>
       </div>
       <div class="rule-action-buttons">
-        <button mat-button mat-stroked-button [disabled]="!editMode" color="primary">Save</button>
+        <button mat-button mat-stroked-button [disabled]="!editMode || form.pristine" (click)="save()" color="primary">Save</button>
         <button mat-button mat-stroked-button [disabled]="!editMode" (click)="cancel()">Cancel</button>
       </div>
     </div>

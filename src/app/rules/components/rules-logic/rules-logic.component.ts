@@ -71,7 +71,13 @@ export class RulesLogicComponent implements ControlValueAccessor, OnInit, OnDest
     this.form.valueChanges.pipe(
       takeUntil(this.unSub),
       distinctUntilChanged()
-    ).subscribe((next) => this.onChange(this.form.valid ? next : null));
+    ).subscribe((next) => {
+      if (this.form.valid && this.form.value?.value && this.form.value?.conditionOperator) {
+        this.onChange(this.form.valid);
+      } else {
+        this.onChange(null);
+      }
+    });
 
     this.form.get('type').valueChanges.subscribe((next) => {
       this.valueType = next === 'Date' ? 'date' : 'text';
