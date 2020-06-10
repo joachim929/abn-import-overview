@@ -1,9 +1,11 @@
 import {Injectable} from '@angular/core';
-import {BehaviorSubject, Observable} from 'rxjs';
+import {BehaviorSubject, Observable, of} from 'rxjs';
 import {TransferConditionDto} from '../../swagger/models/transfer-condition-dto';
 import {RulesApiService} from '../../swagger/services/rules-api.service';
 import {sortBy} from 'lodash';
-import {take} from 'rxjs/operators';
+import {catchError, take} from 'rxjs/operators';
+import {HttpErrorResponse} from '@angular/common/http';
+import {MatSnackBar} from '@angular/material/snack-bar';
 
 @Injectable({
   providedIn: 'root'
@@ -23,7 +25,8 @@ export class RulesDataStore {
   };
 
   constructor(
-    private rulesApiService: RulesApiService
+    private rulesApiService: RulesApiService,
+    private snackBarService: MatSnackBar
   ) {
   }
 
@@ -59,17 +62,33 @@ export class RulesDataStore {
       });
   }
 
-  saveRule(editedRule: TransferConditionDto): void {
+  patchRule(editedRule: TransferConditionDto): void {
     this.setIsSaving(true);
     this.rulesApiService.rulesControllerPatch({body: editedRule})
       .pipe(take(1))
       .subscribe((response) => {
         this.dataStore = {
           ...this.dataStore,
-          rules: sortBy([...this.dataStore.rules].map((rule) => rule.id === response.id ? response : rule), 'name')
+          rules: [...this.dataStore.rules].map((rule) => rule.id === response.id ? response : rule)
         };
         this.rules.next(Object.assign({}, this.dataStore).rules);
         this.setIsSaving(false);
+      });
+  }
+
+  deleteRule(id: string) {
+    this.setIsSaving(true);
+    this.rulesApiService.rulesControllerDelete({id})
+      .pipe(
+        take(1),
+        catchError((error) => {
+          this.handleError(error);
+          return of(false);
+        }))
+      .subscribe((response) => {
+        if (response !== false) {
+          this.setRules([...this.dataStore.rules].filter((rule) => rule.id !== id));
+        }
       });
   }
 
@@ -88,4 +107,14 @@ export class RulesDataStore {
     this.dataStore = {...this.dataStore, isSaving: state};
     this.isSaving.next(Object.assign({}, this.dataStore).isSaving);
   }
+
+  private handleError(error: HttpErrorResponse) {
+    this.setIsSaving(false);
+    if (error.error instanceof ErrorEvent) {
+      console.error('An error occurred:', error.error.message);
+    } else {
+      this.snackBarService.open(`Something went wrong, HttpStatus: ${error.status}, body was: ${error.error}`, 'OK', {duration: 5000});
+    }
+  }
+
 }

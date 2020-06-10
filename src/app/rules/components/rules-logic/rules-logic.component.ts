@@ -43,6 +43,7 @@ export class RulesLogicComponent implements ControlValueAccessor, OnInit, OnDest
   valueType = 'text';
 
   allTransferKeys = Object.keys(TransferKeyEnum);
+  preDisableValue;
 
 
   constructor(
@@ -56,7 +57,10 @@ export class RulesLogicComponent implements ControlValueAccessor, OnInit, OnDest
       map((value) => this.conditionOperatorMap[value]),
       tap((value) => this.form.get('type').setValue(this.rulesLogicService.applyValidators(this.form.get('value') as FormControl, value))),
       tap((x) => {
-        this.form.get('conditionOperator').reset(null, {emitEvent: false});
+        const conditionOperatorValue = this.form.get('conditionOperator').value;
+        if (!conditionOperatorValue || x.filter((item: {value, name}) => item.value === conditionOperatorValue).length === 0) {
+          this.form.get('conditionOperator').reset(null, {emitEvent: false});
+        }
         this.form.get('value').reset(null, {emitEvent: false});
         if (!!x) {
           this.form.get('value').enable({emitEvent: false});
@@ -71,15 +75,17 @@ export class RulesLogicComponent implements ControlValueAccessor, OnInit, OnDest
     this.form.valueChanges.pipe(
       takeUntil(this.unSub),
       distinctUntilChanged()
-    ).subscribe((next) => {
+    ).subscribe(() => {
       if (this.form.valid && this.form.value?.value && this.form.value?.conditionOperator) {
-        this.onChange(this.form.valid);
+        this.onChange(this.form.value);
       } else {
         this.onChange(null);
       }
     });
 
-    this.form.get('type').valueChanges.subscribe((next) => {
+    this.form.get('type').valueChanges.pipe(
+      takeUntil(this.unSub)
+    ).subscribe((next) => {
       this.valueType = next === 'Date' ? 'date' : 'text';
     });
   }
@@ -102,6 +108,7 @@ export class RulesLogicComponent implements ControlValueAccessor, OnInit, OnDest
 
   writeValue(obj: any) {
     if (obj) {
+      this.preDisableValue = obj;
       this.form.enable({emitEvent: false});
       this.form.setValue(obj);
     } else {
@@ -111,9 +118,11 @@ export class RulesLogicComponent implements ControlValueAccessor, OnInit, OnDest
 
   setDisabledState(isDisabled: boolean): void {
     if (isDisabled) {
-      this.form.disable();
+      this.preDisableValue = this.form.value;
+      setTimeout(() => this.form.disable(), 1000);
     } else {
       this.form.enable();
+      this.form.setValue(this.preDisableValue);
     }
   }
 }

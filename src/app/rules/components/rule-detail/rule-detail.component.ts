@@ -4,7 +4,6 @@ import {FormArray, FormControl, FormGroup, Validators} from '@angular/forms';
 import {minLengthThisOrThat} from '../../shared/rules-custom.validators';
 import {RulesDataStore} from '../../../core/services/rules-data.store';
 import {Subject} from 'rxjs';
-import {distinctUntilChanged, takeUntil} from 'rxjs/operators';
 
 /**
  * todo: convert to  controlValueAccessor,
@@ -55,9 +54,8 @@ export class RuleDetailComponent implements OnInit, OnDestroy {
     return (this.form.get(name) as FormArray).controls as FormControl[];
   }
 
-  // todo: Implement
   deleteRule(): void {
-
+    this.rulesDataStore.deleteRule(this.original.id);
   }
 
   removeLogicAt(name: 'orLogic' | 'andLogic', index: number): void {
@@ -83,10 +81,8 @@ export class RuleDetailComponent implements OnInit, OnDestroy {
   }
 
   save() {
-    console.log(this.form);
     if (this.form.valid) {
-      console.log(this.formatValue(this.form.value));
-      this.rulesDataStore.saveRule(this.formatValue(this.form.value));
+      this.rulesDataStore.patchRule(this.formatValue(this.form.value));
     } else {
       this.form.markAllAsTouched();
     }
@@ -104,23 +100,6 @@ export class RuleDetailComponent implements OnInit, OnDestroy {
     this.form.reset();
     this.form.get('orLogic').setValidators([minLengthThisOrThat(this.form.get('andLogic') as FormArray)]);
     this.form.get('andLogic').setValidators([minLengthThisOrThat(this.form.get('orLogic') as FormArray)]);
-    // this.form.get('andLogic').statusChanges.pipe(
-    //   takeUntil(this.unSub),
-    //   distinctUntilChanged()
-    // ).subscribe((status) => {
-    //   if (status === 'VALID') {
-    //     this.form.get('orLogic').markAsTouched({onlySelf: true});
-    //   }
-    // });
-    // this.form.get('orLogic').statusChanges.pipe(
-    //   takeUntil(this.unSub),
-    //   distinctUntilChanged()
-    // ).subscribe((status) => {
-    //   if (status === 'VALID') {
-    //     this.form.get('orLogic').markAsTouched({onlySelf: true});
-    //   }
-    //   console.log('orLogic', status);
-    // });
     (this.form.get('orLogic') as FormArray).clear();
     input?.orLogic?.map(() => (this.form.get('orLogic') as FormArray).push(new FormControl()));
     (this.form.get('andLogic') as FormArray).clear();

@@ -13,5 +13,4 @@ export interface Logic {
   transferKey: 'Amount' | 'Description' | 'TransactionDate' | 'CurrencyCode' | 'AccountNumber' | 'StartBalance' | 'EndBalance';
   type: 'String' | 'Number' | 'Date';
   value: string;
-  values: string;
 }

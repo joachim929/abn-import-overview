@@ -214,7 +214,7 @@ export class RulesApiService extends BaseService {
   /**
    * Path part for operation rulesControllerDelete
    */
-  static readonly RulesControllerDeletePath = '/rules/id';
+  static readonly RulesControllerDeletePath = '/rules/{id}';
 
   /**
    * This method provides access to the full `HttpResponse`, allowing access to response headers.
