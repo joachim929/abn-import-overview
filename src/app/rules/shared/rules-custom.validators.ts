@@ -14,7 +14,13 @@ export function minLengthThisOrThat(thatArray: FormArray): ValidatorFn {
         thatHasValue = true;
       }
     });
-    return (thatHasValue || thisHasValue) ? null : {error: 'Can\'t be empty'};
+    if (thatHasValue || thisHasValue) {
+      thatArray.setErrors(null);
+      return null;
+    } else {
+      thatArray.setErrors({error: 'Can\'t be empty'});
+      return {error: 'Can\'t be empty'};
+    }
   };
 }
 

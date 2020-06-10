@@ -32,8 +32,8 @@ export class RulesDataStore {
     this.rulesApiService.rulesControllerGetAll()
       .pipe(take(1))
       .subscribe((response) => {
-      this.setRules(response);
-    });
+        this.setRules(response);
+      });
   }
 
   getIsSaving(): Observable<boolean> {
@@ -54,6 +54,20 @@ export class RulesDataStore {
       .pipe(take(1))
       .subscribe((response) => {
         this.dataStore = {...this.dataStore, rules: sortBy([...this.dataStore.rules, response], 'name')};
+        this.rules.next(Object.assign({}, this.dataStore).rules);
+        this.setIsSaving(false);
+      });
+  }
+
+  saveRule(editedRule: TransferConditionDto): void {
+    this.setIsSaving(true);
+    this.rulesApiService.rulesControllerPatch({body: editedRule})
+      .pipe(take(1))
+      .subscribe((response) => {
+        this.dataStore = {
+          ...this.dataStore,
+          rules: sortBy([...this.dataStore.rules].map((rule) => rule.id === response.id ? response : rule), 'name')
+        };
         this.rules.next(Object.assign({}, this.dataStore).rules);
         this.setIsSaving(false);
       });
