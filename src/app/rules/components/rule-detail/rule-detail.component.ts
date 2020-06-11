@@ -5,10 +5,6 @@ import {minLengthThisOrThat} from '../../shared/rules-custom.validators';
 import {RulesDataStore} from '../../../core/services/rules-data.store';
 import {Subject} from 'rxjs';
 
-/**
- * todo: convert to  controlValueAccessor,
- *    extract re-useable functionality from create-rule
- */
 @Component({
   selector: 'app-rule-detail',
   templateUrl: './rule-detail.component.html',
@@ -85,6 +81,8 @@ export class RuleDetailComponent implements OnInit, OnDestroy {
       this.rulesDataStore.patchRule(this.formatValue(this.form.value));
     } else {
       this.form.markAllAsTouched();
+      this.form.get('andLogic').markAsDirty();
+      this.form.get('orLogic').markAsDirty();
     }
   }
 

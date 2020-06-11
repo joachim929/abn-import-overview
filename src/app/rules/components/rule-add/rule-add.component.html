@@ -27,48 +27,43 @@
     <app-categories-select label="Category"
                            [control]="form.get('category')"></app-categories-select>
 
-    <mat-card-title>Logic</mat-card-title>
-    <mat-card-subtitle>And</mat-card-subtitle>
-    <div *ngFor="let andLogic of getFormArrayControls('andLogic'); let i = index;"
-         style="display: flex; flex-direction: row;">
-      <app-rules-logic [formControl]="andLogic" style="flex: 1;">
-      </app-rules-logic>
-      <button mat-button mat-icon-button color="warn" (click)="removeLogic('andLogic', i)">
-        <mat-icon>delete</mat-icon>
-      </button>
-    </div>
-    <!-- todo: Implement animation -->
-    <mat-error
-      *ngIf="form.dirty && form.get('orLogic').dirty &&
+    <div class="control-group" [class.invalid]="form.dirty && form.get('orLogic').dirty &&
       form.get('andLogic').dirty &&
-      !!form.get('orLogic').errors &&
-      !!form.get('andLogic').errors">{{form.get('orLogic').getError('error')}}</mat-error>
+      !!form.get('orLogic').invalid &&
+      !!form.get('andLogic').invalid">
+      <mat-card-title>Logic</mat-card-title>
+      <mat-card-subtitle style="margin: 8px 0;">And</mat-card-subtitle>
+      <div *ngFor="let andLogic of getFormArrayControls('andLogic'); let i = index;"
+           style="display: flex; flex-direction: row;">
+        <app-rules-logic [formControl]="andLogic" style="flex: 1;">
+        </app-rules-logic>
+        <button mat-button mat-icon-button color="warn" (click)="removeLogic('andLogic', i)">
+          <mat-icon>delete</mat-icon>
+        </button>
+      </div>
 
-    <mat-card-actions>
-      <button mat-button mat-stroked-button color="primary" (click)="addCondition('andLogic')">Add 'And' condition
-      </button>
-    </mat-card-actions>
+        <button mat-button mat-stroked-button color="primary" (click)="addCondition('andLogic')">Add 'And' condition
+        </button>
 
-    <mat-card-subtitle>Or</mat-card-subtitle>
+      <mat-card-subtitle style="margin: 8px 0;">Or</mat-card-subtitle>
 
-    <div *ngFor="let andLogic of getFormArrayControls('orLogic'); let i = index;"
-         style="display: flex; flex-direction: row;">
-      <app-rules-logic [formControl]="andLogic" style="flex: 1;">
-      </app-rules-logic>
-      <button mat-button mat-icon-button color="warn" (click)="removeLogic('orLogic', i)">
-        <mat-icon>delete</mat-icon>
-      </button>
-    </div>
-    <mat-error
-      *ngIf="form.get('orLogic').dirty &&
+      <div *ngFor="let andLogic of getFormArrayControls('orLogic'); let i = index;"
+           style="display: flex; flex-direction: row;">
+        <app-rules-logic [formControl]="andLogic" style="flex: 1;">
+        </app-rules-logic>
+        <button mat-button mat-icon-button color="warn" (click)="removeLogic('orLogic', i)">
+          <mat-icon>delete</mat-icon>
+        </button>
+      </div>
+
+        <button mat-button mat-stroked-button color="primary" class="mb-2" (click)="addCondition('orLogic')">Add 'Or' condition
+        </button>
+        <mat-error class="control-group-error" [class.invalid]="form.dirty && form.get('orLogic').dirty &&
       form.get('andLogic').dirty &&
-      !!form.get('orLogic').errors &&
-      !!form.get('andLogic').errors">{{form.get('orLogic').getError('error')}}</mat-error>
-
-    <mat-card-actions>
-      <button mat-button mat-stroked-button color="primary" (click)="addCondition('orLogic')">Add 'Or' condition
-      </button>
-    </mat-card-actions>
+      !!form.get('orLogic').invalid &&
+      !!form.get('andLogic').invalid">Some logic required
+        </mat-error>
+    </div>
 
     <mat-card-actions style="display:flex; flex-direction: row; justify-content: end;">
       <a mat-button mat-raised-button color="warn" routerLink="/rules">Cancel</a>

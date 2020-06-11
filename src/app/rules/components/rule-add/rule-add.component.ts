@@ -71,5 +71,4 @@ export class RuleAddComponent implements OnInit, OnDestroy {
     this.form.get('andLogic').markAsDirty();
     this.form.get('orLogic').markAsDirty();
   }
-
 }

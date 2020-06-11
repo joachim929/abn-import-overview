@@ -17,40 +17,58 @@
                   matInput formControlName="description"></textarea>
       </mat-form-field>
       <app-categories-select label="Category" [control]="form.get('category')"></app-categories-select>
-      <div class="pl-5">
-        <mat-label *ngIf="getFormArrayControls('orLogic').length > 0">Or</mat-label>
-        <div class="rule-detail-logic-container" *ngFor="let control of getFormArrayControls('orLogic'); let i = index;">
-          <app-rules-logic class="rule-detail-logic" [formControl]="control">
-          </app-rules-logic>
-          <button mat-button mat-icon-button class="rule-detail-remove-logic" (click)="removeLogicAt('orLogic', i)">
-            <mat-icon color="warn">delete</mat-icon>
-          </button>
+      <div class="control-group"
+           [class.invalid]="form.dirty && form.get('orLogic').dirty && form.get('andLogic').dirty && form.get('orLogic').invalid && form.get('andLogic').invalid">
+        <div>
+          <div>
+            <mat-label *ngIf="getFormArrayControls('andLogic').length > 0">Or</mat-label>
+            <div class="rule-detail-logic-container"
+                 *ngFor="let control of getFormArrayControls('andLogic'); let i = index;">
+              <app-rules-logic class="rule-detail-logic" [formControl]="control">
+              </app-rules-logic>
+              <button mat-button mat-icon-button class="rule-detail-remove-logic"
+                      (click)="removeLogicAt('andLogic', i)">
+                <mat-icon color="warn">delete</mat-icon>
+              </button>
+            </div>
+          </div>
+          <div class="logic-action-buttons">
+            <button mat-button mat-stroked-button color="primary"
+                    [disabled]="!editMode"
+                    (click)="addControlToLogic('andLogic')">Add 'And' logic
+            </button>
+          </div>
         </div>
-      </div>
-      <div class="logic-action-buttons">
-        <button mat-button mat-stroked-button color="primary"
-                [disabled]="!editMode"
-                (click)="addControlToLogic('orLogic')">Add 'And' logic
-        </button>
-      </div>
-      <div class="pl-5">
-        <mat-label *ngIf="getFormArrayControls('andLogic').length > 0">And</mat-label>
-        <div class="rule-detail-logic-container" *ngFor="let control of getFormArrayControls('andLogic'); let i =index;">
-          <app-rules-logic class="rule-detail-logic" [formControl]="control">
-          </app-rules-logic>
-          <button mat-button mat-icon-button class="rule-detail-remove-logic" (click)="removeLogicAt('andLogic', i)">
-            <mat-icon color="warn">delete</mat-icon>
-          </button>
+        <div>
+          <div>
+            <mat-label *ngIf="getFormArrayControls('orLogic').length > 0">And</mat-label>
+            <div class="rule-detail-logic-container"
+                 *ngFor="let control of getFormArrayControls('orLogic'); let i =index;">
+              <app-rules-logic class="rule-detail-logic" [formControl]="control">
+              </app-rules-logic>
+              <button mat-button mat-icon-button class="rule-detail-remove-logic" (click)="removeLogicAt('orLogic', i)">
+                <mat-icon color="warn">delete</mat-icon>
+              </button>
+            </div>
+          </div>
+          <div class="logic-action-buttons">
+            <button mat-button mat-stroked-button color="primary"
+                    [disabled]="!editMode"
+                    (click)="addControlToLogic('orLogic')">Add 'Or' logic
+            </button>
+          </div>
         </div>
-      </div>
-      <div class="logic-action-buttons">
-        <button mat-button mat-stroked-button color="primary"
-                [disabled]="!editMode"
-                (click)="addControlToLogic('andLogic')">Add 'Or' logic
-        </button>
+        <mat-error class="control-group-error" [class.invalid]="form.dirty &&
+         form.get('orLogic').dirty &&
+          form.get('andLogic').dirty &&
+           form.get('orLogic').invalid &&
+           form.get('andLogic').invalid">Some logic required
+        </mat-error>
       </div>
       <div class="rule-action-buttons">
-        <button mat-button mat-stroked-button [disabled]="!editMode || form.pristine" (click)="save()" color="primary">Save</button>
+        <button mat-button mat-stroked-button [disabled]="!editMode || form.pristine" (click)="save()"
+                color="primary">Save
+        </button>
         <button mat-button mat-stroked-button [disabled]="!editMode" (click)="cancel()">Cancel</button>
       </div>
     </div>
