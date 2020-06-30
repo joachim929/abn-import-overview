@@ -23,45 +23,8 @@
       <app-categories-select label="Category" [control]="form.get('category')"></app-categories-select>
       <div class="control-group"
            [class.invalid]="form.dirty && form.get('orLogic').dirty && form.get('andLogic').dirty && form.get('orLogic').invalid && form.get('andLogic').invalid">
-        <div>
-          <div>
-            <mat-label *ngIf="getFormArrayControls('andLogic').length > 0">Or</mat-label>
-            <div class="rule-detail-logic-container"
-                 *ngFor="let control of getFormArrayControls('andLogic'); let i = index;">
-              <app-rules-logic class="rule-detail-logic" [formControl]="control">
-              </app-rules-logic>
-              <button mat-button mat-icon-button class="rule-detail-remove-logic"
-                      (click)="removeLogicAt('andLogic', i)">
-                <mat-icon color="warn">delete</mat-icon>
-              </button>
-            </div>
-          </div>
-          <div class="logic-action-buttons">
-            <button mat-button mat-stroked-button color="primary"
-                    [disabled]="!editMode"
-                    (click)="addControlToLogic('andLogic')">Add 'And' logic
-            </button>
-          </div>
-        </div>
-        <div>
-          <div>
-            <mat-label *ngIf="getFormArrayControls('orLogic').length > 0">And</mat-label>
-            <div class="rule-detail-logic-container"
-                 *ngFor="let control of getFormArrayControls('orLogic'); let i =index;">
-              <app-rules-logic class="rule-detail-logic" [formControl]="control">
-              </app-rules-logic>
-              <button mat-button mat-icon-button class="rule-detail-remove-logic" (click)="removeLogicAt('orLogic', i)">
-                <mat-icon color="warn">delete</mat-icon>
-              </button>
-            </div>
-          </div>
-          <div class="logic-action-buttons">
-            <button mat-button mat-stroked-button color="primary"
-                    [disabled]="!editMode"
-                    (click)="addControlToLogic('orLogic')">Add 'Or' logic
-            </button>
-          </div>
-        </div>
+        <app-rules-logic-array [formArray]="form.get('andLogic')" [editMode]="editMode"></app-rules-logic-array>
+        <app-rules-logic-array [formArray]="form.get('orLogic')" [editMode]="editMode"></app-rules-logic-array>
         <mat-error class="control-group-error" [class.invalid]="form.dirty &&
          form.get('orLogic').dirty &&
           form.get('andLogic').dirty &&

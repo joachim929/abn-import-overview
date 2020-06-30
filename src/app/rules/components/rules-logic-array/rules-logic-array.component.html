@@ -1,0 +1,18 @@
+<div>
+  <mat-label *ngIf="formArray.controls.length > 0">Or</mat-label>
+  <div class="row align-items-center"
+       *ngFor="let control of formArray.controls; let i = index;">
+    <app-rules-logic class="f-1" [formControl]="control">
+    </app-rules-logic>
+    <button mat-button mat-icon-button class="rule-detail-remove-logic"
+            (click)="removeLogicAt(i)">
+      <mat-icon color="warn">delete</mat-icon>
+    </button>
+  </div>
+</div>
+<div class="logic-action-buttons">
+  <button mat-button mat-stroked-button color="primary"
+          [disabled]="!editMode"
+          (click)="addLogic()">Add 'And' logic
+  </button>
+</div>

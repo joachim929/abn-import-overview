@@ -1,4 +1,4 @@
-import {Component, forwardRef, Input, OnDestroy, OnInit} from '@angular/core';
+import {AfterViewInit, Component, forwardRef, Input, OnDestroy, OnInit} from '@angular/core';
 import {ControlValueAccessor, FormControl, FormGroup, NG_VALUE_ACCESSOR, Validators} from '@angular/forms';
 import {Observable, Subject} from 'rxjs';
 import {distinctUntilChanged, map, takeUntil, tap} from 'rxjs/operators';
@@ -18,7 +18,7 @@ import {RulesLogicService} from '../../services/rules-logic.service';
     }
   ]
 })
-export class RulesLogicComponent implements ControlValueAccessor, OnInit, OnDestroy {
+export class RulesLogicComponent implements ControlValueAccessor, AfterViewInit, OnDestroy {
   form = new FormGroup({
     id: new FormControl(),
     transferKey: new FormControl(),
@@ -51,7 +51,7 @@ export class RulesLogicComponent implements ControlValueAccessor, OnInit, OnDest
   ) {
   }
 
-  ngOnInit(): void {
+  ngAfterViewInit(): void {
     this.conditionOperatorOptions$ = this.form.get('transferKey').valueChanges.pipe(
       distinctUntilChanged(),
       map((value) => this.conditionOperatorMap[value]),
@@ -118,8 +118,9 @@ export class RulesLogicComponent implements ControlValueAccessor, OnInit, OnDest
 
   setDisabledState(isDisabled: boolean): void {
     if (isDisabled) {
+      console.log(this.form);
       this.preDisableValue = this.form.value;
-      setTimeout(() => this.form.disable(), 1000);
+      this.form.disable();
     } else {
       this.form.enable();
       this.form.setValue(this.preDisableValue);

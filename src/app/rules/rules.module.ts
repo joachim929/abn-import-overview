@@ -20,6 +20,7 @@ import {MatSelectModule} from '@angular/material/select';
 import { RulesLogicComponent } from './components/rules-logic/rules-logic.component';
 import {RulesLogicService} from './services/rules-logic.service';
 import { RuleAutoAssignInfoComponent } from './components/rule-auto-assign-info/rule-auto-assign-info.component';
+import { RulesLogicArrayComponent } from './components/rules-logic-array/rules-logic-array.component';
 
 
 @NgModule({
@@ -29,7 +30,8 @@ import { RuleAutoAssignInfoComponent } from './components/rule-auto-assign-info/
     RuleDetailComponent,
     RulesListComponent,
     RulesLogicComponent,
-    RuleAutoAssignInfoComponent
+    RuleAutoAssignInfoComponent,
+    RulesLogicArrayComponent
   ],
   imports: [
     CommonModule,

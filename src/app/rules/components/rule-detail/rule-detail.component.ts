@@ -46,16 +46,8 @@ export class RuleDetailComponent implements OnInit, OnDestroy {
     this.unSub.complete();
   }
 
-  getFormArrayControls(name: string): FormControl[] {
-    return (this.form.get(name) as FormArray).controls as FormControl[];
-  }
-
   deleteRule(): void {
     this.rulesDataStore.deleteRule(this.original.id);
-  }
-
-  removeLogicAt(name: 'orLogic' | 'andLogic', index: number): void {
-    (this.form.get(name) as FormArray).removeAt(index);
   }
 
   cloneRule() {
