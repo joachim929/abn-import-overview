@@ -2,22 +2,17 @@
   <mat-card-header>
     <mat-card-title>New rule</mat-card-title>
   </mat-card-header>
-  <mat-card-content [formGroup]="form" style="display: flex; flex-direction: column;">
-    <div style="display: flex; flex-direction: row; justify-content: space-between; align-items: center;">
-      <mat-form-field style="flex: 1;">
+  <mat-card-content [formGroup]="form" class="column">
+    <div class="row align-items-center" style="justify-content: space-between;">
+      <mat-form-field class="f-1">
         <mat-label>Name</mat-label>
         <input matInput formControlName="name" type="text">
         <mat-error *ngIf="form.get('name').invalid">Required</mat-error>
       </mat-form-field>
       <mat-checkbox class="mx-4" formControlName="autoAssign">Auto assign</mat-checkbox>
-      <button mat-button mat-icon-button [matMenuTriggerFor]="autoAssignInfo" matTooltip="Info about auto assign">
-        <mat-icon>info</mat-icon>
-      </button>
-      <mat-menu #autoAssignInfo>
-        Info about auto assign
-      </mat-menu>
+      <app-rule-auto-assign-info></app-rule-auto-assign-info>
     </div>
-    <mat-form-field style="flex: 1">
+    <mat-form-field class="f-1">
       <mat-label>Description</mat-label>
       <textarea matTextareaAutosize
                 [matAutosizeMinRows]="4"
@@ -48,8 +43,8 @@
       <mat-card-subtitle style="margin: 8px 0;">Or</mat-card-subtitle>
 
       <div *ngFor="let andLogic of getFormArrayControls('orLogic'); let i = index;"
-           style="display: flex; flex-direction: row;">
-        <app-rules-logic [formControl]="andLogic" style="flex: 1;">
+           class="row">
+        <app-rules-logic [formControl]="andLogic" class="f-1">
         </app-rules-logic>
         <button mat-button mat-icon-button color="warn" (click)="removeLogic('orLogic', i)">
           <mat-icon>delete</mat-icon>
@@ -65,7 +60,7 @@
         </mat-error>
     </div>
 
-    <mat-card-actions style="display:flex; flex-direction: row; justify-content: end;">
+    <mat-card-actions class="row" style="justify-content: end;">
       <a mat-button mat-raised-button color="warn" routerLink="/rules">Cancel</a>
       <button mat-button mat-raised-button [disabled]="!form.touched || (isSaving$ | async)" color="accent"
               (click)="save()">Save

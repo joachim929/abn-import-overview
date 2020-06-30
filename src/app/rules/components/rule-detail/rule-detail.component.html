@@ -4,11 +4,15 @@
     <mat-card-header>
       <mat-card-title>Rule: {{rule.name}}</mat-card-title>
     </mat-card-header>
-    <div style="display: flex; flex-direction: column;">
-      <mat-form-field>
-        <mat-label>Name</mat-label>
-        <input matInput formControlName="name">
-      </mat-form-field>
+    <div class="column">
+      <div class="row align-items-center">
+        <mat-form-field class="f-1">
+          <mat-label>Name</mat-label>
+          <input matInput formControlName="name">
+        </mat-form-field>
+        <mat-checkbox class="mx-4" formControlName="autoAssign">Auto assign</mat-checkbox>
+        <app-rule-auto-assign-info [disabled]="form.disabled"></app-rule-auto-assign-info>
+      </div>
       <mat-form-field>
         <mat-label>Description</mat-label>
         <textarea matTextareaAutosize

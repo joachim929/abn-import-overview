@@ -19,6 +19,7 @@ import {MatTooltipModule} from '@angular/material/tooltip';
 import {MatSelectModule} from '@angular/material/select';
 import { RulesLogicComponent } from './components/rules-logic/rules-logic.component';
 import {RulesLogicService} from './services/rules-logic.service';
+import { RuleAutoAssignInfoComponent } from './components/rule-auto-assign-info/rule-auto-assign-info.component';
 
 
 @NgModule({
@@ -27,7 +28,8 @@ import {RulesLogicService} from './services/rules-logic.service';
     RuleAddComponent,
     RuleDetailComponent,
     RulesListComponent,
-    RulesLogicComponent
+    RulesLogicComponent,
+    RuleAutoAssignInfoComponent
   ],
   imports: [
     CommonModule,

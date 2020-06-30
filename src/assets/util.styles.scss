@@ -31,6 +31,10 @@ $sizes: 0, 1, 2, 3, 4, 5, 6, 7, 8, 9;
     .pt-#{$size}, .py-#{$size} {
       padding-top: #{$size * 4px};
     }
+
+    .f-#{$size} {
+      flex: #{$size};
+    }
   }
 
   .ml-auto, .mx-auto {
@@ -72,26 +76,52 @@ $sizes: 0, 1, 2, 3, 4, 5, 6, 7, 8, 9;
     cursor: default;
   }
 
-  // todo: Remove, rework with mixins, look at extensions.styles
-  .container, .column-container, .row-container {
-    display: flex;
-    margin: 0 auto;
-    max-width: 1200px;
-  }
-
-  // todo: Remove, rework with mixins, look at extensions.styles
-  .column-container {
-    flex-direction: column;
-  }
-
-  // todo: Remove, rework with mixins, look at extensions.styles
-  .row-container {
-    flex-direction: row;
-  }
-
-  // todo: Remove, rework with mixins, look at extensions.styles
   .content {
     max-width: 1200px;
   }
 
+  @mixin flex {
+    display: flex;
+  }
+
+  @mixin row {
+    @include flex;
+    flex-direction: row;
+  }
+
+  @mixin column {
+    @include flex;
+    flex-direction: column;
+  }
+
+  @mixin align-items-center {
+    @include flex;
+    align-items: center;
+  }
+
+  .column {
+    @include column;
+  }
+
+  .row {
+    @include row;
+  }
+
+  .align-items-center {
+    @include align-items-center;
+  }
+
+  .container, .column-container, .row-container {
+    @include flex;
+    margin: 0 auto;
+    max-width: 1200px;
+  }
+
+  .column-container {
+    @include column;
+  }
+
+  .row-container {
+    @include row;
+  }
 }
