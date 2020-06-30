@@ -29,8 +29,8 @@
       <mat-card-title>Logic</mat-card-title>
       <mat-card-subtitle style="margin: 8px 0;">And</mat-card-subtitle>
       <div *ngFor="let andLogic of getFormArrayControls('andLogic'); let i = index;"
-           style="display: flex; flex-direction: row;">
-        <app-rules-logic [formControl]="andLogic" style="flex: 1;">
+           class="row">
+        <app-rules-logic [formControl]="andLogic" class="f-1">
         </app-rules-logic>
         <button mat-button mat-icon-button color="warn" (click)="removeLogic('andLogic', i)">
           <mat-icon>delete</mat-icon>
