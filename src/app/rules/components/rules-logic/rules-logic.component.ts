@@ -58,7 +58,7 @@ export class RulesLogicComponent implements ControlValueAccessor, OnInit, OnDest
       tap((value) => this.form.get('type').setValue(this.rulesLogicService.applyValidators(this.form.get('value') as FormControl, value))),
       tap((x) => {
         const conditionOperatorValue = this.form.get('conditionOperator').value;
-        if (!conditionOperatorValue || x.filter((item: {value, name}) => item.value === conditionOperatorValue).length === 0) {
+        if (!conditionOperatorValue || x?.filter((item: {value, name}) => item.value === conditionOperatorValue).length === 0) {
           this.form.get('conditionOperator').reset(null, {emitEvent: false});
         }
         this.form.get('value').reset(null, {emitEvent: false});

@@ -4,7 +4,7 @@ export interface Logic {
   amountPassed: number;
   amountUsed: number;
   andCondition: TransferCondition;
-  conditionOperator: 'Equals' | 'GreaterThan' | 'GreaterOrEqualThan' | 'LessThan' | 'LessOrEqualThan' | 'Contains' | 'Not' | 'Like';
+  conditionOperator: 'Equals' | 'NotEqual' | 'GreaterThan' | 'GreaterOrEqualThan' | 'LessThan' | 'LessOrEqualThan' | 'Contains' | 'NotContain' | 'Like' | 'NotLike';
   createdAt: string;
   editedAt: string;
   id: string;
