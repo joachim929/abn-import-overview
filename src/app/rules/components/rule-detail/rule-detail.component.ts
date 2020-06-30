@@ -65,10 +65,6 @@ export class RuleDetailComponent implements OnInit, OnDestroy {
     }
   }
 
-  addControlToLogic(name: 'orLogic' | 'andLogic'): void {
-    (this.form.get(name) as FormArray).push(new FormControl());
-  }
-
   cancel() {
     this.initForm(this.original);
     this.toggleEditMode();
