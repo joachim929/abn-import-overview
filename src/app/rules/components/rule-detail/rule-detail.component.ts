@@ -58,6 +58,12 @@ export class RuleDetailComponent implements OnInit, OnDestroy {
     (this.form.get(name) as FormArray).removeAt(index);
   }
 
+  cloneRule() {
+    const copy = {...this.original, id: null, name: this.original.name + ' (copy)'};
+    this.rulesDataStore.addRule(copy);
+    this.initForm(this.original);
+  }
+
   toggleEditMode(): void {
     this.editMode = !this.editMode;
     if (this.editMode) {

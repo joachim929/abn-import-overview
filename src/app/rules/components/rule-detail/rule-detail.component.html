@@ -82,6 +82,10 @@
             (click)="toggleEditMode()">
       <mat-icon>edit</mat-icon>
     </button>
+    <button class="close-rule-button" mat-icon-button mat-button (click)="cloneRule()"
+            [disabled]="!editMode" matTooltip="Create copy">
+      <mat-icon>content_copy</mat-icon>
+    </button>
     <div>
       <button class="edit-rule-button" mat-icon-button mat-button
               [matMenuTriggerFor]="menu"
