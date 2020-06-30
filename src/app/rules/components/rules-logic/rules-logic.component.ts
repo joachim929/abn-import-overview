@@ -118,7 +118,6 @@ export class RulesLogicComponent implements ControlValueAccessor, AfterViewInit,
 
   setDisabledState(isDisabled: boolean): void {
     if (isDisabled) {
-      console.log(this.form);
       this.preDisableValue = this.form.value;
       this.form.disable();
     } else {
