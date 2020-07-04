@@ -5,7 +5,7 @@
       Category group
     </mat-card-title>
   </mat-card-header>
-  <mat-card-content style="display: flex; flex-direction: column;" [formGroup]="form">
+  <mat-card-content class="column" [formGroup]="form">
     <mat-form-field>
       <mat-label>Name</mat-label>
       <input matInput type="text" formControlName="name">
@@ -17,11 +17,11 @@
                 [matAutosizeMaxRows]="4"
                 matInput formControlName="description"></textarea>
     </mat-form-field>
-    <div style="display: flex; flex-direction: column">
+    <div class="column">
       <mat-label *ngIf="getSubCategories().length > 0">Categories</mat-label>
       <div *ngFor="let subCategory of getSubCategories(); let index = index" [formGroup]="subCategory"
-           style="display: flex; flex-direction: column;">
-        <div style="display:flex; justify-content: space-between">
+           class="column">
+        <div class="category-button-container">
           <mat-label>{{index + 1}})</mat-label>
           <button (click)="removeSubCategory(index)"
                   mat-button mat-icon-button>
@@ -44,7 +44,7 @@
       </div>
     </div>
   </mat-card-content>
-  <mat-card-actions style="display: flex; justify-content: space-between; margin-bottom: 0;">
+  <mat-card-actions class="category-button-container mb-0">
     <button class="ml-5" color="primary" mat-raised-button (click)="addSubCategory()">Add category</button>
     <div>
       <a class="mx-2" color="warn" mat-raised-button [routerLink]="['../']">Cancel</a>

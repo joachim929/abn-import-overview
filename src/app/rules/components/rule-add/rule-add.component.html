@@ -3,7 +3,7 @@
     <mat-card-title>New rule</mat-card-title>
   </mat-card-header>
   <mat-card-content [formGroup]="form" class="column">
-    <div class="row align-items-center" style="justify-content: space-between;">
+    <div class="row align-items-center rule-name-container">
       <mat-form-field class="f-1">
         <mat-label>Name</mat-label>
         <input matInput formControlName="name" type="text">
@@ -27,7 +27,7 @@
       !!form.get('orLogic').invalid &&
       !!form.get('andLogic').invalid">
       <mat-card-title>Logic</mat-card-title>
-      <mat-card-subtitle style="margin: 8px 0;">And</mat-card-subtitle>
+      <mat-card-subtitle class="form-sub-title">And</mat-card-subtitle>
       <div *ngFor="let andLogic of getFormArrayControls('andLogic'); let i = index;"
            class="row">
         <app-rules-logic [formControl]="andLogic" class="f-1">
@@ -40,7 +40,7 @@
         <button mat-button mat-stroked-button color="primary" (click)="addCondition('andLogic')">Add 'And' condition
         </button>
 
-      <mat-card-subtitle style="margin: 8px 0;">Or</mat-card-subtitle>
+      <mat-card-subtitle class="form-sub-title">Or</mat-card-subtitle>
 
       <div *ngFor="let andLogic of getFormArrayControls('orLogic'); let i = index;"
            class="row">
@@ -60,7 +60,7 @@
         </mat-error>
     </div>
 
-    <mat-card-actions class="row" style="justify-content: end;">
+    <mat-card-actions class="row rule-add-action-buttons">
       <a mat-button mat-raised-button color="warn" routerLink="/rules">Cancel</a>
       <button mat-button mat-raised-button [disabled]="!form.touched || (isSaving$ | async)" color="accent"
               (click)="save()">Save

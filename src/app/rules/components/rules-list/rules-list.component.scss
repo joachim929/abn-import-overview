@@ -1,11 +1,12 @@
 @import '../../../shared/styles/create-link.styles';
+@import '../../../../assets/variables.styles';
 
 :host {
   display: flex;
   flex-direction: column;
   margin: 8px;
 
-  @media (max-width: 575.98px) {
+  @media (max-width: $extra-small-devices-max-width) {
     margin: 8px 0;
   }
 }

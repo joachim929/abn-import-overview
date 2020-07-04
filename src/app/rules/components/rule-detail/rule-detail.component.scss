@@ -1,3 +1,6 @@
+@import '../../../../assets/hidden.styles';
+@import '../../../../assets/variables.styles';
+
 .edit-mode {
   .rule-action-buttons {
     max-height: 44px;
@@ -11,9 +14,7 @@
 }
 
 .rule-action-buttons {
-  max-height: 0;
-  opacity: 0;
-  transition: 300ms ease-in-out;;
+  @include hidden-state;
 }
 
 
@@ -31,7 +32,7 @@
   display: flex;
   flex-direction: row;
   mat-label {
-    opacity: 0.54;
+    opacity: $disabled-opacity;
   }
   mat-form-field {
     mat-label {
@@ -41,7 +42,7 @@
 }
 
 .edit-rule-button:disabled {
-  opacity: 0.5;
+  opacity: $disabled-opacity;
 }
 
 .rule-detail-content {

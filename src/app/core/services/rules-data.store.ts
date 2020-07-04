@@ -3,7 +3,7 @@ import {BehaviorSubject, Observable, of} from 'rxjs';
 import {TransferConditionDto} from '../../swagger/models/transfer-condition-dto';
 import {RulesApiService} from '../../swagger/services/rules-api.service';
 import {sortBy} from 'lodash';
-import {catchError, take} from 'rxjs/operators';
+import {catchError, filter, take} from 'rxjs/operators';
 import {HttpErrorResponse} from '@angular/common/http';
 import {MatSnackBar} from '@angular/material/snack-bar';
 import {Router} from '@angular/router';
