@@ -2,7 +2,7 @@ import {Injectable} from '@angular/core';
 import {BehaviorSubject, Observable, of} from 'rxjs';
 import {TransferConditionDto} from '../../swagger/models/transfer-condition-dto';
 import {RulesApiService} from '../../swagger/services/rules-api.service';
-import {sortBy} from 'lodash';
+import {sortBy} from 'lodash-es';
 import {catchError, filter, take} from 'rxjs/operators';
 import {HttpErrorResponse} from '@angular/common/http';
 import {MatSnackBar} from '@angular/material/snack-bar';
