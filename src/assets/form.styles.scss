@@ -1,0 +1,20 @@
+.control-group {
+  border: 1px solid rgba(0, 0, 0, 0.2);
+  border-radius: 4px;
+  padding: 16px;
+  margin: 8px 0;
+  transition: border-color 300ms ease-in-out;
+
+  &.invalid {
+    border-color: #f44336;
+  }
+}
+
+.control-group-error {
+  opacity: 0;
+  transition: 300ms ease-in-out;
+
+  &.invalid {
+    opacity: 1;
+  }
+}

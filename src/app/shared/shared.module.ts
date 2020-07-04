@@ -3,12 +3,7 @@ import {CommonModule} from '@angular/common';
 import {HeaderComponent} from './components/header/header.component';
 import {RouterModule} from '@angular/router';
 import {NotFoundComponent} from './components/not-found/not-found.component';
-import {RuleNameControlComponent} from './components/rule-name-control/rule-name-control.component';
 import {ReactiveFormsModule} from '@angular/forms';
-import {
-  RuleAmountDescriptionControlComponent
-} from './components/rule-amount-description-control/rule-amount-description-control.component';
-import {RuleRadioControlComponent} from './components/rule-radio-control/rule-radio-control.component';
 import {MatButtonModule} from '@angular/material/button';
 import {MatTabsModule} from '@angular/material/tabs';
 import {MatToolbarModule} from '@angular/material/toolbar';
@@ -23,21 +18,20 @@ import { CategoriesSelectComponent } from './components/categories-select/catego
 import { EmptyStateComponent } from './components/empty-state/empty-state.component';
 import {MatCardModule} from '@angular/material/card';
 import {MatIconModule} from '@angular/material/icon';
+import { HumanizePipe } from './pipes/humanize.pipe';
 
 
 @NgModule({
   declarations: [
     HeaderComponent,
     NotFoundComponent,
-    RuleNameControlComponent,
-    RuleAmountDescriptionControlComponent,
-    RuleRadioControlComponent,
     MatInputComponent,
     MatSelectGroupsComponent,
     MatSelectComponent,
     CustomCurrencyPipe,
     CategoriesSelectComponent,
-    EmptyStateComponent
+    EmptyStateComponent,
+    HumanizePipe
   ],
   imports: [
     CommonModule,
@@ -55,15 +49,13 @@ import {MatIconModule} from '@angular/material/icon';
   exports: [
     HeaderComponent,
     NotFoundComponent,
-    RuleNameControlComponent,
-    RuleAmountDescriptionControlComponent,
-    RuleRadioControlComponent,
     MatInputComponent,
     MatSelectGroupsComponent,
     MatSelectComponent,
     CustomCurrencyPipe,
     CategoriesSelectComponent,
-    EmptyStateComponent
+    EmptyStateComponent,
+    HumanizePipe
   ]
 })
 export class SharedModule {

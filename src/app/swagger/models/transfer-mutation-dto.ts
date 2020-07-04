@@ -4,7 +4,6 @@ export interface TransferMutationDto {
   accountNumber: number;
   amount: number;
   category: CategoryDto;
-  categoryId?: number;
   comment?: string;
   currencyCode: string;
   description: string;

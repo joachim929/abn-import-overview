@@ -1,4 +1,20 @@
-.rule-container {
-  margin: 0.125em 0;
-  border: 1px solid rgba(0, 0, 0, .125)
+@import '../../../shared/styles/create-link.styles';
+@import '../../../../assets/variables.styles';
+
+:host {
+  display: flex;
+  flex-direction: column;
+  margin: 8px;
+
+  @media (max-width: $extra-small-devices-max-width) {
+    margin: 8px 0;
+  }
+}
+
+.rule-create-link {
+  @include create-link();
+}
+
+.rule-create-link.hide {
+  @include create-link-hide();
 }

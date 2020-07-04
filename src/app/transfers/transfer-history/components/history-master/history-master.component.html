@@ -1,4 +1,4 @@
-<main class="container column-container" style="padding-top: 8px;" *ngIf="transfer$ | async">
+<main class="container column-container pt-2" *ngIf="transfer$ | async">
   <mat-card>
     <p>Account number: {{(transfer$ | async).accountNumber}}</p>
     <p>Start balance: {{(transfer$ | async).startBalance | customCurrency}}</p>

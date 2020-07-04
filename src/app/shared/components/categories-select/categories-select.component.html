@@ -7,4 +7,5 @@
         {{category.name}}</mat-option>
     </mat-optgroup>
   </mat-select>
+  <mat-error *ngIf="control.invalid && control.touched">Required</mat-error>
 </mat-form-field>

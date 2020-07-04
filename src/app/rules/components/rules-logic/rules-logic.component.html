@@ -1,0 +1,20 @@
+<form [formGroup]="form" class="row">
+  <mat-form-field class="mr-2 f-1">
+    <mat-label>Transfer attribute</mat-label>
+    <mat-select formControlName="transferKey">
+      <mat-option *ngFor="let item of allTransferKeys" [value]="item">{{item | humanize}}</mat-option>
+    </mat-select>
+  </mat-form-field>
+  <mat-form-field class="f-1 mx-2">
+    <mat-label>Operator</mat-label>
+    <mat-select formControlName="conditionOperator">
+      <mat-option *ngFor="let item of conditionOperatorOptions$ | async" [value]="item.value">{{item.name}}</mat-option>
+    </mat-select>
+    <mat-error *ngIf="form.get('conditionOperator').invalid">Required</mat-error>
+  </mat-form-field>
+  <mat-form-field class="mx-2 f-1">
+    <mat-label>Value</mat-label>
+    <input [type]="valueType" matInput formControlName="value">
+    <mat-error *ngIf="form.get('value').invalid">{{form.get('value').hasError('pattern') ? 'Not a valid number' : 'Required'}}</mat-error>
+  </mat-form-field>
+</form>

@@ -1,25 +1,64 @@
-<div class="rules-list">
-  <div [hidden]="showEdit">
-    <label *ngIf="rule.name">Name: {{rule.name}}</label>
-    <label>Amount:</label>
-    <pre *ngFor="let amount of rule.amount">{{amount | amountRule}}</pre>
-    <label>Description:</label>
-    <pre *ngFor="let description of rule.description">{{description | descriptionRule}}</pre>
-    <label>Auto assign:</label>
-    <pre>{{rule.autoAssign}}</pre>
-    <label>Assign to: </label>
-<!--    <pre>Category: {{getCategoryById(rule.id).category}}</pre>-->
-<!--    <pre>Sub-category: {{getCategoryById(rule.id).subCategory}}</pre>-->
+<mat-card [formGroup]="form" class="rule-detail my-2"
+          [class.edit-mode]="editMode">
+  <div class="rule-detail-content">
+    <mat-card-header>
+      <mat-card-title>Rule: {{rule.name}}</mat-card-title>
+    </mat-card-header>
+    <div class="column">
+      <div class="row align-items-center">
+        <mat-form-field class="f-1">
+          <mat-label>Name</mat-label>
+          <input matInput formControlName="name">
+        </mat-form-field>
+        <mat-checkbox class="mx-4" formControlName="autoAssign">Auto assign</mat-checkbox>
+        <app-rule-auto-assign-info [disabled]="form.disabled"></app-rule-auto-assign-info>
+      </div>
+      <mat-form-field>
+        <mat-label>Description</mat-label>
+        <textarea matTextareaAutosize
+                  [matAutosizeMinRows]="2"
+                  [matAutosizeMaxRows]="4"
+                  matInput formControlName="description"></textarea>
+      </mat-form-field>
+      <app-categories-select label="Category" [control]="form.get('category')"></app-categories-select>
+      <div class="control-group"
+           [class.invalid]="form.dirty && form.get('orLogic').dirty && form.get('andLogic').dirty && form.get('orLogic').invalid && form.get('andLogic').invalid">
+        <app-rules-logic-array [formArray]="form.get('andLogic')" [editMode]="editMode"></app-rules-logic-array>
+        <app-rules-logic-array [formArray]="form.get('orLogic')" [editMode]="editMode"></app-rules-logic-array>
+        <mat-error class="control-group-error" [class.invalid]="form.dirty &&
+         form.get('orLogic').dirty &&
+          form.get('andLogic').dirty &&
+           form.get('orLogic').invalid &&
+           form.get('andLogic').invalid">Some logic required
+        </mat-error>
+      </div>
+      <div class="rule-action-buttons">
+        <button mat-button mat-stroked-button [disabled]="!editMode || form.pristine" (click)="save()"
+                color="primary">Save
+        </button>
+        <button mat-button mat-stroked-button [disabled]="!editMode" (click)="cancel()">Cancel</button>
+      </div>
+    </div>
   </div>
-  <app-rule-edit *ngIf="showEdit" [rule]="rule"></app-rule-edit>
-  <!-- todo: Edit/Delete icon & functionality -->
-  <div class="action-bar">
-    <button class="rule-action-button" mat-raised-button (click)="toggleEdit()">
-      <span *ngIf="showEdit">Cancel</span>
-      <span *ngIf="!showEdit">Edit</span>
+  <div class="rule-side-action-buttons">
+    <button class="edit-rule-button edit-button" mat-icon-button mat-button
+            (click)="toggleEditMode()">
+      <mat-icon>edit</mat-icon>
     </button>
-    <button class="rule-action-button" mat-raised-button (click)="deleteRule()">Delete</button>
-    <!-- todo: Implement -->
-    <button class="rule-action-button" mat-raised-button>Duplicate</button>
+    <button class="close-rule-button" mat-icon-button mat-button (click)="cloneRule()"
+            [disabled]="!editMode" matTooltip="Create copy">
+      <mat-icon>content_copy</mat-icon>
+    </button>
+    <div>
+      <button class="edit-rule-button" mat-icon-button mat-button
+              [matMenuTriggerFor]="menu"
+              [disabled]="!editMode">
+        <mat-icon color="warn">delete</mat-icon>
+      </button>
+      <mat-menu #menu="matMenu">
+        <div mat-menu-item disabled>Are you sure?</div>
+        <button mat-menu-item (click)="deleteRule()">Confirm</button>
+      </mat-menu>
+    </div>
   </div>
-</div>
+</mat-card>

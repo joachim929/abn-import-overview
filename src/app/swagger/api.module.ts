@@ -7,6 +7,8 @@ import { CategoryApiService } from './services/category-api.service';
 import { CategoryGroupApiService } from './services/category-group-api.service';
 import { TransferApiService } from './services/transfer-api.service';
 import { TransferMutationApiService } from './services/transfer-mutation-api.service';
+import { RulesApiService } from './services/rules-api.service';
+import { LogicApiService } from './services/logic-api.service';
 
 /**
  * Module that provides all services and configuration.
@@ -20,6 +22,8 @@ import { TransferMutationApiService } from './services/transfer-mutation-api.ser
     CategoryGroupApiService,
     TransferApiService,
     TransferMutationApiService,
+    RulesApiService,
+    LogicApiService,
     ApiConfiguration
   ],
 })

@@ -32,7 +32,7 @@
                 cdkAutosizeMaxRows="5" formControlName="comment" matInput></textarea>
     </mat-form-field>
 
-    <app-categories-select label="Category" formControlName="category"></app-categories-select>
+    <app-categories-select label="Category" [control]="form.get('category')"></app-categories-select>
   </form>
   <div class="transfer-mutation-controls-container">
     <button mat-raised-button (click)="cancel()">Cancel</button>

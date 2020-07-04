@@ -21,7 +21,7 @@
       <div class="category-group-container" *ngFor="let group of categories$ | async">
         <mat-divider></mat-divider>
         <p class="my-2">{{group.name}}</p>
-        <div class="mb-2" style="display: flex; flex-direction: row;">
+        <div class="mb-2 row">
           <button *ngFor="let category of group.categories"
                   [disabled]="isSaving$ | async"
                   (click)="assignCategory(category, mutation)"

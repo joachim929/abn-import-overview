@@ -1,0 +1,5 @@
+@mixin hidden-state {
+  max-height: 0;
+  opacity: 0;
+  transition: 300ms ease-in-out;
+}
