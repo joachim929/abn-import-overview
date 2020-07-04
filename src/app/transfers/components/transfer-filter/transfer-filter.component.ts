@@ -6,7 +6,7 @@ import {CategoryGroupDto} from '../../../swagger/models/category-group-dto';
 import {debounceTime, distinctUntilChanged} from 'rxjs/operators';
 import * as moment from 'moment';
 import {TransferDataStore} from '../../services/transfer-data.store';
-import {isEqual} from 'lodash';
+import {isEqual} from 'lodash-es';
 import {InvoiceFilterControlNames, TransferFilterService} from '../../services/transfer-filter.service';
 import {TransferListParams} from '../../../swagger/models/transfer-list-params';
 
