@@ -56,7 +56,7 @@ export class CategoryDataStore {
   }
 
   loadCategories() {
-    this.categoryApiService.getAllCategoryGroupsWithCategories().subscribe((next) => {
+    this.categoryApiService.categoryGroupControllerGetAllWithCategories().subscribe((next) => {
       this.dataStore.categories$ = next;
       this.categories.next(Object.assign({}, this.dataStore).categories$);
     });
@@ -64,7 +64,7 @@ export class CategoryDataStore {
 
   createCategory(category: CategoryGroupDto) {
     this.setSaving(true);
-    this.categoryApiService.createCategoryGroup({body: category}).pipe(
+    this.categoryApiService.categoryGroupControllerCreate({body: category}).pipe(
       catchError((error) => {
         this.handleError(error);
         return of(null);
@@ -85,7 +85,7 @@ export class CategoryDataStore {
       category.order = index;
     }));
 
-    this.categoryApiService.patchMultiple({body: categoryGroups}).subscribe((patchedCategories) => {
+    this.categoryApiService.categoryGroupControllerPatchMultiple({body: categoryGroups}).subscribe((patchedCategories) => {
       this.setSaving(false);
       this.dataStore.categories$.map((category, index) => {
         patchedCategories.map((patchedCategory) => {
@@ -100,7 +100,7 @@ export class CategoryDataStore {
 
   deleteCategoryGroup(id: string) {
     this.setSaving(true);
-    this.categoryApiService.deleteCategoryGroup({id}).pipe(
+    this.categoryApiService.categoryGroupControllerDelete({id}).pipe(
       catchError(e => {
         this.handleError(e);
         return of(false);

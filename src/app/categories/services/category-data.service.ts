@@ -18,7 +18,7 @@ export class CategoryDataService {
   }
 
   patchCategory(category: CategoryDto): Observable<CategoryDto> {
-    return this.categoryApiService.patchCategory({body: category}).pipe(
+    return this.categoryApiService.categoryControllerPatch({body: category}).pipe(
       tap((response) => {
         this.categoryDataStore.updateCategory(response);
       })
@@ -26,7 +26,7 @@ export class CategoryDataService {
   }
 
   patchCategoryGroup(updatedGroup: CategoryGroupDto): void {
-    this.categoryGroupApiService.patchMultiple({body: [updatedGroup]}).pipe(
+    this.categoryGroupApiService.categoryGroupControllerPatchMultiple({body: [updatedGroup]}).pipe(
       take(1),
       catchError(err => {
         return of(false);
@@ -42,7 +42,7 @@ export class CategoryDataService {
     if (newCategory.order === null || typeof newCategory.order === 'undefined') {
       newCategory = {...newCategory, order: 0};
     }
-    this.categoryApiService.createCategory({
+    this.categoryApiService.categoryControllerCreate({
       body: newCategory,
       parentId
     }).pipe(
@@ -53,7 +53,7 @@ export class CategoryDataService {
   }
 
   deleteCategory(id: number) {
-    this.categoryApiService.deleteCategory({id}).pipe(
+    this.categoryApiService.categoryControllerDelete({id}).pipe(
       take(1),
       catchError(error => {
         return of(false);

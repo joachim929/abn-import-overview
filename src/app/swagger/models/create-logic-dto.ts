@@ -2,10 +2,10 @@
 import { ConditionOperatorEnum } from './condition-operator-enum';
 import { TransferKeyEnum } from './transfer-key-enum';
 export interface CreateLogicDto {
-  andCondition: {  };
+  andCondition?: {  };
   conditionOperator: ConditionOperatorEnum;
   name: string;
-  orCondition: {  };
+  orCondition?: {  };
   transferKey: TransferKeyEnum;
   type: 'String' | 'Number' | 'Date';
   value: string;

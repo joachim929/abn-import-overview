@@ -26,21 +26,21 @@ export class TransferApiService extends BaseService {
   }
 
   /**
-   * Path part for operation adminGetTransfer
+   * Path part for operation transferControllerGet
    */
-  static readonly AdminGetTransferPath = '/transfer';
+  static readonly TransferControllerGetPath = '/transfer';
 
   /**
    * This method provides access to the full `HttpResponse`, allowing access to response headers.
-   * To access only the response body, use `adminGetTransfer()` instead.
+   * To access only the response body, use `transferControllerGet()` instead.
    *
    * This method doesn't expect any request body.
    */
-  adminGetTransfer$Response(params?: {
+  transferControllerGet$Response(params?: {
 
   }): Observable<StrictHttpResponse<Array<Transfer>>> {
 
-    const rb = new RequestBuilder(this.rootUrl, TransferApiService.AdminGetTransferPath, 'get');
+    const rb = new RequestBuilder(this.rootUrl, TransferApiService.TransferControllerGetPath, 'get');
     if (params) {
 
 
@@ -58,36 +58,36 @@ export class TransferApiService extends BaseService {
 
   /**
    * This method provides access to only to the response body.
-   * To access the full response (for headers, for example), `adminGetTransfer$Response()` instead.
+   * To access the full response (for headers, for example), `transferControllerGet$Response()` instead.
    *
    * This method doesn't expect any request body.
    */
-  adminGetTransfer(params?: {
+  transferControllerGet(params?: {
 
   }): Observable<Array<Transfer>> {
 
-    return this.adminGetTransfer$Response(params).pipe(
+    return this.transferControllerGet$Response(params).pipe(
       map((r: StrictHttpResponse<Array<Transfer>>) => r.body as Array<Transfer>)
     );
   }
 
   /**
-   * Path part for operation getTransfer
+   * Path part for operation transferControllerGetTransfer
    */
-  static readonly GetTransferPath = '/transfer/{id}';
+  static readonly TransferControllerGetTransferPath = '/transfer/{id}';
 
   /**
    * This method provides access to the full `HttpResponse`, allowing access to response headers.
-   * To access only the response body, use `getTransfer()` instead.
+   * To access only the response body, use `transferControllerGetTransfer()` instead.
    *
    * This method doesn't expect any request body.
    */
-  getTransfer$Response(params: {
+  transferControllerGetTransfer$Response(params: {
     id: string;
 
   }): Observable<StrictHttpResponse<TransferMutation>> {
 
-    const rb = new RequestBuilder(this.rootUrl, TransferApiService.GetTransferPath, 'get');
+    const rb = new RequestBuilder(this.rootUrl, TransferApiService.TransferControllerGetTransferPath, 'get');
     if (params) {
 
       rb.path('id', params.id);
@@ -106,36 +106,36 @@ export class TransferApiService extends BaseService {
 
   /**
    * This method provides access to only to the response body.
-   * To access the full response (for headers, for example), `getTransfer$Response()` instead.
+   * To access the full response (for headers, for example), `transferControllerGetTransfer$Response()` instead.
    *
    * This method doesn't expect any request body.
    */
-  getTransfer(params: {
+  transferControllerGetTransfer(params: {
     id: string;
 
   }): Observable<TransferMutation> {
 
-    return this.getTransfer$Response(params).pipe(
+    return this.transferControllerGetTransfer$Response(params).pipe(
       map((r: StrictHttpResponse<TransferMutation>) => r.body as TransferMutation)
     );
   }
 
   /**
-   * Path part for operation filteredTransfers
+   * Path part for operation transferControllerGetFilteredTransfers
    */
-  static readonly FilteredTransfersPath = '/transfer/filtered';
+  static readonly TransferControllerGetFilteredTransfersPath = '/transfer/filtered';
 
   /**
    * This method provides access to the full `HttpResponse`, allowing access to response headers.
-   * To access only the response body, use `filteredTransfers()` instead.
+   * To access only the response body, use `transferControllerGetFilteredTransfers()` instead.
    *
    * This method sends `application/json` and handles request body of type `application/json`.
    */
-  filteredTransfers$Response(params: {
+  transferControllerGetFilteredTransfers$Response(params: {
       body: TransferListParams
   }): Observable<StrictHttpResponse<TransferListParams>> {
 
-    const rb = new RequestBuilder(this.rootUrl, TransferApiService.FilteredTransfersPath, 'post');
+    const rb = new RequestBuilder(this.rootUrl, TransferApiService.TransferControllerGetFilteredTransfersPath, 'post');
     if (params) {
 
 
@@ -154,35 +154,35 @@ export class TransferApiService extends BaseService {
 
   /**
    * This method provides access to only to the response body.
-   * To access the full response (for headers, for example), `filteredTransfers$Response()` instead.
+   * To access the full response (for headers, for example), `transferControllerGetFilteredTransfers$Response()` instead.
    *
    * This method sends `application/json` and handles request body of type `application/json`.
    */
-  filteredTransfers(params: {
+  transferControllerGetFilteredTransfers(params: {
       body: TransferListParams
   }): Observable<TransferListParams> {
 
-    return this.filteredTransfers$Response(params).pipe(
+    return this.transferControllerGetFilteredTransfers$Response(params).pipe(
       map((r: StrictHttpResponse<TransferListParams>) => r.body as TransferListParams)
     );
   }
 
   /**
-   * Path part for operation postExcelTransfer
+   * Path part for operation transferControllerPostExcelImport
    */
-  static readonly PostExcelTransferPath = '/transfer/upload/excel';
+  static readonly TransferControllerPostExcelImportPath = '/transfer/upload/excel';
 
   /**
    * This method provides access to the full `HttpResponse`, allowing access to response headers.
-   * To access only the response body, use `postExcelTransfer()` instead.
+   * To access only the response body, use `transferControllerPostExcelImport()` instead.
    *
    * This method sends `application/json` and handles request body of type `application/json`.
    */
-  postExcelTransfer$Response(params: {
+  transferControllerPostExcelImport$Response(params: {
       body: Array<RawInvoiceJsonDto>
   }): Observable<StrictHttpResponse<TransferBatchImportDto>> {
 
-    const rb = new RequestBuilder(this.rootUrl, TransferApiService.PostExcelTransferPath, 'post');
+    const rb = new RequestBuilder(this.rootUrl, TransferApiService.TransferControllerPostExcelImportPath, 'post');
     if (params) {
 
 
@@ -201,15 +201,15 @@ export class TransferApiService extends BaseService {
 
   /**
    * This method provides access to only to the response body.
-   * To access the full response (for headers, for example), `postExcelTransfer$Response()` instead.
+   * To access the full response (for headers, for example), `transferControllerPostExcelImport$Response()` instead.
    *
    * This method sends `application/json` and handles request body of type `application/json`.
    */
-  postExcelTransfer(params: {
+  transferControllerPostExcelImport(params: {
       body: Array<RawInvoiceJsonDto>
   }): Observable<TransferBatchImportDto> {
 
-    return this.postExcelTransfer$Response(params).pipe(
+    return this.transferControllerPostExcelImport$Response(params).pipe(
       map((r: StrictHttpResponse<TransferBatchImportDto>) => r.body as TransferBatchImportDto)
     );
   }

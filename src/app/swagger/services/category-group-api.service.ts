@@ -23,21 +23,21 @@ export class CategoryGroupApiService extends BaseService {
   }
 
   /**
-   * Path part for operation getAllCategoryGroupsWithCategories
+   * Path part for operation categoryGroupControllerGetAllWithCategories
    */
-  static readonly GetAllCategoryGroupsWithCategoriesPath = '/category-group';
+  static readonly CategoryGroupControllerGetAllWithCategoriesPath = '/category-group';
 
   /**
    * This method provides access to the full `HttpResponse`, allowing access to response headers.
-   * To access only the response body, use `getAllCategoryGroupsWithCategories()` instead.
+   * To access only the response body, use `categoryGroupControllerGetAllWithCategories()` instead.
    *
    * This method doesn't expect any request body.
    */
-  getAllCategoryGroupsWithCategories$Response(params?: {
+  categoryGroupControllerGetAllWithCategories$Response(params?: {
 
   }): Observable<StrictHttpResponse<Array<CategoryGroupDto>>> {
 
-    const rb = new RequestBuilder(this.rootUrl, CategoryGroupApiService.GetAllCategoryGroupsWithCategoriesPath, 'get');
+    const rb = new RequestBuilder(this.rootUrl, CategoryGroupApiService.CategoryGroupControllerGetAllWithCategoriesPath, 'get');
     if (params) {
 
 
@@ -55,35 +55,35 @@ export class CategoryGroupApiService extends BaseService {
 
   /**
    * This method provides access to only to the response body.
-   * To access the full response (for headers, for example), `getAllCategoryGroupsWithCategories$Response()` instead.
+   * To access the full response (for headers, for example), `categoryGroupControllerGetAllWithCategories$Response()` instead.
    *
    * This method doesn't expect any request body.
    */
-  getAllCategoryGroupsWithCategories(params?: {
+  categoryGroupControllerGetAllWithCategories(params?: {
 
   }): Observable<Array<CategoryGroupDto>> {
 
-    return this.getAllCategoryGroupsWithCategories$Response(params).pipe(
+    return this.categoryGroupControllerGetAllWithCategories$Response(params).pipe(
       map((r: StrictHttpResponse<Array<CategoryGroupDto>>) => r.body as Array<CategoryGroupDto>)
     );
   }
 
   /**
-   * Path part for operation createCategoryGroup
+   * Path part for operation categoryGroupControllerCreate
    */
-  static readonly CreateCategoryGroupPath = '/category-group';
+  static readonly CategoryGroupControllerCreatePath = '/category-group';
 
   /**
    * This method provides access to the full `HttpResponse`, allowing access to response headers.
-   * To access only the response body, use `createCategoryGroup()` instead.
+   * To access only the response body, use `categoryGroupControllerCreate()` instead.
    *
    * This method sends `application/json` and handles request body of type `application/json`.
    */
-  createCategoryGroup$Response(params: {
+  categoryGroupControllerCreate$Response(params: {
       body: CreateCategoryGroupDto
   }): Observable<StrictHttpResponse<CategoryGroupDto>> {
 
-    const rb = new RequestBuilder(this.rootUrl, CategoryGroupApiService.CreateCategoryGroupPath, 'post');
+    const rb = new RequestBuilder(this.rootUrl, CategoryGroupApiService.CategoryGroupControllerCreatePath, 'post');
     if (params) {
 
 
@@ -102,35 +102,35 @@ export class CategoryGroupApiService extends BaseService {
 
   /**
    * This method provides access to only to the response body.
-   * To access the full response (for headers, for example), `createCategoryGroup$Response()` instead.
+   * To access the full response (for headers, for example), `categoryGroupControllerCreate$Response()` instead.
    *
    * This method sends `application/json` and handles request body of type `application/json`.
    */
-  createCategoryGroup(params: {
+  categoryGroupControllerCreate(params: {
       body: CreateCategoryGroupDto
   }): Observable<CategoryGroupDto> {
 
-    return this.createCategoryGroup$Response(params).pipe(
+    return this.categoryGroupControllerCreate$Response(params).pipe(
       map((r: StrictHttpResponse<CategoryGroupDto>) => r.body as CategoryGroupDto)
     );
   }
 
   /**
-   * Path part for operation patchMultiple
+   * Path part for operation categoryGroupControllerPatchMultiple
    */
-  static readonly PatchMultiplePath = '/category-group';
+  static readonly CategoryGroupControllerPatchMultiplePath = '/category-group';
 
   /**
    * This method provides access to the full `HttpResponse`, allowing access to response headers.
-   * To access only the response body, use `patchMultiple()` instead.
+   * To access only the response body, use `categoryGroupControllerPatchMultiple()` instead.
    *
    * This method sends `application/json` and handles request body of type `application/json`.
    */
-  patchMultiple$Response(params: {
+  categoryGroupControllerPatchMultiple$Response(params: {
       body: Array<CategoryGroupDto>
   }): Observable<StrictHttpResponse<Array<CategoryGroupDto>>> {
 
-    const rb = new RequestBuilder(this.rootUrl, CategoryGroupApiService.PatchMultiplePath, 'patch');
+    const rb = new RequestBuilder(this.rootUrl, CategoryGroupApiService.CategoryGroupControllerPatchMultiplePath, 'patch');
     if (params) {
 
 
@@ -149,36 +149,36 @@ export class CategoryGroupApiService extends BaseService {
 
   /**
    * This method provides access to only to the response body.
-   * To access the full response (for headers, for example), `patchMultiple$Response()` instead.
+   * To access the full response (for headers, for example), `categoryGroupControllerPatchMultiple$Response()` instead.
    *
    * This method sends `application/json` and handles request body of type `application/json`.
    */
-  patchMultiple(params: {
+  categoryGroupControllerPatchMultiple(params: {
       body: Array<CategoryGroupDto>
   }): Observable<Array<CategoryGroupDto>> {
 
-    return this.patchMultiple$Response(params).pipe(
+    return this.categoryGroupControllerPatchMultiple$Response(params).pipe(
       map((r: StrictHttpResponse<Array<CategoryGroupDto>>) => r.body as Array<CategoryGroupDto>)
     );
   }
 
   /**
-   * Path part for operation deleteCategoryGroup
+   * Path part for operation categoryGroupControllerDelete
    */
-  static readonly DeleteCategoryGroupPath = '/category-group/{id}';
+  static readonly CategoryGroupControllerDeletePath = '/category-group/{id}';
 
   /**
    * This method provides access to the full `HttpResponse`, allowing access to response headers.
-   * To access only the response body, use `deleteCategoryGroup()` instead.
+   * To access only the response body, use `categoryGroupControllerDelete()` instead.
    *
    * This method doesn't expect any request body.
    */
-  deleteCategoryGroup$Response(params: {
+  categoryGroupControllerDelete$Response(params: {
     id: string;
 
   }): Observable<StrictHttpResponse<void>> {
 
-    const rb = new RequestBuilder(this.rootUrl, CategoryGroupApiService.DeleteCategoryGroupPath, 'delete');
+    const rb = new RequestBuilder(this.rootUrl, CategoryGroupApiService.CategoryGroupControllerDeletePath, 'delete');
     if (params) {
 
       rb.path('id', params.id);
@@ -197,16 +197,16 @@ export class CategoryGroupApiService extends BaseService {
 
   /**
    * This method provides access to only to the response body.
-   * To access the full response (for headers, for example), `deleteCategoryGroup$Response()` instead.
+   * To access the full response (for headers, for example), `categoryGroupControllerDelete$Response()` instead.
    *
    * This method doesn't expect any request body.
    */
-  deleteCategoryGroup(params: {
+  categoryGroupControllerDelete(params: {
     id: string;
 
   }): Observable<void> {
 
-    return this.deleteCategoryGroup$Response(params).pipe(
+    return this.categoryGroupControllerDelete$Response(params).pipe(
       map((r: StrictHttpResponse<void>) => r.body as void)
     );
   }

@@ -31,7 +31,7 @@ export class TransferEditService {
     dialog.afterClosed().pipe(
       filter(x => !!x),
       switchMap(x => {
-        return this.transferMutationApiService.patchTransferMutation({body: x});
+        return this.transferMutationApiService.transferMutationControllerPatchTransferMutation({body: x});
       })).subscribe(
       (editedTransferMutation: TransferMutationDto) => this.transferDataService.updateTransferMutation(editedTransferMutation));
   }
@@ -50,7 +50,7 @@ export class TransferEditService {
       filter(x => !!x),
       tap((x: SplitTransferMutationDto) => transferMutationId = x.patch.mutationId),
       switchMap((x: SplitTransferMutationDto) => {
-        return this.transferMutationApiService.splitTransferMutation({body: x}).pipe(
+        return this.transferMutationApiService.transferMutationControllerSplitTransferMutation({body: x}).pipe(
           filter(y => !!y)
         );
       })

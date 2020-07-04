@@ -25,21 +25,21 @@ export class TransferMutationApiService extends BaseService {
   }
 
   /**
-   * Path part for operation getByCategoryId
+   * Path part for operation transferMutationControllerGetTransferMutationsByCategoryId
    */
-  static readonly GetByCategoryIdPath = '/transfer-mutation/category';
+  static readonly TransferMutationControllerGetTransferMutationsByCategoryIdPath = '/transfer-mutation/category';
 
   /**
    * This method provides access to the full `HttpResponse`, allowing access to response headers.
-   * To access only the response body, use `getByCategoryId()` instead.
+   * To access only the response body, use `transferMutationControllerGetTransferMutationsByCategoryId()` instead.
    *
    * This method sends `application/json` and handles request body of type `application/json`.
    */
-  getByCategoryId$Response(params: {
+  transferMutationControllerGetTransferMutationsByCategoryId$Response(params: {
       body: TransferListParams
   }): Observable<StrictHttpResponse<TransferListParams>> {
 
-    const rb = new RequestBuilder(this.rootUrl, TransferMutationApiService.GetByCategoryIdPath, 'post');
+    const rb = new RequestBuilder(this.rootUrl, TransferMutationApiService.TransferMutationControllerGetTransferMutationsByCategoryIdPath, 'post');
     if (params) {
 
 
@@ -58,36 +58,36 @@ export class TransferMutationApiService extends BaseService {
 
   /**
    * This method provides access to only to the response body.
-   * To access the full response (for headers, for example), `getByCategoryId$Response()` instead.
+   * To access the full response (for headers, for example), `transferMutationControllerGetTransferMutationsByCategoryId$Response()` instead.
    *
    * This method sends `application/json` and handles request body of type `application/json`.
    */
-  getByCategoryId(params: {
+  transferMutationControllerGetTransferMutationsByCategoryId(params: {
       body: TransferListParams
   }): Observable<TransferListParams> {
 
-    return this.getByCategoryId$Response(params).pipe(
+    return this.transferMutationControllerGetTransferMutationsByCategoryId$Response(params).pipe(
       map((r: StrictHttpResponse<TransferListParams>) => r.body as TransferListParams)
     );
   }
 
   /**
-   * Path part for operation getTransferMutationHistory
+   * Path part for operation transferMutationControllerGetTransferMutationHistory
    */
-  static readonly GetTransferMutationHistoryPath = '/transfer-mutation/history/{id}';
+  static readonly TransferMutationControllerGetTransferMutationHistoryPath = '/transfer-mutation/history/{id}';
 
   /**
    * This method provides access to the full `HttpResponse`, allowing access to response headers.
-   * To access only the response body, use `getTransferMutationHistory()` instead.
+   * To access only the response body, use `transferMutationControllerGetTransferMutationHistory()` instead.
    *
    * This method doesn't expect any request body.
    */
-  getTransferMutationHistory$Response(params: {
+  transferMutationControllerGetTransferMutationHistory$Response(params: {
     id: number;
 
   }): Observable<StrictHttpResponse<Transfer>> {
 
-    const rb = new RequestBuilder(this.rootUrl, TransferMutationApiService.GetTransferMutationHistoryPath, 'get');
+    const rb = new RequestBuilder(this.rootUrl, TransferMutationApiService.TransferMutationControllerGetTransferMutationHistoryPath, 'get');
     if (params) {
 
       rb.path('id', params.id);
@@ -106,36 +106,36 @@ export class TransferMutationApiService extends BaseService {
 
   /**
    * This method provides access to only to the response body.
-   * To access the full response (for headers, for example), `getTransferMutationHistory$Response()` instead.
+   * To access the full response (for headers, for example), `transferMutationControllerGetTransferMutationHistory$Response()` instead.
    *
    * This method doesn't expect any request body.
    */
-  getTransferMutationHistory(params: {
+  transferMutationControllerGetTransferMutationHistory(params: {
     id: number;
 
   }): Observable<Transfer> {
 
-    return this.getTransferMutationHistory$Response(params).pipe(
+    return this.transferMutationControllerGetTransferMutationHistory$Response(params).pipe(
       map((r: StrictHttpResponse<Transfer>) => r.body as Transfer)
     );
   }
 
   /**
-   * Path part for operation undoTransferMutationPatch
+   * Path part for operation transferMutationControllerUndoTransferMutationPatch
    */
-  static readonly UndoTransferMutationPatchPath = '/transfer-mutation/undo';
+  static readonly TransferMutationControllerUndoTransferMutationPatchPath = '/transfer-mutation/undo';
 
   /**
    * This method provides access to the full `HttpResponse`, allowing access to response headers.
-   * To access only the response body, use `undoTransferMutationPatch()` instead.
+   * To access only the response body, use `transferMutationControllerUndoTransferMutationPatch()` instead.
    *
    * This method sends `application/json` and handles request body of type `application/json`.
    */
-  undoTransferMutationPatch$Response(params: {
+  transferMutationControllerUndoTransferMutationPatch$Response(params: {
       body: TransferMutationDto
   }): Observable<StrictHttpResponse<TransferMutationDto>> {
 
-    const rb = new RequestBuilder(this.rootUrl, TransferMutationApiService.UndoTransferMutationPatchPath, 'patch');
+    const rb = new RequestBuilder(this.rootUrl, TransferMutationApiService.TransferMutationControllerUndoTransferMutationPatchPath, 'patch');
     if (params) {
 
 
@@ -154,35 +154,35 @@ export class TransferMutationApiService extends BaseService {
 
   /**
    * This method provides access to only to the response body.
-   * To access the full response (for headers, for example), `undoTransferMutationPatch$Response()` instead.
+   * To access the full response (for headers, for example), `transferMutationControllerUndoTransferMutationPatch$Response()` instead.
    *
    * This method sends `application/json` and handles request body of type `application/json`.
    */
-  undoTransferMutationPatch(params: {
+  transferMutationControllerUndoTransferMutationPatch(params: {
       body: TransferMutationDto
   }): Observable<TransferMutationDto> {
 
-    return this.undoTransferMutationPatch$Response(params).pipe(
+    return this.transferMutationControllerUndoTransferMutationPatch$Response(params).pipe(
       map((r: StrictHttpResponse<TransferMutationDto>) => r.body as TransferMutationDto)
     );
   }
 
   /**
-   * Path part for operation splitTransferMutation
+   * Path part for operation transferMutationControllerSplitTransferMutation
    */
-  static readonly SplitTransferMutationPath = '/transfer-mutation/split';
+  static readonly TransferMutationControllerSplitTransferMutationPath = '/transfer-mutation/split';
 
   /**
    * This method provides access to the full `HttpResponse`, allowing access to response headers.
-   * To access only the response body, use `splitTransferMutation()` instead.
+   * To access only the response body, use `transferMutationControllerSplitTransferMutation()` instead.
    *
    * This method sends `application/json` and handles request body of type `application/json`.
    */
-  splitTransferMutation$Response(params: {
+  transferMutationControllerSplitTransferMutation$Response(params: {
       body: SplitTransferMutationDto
   }): Observable<StrictHttpResponse<Array<TransferMutationDto>>> {
 
-    const rb = new RequestBuilder(this.rootUrl, TransferMutationApiService.SplitTransferMutationPath, 'post');
+    const rb = new RequestBuilder(this.rootUrl, TransferMutationApiService.TransferMutationControllerSplitTransferMutationPath, 'post');
     if (params) {
 
 
@@ -201,36 +201,36 @@ export class TransferMutationApiService extends BaseService {
 
   /**
    * This method provides access to only to the response body.
-   * To access the full response (for headers, for example), `splitTransferMutation$Response()` instead.
+   * To access the full response (for headers, for example), `transferMutationControllerSplitTransferMutation$Response()` instead.
    *
    * This method sends `application/json` and handles request body of type `application/json`.
    */
-  splitTransferMutation(params: {
+  transferMutationControllerSplitTransferMutation(params: {
       body: SplitTransferMutationDto
   }): Observable<Array<TransferMutationDto>> {
 
-    return this.splitTransferMutation$Response(params).pipe(
+    return this.transferMutationControllerSplitTransferMutation$Response(params).pipe(
       map((r: StrictHttpResponse<Array<TransferMutationDto>>) => r.body as Array<TransferMutationDto>)
     );
   }
 
   /**
-   * Path part for operation deleteTransferMutation
+   * Path part for operation transferMutationControllerDelete
    */
-  static readonly DeleteTransferMutationPath = '/transfer-mutation/{id}';
+  static readonly TransferMutationControllerDeletePath = '/transfer-mutation/{id}';
 
   /**
    * This method provides access to the full `HttpResponse`, allowing access to response headers.
-   * To access only the response body, use `deleteTransferMutation()` instead.
+   * To access only the response body, use `transferMutationControllerDelete()` instead.
    *
    * This method doesn't expect any request body.
    */
-  deleteTransferMutation$Response(params: {
+  transferMutationControllerDelete$Response(params: {
     id: number;
 
   }): Observable<StrictHttpResponse<void>> {
 
-    const rb = new RequestBuilder(this.rootUrl, TransferMutationApiService.DeleteTransferMutationPath, 'delete');
+    const rb = new RequestBuilder(this.rootUrl, TransferMutationApiService.TransferMutationControllerDeletePath, 'delete');
     if (params) {
 
       rb.path('id', params.id);
@@ -249,36 +249,36 @@ export class TransferMutationApiService extends BaseService {
 
   /**
    * This method provides access to only to the response body.
-   * To access the full response (for headers, for example), `deleteTransferMutation$Response()` instead.
+   * To access the full response (for headers, for example), `transferMutationControllerDelete$Response()` instead.
    *
    * This method doesn't expect any request body.
    */
-  deleteTransferMutation(params: {
+  transferMutationControllerDelete(params: {
     id: number;
 
   }): Observable<void> {
 
-    return this.deleteTransferMutation$Response(params).pipe(
+    return this.transferMutationControllerDelete$Response(params).pipe(
       map((r: StrictHttpResponse<void>) => r.body as void)
     );
   }
 
   /**
-   * Path part for operation patchTransferMutation
+   * Path part for operation transferMutationControllerPatchTransferMutation
    */
-  static readonly PatchTransferMutationPath = '/transfer-mutation';
+  static readonly TransferMutationControllerPatchTransferMutationPath = '/transfer-mutation';
 
   /**
    * This method provides access to the full `HttpResponse`, allowing access to response headers.
-   * To access only the response body, use `patchTransferMutation()` instead.
+   * To access only the response body, use `transferMutationControllerPatchTransferMutation()` instead.
    *
    * This method sends `application/json` and handles request body of type `application/json`.
    */
-  patchTransferMutation$Response(params: {
+  transferMutationControllerPatchTransferMutation$Response(params: {
       body: TransferMutationDto
   }): Observable<StrictHttpResponse<TransferMutationDto>> {
 
-    const rb = new RequestBuilder(this.rootUrl, TransferMutationApiService.PatchTransferMutationPath, 'patch');
+    const rb = new RequestBuilder(this.rootUrl, TransferMutationApiService.TransferMutationControllerPatchTransferMutationPath, 'patch');
     if (params) {
 
 
@@ -297,15 +297,15 @@ export class TransferMutationApiService extends BaseService {
 
   /**
    * This method provides access to only to the response body.
-   * To access the full response (for headers, for example), `patchTransferMutation$Response()` instead.
+   * To access the full response (for headers, for example), `transferMutationControllerPatchTransferMutation$Response()` instead.
    *
    * This method sends `application/json` and handles request body of type `application/json`.
    */
-  patchTransferMutation(params: {
+  transferMutationControllerPatchTransferMutation(params: {
       body: TransferMutationDto
   }): Observable<TransferMutationDto> {
 
-    return this.patchTransferMutation$Response(params).pipe(
+    return this.transferMutationControllerPatchTransferMutation$Response(params).pipe(
       map((r: StrictHttpResponse<TransferMutationDto>) => r.body as TransferMutationDto)
     );
   }

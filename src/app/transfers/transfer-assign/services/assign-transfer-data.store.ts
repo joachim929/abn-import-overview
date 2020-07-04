@@ -2,8 +2,7 @@ import { Injectable } from '@angular/core';
 import {BehaviorSubject, Observable} from 'rxjs';
 import {TransferMutationDto} from '../../../swagger/models/transfer-mutation-dto';
 import {TransferMutationApiService} from '../../../swagger/services/transfer-mutation-api.service';
-import {switchMap, take, tap} from 'rxjs/operators';
-import {TransferListParams} from '../../../swagger/models/transfer-list-params';
+import {switchMap, take} from 'rxjs/operators';
 
 @Injectable()
 export class AssignTransferDataStore {
@@ -25,7 +24,7 @@ export class AssignTransferDataStore {
 
   constructor(private apiService: TransferMutationApiService) {
     this.skip.pipe(
-      switchMap((skipValue) => this.apiService.getByCategoryId({
+      switchMap((skipValue) => this.apiService.transferMutationControllerGetTransferMutationsByCategoryId({
         body: {skip: skipValue, limit: this.dataStore.limit}
       })
       )
@@ -49,7 +48,7 @@ export class AssignTransferDataStore {
   assignCategory(assignedMutation: TransferMutationDto) {
     this.dataStore.isSaving = true;
     this.isSaving.next(Object.assign({}, this.dataStore).isSaving);
-    this.apiService.patchTransferMutation({
+    this.apiService.transferMutationControllerPatchTransferMutation({
       body: assignedMutation
     }).pipe(
       take(1),

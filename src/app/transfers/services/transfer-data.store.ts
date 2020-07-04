@@ -49,7 +49,7 @@ export class TransferDataStore {
   adjustFilter(input: TransferListParams) {
     this.dataStore.filter = input;
     this.filter$.next(Object.assign({}, this.dataStore).filter);
-    this.transferApiService.filteredTransfers({body: input}).subscribe((data: TransferListParams) => {
+    this.transferApiService.transferControllerGetFilteredTransfers({body: input}).subscribe((data: TransferListParams) => {
       this.setTransfers(data.transferMutations);
       this.setMinAmount(data.minAmount);
       this.setMaxAmount(data.maxAmount);
@@ -63,7 +63,7 @@ export class TransferDataStore {
     filter.skip += 20;
     this.dataStore.filter = filter;
     this.filter$.next(Object.assign({}, this.dataStore).filter);
-    this.transferApiService.filteredTransfers({body: filter}).subscribe((data: TransferListParams) => {
+    this.transferApiService.transferControllerGetFilteredTransfers({body: filter}).subscribe((data: TransferListParams) => {
       let accData = [...this.dataStore.transfer];
       accData = accData.concat(data.transferMutations);
       this.dataStore.transfer = accData;
@@ -157,7 +157,7 @@ export class TransferDataStore {
   }
 
   removeInvoice(id: number) {
-    this.transferMutationApiService.deleteTransferMutation({id}).subscribe(() => {
+    this.transferMutationApiService.transferMutationControllerDelete({id}).subscribe(() => {
       this.dataStore.transfer.map((transferMutation, index) => {
         if (transferMutation.mutationId === id) {
           this.dataStore.transfer.splice(index, 1);
@@ -169,7 +169,7 @@ export class TransferDataStore {
 
   multiUploadExcel(file) {
     this.xlsToJson(file).then((json) => {
-      this.transferApiService.postExcelTransfer({body: json})
+      this.transferApiService.transferControllerPostExcelImport({body: json})
         .subscribe((next: TransferBatchImportDto) => {
           // todo: Deal with existing
           const existing = next.existingTransfers;

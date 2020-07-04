@@ -2,7 +2,7 @@ import {Injectable} from '@angular/core';
 import {BehaviorSubject, Observable} from 'rxjs';
 import {TransferMutationApiService} from '../../../swagger/services/transfer-mutation-api.service';
 import {Transfer} from '../../../swagger/models';
-import {filter, tap} from 'rxjs/operators';
+import {filter} from 'rxjs/operators';
 
 @Injectable()
 export class HistoryDataStore {
@@ -28,7 +28,7 @@ export class HistoryDataStore {
   }
 
   getTransfer(id: number) {
-    this.transferMutationApiService.getTransferMutationHistory({id}).pipe(
+    this.transferMutationApiService.transferMutationControllerGetTransferMutationHistory({id}).pipe(
       filter(result => !!result)
     ).subscribe((result) => this.setTransfer(result));
   }
