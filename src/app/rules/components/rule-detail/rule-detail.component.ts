@@ -90,12 +90,19 @@ export class RuleDetailComponent implements OnInit, OnDestroy {
 
   private initForm(input) {
     this.form.reset();
-    this.form.get('orLogic').setValidators([minLengthThisOrThat(this.form.get('andLogic') as FormArray)]);
-    this.form.get('andLogic').setValidators([minLengthThisOrThat(this.form.get('orLogic') as FormArray)]);
-    (this.form.get('orLogic') as FormArray).clear();
-    input?.orLogic?.map(() => (this.form.get('orLogic') as FormArray).push(new FormControl()));
-    (this.form.get('andLogic') as FormArray).clear();
-    input?.andLogic?.map(() => (this.form.get('andLogic') as FormArray).push(new FormControl()));
+    ['orLogic', 'andLogic'].forEach((controlKey, index) => {
+      this.form.get(controlKey).setValidators([
+        minLengthThisOrThat(this.form.get(controlKey === 'andLogic' ? 'orLogic' : 'andLogic') as FormArray)
+      ]);
+      (this.form.get(controlKey) as FormArray).clear();
+      input[controlKey]?.map(() => (this.form.get(controlKey) as FormArray).push(new FormControl()));
+    });
+    // this.form.get('orLogic').setValidators([minLengthThisOrThat(this.form.get('andLogic') as FormArray)]);
+    // this.form.get('andLogic').setValidators([minLengthThisOrThat(this.form.get('orLogic') as FormArray)]);
+    // (this.form.get('orLogic') as FormArray).clear();
+    // input?.orLogic?.map(() => (this.form.get('orLogic') as FormArray).push(new FormControl()));
+    // (this.form.get('andLogic') as FormArray).clear();
+    // input?.andLogic?.map(() => (this.form.get('andLogic') as FormArray).push(new FormControl()));
     this.form.setValue(input);
     this.form.disable();
   }

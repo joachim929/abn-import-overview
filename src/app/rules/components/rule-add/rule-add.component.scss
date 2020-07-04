@@ -1,3 +1,11 @@
-.control-group .rule-add-subtitle {
+.rule-name-container {
+  justify-content: space-between;
+}
+
+.rule-add-action-buttons {
+  justify-content: end;
+}
+
+.control-group .form-sub-title {
   margin: 8px 0;
 }
