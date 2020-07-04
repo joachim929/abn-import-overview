@@ -1,0 +1,10 @@
+@mixin create-link {
+  max-height: 36px;
+  transition: 300ms ease-in;
+}
+
+@mixin create-link-hide {
+  max-height: 0;
+  opacity: 0;
+  overflow: hidden;
+}

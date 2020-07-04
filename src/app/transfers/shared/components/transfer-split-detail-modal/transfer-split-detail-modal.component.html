@@ -84,7 +84,7 @@
       <mat-label>Category</mat-label>
       <input class="cursor-default" readonly matInput value="{{ocInvoice?.category?.name || ''}}">
     </mat-form-field>
-    <app-categories-select label="New" formControlName="category"></app-categories-select>
+    <app-categories-select label="New" [control]="form.get('category')"></app-categories-select>
   </div>
 </form>
 <div class="transfer-mutation-controls-container">

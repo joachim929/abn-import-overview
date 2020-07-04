@@ -1,5 +1,4 @@
 import { Component, OnInit } from '@angular/core';
-
 @Component({
   selector: 'app-rules-master',
   templateUrl: './rules-master.component.html',
@@ -9,7 +8,6 @@ export class RulesMasterComponent implements OnInit {
 
   constructor() { }
 
-  ngOnInit() {
+  ngOnInit(): void {
   }
-
 }

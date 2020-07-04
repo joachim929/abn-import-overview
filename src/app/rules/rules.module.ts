@@ -3,55 +3,54 @@ import {CommonModule} from '@angular/common';
 
 import {RulesRoutingModule} from './rules-routing.module';
 import {RulesMasterComponent} from './components/rules-master/rules-master.component';
-import {RulesListComponent} from './components/rules-list/rules-list.component';
-import {RulesActionComponent} from './components/rules-actions/rules-action.component';
+import {RuleAddComponent} from './components/rule-add/rule-add.component';
 import {RuleDetailComponent} from './components/rule-detail/rule-detail.component';
-import {RuleEditComponent} from './components/rule-edit/rule-edit.component';
-import { AmountRulePipe } from './pipes/amount-rule.pipe';
-import { DescriptionRulePipe } from './pipes/description-rule.pipe';
-import {ReactiveFormsModule} from '@angular/forms';
 import {SharedModule} from '../shared/shared.module';
-import { MatCardModule } from '@angular/material/card';
-import { MatChipsModule } from '@angular/material/chips';
-import { MatExpansionModule } from '@angular/material/expansion';
-import { ItemTitlePipe } from './pipes/item-title.pipe';
-import { RuleCreateComponent } from './components/rule-create/rule-create.component';
-import {MatCheckboxModule} from '@angular/material/checkbox';
-import {MatFormFieldModule} from '@angular/material/form-field';
-import {MatSelectModule} from '@angular/material/select';
+import { RulesListComponent } from './components/rules-list/rules-list.component';
+import {MatCardModule} from '@angular/material/card';
 import {MatButtonModule} from '@angular/material/button';
+import {MatFormFieldModule} from '@angular/material/form-field';
+import {ReactiveFormsModule} from '@angular/forms';
+import {MatInputModule} from '@angular/material/input';
+import {MatCheckboxModule} from '@angular/material/checkbox';
+import {_MatMenuDirectivesModule, MatMenuModule} from '@angular/material/menu';
 import {MatIconModule} from '@angular/material/icon';
-import { RuleLogicComponent } from './components/rule-logic/rule-logic.component';
-import {MatRadioModule} from '@angular/material/radio';
+import {MatTooltipModule} from '@angular/material/tooltip';
+import {MatSelectModule} from '@angular/material/select';
+import { RulesLogicComponent } from './components/rules-logic/rules-logic.component';
+import {RulesLogicService} from './services/rules-logic.service';
+import { RuleAutoAssignInfoComponent } from './components/rule-auto-assign-info/rule-auto-assign-info.component';
+import { RulesLogicArrayComponent } from './components/rules-logic-array/rules-logic-array.component';
 
 
 @NgModule({
   declarations: [
     RulesMasterComponent,
-    RulesListComponent,
-    RulesActionComponent,
+    RuleAddComponent,
     RuleDetailComponent,
-    RuleEditComponent,
-    AmountRulePipe,
-    DescriptionRulePipe,
-    ItemTitlePipe,
-    RuleCreateComponent,
-    RuleLogicComponent
+    RulesListComponent,
+    RulesLogicComponent,
+    RuleAutoAssignInfoComponent,
+    RulesLogicArrayComponent
   ],
   imports: [
     CommonModule,
     RulesRoutingModule,
-    ReactiveFormsModule,
     SharedModule,
     MatCardModule,
-    MatChipsModule,
-    MatExpansionModule,
-    MatCheckboxModule,
-    MatFormFieldModule,
-    MatSelectModule,
     MatButtonModule,
+    MatFormFieldModule,
+    ReactiveFormsModule,
+    MatInputModule,
+    MatCheckboxModule,
+    _MatMenuDirectivesModule,
+    MatMenuModule,
     MatIconModule,
-    MatRadioModule
+    MatTooltipModule,
+    MatSelectModule
+  ],
+  providers: [
+    RulesLogicService
   ]
 })
 export class RulesModule {

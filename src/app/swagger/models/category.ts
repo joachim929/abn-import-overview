@@ -1,5 +1,6 @@
 /* tslint:disable */
 import { CategoryGroup } from './category-group';
+import { TransferCondition } from './transfer-condition';
 import { TransferMutation } from './transfer-mutation';
 export interface Category {
   categoryGroup: CategoryGroup;
@@ -10,4 +11,5 @@ export interface Category {
   mutations: Array<TransferMutation>;
   name: string;
   order: number;
+  rules: Array<TransferCondition>;
 }

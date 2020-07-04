@@ -1,6 +1,7 @@
-import {Component, OnInit} from '@angular/core';
-import {RuleService} from '../../../core/services/rule.service';
-import {Rule} from '../../../core/interfaces-types/rule.interface';
+import { Component, OnInit } from '@angular/core';
+import {Observable} from 'rxjs';
+import {TransferConditionDto} from '../../../swagger/models/transfer-condition-dto';
+import {RulesDataStore} from '../../../core/services/rules-data.store';
 
 @Component({
   selector: 'app-rules-list',
@@ -8,15 +9,17 @@ import {Rule} from '../../../core/interfaces-types/rule.interface';
   styleUrls: ['./rules-list.component.scss']
 })
 export class RulesListComponent implements OnInit {
-  constructor(
-    private ruleService: RuleService,
-  ) {
+  rules$: Observable<TransferConditionDto[]>;
+  isSaving$: Observable<boolean>;
+  isLoading$: Observable<boolean>;
+
+  constructor(private rulesDataStore: RulesDataStore) { }
+
+  ngOnInit(): void {
+    this.rulesDataStore.loadRules();
+    this.rules$ = this.rulesDataStore.getRules();
+    this.isSaving$ = this.rulesDataStore.getIsSaving();
+    this.isLoading$ = this.rulesDataStore.getIsLoading();
   }
 
-  ngOnInit() {
-  }
-
-  get rules(): Rule[] {
-    return this.ruleService.rules;
-  }
 }

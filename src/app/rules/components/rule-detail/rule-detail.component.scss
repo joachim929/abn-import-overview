@@ -1,14 +1,49 @@
-.rules-list {
-  display: grid;
-  grid-template-columns: auto 100px;
+.edit-mode {
+  .rule-action-buttons {
+    max-height: 44px;
+    opacity: 1;
+    margin-top: 8px;
+  }
+
+  mat-label {
+    opacity: 1;
+  }
 }
 
-.action-bar {
-  justify-content: center;
+.rule-action-buttons {
+  max-height: 0;
+  opacity: 0;
+  transition: 300ms ease-in-out;;
+}
+
+
+.rule-action-buttons, .rule-side-action-buttons {
   display: flex;
-  flex-direction: column;
+  justify-content: space-between;
 }
 
-.rule-action-button {
-  margin: 0.5rem 0;
+.rule-side-action-buttons {
+  flex-direction: column;
+  flex: 0;
+}
+
+.rule-detail {
+  display: flex;
+  flex-direction: row;
+  mat-label {
+    opacity: 0.54;
+  }
+  mat-form-field {
+    mat-label {
+      opacity: inherit;
+    }
+  }
+}
+
+.edit-rule-button:disabled {
+  opacity: 0.5;
+}
+
+.rule-detail-content {
+  flex: 1;
 }

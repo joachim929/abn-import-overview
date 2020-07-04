@@ -9,6 +9,7 @@ export class HeaderComponent implements OnInit {
   links = [
     {path: '/categories', label: 'Categories'},
     {path: '/transfers', label: 'Transfers'},
+    {path: '/rules', label: 'Rules'}
   ];
 
   constructor() {
