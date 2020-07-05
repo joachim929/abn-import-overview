@@ -61,4 +61,7 @@ export class TransferMasterComponent implements OnInit {
     this.file = undefined;
   }
 
+  debugUpload() {
+    this.invoiceDataService.debugUpload();
+  }
 }

@@ -62,7 +62,7 @@
 
     <mat-card-actions class="row rule-add-action-buttons">
       <a mat-button mat-raised-button color="warn" routerLink="/rules">Cancel</a>
-      <button mat-button mat-raised-button [disabled]="!form.touched || (isSaving$ | async)" color="accent"
+      <button mat-button mat-raised-button [disabled]="!form.dirty || (isSaving$ | async)" color="accent"
               (click)="save()">Save
       </button>
     </mat-card-actions>

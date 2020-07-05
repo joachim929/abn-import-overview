@@ -166,12 +166,34 @@ export class TransferDataStore {
     });
   }
 
+  debugUpload() {
+    const testData = {
+      Beginsaldo: Math.floor(Math.random() * 100),
+      Eindsaldo: Math.floor(Math.random() * 100),
+      Muntsoort: 'EUR',
+      Omschrijving: 'Test',
+      Rekeningnummer: Math.floor(Math.random() * 100),
+      Rentedatum: Math.floor(Math.random() * 100000000),
+      Transactiebedrag: Math.floor(Math.random() * 100),
+      Transactiedatum: Math.floor(Math.random() * 100000000),
+    };
+    this.transferApiService.transferControllerPostExcelImport({body: [testData]})
+      .pipe(
+        take(1),
+        tap((next: TransferBatchImportDto) => this.addToTransfers(next.savedTransfers)),
+        filter((response) => response?.existingTransfers.length > 0),
+        map((response) => response.existingTransfers),
+        switchMap((existingTransfers) => this.existingTransferService.openDialog(existingTransfers).pipe(
+          tap((response) => this.addToTransfers(response))
+        ))
+      ).subscribe();
+  }
+
   private addToTransfers(transfers) {
     this.dataStore.transfer = this.dataStore.transfer.concat(transfers).sort((a, b) =>
       (new Date(a.transactionDate) as any) - (new Date(b.transactionDate) as any));
     this.transfers$.next(Object.assign({}, this.dataStore).transfer);
   }
-
 
   private xlsToJson(file): Promise<any> {
     return new Promise((resolve) => {

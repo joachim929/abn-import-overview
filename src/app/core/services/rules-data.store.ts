@@ -56,10 +56,18 @@ export class RulesDataStore {
   addRule(rule: TransferConditionDto): void {
     this.setIsSaving(true);
     this.rulesApiService.rulesControllerPost({body: rule})
-      .pipe(take(1))
+      .pipe(
+        take(1),
+        catchError((e) => {
+          this.handleError(e);
+          return of();
+        })
+      )
       .subscribe((response) => {
-        this.setRules(sortBy([...this.dataStore.rules, response], 'name'));
-        this.router.navigate(['/rules']);
+        if (response) {
+          this.setRules(sortBy([...this.dataStore.rules, response], 'name'));
+          this.router.navigate(['/rules']);
+        }
       });
   }
 
