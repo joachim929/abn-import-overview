@@ -3,7 +3,7 @@ import {HistoryDataStore} from '../../services/history-data.store';
 import {Transfer} from '../../../../swagger/models/transfer';
 import {Observable} from 'rxjs';
 import {ActivatedRoute} from '@angular/router';
-import {filter, switchMap, tap} from 'rxjs/operators';
+import {filter, tap} from 'rxjs/operators';
 import {TransferMutation} from '../../../../swagger/models';
 
 @Component({

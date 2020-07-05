@@ -5,7 +5,6 @@ import {TransferDataStore} from './transfer-data.store';
 import {MatDialog} from '@angular/material/dialog';
 import {TransferSplitDetailModalComponent} from '../shared/components/transfer-split-detail-modal/transfer-split-detail-modal.component';
 import {TransferMutationDto} from '../../swagger/models/transfer-mutation-dto';
-import {TransferApiService} from '../../swagger/services/transfer-api.service';
 import {TransferMutationApiService} from '../../swagger/services/transfer-mutation-api.service';
 import {SplitTransferMutationDto} from '../../swagger/models';
 
@@ -14,7 +13,6 @@ export class TransferEditService {
 
   constructor(
     private transferDataService: TransferDataStore,
-    private transferApiService: TransferApiService,
     private transferMutationApiService: TransferMutationApiService,
     private dialog: MatDialog
   ) {

@@ -5,7 +5,6 @@ import { AssignRoutingModule } from './assign-routing.module';
 import { AssignComponent } from './components/assign/assign.component';
 import {MatCardModule} from '@angular/material/card';
 import {AssignTransferDataStore} from './services/assign-transfer-data.store';
-import {AssignTransferService} from './services/assign-transfer.service';
 import {SharedModule} from '../../shared/shared.module';
 import {MatButtonModule} from '@angular/material/button';
 import {MatDividerModule} from '@angular/material/divider';
@@ -33,7 +32,6 @@ import {MatToolbarModule} from '@angular/material/toolbar';
     ],
   providers: [
     AssignTransferDataStore,
-    AssignTransferService
   ]
 })
 export class AssignModule { }

@@ -6,7 +6,6 @@ import {CategoryGroupDto} from '../../../../swagger/models/category-group-dto';
 import {CategoryDataStore} from '../../../../core/services/category-data.store';
 import {CategoryDto} from '../../../../swagger/models/category-dto';
 import {share} from 'rxjs/operators';
-import {ActivatedRoute, Router} from '@angular/router';
 import {Location} from '@angular/common';
 
 @Component({

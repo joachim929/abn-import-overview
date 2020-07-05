@@ -73,6 +73,7 @@
       "ignore-params"
     ],
     "no-non-null-assertion": true,
+    "no-unused-variable": [true, {"ignore-pattern": "^_"}],
     "no-redundant-jsdoc": true,
     "no-switch-case-fall-through": true,
     "no-var-requires": false,

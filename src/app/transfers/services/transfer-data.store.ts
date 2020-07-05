@@ -1,7 +1,7 @@
 import {Injectable} from '@angular/core';
 import {BehaviorSubject, Observable} from 'rxjs';
 import * as XLSX from 'xlsx';
-import {RawTransferSerializerDto, TransferBatchImportDto, TransferListParams, TransferMutationDto} from '../../swagger/models';
+import {TransferBatchImportDto, TransferListParams, TransferMutationDto} from '../../swagger/models';
 import {TransferApiService} from '../../swagger/services/transfer-api.service';
 import {TransferMutationApiService} from '../../swagger/services/transfer-mutation-api.service';
 import {map, filter, switchMap, take, tap} from 'rxjs/operators';
@@ -116,10 +116,6 @@ export class TransferDataStore {
     this.recordCount$.next(Object.assign({}, this.dataStore).recordCount);
   }
 
-  get skip(): Observable<number> {
-    return this.skip$.asObservable();
-  }
-
   setSkip(input: number): void {
     this.dataStore.skip = input;
     this.skip$.next(Object.assign({}, this.dataStore).skip);
@@ -164,8 +160,8 @@ export class TransferDataStore {
           filter((response) => response?.existingTransfers.length > 0),
           map((response) => response.existingTransfers),
           switchMap((existingTransfers) => this.existingTransferService.openDialog(existingTransfers).pipe(
-            filter((x => !!x)),
-            switchMap((transfersToForce: RawTransferSerializerDto[]) => this.postExistingTransfers(transfersToForce))))
+            tap((response) => this.addToTransfers(response))
+          ))
         ).subscribe();
     });
   }
@@ -176,10 +172,6 @@ export class TransferDataStore {
     this.transfers$.next(Object.assign({}, this.dataStore).transfer);
   }
 
-  private postExistingTransfers(transfers: RawTransferSerializerDto[]): Observable<TransferMutationDto[]> {
-    return this.transferApiService.transferControllerPostExisting({body: transfers}).pipe(
-      tap((response) => this.addToTransfers(response)));
-  }
 
   private xlsToJson(file): Promise<any> {
     return new Promise((resolve) => {

@@ -1,6 +1,6 @@
-import { NgModule } from '@angular/core';
-import { CommonModule } from '@angular/common';
-import { LoadMoreComponent } from './components/load-more/load-more.component';
+import {NgModule} from '@angular/core';
+import {CommonModule} from '@angular/common';
+import {LoadMoreComponent} from './components/load-more/load-more.component';
 import {MatButtonModule} from '@angular/material/button';
 import {TransferEditDetailModalComponent} from './components/transfer-edit-detail-modal/transfer-edit-detail-modal.component';
 import {TransferSplitDetailModalComponent} from './components/transfer-split-detail-modal/transfer-split-detail-modal.component';
@@ -19,24 +19,25 @@ import {MatDialogModule} from '@angular/material/dialog';
     TransferEditDetailModalComponent,
     TransferSplitDetailModalComponent
   ],
-    imports: [
-        CommonModule,
-        MatButtonModule,
-        MatFormFieldModule,
-        ReactiveFormsModule,
-        SharedModule,
-        TextFieldModule,
-        MatInputModule,
-        MatSelectModule,
-        MatDialogModule
-    ],
+  imports: [
+    CommonModule,
+    MatButtonModule,
+    MatFormFieldModule,
+    ReactiveFormsModule,
+    SharedModule,
+    TextFieldModule,
+    MatInputModule,
+    MatSelectModule,
+    MatDialogModule
+  ],
   exports: [
     LoadMoreComponent,
     TransferEditDetailModalComponent,
     TransferSplitDetailModalComponent
   ],
   providers: [
-    CustomCurrencyPipe,
+    CustomCurrencyPipe
   ]
 })
-export class SharedTransferModule { }
+export class SharedTransferModule {
+}

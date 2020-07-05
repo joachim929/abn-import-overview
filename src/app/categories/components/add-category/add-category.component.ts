@@ -1,7 +1,7 @@
 import {Component, EventEmitter, forwardRef, Input, OnDestroy, OnInit, Output} from '@angular/core';
 import {ControlValueAccessor, FormControl, FormGroup, NG_VALUE_ACCESSOR, Validators} from '@angular/forms';
 import {Subject} from 'rxjs';
-import {distinctUntilChanged, take, takeUntil} from 'rxjs/operators';
+import {distinctUntilChanged, takeUntil} from 'rxjs/operators';
 import {isEqual} from 'lodash-es';
 import {CategoryDataService} from '../../services/category-data.service';
 import {CategoryDto} from '../../../swagger/models/category-dto';
