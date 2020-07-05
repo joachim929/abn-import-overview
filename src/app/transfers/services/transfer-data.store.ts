@@ -1,9 +1,11 @@
 import {Injectable} from '@angular/core';
 import {BehaviorSubject, Observable} from 'rxjs';
 import * as XLSX from 'xlsx';
-import {TransferBatchImportDto, TransferListParams, TransferMutationDto} from '../../swagger/models';
+import {RawTransferSerializerDto, TransferBatchImportDto, TransferListParams, TransferMutationDto} from '../../swagger/models';
 import {TransferApiService} from '../../swagger/services/transfer-api.service';
 import {TransferMutationApiService} from '../../swagger/services/transfer-mutation-api.service';
+import {map, filter, switchMap, take, tap} from 'rxjs/operators';
+import {ExistingTransferService} from './existing-transfer.service';
 
 // https://coryrylan.com/blog/angular-observable-data-services
 @Injectable()
@@ -38,7 +40,8 @@ export class TransferDataStore {
 
   constructor(
     private transferApiService: TransferApiService,
-    private transferMutationApiService: TransferMutationApiService
+    private transferMutationApiService: TransferMutationApiService,
+    private existingTransferService: ExistingTransferService
   ) {
   }
 
@@ -59,11 +62,9 @@ export class TransferDataStore {
   }
 
   loadMore() {
-    const filter = {...this.dataStore.filter};
-    filter.skip += 20;
-    this.dataStore.filter = filter;
+    this.dataStore.filter = {...this.dataStore.filter, skip: this.dataStore.filter.skip += 20};
     this.filter$.next(Object.assign({}, this.dataStore).filter);
-    this.transferApiService.transferControllerGetFilteredTransfers({body: filter}).subscribe((data: TransferListParams) => {
+    this.transferApiService.transferControllerGetFilteredTransfers({body: this.dataStore.filter}).subscribe((data: TransferListParams) => {
       let accData = [...this.dataStore.transfer];
       accData = accData.concat(data.transferMutations);
       this.dataStore.transfer = accData;
@@ -86,19 +87,6 @@ export class TransferDataStore {
 
   get selectedTransfer(): Observable<TransferMutationDto> {
     return this.selectedTransfer$.asObservable();
-  }
-
-  setSelectedTransferById(id?: number) {
-    this.dataStore.selectedTransfer = null;
-
-    if (id) {
-      this.dataStore.transfer.map((transfer) => {
-        if (transfer.mutationId === id) {
-          this.dataStore.selectedTransfer = transfer;
-        }
-      });
-    }
-    this.selectedTransfer$.next(Object.assign({}, this.dataStore).selectedTransfer);
   }
 
   get minAmount(): Observable<number> {
@@ -132,12 +120,12 @@ export class TransferDataStore {
     return this.skip$.asObservable();
   }
 
-  setSkip(input: number) {
+  setSkip(input: number): void {
     this.dataStore.skip = input;
     this.skip$.next(Object.assign({}, this.dataStore).skip);
   }
 
-  updateTransferMutation(updateTransferMutation: TransferMutationDto) {
+  updateTransferMutation(updateTransferMutation: TransferMutationDto): void {
     this.dataStore.transfer.map((_invoice, index) => {
       if (_invoice.id === updateTransferMutation.id) {
         this.dataStore.transfer[index] = updateTransferMutation;
@@ -146,7 +134,7 @@ export class TransferDataStore {
     });
   }
 
-  updateAndAddInvoice(transferMutationId: number, splitTransferMutations: TransferMutationDto[]) {
+  updateAndAddInvoice(transferMutationId: number, splitTransferMutations: TransferMutationDto[]): void {
     this.dataStore.transfer.map((transfer, index) => {
       if (transfer.mutationId === transferMutationId) {
         this.dataStore.transfer[index] = {...splitTransferMutations[0]};
@@ -156,7 +144,7 @@ export class TransferDataStore {
     this.transfers$.next(Object.assign({}, this.dataStore).transfer);
   }
 
-  removeInvoice(id: number) {
+  removeInvoice(id: number): void {
     this.transferMutationApiService.transferMutationControllerDelete({id}).subscribe(() => {
       this.dataStore.transfer.map((transferMutation, index) => {
         if (transferMutation.mutationId === id) {
@@ -170,13 +158,27 @@ export class TransferDataStore {
   multiUploadExcel(file) {
     this.xlsToJson(file).then((json) => {
       this.transferApiService.transferControllerPostExcelImport({body: json})
-        .subscribe((next: TransferBatchImportDto) => {
-          // todo: Deal with existing
-          const existing = next.existingTransfers;
-          this.dataStore.transfer = this.dataStore.transfer.concat(next.savedTransfers);
-          this.transfers$.next(Object.assign({}, this.dataStore).transfer);
-        });
+        .pipe(
+          take(1),
+          tap((next: TransferBatchImportDto) => this.addToTransfers(next.savedTransfers)),
+          filter((response) => response?.existingTransfers.length > 0),
+          map((response) => response.existingTransfers),
+          switchMap((existingTransfers) => this.existingTransferService.openDialog(existingTransfers).pipe(
+            filter((x => !!x)),
+            switchMap((transfersToForce: RawTransferSerializerDto[]) => this.postExistingTransfers(transfersToForce))))
+        ).subscribe();
     });
+  }
+
+  private addToTransfers(transfers) {
+    this.dataStore.transfer = this.dataStore.transfer.concat(transfers).sort((a, b) =>
+      (new Date(a.transactionDate) as any) - (new Date(b.transactionDate) as any));
+    this.transfers$.next(Object.assign({}, this.dataStore).transfer);
+  }
+
+  private postExistingTransfers(transfers: RawTransferSerializerDto[]): Observable<TransferMutationDto[]> {
+    return this.transferApiService.transferControllerPostExisting({body: transfers}).pipe(
+      tap((response) => this.addToTransfers(response)));
   }
 
   private xlsToJson(file): Promise<any> {

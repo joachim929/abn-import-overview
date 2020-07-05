@@ -1,0 +1,9 @@
+dl {
+  display: grid;
+  grid-template-columns: 1fr 2fr;
+  row-gap: 4px;
+}
+
+mat-list-option {
+  margin: 8px 0;
+}

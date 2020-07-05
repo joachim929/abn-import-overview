@@ -6,6 +6,7 @@ export interface Transfer {
   createdAt: string;
   currencyCode: string;
   endBalance: number;
+  forced: boolean;
   hash: string;
   id: string;
   mutations: Array<TransferMutation>;

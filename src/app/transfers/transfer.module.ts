@@ -26,12 +26,17 @@ import {TransferFilterComponent} from './components/transfer-filter/transfer-fil
 import {TransferMasterComponent} from './components/transfer-master/transfer-master.component';
 import {SharedTransferModule} from './shared/shared-transfer.module';
 import {MatSidenavModule} from '@angular/material/sidenav';
+import { ExistingTransferDialogComponent } from './components/existing-transfer-dialog/existing-transfer-dialog.component';
+import {MatDialogModule} from '@angular/material/dialog';
+import {MatTableModule} from '@angular/material/table';
+import {MatListModule} from '@angular/material/list';
 
 
 @NgModule({
   declarations: [
     TransferMasterComponent,
-    TransferFilterComponent
+    TransferFilterComponent,
+    ExistingTransferDialogComponent
   ],
   imports: [
     CommonModule,
@@ -53,7 +58,10 @@ import {MatSidenavModule} from '@angular/material/sidenav';
     MatTabsModule,
     MatToolbarModule,
     SharedTransferModule,
-    MatSidenavModule
+    MatSidenavModule,
+    MatDialogModule,
+    MatTableModule,
+    MatListModule
   ],
   providers: [
     CustomCurrencyPipe,

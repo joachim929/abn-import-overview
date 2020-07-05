@@ -1,6 +1,6 @@
 import {Injectable} from '@angular/core';
 import {TransferEditDetailModalComponent} from '../shared/components/transfer-edit-detail-modal/transfer-edit-detail-modal.component';
-import {filter, switchMap, tap} from 'rxjs/operators';
+import {filter, switchMap, take, tap} from 'rxjs/operators';
 import {TransferDataStore} from './transfer-data.store';
 import {MatDialog} from '@angular/material/dialog';
 import {TransferSplitDetailModalComponent} from '../shared/components/transfer-split-detail-modal/transfer-split-detail-modal.component';
@@ -47,6 +47,7 @@ export class TransferEditService {
     });
 
     dialog.afterClosed().pipe(
+      take(1),
       filter(x => !!x),
       tap((x: SplitTransferMutationDto) => transferMutationId = x.patch.mutationId),
       switchMap((x: SplitTransferMutationDto) => {

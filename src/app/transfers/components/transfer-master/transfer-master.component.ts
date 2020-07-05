@@ -15,7 +15,6 @@ export class TransferMasterComponent implements OnInit {
   transferMutations$: Observable<TransferMutationDto[]>;
   recordCount$: Observable<number>;
   selectedTransferMutation$: Observable<TransferMutationDto>;
-  showFilter = true;
   events: string[] = [];
   opened: boolean;
 
@@ -55,16 +54,11 @@ export class TransferMasterComponent implements OnInit {
 
   upload() {
     this.invoiceDataService.multiUploadExcel(this.file);
+    this.cancelUpload();
   }
 
   cancelUpload() {
     this.file = undefined;
-  }
-
-  toggleFilter() {
-    if (this.isSmall) {
-      this.showFilter = !this.showFilter;
-    }
   }
 
 }

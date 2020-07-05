@@ -9,10 +9,12 @@ import { Observable } from 'rxjs';
 import { map, filter } from 'rxjs/operators';
 
 import { RawInvoiceJsonDto } from '../models/raw-invoice-json-dto';
+import { RawTransferSerializerDto } from '../models/raw-transfer-serializer-dto';
 import { Transfer } from '../models/transfer';
 import { TransferBatchImportDto } from '../models/transfer-batch-import-dto';
 import { TransferListParams } from '../models/transfer-list-params';
 import { TransferMutation } from '../models/transfer-mutation';
+import { TransferMutationDto } from '../models/transfer-mutation-dto';
 
 @Injectable({
   providedIn: 'root',
@@ -211,6 +213,53 @@ export class TransferApiService extends BaseService {
 
     return this.transferControllerPostExcelImport$Response(params).pipe(
       map((r: StrictHttpResponse<TransferBatchImportDto>) => r.body as TransferBatchImportDto)
+    );
+  }
+
+  /**
+   * Path part for operation transferControllerPostExisting
+   */
+  static readonly TransferControllerPostExistingPath = '/transfer/upload/existing';
+
+  /**
+   * This method provides access to the full `HttpResponse`, allowing access to response headers.
+   * To access only the response body, use `transferControllerPostExisting()` instead.
+   *
+   * This method sends `application/json` and handles request body of type `application/json`.
+   */
+  transferControllerPostExisting$Response(params: {
+      body: Array<RawTransferSerializerDto>
+  }): Observable<StrictHttpResponse<Array<TransferMutationDto>>> {
+
+    const rb = new RequestBuilder(this.rootUrl, TransferApiService.TransferControllerPostExistingPath, 'post');
+    if (params) {
+
+
+      rb.body(params.body, 'application/json');
+    }
+    return this.http.request(rb.build({
+      responseType: 'json',
+      accept: 'application/json'
+    })).pipe(
+      filter((r: any) => r instanceof HttpResponse),
+      map((r: HttpResponse<any>) => {
+        return r as StrictHttpResponse<Array<TransferMutationDto>>;
+      })
+    );
+  }
+
+  /**
+   * This method provides access to only to the response body.
+   * To access the full response (for headers, for example), `transferControllerPostExisting$Response()` instead.
+   *
+   * This method sends `application/json` and handles request body of type `application/json`.
+   */
+  transferControllerPostExisting(params: {
+      body: Array<RawTransferSerializerDto>
+  }): Observable<Array<TransferMutationDto>> {
+
+    return this.transferControllerPostExisting$Response(params).pipe(
+      map((r: StrictHttpResponse<Array<TransferMutationDto>>) => r.body as Array<TransferMutationDto>)
     );
   }
 
