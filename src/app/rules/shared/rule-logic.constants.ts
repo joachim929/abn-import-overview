@@ -1,6 +1,22 @@
 import {ConditionOperatorEnum} from '../../swagger/models/condition-operator-enum';
 
-export const dateOperators = [
+export type DateOperatorType = Extract<ConditionOperatorEnum,
+  ConditionOperatorEnum.Equals |
+  ConditionOperatorEnum.NotEqual |
+  ConditionOperatorEnum.GreaterThan |
+  ConditionOperatorEnum.GreaterOrEqualThan |
+  ConditionOperatorEnum.LessThan |
+  ConditionOperatorEnum.LessOrEqualThan>;
+export enum DateOperators {
+  Equals = ConditionOperatorEnum.Equals,
+  NotEqual = ConditionOperatorEnum.NotEqual,
+  GreaterThan = ConditionOperatorEnum.GreaterThan,
+  GreaterOrEqualThan = ConditionOperatorEnum.GreaterOrEqualThan,
+  LessThan = ConditionOperatorEnum.LessThan,
+  LessOrEqualThan = ConditionOperatorEnum.LessOrEqualThan
+}
+
+export const dateOperators: {value: DateOperatorType, name: string}[] = [
   {value: ConditionOperatorEnum.Equals, name: 'Equals'},
   {value: ConditionOperatorEnum.NotEqual, name: 'Not equal'},
   {value: ConditionOperatorEnum.GreaterThan, name: 'Later than'},
