@@ -3,6 +3,7 @@ import { NgModule, ModuleWithProviders, SkipSelf, Optional } from '@angular/core
 import { HttpClient } from '@angular/common/http';
 import { ApiConfiguration, ApiConfigurationParams } from './api-configuration';
 
+import { AppApiService } from './services/app-api.service';
 import { CategoryApiService } from './services/category-api.service';
 import { CategoryGroupApiService } from './services/category-group-api.service';
 import { TransferApiService } from './services/transfer-api.service';
@@ -18,6 +19,7 @@ import { LogicApiService } from './services/logic-api.service';
   exports: [],
   declarations: [],
   providers: [
+    AppApiService,
     CategoryApiService,
     CategoryGroupApiService,
     TransferApiService,

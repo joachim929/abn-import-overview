@@ -1,3 +1,4 @@
+export { AppApiService } from './services/app-api.service';
 export { CategoryApiService } from './services/category-api.service';
 export { CategoryGroupApiService } from './services/category-group-api.service';
 export { TransferApiService } from './services/transfer-api.service';

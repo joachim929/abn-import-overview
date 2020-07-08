@@ -8,8 +8,8 @@ import { RequestBuilder } from '../request-builder';
 import { Observable } from 'rxjs';
 import { map, filter } from 'rxjs/operators';
 
+import { CategoryDto } from '../models/category-dto';
 import { RawInvoiceJsonDto } from '../models/raw-invoice-json-dto';
-import { RawTransferSerializerDto } from '../models/raw-transfer-serializer-dto';
 import { Transfer } from '../models/transfer';
 import { TransferBatchImportDto } from '../models/transfer-batch-import-dto';
 import { TransferListParams } from '../models/transfer-list-params';
@@ -123,6 +123,55 @@ export class TransferApiService extends BaseService {
   }
 
   /**
+   * Path part for operation transferControllerGetTransferHints
+   */
+  static readonly TransferControllerGetTransferHintsPath = '/transfer/hint/{id}';
+
+  /**
+   * This method provides access to the full `HttpResponse`, allowing access to response headers.
+   * To access only the response body, use `transferControllerGetTransferHints()` instead.
+   *
+   * This method doesn't expect any request body.
+   */
+  transferControllerGetTransferHints$Response(params: {
+    id: string;
+
+  }): Observable<StrictHttpResponse<Array<CategoryDto>>> {
+
+    const rb = new RequestBuilder(this.rootUrl, TransferApiService.TransferControllerGetTransferHintsPath, 'get');
+    if (params) {
+
+      rb.path('id', params.id);
+
+    }
+    return this.http.request(rb.build({
+      responseType: 'json',
+      accept: 'application/json'
+    })).pipe(
+      filter((r: any) => r instanceof HttpResponse),
+      map((r: HttpResponse<any>) => {
+        return r as StrictHttpResponse<Array<CategoryDto>>;
+      })
+    );
+  }
+
+  /**
+   * This method provides access to only to the response body.
+   * To access the full response (for headers, for example), `transferControllerGetTransferHints$Response()` instead.
+   *
+   * This method doesn't expect any request body.
+   */
+  transferControllerGetTransferHints(params: {
+    id: string;
+
+  }): Observable<Array<CategoryDto>> {
+
+    return this.transferControllerGetTransferHints$Response(params).pipe(
+      map((r: StrictHttpResponse<Array<CategoryDto>>) => r.body as Array<CategoryDto>)
+    );
+  }
+
+  /**
    * Path part for operation transferControllerGetFilteredTransfers
    */
   static readonly TransferControllerGetFilteredTransfersPath = '/transfer/filtered';
@@ -228,7 +277,7 @@ export class TransferApiService extends BaseService {
    * This method sends `application/json` and handles request body of type `application/json`.
    */
   transferControllerPostExisting$Response(params: {
-      body: Array<RawTransferSerializerDto>
+      body: Array<string>
   }): Observable<StrictHttpResponse<Array<TransferMutationDto>>> {
 
     const rb = new RequestBuilder(this.rootUrl, TransferApiService.TransferControllerPostExistingPath, 'post');
@@ -255,7 +304,7 @@ export class TransferApiService extends BaseService {
    * This method sends `application/json` and handles request body of type `application/json`.
    */
   transferControllerPostExisting(params: {
-      body: Array<RawTransferSerializerDto>
+      body: Array<string>
   }): Observable<Array<TransferMutationDto>> {
 
     return this.transferControllerPostExisting$Response(params).pipe(
