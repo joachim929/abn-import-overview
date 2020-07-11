@@ -4,8 +4,6 @@ export { StringOperatorsEnum } from './models/string-operators-enum';
 export { NumberOperatorsEnum } from './models/number-operators-enum';
 export { LogicTypeEnum } from './models/logic-type-enum';
 export { TransferKeyEnum } from './models/transfer-key-enum';
-export { Cat } from './models/cat';
-export { Dog } from './models/dog';
 export { EnumDto } from './models/enum-dto';
 export { CategoryDto } from './models/category-dto';
 export { CreateCategoryDto } from './models/create-category-dto';
