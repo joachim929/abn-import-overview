@@ -1,9 +1,9 @@
 import {Component, Input, OnDestroy, OnInit} from '@angular/core';
-import {TransferConditionDto} from '../../../swagger/models/transfer-condition-dto';
 import {FormArray, FormControl, FormGroup, Validators} from '@angular/forms';
 import {minLengthThisOrThat} from '../../shared/rules-custom.validators';
 import {RulesDataStore} from '../../../core/services/rules-data.store';
 import {Subject} from 'rxjs';
+import {TransferConditionDto} from '../../../swagger/models';
 
 @Component({
   selector: 'app-rule-detail',

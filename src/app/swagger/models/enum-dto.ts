@@ -14,7 +14,7 @@ export interface EnumDto {
   dog: Dog;
   logicTypeEnum: LogicTypeEnum;
   numberOperatorsEnum: NumberOperatorsEnum;
-  pet: {  };
+  pet: Cat | Dog;
   pets: Cat | Dog;
   stringOperatorsEnum: StringOperatorsEnum;
   transferKeyEnum: TransferKeyEnum;

@@ -4,8 +4,8 @@ import {ExistingTransferDialogComponent} from '../components/existing-transfer-d
 import {RawTransferSerializerDto} from '../../swagger/models/raw-transfer-serializer-dto';
 import {filter, switchMap, take} from 'rxjs/operators';
 import {Observable} from 'rxjs';
-import {TransferMutationDto} from '../../swagger/models/transfer-mutation-dto';
 import {TransferApiService} from '../../swagger/services';
+import {TransferMutationDto} from '../../swagger/models';
 
 @Injectable({
   providedIn: 'root'

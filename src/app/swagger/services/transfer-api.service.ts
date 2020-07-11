@@ -10,6 +10,7 @@ import { map, filter } from 'rxjs/operators';
 
 import { CategoryDto } from '../models/category-dto';
 import { RawInvoiceJsonDto } from '../models/raw-invoice-json-dto';
+import { RawTransferSerializerDto } from '../models/raw-transfer-serializer-dto';
 import { Transfer } from '../models/transfer';
 import { TransferBatchImportDto } from '../models/transfer-batch-import-dto';
 import { TransferListParams } from '../models/transfer-list-params';
@@ -277,7 +278,7 @@ export class TransferApiService extends BaseService {
    * This method sends `application/json` and handles request body of type `application/json`.
    */
   transferControllerPostExisting$Response(params: {
-      body: Array<string>
+      body: Array<RawTransferSerializerDto>
   }): Observable<StrictHttpResponse<Array<TransferMutationDto>>> {
 
     const rb = new RequestBuilder(this.rootUrl, TransferApiService.TransferControllerPostExistingPath, 'post');
@@ -304,7 +305,7 @@ export class TransferApiService extends BaseService {
    * This method sends `application/json` and handles request body of type `application/json`.
    */
   transferControllerPostExisting(params: {
-      body: Array<string>
+      body: Array<RawTransferSerializerDto>
   }): Observable<Array<TransferMutationDto>> {
 
     return this.transferControllerPostExisting$Response(params).pipe(
