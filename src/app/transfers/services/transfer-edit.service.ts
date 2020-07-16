@@ -35,7 +35,7 @@ export class TransferEditService {
   }
 
   openSplitDialog(transferMutation: TransferMutationDto) {
-    let transferMutationId: number;
+    let transferMutationId: string;
 
     const dialog = this.dialog.open(TransferSplitDetailModalComponent, {
       width: '800px',

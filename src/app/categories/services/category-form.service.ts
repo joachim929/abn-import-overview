@@ -1,7 +1,7 @@
 import {Injectable} from '@angular/core';
 import {FormArray, FormControl, FormGroup, Validators} from '@angular/forms';
-import {CategoryGroupDto} from '../../swagger/models/category-group-dto';
 import {CategoryDto} from '../../swagger/models/category-dto';
+import {CategoryGroupResource} from '../../swagger/models/category-group-resource';
 
 @Injectable()
 export class CategoryFormService {
@@ -21,7 +21,7 @@ export class CategoryFormService {
     (currentGroup.get('categories') as FormArray).insert(currentIndex, movedControl);
   }
 
-  buildCategoryGroupFormGroup(categoryGroup: CategoryGroupDto): FormGroup {
+  buildCategoryGroupFormGroup(categoryGroup: CategoryGroupResource): FormGroup {
     return new FormGroup({
       id: new FormControl(categoryGroup.id),
       name: new FormControl(categoryGroup.name, [
@@ -34,7 +34,8 @@ export class CategoryFormService {
     });
   }
 
-  private buildCategoryFormArray(categories: CategoryDto[]): FormArray {
+  // todo: Fix once CategoryDTO has been removed
+  private buildCategoryFormArray(categories: any[]): FormArray {
     return new FormArray(categories.map(category => this.buildCategoryFormGroup(category)));
   }
 

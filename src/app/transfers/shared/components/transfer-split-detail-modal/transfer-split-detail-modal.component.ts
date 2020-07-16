@@ -4,8 +4,8 @@ import {FormControl, FormGroup, Validators} from '@angular/forms';
 import {filter, map} from 'rxjs/operators';
 import {CategoryDataStore} from '../../../../core/services/category-data.store';
 import {Observable} from 'rxjs';
-import {CategoryGroupDto} from '../../../../swagger/models/category-group-dto';
 import {TransferMutationDto} from '../../../../swagger/models/transfer-mutation-dto';
+import {CategoryGroupResource} from '../../../../swagger/models/category-group-resource';
 
 @Component({
   selector: 'app-transfer-split-detail-modal',
@@ -19,7 +19,7 @@ export class TransferSplitDetailModalComponent implements OnInit {
   form: FormGroup;
   ocInvoice: TransferMutationDto;
   ocAmount: number;
-  categories$: Observable<CategoryGroupDto[]>;
+  categories$: Observable<CategoryGroupResource[]>;
 
   constructor(
     public dialogRef: MatDialogRef<TransferSplitDetailModalComponent>,

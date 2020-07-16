@@ -34,7 +34,7 @@ export class RulesDataStore {
 
   loadRules(): void {
     this.setIsLoading(true);
-    this.rulesApiService.rulesControllerGetAll()
+    this.rulesApiService.transferConditionControllerGetAll()
       .pipe(take(1))
       .subscribe((response) => {
         this.setRules(response);
@@ -55,7 +55,7 @@ export class RulesDataStore {
 
   addRule(rule: TransferConditionDto): void {
     this.setIsSaving(true);
-    this.rulesApiService.rulesControllerPost({body: rule})
+    this.rulesApiService.transferConditionControllerPost({body: rule})
       .pipe(
         take(1),
         catchError((e) => {
@@ -73,7 +73,7 @@ export class RulesDataStore {
 
   patchRule(editedRule: TransferConditionDto): void {
     this.setIsSaving(true);
-    this.rulesApiService.rulesControllerPatch({body: editedRule})
+    this.rulesApiService.transferConditionControllerPatch({body: editedRule})
       .pipe(take(1))
       .subscribe((response) =>
         this.setRules([...this.dataStore.rules].map((rule) => rule.id === response.id ? response : rule)));
@@ -81,7 +81,7 @@ export class RulesDataStore {
 
   deleteRule(id: string) {
     this.setIsSaving(true);
-    this.rulesApiService.rulesControllerDelete({id})
+    this.rulesApiService.transferConditionControllerDelete({id})
       .pipe(
         take(1),
         catchError((error) => {

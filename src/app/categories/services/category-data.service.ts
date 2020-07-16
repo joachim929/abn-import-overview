@@ -4,8 +4,8 @@ import {CategoryApiService} from '../../swagger/services/category-api.service';
 import {CategoryDto} from '../../swagger/models/category-dto';
 import {catchError, take, tap} from 'rxjs/operators';
 import {Observable, of} from 'rxjs';
-import {CategoryGroupDto} from '../../swagger/models/category-group-dto';
 import {CategoryGroupApiService} from '../../swagger/services/category-group-api.service';
+import {CategoryGroupResource} from '../../swagger/models/category-group-resource';
 
 @Injectable()
 export class CategoryDataService {
@@ -25,14 +25,14 @@ export class CategoryDataService {
     );
   }
 
-  patchCategoryGroup(updatedGroup: CategoryGroupDto): void {
+  patchCategoryGroup(updatedGroup: CategoryGroupResource): void {
     this.categoryGroupApiService.categoryGroupControllerPatchMultiple({body: [updatedGroup]}).pipe(
       take(1),
       catchError(err => {
         return of(false);
       })
     ).subscribe((response) => {
-      if (response !== false && (response as CategoryGroupDto[]).length === 1) {
+      if (response !== false && (response as CategoryGroupResource[]).length === 1) {
         this.categoryDataStore.updateCategoryGroup(response[0]);
       }
     });
@@ -52,7 +52,7 @@ export class CategoryDataService {
     });
   }
 
-  deleteCategory(id: number) {
+  deleteCategory(id: string) {
     this.categoryApiService.categoryControllerDelete({id}).pipe(
       take(1),
       catchError(error => {

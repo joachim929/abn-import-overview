@@ -23,21 +23,21 @@ export class RulesApiService extends BaseService {
   }
 
   /**
-   * Path part for operation rulesControllerGetAll
+   * Path part for operation transferConditionControllerGetAll
    */
-  static readonly RulesControllerGetAllPath = '/rules';
+  static readonly TransferConditionControllerGetAllPath = '/rules';
 
   /**
    * This method provides access to the full `HttpResponse`, allowing access to response headers.
-   * To access only the response body, use `rulesControllerGetAll()` instead.
+   * To access only the response body, use `transferConditionControllerGetAll()` instead.
    *
    * This method doesn't expect any request body.
    */
-  rulesControllerGetAll$Response(params?: {
+  transferConditionControllerGetAll$Response(params?: {
 
   }): Observable<StrictHttpResponse<Array<TransferConditionDto>>> {
 
-    const rb = new RequestBuilder(this.rootUrl, RulesApiService.RulesControllerGetAllPath, 'get');
+    const rb = new RequestBuilder(this.rootUrl, RulesApiService.TransferConditionControllerGetAllPath, 'get');
     if (params) {
 
 
@@ -55,35 +55,35 @@ export class RulesApiService extends BaseService {
 
   /**
    * This method provides access to only to the response body.
-   * To access the full response (for headers, for example), `rulesControllerGetAll$Response()` instead.
+   * To access the full response (for headers, for example), `transferConditionControllerGetAll$Response()` instead.
    *
    * This method doesn't expect any request body.
    */
-  rulesControllerGetAll(params?: {
+  transferConditionControllerGetAll(params?: {
 
   }): Observable<Array<TransferConditionDto>> {
 
-    return this.rulesControllerGetAll$Response(params).pipe(
+    return this.transferConditionControllerGetAll$Response(params).pipe(
       map((r: StrictHttpResponse<Array<TransferConditionDto>>) => r.body as Array<TransferConditionDto>)
     );
   }
 
   /**
-   * Path part for operation rulesControllerPost
+   * Path part for operation transferConditionControllerPost
    */
-  static readonly RulesControllerPostPath = '/rules';
+  static readonly TransferConditionControllerPostPath = '/rules';
 
   /**
    * This method provides access to the full `HttpResponse`, allowing access to response headers.
-   * To access only the response body, use `rulesControllerPost()` instead.
+   * To access only the response body, use `transferConditionControllerPost()` instead.
    *
    * This method sends `application/json` and handles request body of type `application/json`.
    */
-  rulesControllerPost$Response(params: {
+  transferConditionControllerPost$Response(params: {
       body: CreateTransferConditionDto
   }): Observable<StrictHttpResponse<TransferConditionDto>> {
 
-    const rb = new RequestBuilder(this.rootUrl, RulesApiService.RulesControllerPostPath, 'post');
+    const rb = new RequestBuilder(this.rootUrl, RulesApiService.TransferConditionControllerPostPath, 'post');
     if (params) {
 
 
@@ -102,35 +102,35 @@ export class RulesApiService extends BaseService {
 
   /**
    * This method provides access to only to the response body.
-   * To access the full response (for headers, for example), `rulesControllerPost$Response()` instead.
+   * To access the full response (for headers, for example), `transferConditionControllerPost$Response()` instead.
    *
    * This method sends `application/json` and handles request body of type `application/json`.
    */
-  rulesControllerPost(params: {
+  transferConditionControllerPost(params: {
       body: CreateTransferConditionDto
   }): Observable<TransferConditionDto> {
 
-    return this.rulesControllerPost$Response(params).pipe(
+    return this.transferConditionControllerPost$Response(params).pipe(
       map((r: StrictHttpResponse<TransferConditionDto>) => r.body as TransferConditionDto)
     );
   }
 
   /**
-   * Path part for operation rulesControllerPatch
+   * Path part for operation transferConditionControllerPatch
    */
-  static readonly RulesControllerPatchPath = '/rules';
+  static readonly TransferConditionControllerPatchPath = '/rules';
 
   /**
    * This method provides access to the full `HttpResponse`, allowing access to response headers.
-   * To access only the response body, use `rulesControllerPatch()` instead.
+   * To access only the response body, use `transferConditionControllerPatch()` instead.
    *
    * This method sends `application/json` and handles request body of type `application/json`.
    */
-  rulesControllerPatch$Response(params: {
+  transferConditionControllerPatch$Response(params: {
       body: TransferConditionDto
   }): Observable<StrictHttpResponse<TransferConditionDto>> {
 
-    const rb = new RequestBuilder(this.rootUrl, RulesApiService.RulesControllerPatchPath, 'patch');
+    const rb = new RequestBuilder(this.rootUrl, RulesApiService.TransferConditionControllerPatchPath, 'patch');
     if (params) {
 
 
@@ -149,36 +149,36 @@ export class RulesApiService extends BaseService {
 
   /**
    * This method provides access to only to the response body.
-   * To access the full response (for headers, for example), `rulesControllerPatch$Response()` instead.
+   * To access the full response (for headers, for example), `transferConditionControllerPatch$Response()` instead.
    *
    * This method sends `application/json` and handles request body of type `application/json`.
    */
-  rulesControllerPatch(params: {
+  transferConditionControllerPatch(params: {
       body: TransferConditionDto
   }): Observable<TransferConditionDto> {
 
-    return this.rulesControllerPatch$Response(params).pipe(
+    return this.transferConditionControllerPatch$Response(params).pipe(
       map((r: StrictHttpResponse<TransferConditionDto>) => r.body as TransferConditionDto)
     );
   }
 
   /**
-   * Path part for operation rulesControllerGet
+   * Path part for operation transferConditionControllerGet
    */
-  static readonly RulesControllerGetPath = '/rules/{id}';
+  static readonly TransferConditionControllerGetPath = '/rules/{id}';
 
   /**
    * This method provides access to the full `HttpResponse`, allowing access to response headers.
-   * To access only the response body, use `rulesControllerGet()` instead.
+   * To access only the response body, use `transferConditionControllerGet()` instead.
    *
    * This method doesn't expect any request body.
    */
-  rulesControllerGet$Response(params: {
+  transferConditionControllerGet$Response(params: {
     id: string;
 
   }): Observable<StrictHttpResponse<TransferConditionDto>> {
 
-    const rb = new RequestBuilder(this.rootUrl, RulesApiService.RulesControllerGetPath, 'get');
+    const rb = new RequestBuilder(this.rootUrl, RulesApiService.TransferConditionControllerGetPath, 'get');
     if (params) {
 
       rb.path('id', params.id);
@@ -197,37 +197,37 @@ export class RulesApiService extends BaseService {
 
   /**
    * This method provides access to only to the response body.
-   * To access the full response (for headers, for example), `rulesControllerGet$Response()` instead.
+   * To access the full response (for headers, for example), `transferConditionControllerGet$Response()` instead.
    *
    * This method doesn't expect any request body.
    */
-  rulesControllerGet(params: {
+  transferConditionControllerGet(params: {
     id: string;
 
   }): Observable<TransferConditionDto> {
 
-    return this.rulesControllerGet$Response(params).pipe(
+    return this.transferConditionControllerGet$Response(params).pipe(
       map((r: StrictHttpResponse<TransferConditionDto>) => r.body as TransferConditionDto)
     );
   }
 
   /**
-   * Path part for operation rulesControllerDelete
+   * Path part for operation transferConditionControllerDelete
    */
-  static readonly RulesControllerDeletePath = '/rules/{id}';
+  static readonly TransferConditionControllerDeletePath = '/rules/{id}';
 
   /**
    * This method provides access to the full `HttpResponse`, allowing access to response headers.
-   * To access only the response body, use `rulesControllerDelete()` instead.
+   * To access only the response body, use `transferConditionControllerDelete()` instead.
    *
    * This method doesn't expect any request body.
    */
-  rulesControllerDelete$Response(params: {
+  transferConditionControllerDelete$Response(params: {
     id: string;
 
   }): Observable<StrictHttpResponse<void>> {
 
-    const rb = new RequestBuilder(this.rootUrl, RulesApiService.RulesControllerDeletePath, 'delete');
+    const rb = new RequestBuilder(this.rootUrl, RulesApiService.TransferConditionControllerDeletePath, 'delete');
     if (params) {
 
       rb.path('id', params.id);
@@ -246,16 +246,16 @@ export class RulesApiService extends BaseService {
 
   /**
    * This method provides access to only to the response body.
-   * To access the full response (for headers, for example), `rulesControllerDelete$Response()` instead.
+   * To access the full response (for headers, for example), `transferConditionControllerDelete$Response()` instead.
    *
    * This method doesn't expect any request body.
    */
-  rulesControllerDelete(params: {
+  transferConditionControllerDelete(params: {
     id: string;
 
   }): Observable<void> {
 
-    return this.rulesControllerDelete$Response(params).pipe(
+    return this.transferConditionControllerDelete$Response(params).pipe(
       map((r: StrictHttpResponse<void>) => r.body as void)
     );
   }

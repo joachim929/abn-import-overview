@@ -3,9 +3,9 @@ import {MAT_DIALOG_DATA, MatDialogRef} from '@angular/material/dialog';
 import {FormControl, FormGroup, Validators} from '@angular/forms';
 import {CategoryDataStore} from '../../../../core/services/category-data.store';
 import {Observable} from 'rxjs';
-import {CategoryGroupDto} from '../../../../swagger/models/category-group-dto';
 import {filter} from 'rxjs/operators';
 import {TransferMutationDto} from '../../../../swagger/models/transfer-mutation-dto';
+import {CategoryGroupResource} from '../../../../swagger/models/category-group-resource';
 
 @Component({
   selector: 'app-transfer-edit-detail-modal',
@@ -17,7 +17,7 @@ import {TransferMutationDto} from '../../../../swagger/models/transfer-mutation-
 })
 export class TransferEditDetailModalComponent implements OnInit {
   form: FormGroup;
-  categories$: Observable<CategoryGroupDto[]>;
+  categories$: Observable<CategoryGroupResource[]>;
   ocTransferMutation: TransferMutationDto;
 
   constructor(

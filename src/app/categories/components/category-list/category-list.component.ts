@@ -1,11 +1,11 @@
 import {Component, OnDestroy, OnInit} from '@angular/core';
 import {CategoryDataStore} from '../../../core/services/category-data.store';
-import {CategoryGroupDto} from '../../../swagger/models/category-group-dto';
 import {Observable, Subject} from 'rxjs';
 import {CdkDragDrop} from '@angular/cdk/drag-drop';
 import {takeUntil, tap} from 'rxjs/operators';
 import {FormArray, FormGroup} from '@angular/forms';
 import {CategoryFormService} from '../../services/category-form.service';
+import {CategoryGroupResource} from '../../../swagger/models/category-group-resource';
 
 @Component({
   selector: 'app-category-list',
@@ -16,7 +16,7 @@ export class CategoryListComponent implements OnInit, OnDestroy {
   form = new FormArray([]);
   isSaving$: Observable<boolean>;
   unSub = new Subject();
-  originalValue: CategoryGroupDto[];
+  originalValue: CategoryGroupResource[];
 
   constructor(
     private categoryDataStore: CategoryDataStore,

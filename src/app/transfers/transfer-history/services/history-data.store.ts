@@ -27,7 +27,7 @@ export class HistoryDataStore {
     this.transfer.next(Object.assign({}, this.dataStore).transfer);
   }
 
-  getTransfer(id: number) {
+  getTransfer(id: string) {
     this.transferMutationApiService.transferMutationControllerGetTransferMutationHistory({id}).pipe(
       filter(result => !!result)
     ).subscribe((result) => this.setTransfer(result));

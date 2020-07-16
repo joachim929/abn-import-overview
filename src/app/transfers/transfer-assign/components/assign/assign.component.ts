@@ -2,11 +2,11 @@ import {Component, OnInit} from '@angular/core';
 import {AssignTransferDataStore} from '../../services/assign-transfer-data.store';
 import {TransferMutationDto} from '../../../../swagger/models/transfer-mutation-dto';
 import {Observable} from 'rxjs';
-import {CategoryGroupDto} from '../../../../swagger/models/category-group-dto';
 import {CategoryDataStore} from '../../../../core/services/category-data.store';
 import {CategoryDto} from '../../../../swagger/models/category-dto';
 import {share} from 'rxjs/operators';
 import {Location} from '@angular/common';
+import {CategoryGroupResource} from '../../../../swagger/models/category-group-resource';
 
 @Component({
   selector: 'app-assign',
@@ -15,7 +15,7 @@ import {Location} from '@angular/common';
 })
 export class AssignComponent implements OnInit {
   transferMutations$: Observable<TransferMutationDto[]>;
-  categories$: Observable<CategoryGroupDto[]>;
+  categories$: Observable<CategoryGroupResource[]>;
   isSaving$: Observable<boolean>;
 
   constructor(

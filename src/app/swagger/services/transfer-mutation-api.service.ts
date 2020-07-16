@@ -83,7 +83,7 @@ export class TransferMutationApiService extends BaseService {
    * This method doesn't expect any request body.
    */
   transferMutationControllerGetTransferMutationHistory$Response(params: {
-    id: number;
+    id: string;
 
   }): Observable<StrictHttpResponse<Transfer>> {
 
@@ -111,7 +111,7 @@ export class TransferMutationApiService extends BaseService {
    * This method doesn't expect any request body.
    */
   transferMutationControllerGetTransferMutationHistory(params: {
-    id: number;
+    id: string;
 
   }): Observable<Transfer> {
 
@@ -226,7 +226,7 @@ export class TransferMutationApiService extends BaseService {
    * This method doesn't expect any request body.
    */
   transferMutationControllerDelete$Response(params: {
-    id: number;
+    id: string;
 
   }): Observable<StrictHttpResponse<void>> {
 
@@ -254,7 +254,7 @@ export class TransferMutationApiService extends BaseService {
    * This method doesn't expect any request body.
    */
   transferMutationControllerDelete(params: {
-    id: number;
+    id: string;
 
   }): Observable<void> {
 

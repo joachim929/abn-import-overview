@@ -2,10 +2,10 @@ import {Component, Inject, OnInit} from '@angular/core';
 import {MAT_DIALOG_DATA, MatDialogRef} from '@angular/material/dialog';
 import {RawTransferSerializerDto} from '../../../swagger/models/raw-transfer-serializer-dto';
 import {CategoryDataStore} from '../../../core/services/category-data.store';
-import {CategoryGroupDto} from '../../../swagger/models/category-group-dto';
 import {Observable, Subject} from 'rxjs';
 import {FormControl, Validators} from '@angular/forms';
 import {filter, takeUntil, tap} from 'rxjs/operators';
+import {CategoryGroupResource} from '../../../swagger/models/category-group-resource';
 
 @Component({
   selector: 'app-existing-transfer-dialog',
@@ -15,7 +15,7 @@ import {filter, takeUntil, tap} from 'rxjs/operators';
 export class ExistingTransferDialogComponent implements OnInit {
   control = new FormControl(null, [Validators.required]);
   selectAllControl = new FormControl();
-  categories$: Observable<CategoryGroupDto[]>;
+  categories$: Observable<CategoryGroupResource[]>;
   showList = false;
   unSub = new Subject<void>();
 

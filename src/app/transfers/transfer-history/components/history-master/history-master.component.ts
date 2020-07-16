@@ -14,7 +14,7 @@ import {TransferMutation} from '../../../../swagger/models';
 export class HistoryMasterComponent implements OnInit {
   transfer$: Observable<Transfer>;
   selectedMutation: TransferMutation;
-  mutationId: number;
+  mutationId: string;
 
   constructor(
     private historyDataService: HistoryDataStore,
@@ -30,7 +30,7 @@ export class HistoryMasterComponent implements OnInit {
     this.activatedRoute.paramMap.pipe(
       filter((params) => !!params.has('id'))
     ).subscribe((params) => {
-      this.mutationId = Number(params.get('id'));
+      this.mutationId = params.get('id');
       this.historyDataService.getTransfer(this.mutationId);
     });
 

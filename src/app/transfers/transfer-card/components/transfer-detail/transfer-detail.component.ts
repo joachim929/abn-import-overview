@@ -31,7 +31,7 @@ export class TransferDetailComponent {
     this.transferEditService.openSplitDialog(transferMutation);
   }
 
-  remove(transferMutationId: number) {
+  remove(transferMutationId: string) {
     this.transferDataService.removeInvoice(transferMutationId);
   }
 }

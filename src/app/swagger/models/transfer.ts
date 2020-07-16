@@ -5,6 +5,7 @@ export interface Transfer {
   active: boolean;
   createdAt: string;
   currencyCode: string;
+  editedAt: string;
   endBalance: number;
   forced: boolean;
   hash: string;
@@ -12,6 +13,5 @@ export interface Transfer {
   mutations: Array<TransferMutation>;
   startBalance: number;
   transactionDate: string;
-  updatedAt: string;
   valueDate: string;
 }

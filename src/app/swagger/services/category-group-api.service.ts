@@ -8,8 +8,8 @@ import { RequestBuilder } from '../request-builder';
 import { Observable } from 'rxjs';
 import { map, filter } from 'rxjs/operators';
 
-import { CategoryGroupDto } from '../models/category-group-dto';
-import { CreateCategoryGroupDto } from '../models/create-category-group-dto';
+import { CategoryGroupResource } from '../models/category-group-resource';
+import { CreateCategoryGroupResource } from '../models/create-category-group-resource';
 
 @Injectable({
   providedIn: 'root',
@@ -35,7 +35,7 @@ export class CategoryGroupApiService extends BaseService {
    */
   categoryGroupControllerGetAllWithCategories$Response(params?: {
 
-  }): Observable<StrictHttpResponse<Array<CategoryGroupDto>>> {
+  }): Observable<StrictHttpResponse<Array<CategoryGroupResource>>> {
 
     const rb = new RequestBuilder(this.rootUrl, CategoryGroupApiService.CategoryGroupControllerGetAllWithCategoriesPath, 'get');
     if (params) {
@@ -48,7 +48,7 @@ export class CategoryGroupApiService extends BaseService {
     })).pipe(
       filter((r: any) => r instanceof HttpResponse),
       map((r: HttpResponse<any>) => {
-        return r as StrictHttpResponse<Array<CategoryGroupDto>>;
+        return r as StrictHttpResponse<Array<CategoryGroupResource>>;
       })
     );
   }
@@ -61,10 +61,10 @@ export class CategoryGroupApiService extends BaseService {
    */
   categoryGroupControllerGetAllWithCategories(params?: {
 
-  }): Observable<Array<CategoryGroupDto>> {
+  }): Observable<Array<CategoryGroupResource>> {
 
     return this.categoryGroupControllerGetAllWithCategories$Response(params).pipe(
-      map((r: StrictHttpResponse<Array<CategoryGroupDto>>) => r.body as Array<CategoryGroupDto>)
+      map((r: StrictHttpResponse<Array<CategoryGroupResource>>) => r.body as Array<CategoryGroupResource>)
     );
   }
 
@@ -80,8 +80,8 @@ export class CategoryGroupApiService extends BaseService {
    * This method sends `application/json` and handles request body of type `application/json`.
    */
   categoryGroupControllerCreate$Response(params: {
-      body: CreateCategoryGroupDto
-  }): Observable<StrictHttpResponse<CategoryGroupDto>> {
+      body: CreateCategoryGroupResource
+  }): Observable<StrictHttpResponse<CategoryGroupResource>> {
 
     const rb = new RequestBuilder(this.rootUrl, CategoryGroupApiService.CategoryGroupControllerCreatePath, 'post');
     if (params) {
@@ -95,7 +95,7 @@ export class CategoryGroupApiService extends BaseService {
     })).pipe(
       filter((r: any) => r instanceof HttpResponse),
       map((r: HttpResponse<any>) => {
-        return r as StrictHttpResponse<CategoryGroupDto>;
+        return r as StrictHttpResponse<CategoryGroupResource>;
       })
     );
   }
@@ -107,11 +107,11 @@ export class CategoryGroupApiService extends BaseService {
    * This method sends `application/json` and handles request body of type `application/json`.
    */
   categoryGroupControllerCreate(params: {
-      body: CreateCategoryGroupDto
-  }): Observable<CategoryGroupDto> {
+      body: CreateCategoryGroupResource
+  }): Observable<CategoryGroupResource> {
 
     return this.categoryGroupControllerCreate$Response(params).pipe(
-      map((r: StrictHttpResponse<CategoryGroupDto>) => r.body as CategoryGroupDto)
+      map((r: StrictHttpResponse<CategoryGroupResource>) => r.body as CategoryGroupResource)
     );
   }
 
@@ -127,8 +127,8 @@ export class CategoryGroupApiService extends BaseService {
    * This method sends `application/json` and handles request body of type `application/json`.
    */
   categoryGroupControllerPatchMultiple$Response(params: {
-      body: Array<CategoryGroupDto>
-  }): Observable<StrictHttpResponse<Array<CategoryGroupDto>>> {
+      body: Array<CategoryGroupResource>
+  }): Observable<StrictHttpResponse<Array<CategoryGroupResource>>> {
 
     const rb = new RequestBuilder(this.rootUrl, CategoryGroupApiService.CategoryGroupControllerPatchMultiplePath, 'patch');
     if (params) {
@@ -142,7 +142,7 @@ export class CategoryGroupApiService extends BaseService {
     })).pipe(
       filter((r: any) => r instanceof HttpResponse),
       map((r: HttpResponse<any>) => {
-        return r as StrictHttpResponse<Array<CategoryGroupDto>>;
+        return r as StrictHttpResponse<Array<CategoryGroupResource>>;
       })
     );
   }
@@ -154,11 +154,11 @@ export class CategoryGroupApiService extends BaseService {
    * This method sends `application/json` and handles request body of type `application/json`.
    */
   categoryGroupControllerPatchMultiple(params: {
-      body: Array<CategoryGroupDto>
-  }): Observable<Array<CategoryGroupDto>> {
+      body: Array<CategoryGroupResource>
+  }): Observable<Array<CategoryGroupResource>> {
 
     return this.categoryGroupControllerPatchMultiple$Response(params).pipe(
-      map((r: StrictHttpResponse<Array<CategoryGroupDto>>) => r.body as Array<CategoryGroupDto>)
+      map((r: StrictHttpResponse<Array<CategoryGroupResource>>) => r.body as Array<CategoryGroupResource>)
     );
   }
 

@@ -130,7 +130,7 @@ export class TransferDataStore {
     });
   }
 
-  updateAndAddInvoice(transferMutationId: number, splitTransferMutations: TransferMutationDto[]): void {
+  updateAndAddInvoice(transferMutationId: string, splitTransferMutations: TransferMutationDto[]): void {
     this.dataStore.transfer.map((transfer, index) => {
       if (transfer.mutationId === transferMutationId) {
         this.dataStore.transfer[index] = {...splitTransferMutations[0]};
@@ -140,7 +140,7 @@ export class TransferDataStore {
     this.transfers$.next(Object.assign({}, this.dataStore).transfer);
   }
 
-  removeInvoice(id: number): void {
+  removeInvoice(id: string): void {
     this.transferMutationApiService.transferMutationControllerDelete({id}).subscribe(() => {
       this.dataStore.transfer.map((transferMutation, index) => {
         if (transferMutation.mutationId === id) {

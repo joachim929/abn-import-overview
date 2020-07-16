@@ -1,6 +1,6 @@
 import {Injectable} from '@angular/core';
 import {BehaviorSubject, Observable, of} from 'rxjs';
-import {CategoryDto, CategoryGroupDto} from '../../swagger/models';
+import {CategoryDto, CategoryGroupResource} from '../../swagger/models';
 import {CategoryGroupApiService} from '../../swagger/services/category-group-api.service';
 import {catchError} from 'rxjs/operators';
 import {MatSnackBar} from '@angular/material/snack-bar';
@@ -12,10 +12,10 @@ import {ActivatedRoute, Router} from '@angular/router';
 })
 export class CategoryDataStore {
   private isSaving = new BehaviorSubject<boolean>(false);
-  private categories = new BehaviorSubject<CategoryGroupDto[]>([]);
-  private selectedCategory = new BehaviorSubject<CategoryGroupDto>(null);
+  private categories = new BehaviorSubject<CategoryGroupResource[]>([]);
+  private selectedCategory = new BehaviorSubject<CategoryGroupResource>(null);
   private dataStore: {
-    categories$: CategoryGroupDto[],
+    categories$: CategoryGroupResource[],
     selectedCategory$,
     isSaving$: boolean
   } = {
@@ -37,11 +37,11 @@ export class CategoryDataStore {
     return this.isSaving.asObservable();
   }
 
-  get categories$(): Observable<CategoryGroupDto[]> {
+  get categories$(): Observable<CategoryGroupResource[]> {
     return this.categories.asObservable();
   }
 
-  get selectedCategory$(): Observable<CategoryGroupDto> {
+  get selectedCategory$(): Observable<CategoryGroupResource> {
     return this.selectedCategory.asObservable();
   }
 
@@ -62,7 +62,7 @@ export class CategoryDataStore {
     });
   }
 
-  createCategory(category: CategoryGroupDto) {
+  createCategory(category: CategoryGroupResource) {
     this.setSaving(true);
     this.categoryApiService.categoryGroupControllerCreate({body: category}).pipe(
       catchError((error) => {
@@ -79,9 +79,10 @@ export class CategoryDataStore {
     });
   }
 
-  moveCategories(categoryGroups: CategoryGroupDto[]) {
+  moveCategories(categoryGroups: CategoryGroupResource[]) {
     this.setSaving(true);
-    categoryGroups.map((categoryGroup) => categoryGroup.categories.map((category, index) => {
+    // todo: Fix once CategoryDTO has been removed
+    categoryGroups.map((categoryGroup) => categoryGroup.categories.map((category: any, index) => {
       category.order = index;
     }));
 
@@ -116,12 +117,14 @@ export class CategoryDataStore {
 
   updateCategory(updatedCategory: CategoryDto) {
     let categoryGroup = this.dataStore.categories$.find((categoryGroups) =>
-      categoryGroups.categories.find((category) =>
+      // todo: Fix once CategoryDTO has been removed
+      categoryGroups.categories.find((category: any) =>
         category.id === updatedCategory.id));
     if (categoryGroup) {
       categoryGroup = {
         ...categoryGroup,
-        categories: categoryGroup.categories.map((category) => category.id === updatedCategory.id ? updatedCategory : category)
+        // todo: Fix once CategoryDTO has been removed
+        categories: categoryGroup.categories.map((category: any) => category.id === updatedCategory.id ? updatedCategory : category)
       };
       this.dataStore = {
         ...this.dataStore,
@@ -131,7 +134,7 @@ export class CategoryDataStore {
     }
   }
 
-  updateCategoryGroup(updatedGroup: CategoryGroupDto): void {
+  updateCategoryGroup(updatedGroup: CategoryGroupResource): void {
     this.dataStore = {
       ...this.dataStore,
       categories$: {...this.dataStore}.categories$.map((category) =>
@@ -154,7 +157,9 @@ export class CategoryDataStore {
       ...this.dataStore,
       categories$: {...this.dataStore}.categories$.map((categoryGroup) => {
         if (categoryGroup.id === parentId) {
-          categoryGroup = {...categoryGroup, categories: [...categoryGroup.categories, category].sort((a, b) => a.order - b.order)};
+          // todo: Fix once CategoryDTO has been removed
+          categoryGroup = {...categoryGroup, categories: ([...categoryGroup.categories, category] as any)
+              .sort((a, b) => a.order - b.order)};
         }
         return categoryGroup;
       })
@@ -163,11 +168,12 @@ export class CategoryDataStore {
     this.categories.next(Object.assign({}, this.dataStore).categories$);
   }
 
-  removeCategory(id: number) {
+  removeCategory(id: string) {
     this.dataStore = {
       ...this.dataStore,
       categories$: {...this.dataStore}.categories$.map((categoryGroup) => ({
-        ...categoryGroup, categories: [...categoryGroup.categories].filter((category) => category.id !== id)
+        // todo: Fix once CategoryDTO has been removed
+        ...categoryGroup, categories: [...categoryGroup.categories].filter((category: any) => category.id !== id)
       }))
     };
     this.categories.next(Object.assign({}, this.dataStore).categories$);

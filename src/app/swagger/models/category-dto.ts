@@ -1,7 +1,7 @@
 /* tslint:disable */
 export interface CategoryDto {
   description?: string;
-  id: number;
+  id: string;
   name: string;
   order: number;
 }

@@ -7,9 +7,9 @@ export interface Category {
   createdAt: string;
   description: string;
   editedAt: string;
-  id: number;
+  id: string;
   mutations: Array<TransferMutation>;
   name: string;
   order: number;
-  rules: Array<TransferCondition>;
+  transferConditions: Array<TransferCondition>;
 }

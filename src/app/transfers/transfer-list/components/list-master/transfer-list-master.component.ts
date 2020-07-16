@@ -73,7 +73,7 @@ export class TransferListMasterComponent implements OnInit, OnDestroy {
     this.transferEditService.openSplitDialog(transferMutation);
   }
 
-  remove(event, transferMutationId: number) {
+  remove(event, transferMutationId: string) {
     event.stopPropagation();
     this.transferDataService.removeInvoice(transferMutationId);
   }

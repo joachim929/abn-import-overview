@@ -4,8 +4,8 @@ import {
 } from '@angular/forms';
 import {Observable} from 'rxjs';
 import {CategoryDataStore} from '../../../core/services/category-data.store';
-import {CategoryGroupDto} from '../../../swagger/models/category-group-dto';
 import {CategoryDto} from '../../../swagger/models/category-dto';
+import {CategoryGroupResource} from '../../../swagger/models/category-group-resource';
 
 @Component({
   selector: 'app-categories-select',
@@ -15,7 +15,7 @@ import {CategoryDto} from '../../../swagger/models/category-dto';
 export class CategoriesSelectComponent implements OnInit {
   @Input() control: FormControl;
   @Input() label?: string;
-  categoryGroups$: Observable<CategoryGroupDto[]>;
+  categoryGroups$: Observable<CategoryGroupResource[]>;
 
   constructor(private categoryDataStore: CategoryDataStore) {
   }

@@ -10,6 +10,7 @@ import { map, filter } from 'rxjs/operators';
 
 import { CategoryDto } from '../models/category-dto';
 import { CreateCategoryDto } from '../models/create-category-dto';
+import { CreateCategoryResource } from '../models/create-category-resource';
 
 @Injectable({
   providedIn: 'root',
@@ -116,6 +117,52 @@ export class CategoryApiService extends BaseService {
   }
 
   /**
+   * Path part for operation categoryControllerTest
+   */
+  static readonly CategoryControllerTestPath = '/category/test';
+
+  /**
+   * This method provides access to the full `HttpResponse`, allowing access to response headers.
+   * To access only the response body, use `categoryControllerTest()` instead.
+   *
+   * This method doesn't expect any request body.
+   */
+  categoryControllerTest$Response(params?: {
+
+  }): Observable<StrictHttpResponse<CreateCategoryResource>> {
+
+    const rb = new RequestBuilder(this.rootUrl, CategoryApiService.CategoryControllerTestPath, 'get');
+    if (params) {
+
+
+    }
+    return this.http.request(rb.build({
+      responseType: 'json',
+      accept: 'application/json'
+    })).pipe(
+      filter((r: any) => r instanceof HttpResponse),
+      map((r: HttpResponse<any>) => {
+        return r as StrictHttpResponse<CreateCategoryResource>;
+      })
+    );
+  }
+
+  /**
+   * This method provides access to only to the response body.
+   * To access the full response (for headers, for example), `categoryControllerTest$Response()` instead.
+   *
+   * This method doesn't expect any request body.
+   */
+  categoryControllerTest(params?: {
+
+  }): Observable<CreateCategoryResource> {
+
+    return this.categoryControllerTest$Response(params).pipe(
+      map((r: StrictHttpResponse<CreateCategoryResource>) => r.body as CreateCategoryResource)
+    );
+  }
+
+  /**
    * Path part for operation categoryControllerGet
    */
   static readonly CategoryControllerGetPath = '/category/{id}';
@@ -173,7 +220,7 @@ export class CategoryApiService extends BaseService {
    * This method doesn't expect any request body.
    */
   categoryControllerDelete$Response(params: {
-    id: number;
+    id: string;
 
   }): Observable<StrictHttpResponse<{  }>> {
 
@@ -201,7 +248,7 @@ export class CategoryApiService extends BaseService {
    * This method doesn't expect any request body.
    */
   categoryControllerDelete(params: {
-    id: number;
+    id: string;
 
   }): Observable<{  }> {
 

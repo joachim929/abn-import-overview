@@ -1,9 +1,9 @@
 import {Component, Input, OnDestroy, OnInit} from '@angular/core';
 import {FormArray, FormControl, FormGroup} from '@angular/forms';
 import {Subject} from 'rxjs';
-import {CategoryGroupDto} from '../../../swagger/models/category-group-dto';
 import {CategoryDataService} from '../../services/category-data.service';
 import {CategoryDataStore} from '../../../core/services/category-data.store';
+import {CategoryGroupResource} from '../../../swagger/models/category-group-resource';
 
 @Component({
   selector: 'app-category-group-detail',
@@ -25,7 +25,7 @@ export class CategoryGroupDetailComponent implements OnInit, OnDestroy {
   }
 
   unSub = new Subject<void>();
-  originalValue: CategoryGroupDto;
+  originalValue: CategoryGroupResource;
   editModeControl = new FormControl(false);
 
   constructor(

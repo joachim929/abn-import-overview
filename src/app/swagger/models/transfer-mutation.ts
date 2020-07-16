@@ -6,11 +6,11 @@ export interface TransferMutation {
   amount: number;
   category: Category;
   children: Array<TransferMutation>;
-  comment: string;
+  comment?: string;
   createdAt: string;
   description: string;
-  id: number;
+  editedAt: string;
+  id: string;
   parent: TransferMutation;
   transfer: Transfer;
-  updatedAt: string;
 }
